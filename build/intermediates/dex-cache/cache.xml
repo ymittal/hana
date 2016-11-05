@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.0"
-        sha1="320c4cff70fae91f1d78d8dec4a4948c6e5e15db">
+        sha1="482fb2f1ec8fffeb7a17b7766ddbd5fda6a717f5">
         <dex dex="/Users/user/Desktop/csci205_final/ymca/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_68a911863c3bf5f1effd4bfda6d0e93e44786915/classes.dex" />
     </item>
     <item
@@ -30,6 +30,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/user/Desktop/csci205_final/ymca/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.0"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="/Users/user/Desktop/csci205_final/ymca/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-24.2.1_db8f0b3956ff5231939f0cd72a1a8b86753fbe72/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/user/Desktop/csci205_final/ymca/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -43,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.0"
-        sha1="158322c231490b52158fdc2b32b974976a895895">
+        sha1="b3a9f670072b24773d783d47600dbf2c77657b47">
         <dex dex="/Users/user/Desktop/csci205_final/ymca/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_92771c94434a64b754a25c1e49971cc0dd881fa3/classes.dex" />
     </item>
     <item
@@ -126,6 +135,15 @@
         revision="24.0.0"
         sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
         <dex dex="/Users/user/Desktop/csci205_final/ymca/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_49a191a655920507709ef8ef76366801d0a4787f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/user/Desktop/csci205_final/ymca/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.0"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/Users/user/Desktop/csci205_final/ymca/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.1_69d80ae4662330036d6d54901f9b415df570e707/classes.dex" />
     </item>
     <item
         is-multidex="true"
