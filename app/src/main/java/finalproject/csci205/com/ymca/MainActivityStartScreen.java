@@ -22,6 +22,7 @@ public class MainActivityStartScreen extends AppCompatActivity {
                 //Goto Other Activity
                 Intent i = new Intent(MainActivityStartScreen.this, NavActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
