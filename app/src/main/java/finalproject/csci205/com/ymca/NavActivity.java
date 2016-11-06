@@ -52,6 +52,7 @@ public class NavActivity extends AppCompatActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_nav, fragment)
