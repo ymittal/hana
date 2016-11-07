@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="finalproject.csci205.com.ymca.modulues.GTD">
+    tools:context=".view.modulues.GTD">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
