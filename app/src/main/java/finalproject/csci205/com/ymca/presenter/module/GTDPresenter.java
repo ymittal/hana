@@ -1,8 +1,9 @@
-package finalproject.csci205.com.ymca.presenter;
+package finalproject.csci205.com.ymca.presenter.module;
 
 import android.support.v4.app.Fragment;
 
-import finalproject.csci205.com.ymca.view.modulues.GTD;
+import finalproject.csci205.com.ymca.presenter.GTDPresenterInterface;
+import finalproject.csci205.com.ymca.view.module.GTD;
 
 /**
  * Created by ceh024 on 11/6/16.

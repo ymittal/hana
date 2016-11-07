@@ -15,8 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.view.modulues.GTD;
-import finalproject.csci205.com.ymca.view.modulues.Pomodoro;
+import finalproject.csci205.com.ymca.view.module.GTD;
+import finalproject.csci205.com.ymca.view.module.Pomodoro;
 
 public class NavActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GTD.OnFragmentInteractionListener,

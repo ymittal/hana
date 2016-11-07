@@ -8,21 +8,21 @@ import android.widget.Button;
 
 import finalproject.csci205.com.ymca.R;
 
-public class MainActivityStartScreen extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private Button tempLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_start_screen);
+        setContentView(R.layout.activity_main);
         tempLogin = (Button) findViewById(R.id.tempLogin);
 
         tempLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Goto Other Activity
-                Intent i = new Intent(MainActivityStartScreen.this, NavActivity.class);
+                Intent i = new Intent(MainActivity.this, NavActivity.class);
                 startActivity(i);
                 finish();
             }

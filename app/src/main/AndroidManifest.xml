@@ -23,7 +23,7 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="finalproject.csci205.com.ymca.model" />
 
-        <activity android:name=".view.MainActivityStartScreen">
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

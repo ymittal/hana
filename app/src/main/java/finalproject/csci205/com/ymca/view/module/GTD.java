@@ -1,38 +1,42 @@
-package finalproject.csci205.com.ymca.view.modulues;
+package finalproject.csci205.com.ymca.view.module;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.item.TasksAdapter;
+import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
 import finalproject.csci205.com.ymca.presenter.LifeCycle;
-import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Pomodoro.OnFragmentInteractionListener} interface
+ * {@link GTD.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Pomodoro#newInstance} factory method to
+ * Use the {@link GTD#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Pomodoro extends Fragment implements LifeCycle {
+public class GTD extends Fragment implements LifeCycle {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static PomodoroPresenter POMODOROPRESENTER;
+    private static GTDPresenter GTDPRESENTER;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public Pomodoro() {
+    public GTD() {
         // Required empty public constructor
     }
 
@@ -42,11 +46,11 @@ public class Pomodoro extends Fragment implements LifeCycle {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Pomodoro.
+     * @return A new instance of fragment GTD.
      */
     // TODO: Rename and change types and number of parameters
-    public static Pomodoro newInstance(String param1, String param2) {
-        Pomodoro fragment = new Pomodoro();
+    public static GTD newInstance(String param1, String param2) {
+        GTD fragment = new GTD();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,7 +71,19 @@ public class Pomodoro extends Fragment implements LifeCycle {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pomodoro, container, false);
+        View root = inflater.inflate(R.layout.fragment_gtd, container, false);
+
+        initTaskList(root);
+
+        return root;
+    }
+
+    private void initTaskList(View root) {
+        RecyclerView rvTasks = (RecyclerView) root.findViewById(R.id.rvTasks);
+        rvTasks.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        TasksAdapter tasksAdapter = new TasksAdapter();
+        rvTasks.setAdapter(tasksAdapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
