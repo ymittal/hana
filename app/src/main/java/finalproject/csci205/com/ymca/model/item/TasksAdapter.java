@@ -16,9 +16,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> {
     List<Task> tasks = new ArrayList<>();
 
     public TasksAdapter() {
-        for (int i =0; i < 5; ++i) {
-            tasks.add(new Task("Hey", "Desc", false));
-        }
+        tasks = Task.listAll(Task.class);
     }
 
     @Override
@@ -34,9 +32,10 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> {
         holder.checkboxTask.setChecked(task.isComplete());
         holder.checkboxTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isComplete) {
                 Task task = tasks.get(holder.getAdapterPosition());
-                task.setIsComplete(b);
+                task.setIsComplete(isComplete);
+                task.save();
             }
         });
 
@@ -50,6 +49,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> {
 
     public void addItem(Task newTask) {
         tasks.add(newTask);
+        newTask.save();
         notifyDataSetChanged();
     }
 }
