@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.presenter.GTDPresenter;
+import finalproject.csci205.com.ymca.presenter.LifeCycle;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +20,7 @@ import finalproject.csci205.com.ymca.presenter.GTDPresenter;
  * Use the {@link GTD#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GTD extends Fragment {
+public class GTD extends Fragment implements LifeCycle {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.presenter.LifeCycle;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 
 /**
@@ -19,7 +20,7 @@ import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
  * Use the {@link Pomodoro#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Pomodoro extends Fragment {
+public class Pomodoro extends Fragment implements LifeCycle {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
