@@ -19,6 +19,8 @@ import finalproject.csci205.com.ymca.model.item.TasksAdapter;
 import finalproject.csci205.com.ymca.presenter.LifeCycle;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
 import finalproject.csci205.com.ymca.view.Fab;
+import finalproject.csci205.com.ymca.view.dialogs.GTDTaskDialog;
+import finalproject.csci205.com.ymca.view.dialogs.QuickTaskDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -156,10 +158,12 @@ public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
     public void onClick(View view) {
 
         if (view.getId() == quickTask.getId()) {
-
+            QuickTaskDialog qt = new QuickTaskDialog();
+            qt.show(getFragmentManager(), "QT");
             materialSheetFab.hideSheet();
         } else if (view.getId() == addTask.getId()) {
-
+            GTDTaskDialog gtdDialog = new GTDTaskDialog();
+            gtdDialog.show(getFragmentManager(), "TASK");
             materialSheetFab.hideSheet();
         }
     }
