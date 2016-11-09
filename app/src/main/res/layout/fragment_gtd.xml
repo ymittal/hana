@@ -46,16 +46,16 @@
                     <TextView
                         android:id="@+id/fab_sheet_item_quicktask"
                         style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                        android:drawableLeft="@drawable/ic_task"
-                        android:drawableStart="@drawable/ic_task"
+                        android:drawableLeft="@drawable/ic_action_flash"
+                        android:drawableStart="@drawable/ic_action_flash"
                         android:text="Quick Task" />
 
                     <!-- Get it done -->
                     <TextView
                         android:id="@+id/fab_sheet_item_task"
                         style="@style/TextAppearance.MaterialSheetFab.Sheet.Item"
-                        android:drawableLeft="@drawable/ic_task"
-                        android:drawableStart="@drawable/ic_task"
+                        android:drawableLeft="@drawable/ic_action_add_black"
+                        android:drawableStart="@drawable/ic_action_add_black"
                         android:text="Get it DONE!" />
 
 
