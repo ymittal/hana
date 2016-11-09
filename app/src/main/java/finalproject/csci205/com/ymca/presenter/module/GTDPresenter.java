@@ -19,4 +19,14 @@ public class GTDPresenter implements GTDPresenterInterface, Presenter {
     public void setView(Fragment f) {
         this.view = (GTD) f;
     }
+
+    @Override
+    public void createQuickTask() {
+
+    }
+
+    @Override
+    public void createGTDTask() {
+
+    }
 }
