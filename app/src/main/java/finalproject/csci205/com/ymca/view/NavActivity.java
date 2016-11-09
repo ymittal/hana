@@ -29,6 +29,7 @@ public class NavActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
