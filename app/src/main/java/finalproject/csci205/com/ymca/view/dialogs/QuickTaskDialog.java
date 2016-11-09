@@ -11,6 +11,14 @@ import android.support.v7.app.AlertDialog;
  * Created by Charles on 11/9/2016.
  */
 
+
+/*
+Note to Aleks. Refrence the chapter in the busy coder's guide to android dev on this
+AS well as ...
+https://developer.android.com/guide/topics/ui/dialogs.html
+
+ */
+
 public class QuickTaskDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
