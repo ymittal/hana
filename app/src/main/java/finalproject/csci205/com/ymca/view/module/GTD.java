@@ -82,12 +82,13 @@ public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
 
         View overlay = root.findViewById(R.id.overlay);
         View sheetView = root.findViewById(R.id.fab_sheet);
-        int sheetColor = getResources().getColor(R.color.background_dim_overlay);
+        int sheetColor = getResources().getColor(R.color.white);
         int fabColor = getResources().getColor(R.color.colorPrimary);
 
         // Initialize material sheet FAB
         materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay,
                 sheetColor, fabColor);
+
         initTaskList(root);
 
         initSheetOnClickListener();
