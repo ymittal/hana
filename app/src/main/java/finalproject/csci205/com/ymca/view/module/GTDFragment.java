@@ -135,13 +135,13 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    tasksAdapter.addItem(new Task(sNewTask, "Something", false));
+                    tasksAdapter.addItem(new Task(sNewTask, false));
                 }
             case REQUEST_CODE_GTD:
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    tasksAdapter.addItem(new Task(sNewTask, "Something", false));
+                    tasksAdapter.addItem(new Task(sNewTask, false));
                 }
         }
     }

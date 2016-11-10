@@ -19,6 +19,7 @@ import finalproject.csci205.com.ymca.R;
 public class GTDDialogFragment extends DialogFragment {
 
     public static final String NEW_TASK = "NEW_TASK";
+    public static final String GTD_TASK = "GTD_TASK";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class GTDDialogFragment extends DialogFragment {
         builder.setMessage("Add Task").setView(view);
 
         final EditText etGtdTask = (EditText) view.findViewById(R.id.etGtdTask);
-        etGtdTask.setText(getArguments().getString("TASK"));
+        etGtdTask.setText(getArguments().getString(GTD_TASK));
 
         builder.setPositiveButton("Get Thing Done", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

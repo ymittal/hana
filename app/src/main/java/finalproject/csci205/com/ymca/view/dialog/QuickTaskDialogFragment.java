@@ -22,6 +22,7 @@ https://developer.android.com/guide/topics/ui/dialogs.html
 public class QuickTaskDialogFragment extends DialogFragment {
 
     public static final String NEW_TASK = "NEW_TASK";
+    public static final String GTD_TASK = "GTD_TASK";
     public static final int REQUEST_CODE_GTD = 2;
 
     public QuickTaskDialogFragment() {
@@ -34,13 +35,13 @@ public class QuickTaskDialogFragment extends DialogFragment {
 
         builder.setMessage("Add Task")
                 .setView(view)
-                .setPositiveButton("Right Now", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Get Thing Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
-                        GTDDialogFragment gtdDialog = new GTDDialogFragment();
-
                         Bundle bundle = new Bundle();
-                        bundle.putString("TASK", etAddTask.getText().toString());
+                        EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
+                        bundle.putString(GTD_TASK, etAddTask.getText().toString());
+
+                        GTDDialogFragment gtdDialog = new GTDDialogFragment();
                         gtdDialog.setArguments(bundle);
 
                         gtdDialog.setTargetFragment(getTargetFragment(), REQUEST_CODE_GTD);

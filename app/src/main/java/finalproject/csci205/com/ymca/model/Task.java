@@ -15,10 +15,10 @@ public class Task extends SugarRecord {
     public Task() {
     }
 
-    public Task(String title, String desc) {
+    public Task(String title, Boolean isComplete) {
         this.title = title;
-        this.desc = desc;
-        this.isComplete = false;
+        this.desc = "Empty desc";
+        this.isComplete = isComplete;
     }
 
     public Task(String title, String desc, Boolean isComplete) {
