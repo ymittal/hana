@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,15 +15,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
-import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.model.item.TasksAdapter;
 import finalproject.csci205.com.ymca.presenter.LifeCycle;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
-import finalproject.csci205.com.ymca.view.Fab;
-import finalproject.csci205.com.ymca.view.dialog.GTDDialogFragment;
 import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialogFragment;
 
 /**
@@ -39,7 +37,7 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
     // TODO: fix static reference to presenter
     private static GTDPresenter GTDPRESENTER;
 
-    private Fab fab;
+    private FloatingActionButton fab;
     private View root;
     private MaterialSheetFab materialSheetFab;
     private TextView quickTask;
@@ -76,49 +74,13 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment and its features
         root = inflater.inflate(R.layout.fragment_gtd, container, false);
-        fab = (Fab) root.findViewById(R.id.fab);
-        quickTask = (TextView) root.findViewById(R.id.fab_sheet_item_quicktask);
-        addTask = (TextView) root.findViewById(R.id.fab_sheet_item_task);
-        quickTask.setOnClickListener(this);
-        addTask.setOnClickListener(this);
-
-        View overlay = root.findViewById(R.id.overlay);
-        View sheetView = root.findViewById(R.id.fab_sheet);
-        int sheetColor = getResources().getColor(R.color.white);
-        int fabColor = getResources().getColor(R.color.colorPrimary);
-
-        // Initialize material sheet FAB
-        materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay,
-                sheetColor, fabColor);
+        fab = (FloatingActionButton) root.findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         initTaskList(root);
 
-        initSheetOnClickListener();
 
         return root;
-    }
-
-    private void initSheetOnClickListener() {
-        materialSheetFab.setEventListener(new MaterialSheetFabEventListener() {
-            @Override
-            public void onShowSheet() {
-                // Called when the material sheet's "show" animation starts.
-            }
-
-            @Override
-            public void onSheetShown() {
-                // Called when the material sheet's "show" animation ends.
-            }
-
-            @Override
-            public void onHideSheet() {
-                // Called when the material sheet's "hide" animation starts.
-            }
-
-            public void onSheetHidden() {
-                // Called when the material sheet's "hide" animation ends.
-            }
-        });
     }
 
 
@@ -156,18 +118,12 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == quickTask.getId()) {
+        if (view.getId() == fab.getId()) {
             QuickTaskDialogFragment dialog = new QuickTaskDialogFragment();
             dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
             dialog.show(getFragmentManager(), "Add Task");
 
-        } else if (view.getId() == addTask.getId()) {
-            GTDDialogFragment dialog = new GTDDialogFragment();
-            dialog.show(getFragmentManager(), "Add Task");
-
         }
-
-        materialSheetFab.hideSheet();
     }
 
     @Override
