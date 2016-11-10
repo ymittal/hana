@@ -10,7 +10,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import finalproject.csci205.com.ymca.R;
 
@@ -23,6 +22,7 @@ https://developer.android.com/guide/topics/ui/dialogs.html
 public class QuickTaskDialogFragment extends DialogFragment {
 
     public static final String NEW_TASK = "NEW_TASK";
+    public static final int REQUEST_CODE_GTD = 2;
 
     public QuickTaskDialogFragment() {
     }
@@ -32,12 +32,18 @@ public class QuickTaskDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_quicktask_dialog, null);
 
-        builder.setMessage("Get Thing Done")
+        builder.setMessage("Add Task")
                 .setView(view)
                 .setPositiveButton("Right Now", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
                         GTDDialogFragment gtdDialog = new GTDDialogFragment();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("TASK", etAddTask.getText().toString());
+                        gtdDialog.setArguments(bundle);
+
+                        gtdDialog.setTargetFragment(getTargetFragment(), REQUEST_CODE_GTD);
                         gtdDialog.show(getFragmentManager(), "Add GTD Task");
                     }
                 })

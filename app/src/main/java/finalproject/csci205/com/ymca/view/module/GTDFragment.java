@@ -34,6 +34,8 @@ import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialogFragment;
 public class GTDFragment extends Fragment implements LifeCycle, View.OnClickListener {
 
     public static final int REQUEST_CODE_QUICK = 1;
+    public static final String NEW_TASK = "NEW_TASK";
+    public static final int REQUEST_CODE_GTD = 2;
     // TODO: fix static reference to presenter
     private static GTDPresenter GTDPRESENTER;
 
@@ -132,7 +134,13 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
             case REQUEST_CODE_QUICK:
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
-                    String sNewTask = bundle.getString(QuickTaskDialogFragment.NEW_TASK);
+                    String sNewTask = bundle.getString(NEW_TASK);
+                    tasksAdapter.addItem(new Task(sNewTask, "Something", false));
+                }
+            case REQUEST_CODE_GTD:
+                if (resultCode == Activity.RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    String sNewTask = bundle.getString(NEW_TASK);
                     tasksAdapter.addItem(new Task(sNewTask, "Something", false));
                 }
         }
