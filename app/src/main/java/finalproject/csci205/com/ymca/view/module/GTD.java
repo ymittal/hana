@@ -32,9 +32,9 @@ import finalproject.csci205.com.ymca.view.dialogs.QuickTaskDialog;
  */
 public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
 
-
-    //Refrence to presenter
+    // TODO: fix static reference to presenter
     private static GTDPresenter GTDPRESENTER;
+
     private Fab fab;
     private View root;
     private MaterialSheetFab materialSheetFab;
@@ -44,7 +44,6 @@ public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
     private OnFragmentInteractionListener mListener;
 
     public GTD() {
-
     }
 
     /**
@@ -53,7 +52,6 @@ public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
      *
      * @return A new instance of fragment GTD.
      */
-
     public static GTD newInstance() {
         GTD fragment = new GTD();
         Bundle args = new Bundle();
@@ -65,7 +63,6 @@ public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
         }
     }
 
@@ -97,12 +94,10 @@ public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
     }
 
     private void initSheetOnClickListener() {
-
         materialSheetFab.setEventListener(new MaterialSheetFabEventListener() {
             @Override
             public void onShowSheet() {
                 // Called when the material sheet's "show" animation starts.
-
             }
 
             @Override
@@ -113,7 +108,6 @@ public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
             @Override
             public void onHideSheet() {
                 // Called when the material sheet's "hide" animation starts.
-
             }
 
             public void onSheetHidden() {
@@ -157,7 +151,6 @@ public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
         if (view.getId() == quickTask.getId()) {
             QuickTaskDialog qt = new QuickTaskDialog();
             qt.show(getFragmentManager(), "QT");
@@ -183,6 +176,4 @@ public class GTD extends Fragment implements LifeCycle, View.OnClickListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
 }
