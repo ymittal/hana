@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gordonwong.materialsheetfab.MaterialSheetFab;
 import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
@@ -36,6 +35,7 @@ import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialogFragment;
  */
 public class GTDFragment extends Fragment implements LifeCycle, View.OnClickListener {
 
+    public static final int REQUEST_CODE_QUICK = 1;
     // TODO: fix static reference to presenter
     private static GTDPresenter GTDPRESENTER;
 
@@ -158,29 +158,28 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
     public void onClick(View view) {
         if (view.getId() == quickTask.getId()) {
             QuickTaskDialogFragment dialog = new QuickTaskDialogFragment();
-            dialog.setTargetFragment(GTDFragment.this, 1);
-            dialog.show(getFragmentManager(), "QT");
-            materialSheetFab.hideSheet();
+            dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
+            dialog.show(getFragmentManager(), "Add Task");
 
         } else if (view.getId() == addTask.getId()) {
             GTDDialogFragment dialog = new GTDDialogFragment();
-            dialog.show(getFragmentManager(), "TASK");
-            materialSheetFab.hideSheet();
+            dialog.show(getFragmentManager(), "Add Task");
 
         }
+
+        materialSheetFab.hideSheet();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case 1:
+            case REQUEST_CODE_QUICK:
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
-                    String sNewTask = bundle.getString("TASK");
+                    String sNewTask = bundle.getString(QuickTaskDialogFragment.NEW_TASK);
                     tasksAdapter.addItem(new Task(sNewTask, "Something", false));
                 }
         }
-
     }
 
     /**

@@ -22,6 +22,8 @@ https://developer.android.com/guide/topics/ui/dialogs.html
 
 public class QuickTaskDialogFragment extends DialogFragment {
 
+    public static final String NEW_TASK = "NEW_TASK";
+
     public QuickTaskDialogFragment() {
     }
 
@@ -30,20 +32,23 @@ public class QuickTaskDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_quicktask_dialog, null);
 
-        builder.setMessage("Get Things Done")
+        builder.setMessage("Get Thing Done")
                 .setView(view)
-                .setPositiveButton("Right now", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Right Now", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
+                        GTDDialogFragment gtdDialog = new GTDDialogFragment();
+                        gtdDialog.show(getFragmentManager(), "Add GTD Task");
+                    }
+                })
+                .setNegativeButton("Save for Later", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
                         Intent i = new Intent()
-                                .putExtra("TASK", etAddTask.getText().toString());
+                                .putExtra(NEW_TASK, etAddTask.getText().toString());
+
                         getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
                         dismiss();
-                    }
-                })
-                .setNegativeButton("Save for later", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
                     }
                 });
 
