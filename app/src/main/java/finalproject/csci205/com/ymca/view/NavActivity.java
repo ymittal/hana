@@ -15,12 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.view.module.GTD;
-import finalproject.csci205.com.ymca.view.module.Pomodoro;
+import finalproject.csci205.com.ymca.view.module.GTDFragment;
+import finalproject.csci205.com.ymca.view.module.PomodoroFragment;
 
 public class NavActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GTD.OnFragmentInteractionListener,
-        Pomodoro.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, GTDFragment.OnFragmentInteractionListener,
+        PomodoroFragment.OnFragmentInteractionListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawer;
@@ -50,7 +50,7 @@ public class NavActivity extends AppCompatActivity
         //Setup default fragment view
         Fragment fragment = null;
         try {
-            fragment = GTD.class.newInstance();
+            fragment = GTDFragment.class.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,11 +105,11 @@ public class NavActivity extends AppCompatActivity
 
         if (id == R.id.GTD_tasks) {
 
-            fragmentClass = GTD.class;
+            fragmentClass = GTDFragment.class;
 
 
         } else if (id == R.id.Pom) {
-            fragmentClass = Pomodoro.class;
+            fragmentClass = PomodoroFragment.class;
 
         }
 

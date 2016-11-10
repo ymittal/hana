@@ -3,7 +3,7 @@ package finalproject.csci205.com.ymca.presenter.module;
 import android.support.v4.app.Fragment;
 
 import finalproject.csci205.com.ymca.presenter.GTDPresenterInterface;
-import finalproject.csci205.com.ymca.view.module.GTD;
+import finalproject.csci205.com.ymca.view.module.GTDFragment;
 
 /**
  * Created by ceh024 on 11/6/16.
@@ -12,12 +12,12 @@ import finalproject.csci205.com.ymca.view.module.GTD;
 public class GTDPresenter implements GTDPresenterInterface, Presenter {
 
 
-    private GTD view;
+    private GTDFragment view;
 
 
     @Override
     public void setView(Fragment f) {
-        this.view = (GTD) f;
+        this.view = (GTDFragment) f;
     }
 
     @Override
