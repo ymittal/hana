@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
+import finalproject.csci205.com.ymca.model.gesture.TaskItemTouchTouchHelperCallback;
 import finalproject.csci205.com.ymca.model.item.TasksAdapter;
 import finalproject.csci205.com.ymca.presenter.LifeCycle;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
@@ -92,6 +94,11 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
 
         tasksAdapter = new TasksAdapter();
         rvTasks.setAdapter(tasksAdapter);
+
+        ItemTouchHelper.Callback callback =
+                new TaskItemTouchTouchHelperCallback(tasksAdapter, rvTasks);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(rvTasks);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
