@@ -131,7 +131,6 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
             QuickTaskDialogFragment dialog = new QuickTaskDialogFragment();
             dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
             dialog.show(getFragmentManager(), "Add Task");
-
         }
     }
 
@@ -144,6 +143,7 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
                     String sNewTask = bundle.getString(NEW_TASK);
                     tasksAdapter.addItem(new Task(sNewTask, false));
                 }
+                break;
             case REQUEST_CODE_GTD:
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
