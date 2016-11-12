@@ -7,8 +7,15 @@ import android.support.v4.app.Fragment;
  */
 
 public interface Presenter {
+    /*
+    Every presenter should have a refrence to:
+     its proper model
+     The view it handles
+     The core logic between the model and view
 
-    void setView(Fragment f);
+     */
     //TODO: Flesh this out.
+    void setView(Fragment f);
+
 
 }

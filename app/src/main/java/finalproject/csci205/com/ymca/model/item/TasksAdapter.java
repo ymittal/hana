@@ -12,7 +12,11 @@ import java.util.List;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
-import finalproject.csci205.com.ymca.model.gesture.TaskTouchHelperAdapter;
+import finalproject.csci205.com.ymca.view.gesture.TaskTouchHelperAdapter;
+
+/*
+TODO: ASK Yash on his opinion on how we should re-distribute non-obvious features.
+ */
 
 public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implements TaskTouchHelperAdapter {
     List<Task> tasks = new ArrayList<>();
@@ -49,6 +53,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         return tasks.size();
     }
 
+    //This needs to go to presenter
     public void addItem(Task newTask) {
         tasks.add(newTask);
         newTask.save();
@@ -60,8 +65,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         final Task todoToBeRemoved = tasks.get(position);
         todoToBeRemoved.delete();
 
-        tasks.remove(position);
-        notifyItemRemoved(position);
+        tasks.remove(position); //Presenter
+        notifyItemRemoved(position); //This needs to go from Presenter to View.
 
         Snackbar snackbar = Snackbar
                 .make(recyclerView, "Item has been deleted", Snackbar.LENGTH_LONG)
@@ -73,6 +78,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
                         notifyItemInserted(position);
                     }
                 });
-        snackbar.show();
+        snackbar.show(); //Showing a snackbar should exist in view, but can be triggered by the presenter
     }
 }

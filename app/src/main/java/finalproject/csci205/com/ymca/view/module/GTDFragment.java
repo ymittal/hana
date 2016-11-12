@@ -13,17 +13,12 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.gordonwong.materialsheetfab.MaterialSheetFab;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
-import finalproject.csci205.com.ymca.model.gesture.TaskItemTouchTouchHelperCallback;
-import finalproject.csci205.com.ymca.model.item.TasksAdapter;
-import finalproject.csci205.com.ymca.presenter.LifeCycle;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
 import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialogFragment;
+import finalproject.csci205.com.ymca.view.gesture.TaskItemTouchTouchHelperCallback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,22 +28,19 @@ import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialogFragment;
  * Use the {@link GTDFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GTDFragment extends Fragment implements LifeCycle, View.OnClickListener {
+public class GTDFragment extends Fragment implements View.OnClickListener {
 
     public static final int REQUEST_CODE_QUICK = 1;
     public static final String NEW_TASK = "NEW_TASK";
     public static final int REQUEST_CODE_GTD = 2;
-    // TODO: fix static reference to presenter
-    private static GTDPresenter GTDPRESENTER;
 
+    // TODO: fix static reference to presenter
+    private GTDPresenter gtdPresenter;
     private FloatingActionButton fab;
     private View root;
-    private MaterialSheetFab materialSheetFab;
-    private TextView quickTask;
-    private TextView addTask;
-
+    private RecyclerView rvTasks;
     private OnFragmentInteractionListener mListener;
-    private TasksAdapter tasksAdapter;
+
 
     public GTDFragment() {
     }
@@ -77,26 +69,33 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment and its features
+
         root = inflater.inflate(R.layout.fragment_gtd, container, false);
         fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(this);
-
+        gtdPresenter = new GTDPresenter(this);
         initTaskList(root);
-
 
         return root;
     }
 
 
+    /*
+        this method needs refactoring into MVP.
+        * TaskAdapter is a part of the GTD Model
+     */
     private void initTaskList(View root) {
-        RecyclerView rvTasks = (RecyclerView) root.findViewById(R.id.rvTasks);
+        rvTasks = (RecyclerView) root.findViewById(R.id.rvTasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        tasksAdapter = new TasksAdapter();
-        rvTasks.setAdapter(tasksAdapter);
+        //Ask Yash see class for note.
+        rvTasks.setAdapter(gtdPresenter.getTasksAdapter());
 
+        /*
+            Defines swipe to delete functionality
+         */
         ItemTouchHelper.Callback callback =
-                new TaskItemTouchTouchHelperCallback(tasksAdapter, rvTasks);
+                new TaskItemTouchTouchHelperCallback(gtdPresenter.getTasksAdapter(), rvTasks);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(rvTasks);
     }
@@ -125,8 +124,21 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
         mListener = null;
     }
 
+    /**
+     * Handles view actions between the user, and the defined response depending on the
+     * object defined to the OnClickListener.
+     *
+     * @param view
+     */
     @Override
     public void onClick(View view) {
+
+        /*
+           Responses with a dialog box that gives the user a choice of a quick task,
+           or the option to extend it to the full task form.
+
+           This fragment will handle the transition to display the dialog box.
+         */
         if (view.getId() == fab.getId()) {
             QuickTaskDialogFragment dialog = new QuickTaskDialogFragment();
             dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
@@ -139,16 +151,19 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
         switch (requestCode) {
             case REQUEST_CODE_QUICK:
                 if (resultCode == Activity.RESULT_OK) {
+
+
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    tasksAdapter.addItem(new Task(sNewTask, false));
+                    gtdPresenter.addItem(new Task(sNewTask, false));
                 }
                 break;
             case REQUEST_CODE_GTD:
                 if (resultCode == Activity.RESULT_OK) {
+
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    tasksAdapter.addItem(new Task(sNewTask, false));
+                    gtdPresenter.addItem(new Task(sNewTask, false));
                 }
         }
     }
@@ -164,7 +179,7 @@ public class GTDFragment extends Fragment implements LifeCycle, View.OnClickList
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: update argument type and name
+        // This handles fragment communication, which isn't needed atm - Charles.
         void onFragmentInteraction(Uri uri);
     }
 }

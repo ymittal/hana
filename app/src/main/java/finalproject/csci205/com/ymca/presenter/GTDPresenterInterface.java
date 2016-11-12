@@ -11,6 +11,7 @@ public interface GTDPresenterInterface {
      Define core logic here, store to model (Task, TaskList, ect)
      */
 
+
     void createQuickTask();
 
     void createGTDTask();

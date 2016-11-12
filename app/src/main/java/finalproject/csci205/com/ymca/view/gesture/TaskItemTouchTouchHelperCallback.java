@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.model.gesture;
+package finalproject.csci205.com.ymca.view.gesture;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
