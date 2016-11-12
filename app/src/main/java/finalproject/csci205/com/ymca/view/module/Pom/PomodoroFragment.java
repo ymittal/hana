@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module;
+package finalproject.csci205.com.ymca.view.module.Pom;
 
 import android.content.Context;
 import android.net.Uri;

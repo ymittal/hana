@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module;
+package finalproject.csci205.com.ymca.view.module.GTD;
 
 import android.app.Activity;
 import android.content.Context;
@@ -155,7 +155,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
 
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    gtdPresenter.addItem(new Task(sNewTask, false));
+                    gtdPresenter.addTask(new Task(sNewTask, false));
                 }
                 break;
             case REQUEST_CODE_GTD:
@@ -163,7 +163,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
 
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    gtdPresenter.addItem(new Task(sNewTask, false));
+                    gtdPresenter.addTask(new Task(sNewTask, false));
                 }
         }
     }
