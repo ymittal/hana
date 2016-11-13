@@ -28,21 +28,19 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
     }
 
 
-    /*
-        Figure out what todo with this method which skips the presenter and addressed the view
-        from the model, breaking MVP.
-     */
+
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_rv_item, parent, false);
         return new TaskViewHolder(rowView);
     }
 
-    /*
-        This method directly accesses the view. Model --> View
-        This method isn't clean, the anon inner class forces dev to create two objs of Task
-        in order to do something. Makes sense to implement setOnCheckedChangeListener - Interface
-        to avoid garbage code.
+
+    /**
+     * Updates the view if user checks a Task. State is updated in the Model afterwards.
+     * @author Charles and Yash
+     * @param holder
+     * @param position
      */
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, int position) {
@@ -52,12 +50,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         holder.checkboxTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isComplete) {
-                /*
-                    This needs to be refactored such that it goes through the presenter.
-                 */
-                Task task = gtdPresenter.getTasks().get(holder.getAdapterPosition());
-                task.setIsComplete(isComplete);
-                task.save();
+                gtdPresenter.taskChecked(holder.getAdapterPosition(), isComplete);
             }
         });
 
@@ -69,7 +62,13 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         return gtdPresenter.taskSize(); //This should be returned by the presenter.
     }
 
-
+    /**
+     * Notifies Presenter that the Task is to be removed, allows user to undo action if so.
+     *
+     * @param position
+     * @param recyclerView
+     * @author Charles and Yash
+     */
     @Override
     public void onItemDismiss(final int position, RecyclerView recyclerView) {
         gtdPresenter.removeTask(position);
@@ -82,6 +81,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
                         gtdPresenter.restoreTask(position);
                     }
                 });
-        snackbar.show(); //Showing a snackbar should exist in view, but can be triggered by the presenter
+        snackbar.show();
+        //TODO Hide FAB during this.
     }
 }

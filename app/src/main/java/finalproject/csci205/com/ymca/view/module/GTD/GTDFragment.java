@@ -34,7 +34,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     public static final String NEW_TASK = "NEW_TASK";
     public static final int REQUEST_CODE_GTD = 2;
 
-    // TODO: fix static reference to presenter
+
     private GTDPresenter gtdPresenter;
     private FloatingActionButton fab;
     private View root;
@@ -80,9 +80,11 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    /*
-        this method needs refactoring into MVP.
-        * TaskAdapter is a part of the GTD Model
+    /**
+     * Requests the TaskAdapter from Presenter, set's up view and corresponding
+     * functionality that occurs with user interaction.
+     * @author Charles and Yash
+     * @param root
      */
     private void initTaskList(View root) {
         rvTasks = (RecyclerView) root.findViewById(R.id.rvTasks);
@@ -100,7 +102,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
         touchHelper.attachToRecyclerView(rvTasks);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -127,7 +129,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     /**
      * Handles view actions between the user, and the defined response depending on the
      * object defined to the OnClickListener.
-     *
+     * @author Charles
      * @param view
      */
     @Override
@@ -146,6 +148,15 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    /**
+     * Handle's the pending result when user interacts with a dialog spawned from the view.
+     * Stores task when user indicates such.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     * @author Charles and Yash
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
