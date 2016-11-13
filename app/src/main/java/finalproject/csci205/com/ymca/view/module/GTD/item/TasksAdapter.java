@@ -24,6 +24,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
 
     public TasksAdapter(GTDPresenter gtd) {
         this.gtdPresenter = gtd;
+
         //tasks = Task.listAll(Task.class); //Find out what this does.
     }
 
