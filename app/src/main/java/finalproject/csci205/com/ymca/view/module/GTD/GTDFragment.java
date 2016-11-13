@@ -41,7 +41,6 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     private RecyclerView rvTasks;
     private OnFragmentInteractionListener mListener;
 
-
     public GTDFragment() {
     }
 
