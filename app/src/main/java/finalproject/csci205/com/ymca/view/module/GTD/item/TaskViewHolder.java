@@ -7,9 +7,7 @@ import android.widget.TextView;
 
 import finalproject.csci205.com.ymca.R;
 
-/*
-    This is part of the view, refactor it so.
- */
+
 public class TaskViewHolder extends RecyclerView.ViewHolder {
     public final TextView tvTask;
     public final CheckBox checkboxTask;
