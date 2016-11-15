@@ -31,7 +31,7 @@ public class QuickTaskDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        final View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_quicktask_dialog, null);
+        final View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_quicktask, null);
 
         builder.setMessage("Add Task")
                 .setView(view)
