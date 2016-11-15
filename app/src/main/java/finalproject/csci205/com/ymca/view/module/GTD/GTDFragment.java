@@ -65,7 +65,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment and its features
         View root = inflater.inflate(R.layout.fragment_gtd, container, false);
-        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
+        fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(this);
         gtdPresenter = new GTDPresenter(this);
         initTaskList(root);
