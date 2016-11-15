@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module.GTD;
+package finalproject.csci205.com.ymca.view.module.gtd;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
-import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialogFragment;
+import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialog;
 import finalproject.csci205.com.ymca.view.gesture.TaskItemTouchTouchHelperCallback;
 
 /**
@@ -141,7 +141,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
            This fragment will handle the transition to display the dialog box.
          */
         if (view.getId() == fab.getId()) {
-            QuickTaskDialogFragment dialog = new QuickTaskDialogFragment();
+            QuickTaskDialog dialog = new QuickTaskDialog();
             dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
             dialog.show(getFragmentManager(), "Add Task");
         }

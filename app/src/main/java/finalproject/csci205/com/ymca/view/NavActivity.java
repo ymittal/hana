@@ -11,12 +11,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.view.module.GTD.GTDFragment;
-import finalproject.csci205.com.ymca.view.module.Pom.PomodoroFragment;
+import finalproject.csci205.com.ymca.view.module.gtd.GTDFragment;
+import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 
 public class NavActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GTDFragment.OnFragmentInteractionListener,

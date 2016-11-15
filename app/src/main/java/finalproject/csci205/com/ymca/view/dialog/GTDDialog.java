@@ -17,7 +17,7 @@ import finalproject.csci205.com.ymca.R;
  * Created by Charles on 11/9/2016.
  */
 
-public class GTDDialogFragment extends DialogFragment {
+public class GTDDialog extends DialogFragment {
 
     public static final String NEW_TASK = "NEW_TASK";
     public static final String GTD_TASK = "GTD_TASK";

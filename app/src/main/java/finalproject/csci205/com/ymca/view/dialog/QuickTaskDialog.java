@@ -19,13 +19,13 @@ AS well as ...
 https://developer.android.com/guide/topics/ui/dialogs.html
 */
 
-public class QuickTaskDialogFragment extends DialogFragment {
+public class QuickTaskDialog extends DialogFragment {
 
     public static final String NEW_TASK = "NEW_TASK";
     public static final String GTD_TASK = "GTD_TASK";
     public static final int REQUEST_CODE_GTD = 2;
 
-    public QuickTaskDialogFragment() {
+    public QuickTaskDialog() {
     }
 
     @Override
@@ -41,7 +41,7 @@ public class QuickTaskDialogFragment extends DialogFragment {
                         EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
                         bundle.putString(GTD_TASK, etAddTask.getText().toString());
 
-                        GTDDialogFragment gtdDialog = new GTDDialogFragment();
+                        GTDDialog gtdDialog = new GTDDialog();
                         gtdDialog.setArguments(bundle);
 
                         gtdDialog.setTargetFragment(getTargetFragment(), REQUEST_CODE_GTD);
