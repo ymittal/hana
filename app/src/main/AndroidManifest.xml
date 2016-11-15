@@ -23,10 +23,11 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="finalproject.csci205.com.ymca.model" />
 
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
