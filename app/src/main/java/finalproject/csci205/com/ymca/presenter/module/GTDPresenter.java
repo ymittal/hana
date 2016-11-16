@@ -1,13 +1,16 @@
 package finalproject.csci205.com.ymca.presenter.module;
 
+
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.GTDPresenterInterface;
-import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialogFragment;
-import finalproject.csci205.com.ymca.view.module.GTD.GTDFragment;
-import finalproject.csci205.com.ymca.view.module.GTD.item.TasksAdapter;
+import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
+import finalproject.csci205.com.ymca.view.task.TaskFragment;
+import finalproject.csci205.com.ymca.view.task.item.TasksAdapter;
 
 /**
  * Created by ceh024 on 11/6/16.
@@ -16,25 +19,35 @@ import finalproject.csci205.com.ymca.view.module.GTD.item.TasksAdapter;
 public class GTDPresenter implements GTDPresenterInterface {
 
 
-    private GTDFragment view;
+    private TaskFragment view;
     private TasksAdapter tasksAdapter;
     private List<Task> tasks;
     private Task dismissedTask;
 
 
-
-    public GTDPresenter(GTDFragment view) {
+    /**
+     * Standard Constructor scheme used for Presenter-->Fragment
+     *
+     * @param view
+     * @author Charles
+     */
+    public GTDPresenter(TaskFragment view) {
         this.view = view;
         this.tasks = new ArrayList<>();
-        this.tasks = Task.listAll(Task.class); //Ask Yash what this does.
+        this.tasks = Task.listAll(Task.class);
         this.tasksAdapter = new TasksAdapter(this);
-
     }
 
-//    @Override
-//    public void setView(Fragment f) {
-//        this.view = (GTDFragment) f;
-//    }
+    /**
+     * Special Case Constructor for model access, used for AddGTDFragment.
+     *
+     * @author Charles
+     */
+    public GTDPresenter() {
+        this.tasks = new ArrayList<>();
+        this.tasks = Task.listAll(Task.class);
+    }
+
 
     @Override
     public void createQuickTask() {
@@ -50,16 +63,13 @@ public class GTDPresenter implements GTDPresenterInterface {
         return tasksAdapter;
     }
 
-//    public void addItem(Task t) {
-//        tasksAdapter.addItem(t);
-//    }
 
     /*
     See video for awsome sauce.
     Note this code is example code
      */
     public void dialogTest() {
-        QuickTaskDialogFragment dialog = new QuickTaskDialogFragment();
+        AddQuickTaskDialog dialog = new AddQuickTaskDialog();
         dialog.setTargetFragment(view, 1);
         dialog.show(view.getFragmentManager(), "Add Task");
     }
@@ -76,12 +86,18 @@ public class GTDPresenter implements GTDPresenterInterface {
      * Add's task to model, updates view
      *
      * @param t
+     * @param b checks to see if we are adjusting the view. Relies on which constructor
+     *          was used. Expects programmer to be aware of which class depends on each case.
+     *          TaskFragment, b = true. Otherwise it is false.
      * @author Charles & Yash
      */
-    public void addTask(Task t) {
+    public void addTask(Task t, boolean b) {
         getTasks().add(t);
         t.save();
-        tasksAdapter.notifyDataSetChanged();
+        if (b) {
+            tasksAdapter.notifyDataSetChanged();
+        }
+
     }
 
     /**
@@ -119,6 +135,10 @@ public class GTDPresenter implements GTDPresenterInterface {
     public void taskChecked(int index, boolean b) {
         getTasks().get(index).setIsComplete(b);
         getTasks().get(index).save();
+    }
+
+    public void showGTD() {
+        view.getView().setVisibility(View.VISIBLE);
     }
 
 }

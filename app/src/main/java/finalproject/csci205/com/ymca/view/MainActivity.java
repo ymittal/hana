@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //TODO Check if user has opened app before, if they have ship this screen and go
+        //to nav act
+
         Button tempLogin = (Button) findViewById(R.id.tempLogin);
         tempLogin.setOnClickListener(new View.OnClickListener() {
             @Override

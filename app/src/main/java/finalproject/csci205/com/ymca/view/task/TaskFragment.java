@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module.GTD;
+package finalproject.csci205.com.ymca.view.task;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,41 +17,36 @@ import android.view.ViewGroup;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
-import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialogFragment;
 import finalproject.csci205.com.ymca.view.gesture.TaskItemTouchTouchHelperCallback;
+import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GTDFragment.OnFragmentInteractionListener} interface
+ * {@link TaskFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GTDFragment#newInstance} factory method to
+ * Use the {@link TaskFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GTDFragment extends Fragment implements View.OnClickListener {
+public class TaskFragment extends Fragment implements View.OnClickListener {
 
     public static final int REQUEST_CODE_QUICK = 1;
     public static final String NEW_TASK = "NEW_TASK";
-    public static final int REQUEST_CODE_GTD = 2;
 
-
-    private GTDPresenter gtdPresenter;
-    private FloatingActionButton fab;
-    private View root;
-    private RecyclerView rvTasks;
     private OnFragmentInteractionListener mListener;
+    private GTDPresenter gtdPresenter;
 
-    public GTDFragment() {
+    public TaskFragment() {
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment GTDFragment.
+     * @return A new instance of fragment TaskFragment.
      */
-    public static GTDFragment newInstance() {
-        GTDFragment fragment = new GTDFragment();
+    public static TaskFragment newInstance() {
+        TaskFragment fragment = new TaskFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -60,21 +55,18 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment and its features
-
-        root = inflater.inflate(R.layout.fragment_gtd, container, false);
-        fab = (FloatingActionButton) root.findViewById(R.id.fab);
+        View root = inflater.inflate(R.layout.fragment_task, container, false);
+        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(this);
-        gtdPresenter = new GTDPresenter(this);
-        initTaskList(root);
 
+        gtdPresenter = new GTDPresenter(this);
+
+        initTaskList(root);
         return root;
     }
 
@@ -82,30 +74,20 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     /**
      * Requests the TaskAdapter from Presenter, set's up view and corresponding
      * functionality that occurs with user interaction.
-     * @author Charles and Yash
+     *
      * @param root
+     * @author Charles and Yash
      */
     private void initTaskList(View root) {
-        rvTasks = (RecyclerView) root.findViewById(R.id.rvTasks);
+        RecyclerView rvTasks = (RecyclerView) root.findViewById(R.id.rvTasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        //Ask Yash see class for note.
         rvTasks.setAdapter(gtdPresenter.getTasksAdapter());
 
-        /*
-            Defines swipe to delete functionality
-         */
+        // defines swipe to delete functionality
         ItemTouchHelper.Callback callback =
                 new TaskItemTouchTouchHelperCallback(gtdPresenter.getTasksAdapter(), rvTasks);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(rvTasks);
-    }
-
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -128,24 +110,26 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     /**
      * Handles view actions between the user, and the defined response depending on the
      * object defined to the OnClickListener.
-     * @author Charles
+     *
      * @param view
+     * @author Charles
      */
     @Override
     public void onClick(View view) {
-
         /*
            Responses with a dialog box that gives the user a choice of a quick task,
            or the option to extend it to the full task form.
 
            This fragment will handle the transition to display the dialog box.
          */
-        if (view.getId() == fab.getId()) {
-            QuickTaskDialogFragment dialog = new QuickTaskDialogFragment();
-            dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
+        if (view.getId() == R.id.fab) {
+            AddQuickTaskDialog dialog = new AddQuickTaskDialog();
+            dialog.setTargetFragment(TaskFragment.this, REQUEST_CODE_QUICK);
             dialog.show(getFragmentManager(), "Add Task");
+
         }
     }
+
 
     /**
      * Handle's the pending result when user interacts with a dialog spawned from the view.
@@ -161,20 +145,11 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
         switch (requestCode) {
             case REQUEST_CODE_QUICK:
                 if (resultCode == Activity.RESULT_OK) {
-
-
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    gtdPresenter.addTask(new Task(sNewTask, false));
+                    gtdPresenter.addTask(new Task(sNewTask, false), true);
                 }
                 break;
-            case REQUEST_CODE_GTD:
-                if (resultCode == Activity.RESULT_OK) {
-
-                    Bundle bundle = data.getExtras();
-                    String sNewTask = bundle.getString(NEW_TASK);
-                    gtdPresenter.addTask(new Task(sNewTask, false));
-                }
         }
     }
 
