@@ -28,7 +28,7 @@ public class TaskFormFragment extends Fragment implements View.OnClickListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_add_gtd, container, false);
+        View root = inflater.inflate(R.layout.taskformfragment, container, false);
         root.setFocusableInTouchMode(true);
         root.requestFocus();
         root.setOnKeyListener(this);
