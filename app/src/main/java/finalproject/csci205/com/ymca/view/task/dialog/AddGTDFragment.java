@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.dialog;
+package finalproject.csci205.com.ymca.view.task.dialog;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,13 +14,13 @@ import android.widget.EditText;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
-import finalproject.csci205.com.ymca.view.module.gtd.TaskFragment;
+import finalproject.csci205.com.ymca.view.task.TaskFragment;
 
 /**
  * Created by ceh024 on 11/15/16.
  */
 
-public class GTDFragment extends Fragment implements View.OnClickListener, View.OnKeyListener {
+public class AddGTDFragment extends Fragment implements View.OnClickListener, View.OnKeyListener {
 
     private Button save;
     private Button cancel;

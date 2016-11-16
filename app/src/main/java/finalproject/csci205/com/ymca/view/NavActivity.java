@@ -14,7 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.view.module.gtd.TaskFragment;
+import finalproject.csci205.com.ymca.view.task.TaskFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 
 public class NavActivity extends AppCompatActivity

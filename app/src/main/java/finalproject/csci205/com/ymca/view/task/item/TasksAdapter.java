@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module.gtd.item;
+package finalproject.csci205.com.ymca.view.task.item;
 
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;

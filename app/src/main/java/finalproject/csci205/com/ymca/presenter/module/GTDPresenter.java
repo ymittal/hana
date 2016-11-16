@@ -8,9 +8,9 @@ import java.util.List;
 
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.GTDPresenterInterface;
-import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialog;
-import finalproject.csci205.com.ymca.view.module.gtd.TaskFragment;
-import finalproject.csci205.com.ymca.view.module.gtd.item.TasksAdapter;
+import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
+import finalproject.csci205.com.ymca.view.task.TaskFragment;
+import finalproject.csci205.com.ymca.view.task.item.TasksAdapter;
 
 /**
  * Created by ceh024 on 11/6/16.
@@ -39,7 +39,7 @@ public class GTDPresenter implements GTDPresenterInterface {
     }
 
     /**
-     * Special Case Constructor for model access, used for GTDFragment.
+     * Special Case Constructor for model access, used for AddGTDFragment.
      *
      * @author Charles
      */
@@ -69,7 +69,7 @@ public class GTDPresenter implements GTDPresenterInterface {
     Note this code is example code
      */
     public void dialogTest() {
-        QuickTaskDialog dialog = new QuickTaskDialog();
+        AddQuickTaskDialog dialog = new AddQuickTaskDialog();
         dialog.setTargetFragment(view, 1);
         dialog.show(view.getFragmentManager(), "Add Task");
     }

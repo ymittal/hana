@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.dialog;
+package finalproject.csci205.com.ymca.view.task.dialog;
 
 
 import android.app.Activity;
@@ -15,11 +15,11 @@ import android.widget.EditText;
 
 import finalproject.csci205.com.ymca.R;
 
-public class QuickTaskDialog extends DialogFragment {
+public class AddQuickTaskDialog extends DialogFragment {
 
     public static final String NEW_TASK = "NEW_TASK";
 
-    public QuickTaskDialog() {
+    public AddQuickTaskDialog() {
     }
 
     @Override
@@ -51,12 +51,12 @@ public class QuickTaskDialog extends DialogFragment {
     }
 
     public void showDialog(String sTask) {
-        GTDFragment gtdFragment = new GTDFragment();
-        gtdFragment.setTaskName(sTask);
+        AddGTDFragment addGtdFragment = new AddGTDFragment();
+        addGtdFragment.setTaskName(sTask);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.replace(R.id.content_nav, gtdFragment).commit();
+        transaction.replace(R.id.content_nav, addGtdFragment).commit();
     }
 }
