@@ -14,7 +14,7 @@ import android.widget.EditText;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
-import finalproject.csci205.com.ymca.view.module.GTD.GTDFragment;
+import finalproject.csci205.com.ymca.view.module.gtd.GTDFragment;
 
 /**
  * Created by ceh024 on 11/15/16.

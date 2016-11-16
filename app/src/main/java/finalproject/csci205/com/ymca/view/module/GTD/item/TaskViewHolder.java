@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module.GTD.item;
+package finalproject.csci205.com.ymca.view.module.gtd.item;
 
 
 import android.support.v7.widget.RecyclerView;

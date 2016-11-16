@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module.GTD;
+package finalproject.csci205.com.ymca.view.module.gtd;
 
 import android.app.Activity;
 import android.content.Context;

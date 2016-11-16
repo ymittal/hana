@@ -9,8 +9,8 @@ import java.util.List;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.GTDPresenterInterface;
 import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialog;
-import finalproject.csci205.com.ymca.view.module.GTD.GTDFragment;
-import finalproject.csci205.com.ymca.view.module.GTD.item.TasksAdapter;
+import finalproject.csci205.com.ymca.view.module.gtd.GTDFragment;
+import finalproject.csci205.com.ymca.view.module.gtd.item.TasksAdapter;
 
 /**
  * Created by ceh024 on 11/6/16.
