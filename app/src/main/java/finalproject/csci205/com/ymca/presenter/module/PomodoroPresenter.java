@@ -10,5 +10,8 @@ public class PomodoroPresenter {
 
     private PomodoroFragment view;
 
+    public PomodoroPresenter(PomodoroFragment p) {
+        view = p;
+    }
 
 }
