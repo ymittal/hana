@@ -22,8 +22,6 @@ import finalproject.csci205.com.ymca.view.task.TaskFragment;
 
 public class AddGTDFragment extends Fragment implements View.OnClickListener, View.OnKeyListener {
 
-    private Button save;
-    private Button cancel;
     private EditText editText;
     private String passedTaskName;
 
@@ -41,10 +39,11 @@ public class AddGTDFragment extends Fragment implements View.OnClickListener, Vi
     }
 
     private void initUI(View root) {
-        save = (Button) root.findViewById(R.id.save);
+        Button save = (Button) root.findViewById(R.id.save);
+        Button cancel = (Button) root.findViewById(R.id.cancel);
         save.setOnClickListener(this);
-        cancel = (Button) root.findViewById(R.id.cancel);
         cancel.setOnClickListener(this);
+
         editText = (EditText) root.findViewById(R.id.editText);
         editText.setText(passedTaskName);
     }
@@ -52,10 +51,13 @@ public class AddGTDFragment extends Fragment implements View.OnClickListener, Vi
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == save.getId()) {
-            save();
-        } else if (view.getId() == cancel.getId()) {
-            returnToLast();
+        switch (view.getId()) {
+            case R.id.save:
+                save();
+                break;
+            case R.id.cancel:
+                returnToLast();
+                break;
         }
     }
 

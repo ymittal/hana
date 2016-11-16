@@ -35,7 +35,6 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private GTDPresenter gtdPresenter;
-    private FloatingActionButton fab;
 
     public TaskFragment() {
     }
@@ -61,8 +60,8 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_gtd, container, false);
-        fab = (FloatingActionButton) root.findViewById(R.id.fab);
+        View root = inflater.inflate(R.layout.fragment_task, container, false);
+        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
         gtdPresenter = new GTDPresenter(this);
@@ -123,7 +122,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
 
            This fragment will handle the transition to display the dialog box.
          */
-        if (view.getId() == fab.getId()) {
+        if (view.getId() == R.id.fab) {
             AddQuickTaskDialog dialog = new AddQuickTaskDialog();
             dialog.setTargetFragment(TaskFragment.this, REQUEST_CODE_QUICK);
             dialog.show(getFragmentManager(), "Add Task");
