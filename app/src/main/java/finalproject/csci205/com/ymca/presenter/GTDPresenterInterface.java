@@ -7,7 +7,7 @@ package finalproject.csci205.com.ymca.presenter;
 public interface GTDPresenterInterface {
 
     /*
-     Define at each point where data persistance needs to be set/retreived. IN TaskFragment fragment
+     Define at each point where data persistance needs to be set/retreived. IN GTDFragment fragment
      Define core logic here, store to model (Task, TaskList, ect)
      */
 
