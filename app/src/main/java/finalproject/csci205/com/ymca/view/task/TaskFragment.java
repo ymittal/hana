@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
-import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
 import finalproject.csci205.com.ymca.view.gesture.TaskItemTouchTouchHelperCallback;
+import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,12 +31,11 @@ import finalproject.csci205.com.ymca.view.gesture.TaskItemTouchTouchHelperCallba
 public class TaskFragment extends Fragment implements View.OnClickListener {
 
     public static final int REQUEST_CODE_QUICK = 1;
-    public static final int REQUEST_CODE_GTD = 2;
     public static final String NEW_TASK = "NEW_TASK";
+
     private OnFragmentInteractionListener mListener;
     private GTDPresenter gtdPresenter;
     private FloatingActionButton fab;
-    private View root;
 
     public TaskFragment() {
     }
@@ -62,11 +61,12 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment and its features
-        root = inflater.inflate(R.layout.fragment_gtd, container, false);
+        View root = inflater.inflate(R.layout.fragment_gtd, container, false);
         fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(this);
+
         gtdPresenter = new GTDPresenter(this);
+
         initTaskList(root);
         return root;
     }
@@ -82,8 +82,6 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     private void initTaskList(View root) {
         RecyclerView rvTasks = (RecyclerView) root.findViewById(R.id.rvTasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        //TODO: ask Yash see class for note.
         rvTasks.setAdapter(gtdPresenter.getTasksAdapter());
 
         // defines swipe to delete functionality
@@ -147,15 +145,6 @@ public class TaskFragment extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_CODE_QUICK:
-                if (resultCode == Activity.RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    String sNewTask = bundle.getString(NEW_TASK);
-                    gtdPresenter.addTask(new Task(sNewTask, false), true);
-                }
-                break;
-
-            //This case might never be called.
-            case REQUEST_CODE_GTD:
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
