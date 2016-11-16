@@ -15,17 +15,9 @@ import android.widget.EditText;
 
 import finalproject.csci205.com.ymca.R;
 
-/*
-Note to Aleks. Reference the chapter in the busy coder's guide to android dev on this
-AS well as ...
-https://developer.android.com/guide/topics/ui/dialogs.html
-*/
-
 public class QuickTaskDialog extends DialogFragment {
 
     public static final String NEW_TASK = "NEW_TASK";
-    public static final String GTD_TASK = "GTD_TASK";
-    public static final int REQUEST_CODE_GTD = 2;
 
     public QuickTaskDialog() {
     }
@@ -39,18 +31,8 @@ public class QuickTaskDialog extends DialogFragment {
                 .setView(view)
                 .setPositiveButton("Get Thing Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-//                        Bundle bundle = new Bundle();
-//                        EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
-//                        bundle.putString(GTD_TASK, etAddTask.getText().toString());
-//
-//                        GTDDialog gtdDialog = new GTDDialog();
-//                        gtdDialog.setArguments(bundle);
-//
-//                        gtdDialog.setTargetFragment(getTargetFragment(), REQUEST_CODE_GTD);
-//                        gtdDialog.show(getFragmentManager(), "Add GTD Task");
                         EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
                         showDialog(etAddTask.getText().toString());
-
                     }
                 })
                 .setNegativeButton("Save for Later", new DialogInterface.OnClickListener() {
@@ -68,12 +50,13 @@ public class QuickTaskDialog extends DialogFragment {
         return builder.create();
     }
 
-    public void showDialog(String s) {
+    public void showDialog(String sTask) {
+        GTDFragment gtdFragment = new GTDFragment();
+        gtdFragment.setTaskName(sTask);
+
         FragmentManager fragmentManager = getFragmentManager();
-        TaskLongForm longForm = new TaskLongForm();
-        longForm.setPassedTaskName(s);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.replace(R.id.content_nav, longForm).commit();
+        transaction.replace(R.id.content_nav, gtdFragment).commit();
     }
 }

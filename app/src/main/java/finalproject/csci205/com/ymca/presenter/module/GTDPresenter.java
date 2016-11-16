@@ -9,7 +9,7 @@ import java.util.List;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.GTDPresenterInterface;
 import finalproject.csci205.com.ymca.view.dialog.QuickTaskDialog;
-import finalproject.csci205.com.ymca.view.module.gtd.GTDFragment;
+import finalproject.csci205.com.ymca.view.module.gtd.TaskFragment;
 import finalproject.csci205.com.ymca.view.module.gtd.item.TasksAdapter;
 
 /**
@@ -19,7 +19,7 @@ import finalproject.csci205.com.ymca.view.module.gtd.item.TasksAdapter;
 public class GTDPresenter implements GTDPresenterInterface {
 
 
-    private GTDFragment view;
+    private TaskFragment view;
     private TasksAdapter tasksAdapter;
     private List<Task> tasks;
     private Task dismissedTask;
@@ -31,7 +31,7 @@ public class GTDPresenter implements GTDPresenterInterface {
      * @param view
      * @author Charles
      */
-    public GTDPresenter(GTDFragment view) {
+    public GTDPresenter(TaskFragment view) {
         this.view = view;
         this.tasks = new ArrayList<>();
         this.tasks = Task.listAll(Task.class);
@@ -39,7 +39,7 @@ public class GTDPresenter implements GTDPresenterInterface {
     }
 
     /**
-     * Special Case Constructor for model access, used for TaskLongForm.
+     * Special Case Constructor for model access, used for GTDFragment.
      *
      * @author Charles
      */
@@ -88,7 +88,7 @@ public class GTDPresenter implements GTDPresenterInterface {
      * @param t
      * @param b checks to see if we are adjusting the view. Relies on which constructor
      *          was used. Expects programmer to be aware of which class depends on each case.
-     *          GTDFragment, b = true. Otherwise it is false.
+     *          TaskFragment, b = true. Otherwise it is false.
      * @author Charles & Yash
      */
     public void addTask(Task t, boolean b) {

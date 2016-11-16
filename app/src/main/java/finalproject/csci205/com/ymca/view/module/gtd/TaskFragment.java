@@ -23,12 +23,12 @@ import finalproject.csci205.com.ymca.view.gesture.TaskItemTouchTouchHelperCallba
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GTDFragment.OnFragmentInteractionListener} interface
+ * {@link TaskFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GTDFragment#newInstance} factory method to
+ * Use the {@link TaskFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GTDFragment extends Fragment implements View.OnClickListener {
+public class TaskFragment extends Fragment implements View.OnClickListener {
 
     public static final int REQUEST_CODE_QUICK = 1;
     public static final int REQUEST_CODE_GTD = 2;
@@ -38,17 +38,17 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     private FloatingActionButton fab;
     private View root;
 
-    public GTDFragment() {
+    public TaskFragment() {
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment GTDFragment.
+     * @return A new instance of fragment TaskFragment.
      */
-    public static GTDFragment newInstance() {
-        GTDFragment fragment = new GTDFragment();
+    public static TaskFragment newInstance() {
+        TaskFragment fragment = new TaskFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -127,7 +127,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
          */
         if (view.getId() == fab.getId()) {
             QuickTaskDialog dialog = new QuickTaskDialog();
-            dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
+            dialog.setTargetFragment(TaskFragment.this, REQUEST_CODE_QUICK);
             dialog.show(getFragmentManager(), "Add Task");
 
         }

@@ -14,11 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.view.module.gtd.GTDFragment;
+import finalproject.csci205.com.ymca.view.module.gtd.TaskFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 
 public class NavActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GTDFragment.OnFragmentInteractionListener,
+        implements NavigationView.OnNavigationItemSelectedListener, TaskFragment.OnFragmentInteractionListener,
         PomodoroFragment.OnFragmentInteractionListener {
 
     private DrawerLayout drawer;
@@ -30,7 +30,7 @@ public class NavActivity extends AppCompatActivity
         setContentView(R.layout.activity_nav);
 
         initUI();
-        initFragment(new GTDFragment());
+        initFragment(new TaskFragment());
     }
 
     private void initUI() {
@@ -62,13 +62,13 @@ public class NavActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.GTD_tasks:
-                fragmentClass = GTDFragment.class;
+                fragmentClass = TaskFragment.class;
                 break;
             case R.id.Pom:
                 fragmentClass = PomodoroFragment.class;
                 break;
             default:
-                fragmentClass = GTDFragment.class;
+                fragmentClass = TaskFragment.class;
         }
 
         try {
