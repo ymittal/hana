@@ -22,14 +22,10 @@ import finalproject.csci205.com.ymca.view.module.gtd.TaskFragment;
 
 public class GTDFragment extends Fragment implements View.OnClickListener, View.OnKeyListener {
 
-    public static final String NEW_TASK = "NEW_TASK";
-    public static final String GTD_TASK = "GTD_TASK";
-
     private Button save;
     private Button cancel;
     private EditText editText;
     private String passedTaskName;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
