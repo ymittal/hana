@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module.gtd.item;
+package finalproject.csci205.com.ymca.view.module.GTD.item;
 
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +12,8 @@ import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
 import finalproject.csci205.com.ymca.view.gesture.TaskTouchHelperAdapter;
 
-/*
-TODO: ASK Yash on his opinion on how we should re-distribute non-obvious features.
-    I think this should be a sublcass of the GTDFragment or considered an element of the view.
-    My reasoning is that this handles a lot of the view interactions specific to the
-    RecyclerView, and only handles small tidbits of logic to the model.
- */
+//TODO: ASK Yash on his opinion on how we should re-distribute non-obvious features.
+
 
 public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implements TaskTouchHelperAdapter {
     private GTDPresenter gtdPresenter;

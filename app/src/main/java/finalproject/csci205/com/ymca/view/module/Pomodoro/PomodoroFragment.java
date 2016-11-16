@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module.pomodoro;
+package finalproject.csci205.com.ymca.view.module.Pomodoro;
 
 import android.content.Context;
 import android.net.Uri;

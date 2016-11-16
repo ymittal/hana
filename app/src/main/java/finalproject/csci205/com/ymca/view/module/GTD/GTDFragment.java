@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.module.gtd;
+package finalproject.csci205.com.ymca.view.module.GTD;
 
 import android.app.Activity;
 import android.content.Context;
@@ -33,11 +33,10 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     public static final int REQUEST_CODE_QUICK = 1;
     public static final int REQUEST_CODE_GTD = 2;
     public static final String NEW_TASK = "NEW_TASK";
-
     private OnFragmentInteractionListener mListener;
     private GTDPresenter gtdPresenter;
-
     private FloatingActionButton fab;
+    private View root;
 
     public GTDFragment() {
     }
@@ -64,7 +63,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment and its features
-        View root = inflater.inflate(R.layout.fragment_gtd, container, false);
+        root = inflater.inflate(R.layout.fragment_gtd, container, false);
         fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(this);
         gtdPresenter = new GTDPresenter(this);
@@ -130,8 +129,10 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
             QuickTaskDialog dialog = new QuickTaskDialog();
             dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
             dialog.show(getFragmentManager(), "Add Task");
+
         }
     }
+
 
     /**
      * Handle's the pending result when user interacts with a dialog spawned from the view.
@@ -149,15 +150,16 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    gtdPresenter.addTask(new Task(sNewTask, false));
+                    gtdPresenter.addTask(new Task(sNewTask, false), true);
                 }
                 break;
 
+            //This case might never be called.
             case REQUEST_CODE_GTD:
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    gtdPresenter.addTask(new Task(sNewTask, false));
+                    gtdPresenter.addTask(new Task(sNewTask, false), true);
                 }
                 break;
         }
