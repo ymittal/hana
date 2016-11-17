@@ -1,8 +1,113 @@
 package finalproject.csci205.com.countcown;
 
+/******************************************
+ * CSCI205 - Software Engineering and Design
+ * Fall 2016
+ * <p>
+ * Name: YMCA
+ * Date: Nov 1, 2016
+ * Time: 7:50:26 PM
+ * <p>
+ * Project: csci205_final
+ * Package: finalproject.csci205.com.countcown
+ * File: CountDownView
+ * Description:
+ * Services that keeps track of counting down time.
+ * ****************************************
+ */
+
+
+import android.os.CountDownTimer;
+
 /**
- * Created by ceh024 on 11/16/16.
+ * @author Charles
  */
 
 public class CountDownService {
+    private final int SECONDSPARAM = 1000;
+    private int startPauseCounter = 0;
+    private long storedTime;
+    private int sessionTime; // In mins 
+    private CountDownTimer cdStart = null;
+    private CountDownListener countDownListener;
+//    private ViewList viewList;
+
+    public CountDownService(int sessionTime) {
+        this.sessionTime = sessionTime;
+    }
+
+
+    /**
+     * Starts/Stops counter depending on the state of the counter
+     *
+     * @author Charles
+     */
+    private void startPauseCounter() {
+        if (startPauseCounter == 0) {
+            startPauseCounter++;
+            //TODO get right param passing
+            cdStart = new CountDownTimer(minToMili(sessionTime), SECONDSPARAM) {
+                @Override
+                public void onTick(long l) {
+
+                    countDownListener.countdownResult(l);
+                    storedTime = l;
+                }
+
+                @Override
+                public void onFinish() {
+
+                }
+
+            };
+            cdStart.start();
+        } else if (startPauseCounter % 2 != 0) {
+            startPauseCounter++;
+            cdStart.cancel();
+
+        } else if (startPauseCounter % 2 == 0) {
+
+            startPauseCounter++;
+            cdStart = new CountDownTimer(storedTime, SECONDSPARAM) {
+                @Override
+                public void onTick(long l) {
+
+                    countDownListener.countdownResult(l);
+                    storedTime = l;
+                }
+
+                @Override
+                public void onFinish() {
+
+                }
+
+            };
+            cdStart.start();
+        }
+    }
+
+
+    /**
+     * Converts Minuetes to Miliseconds
+     *
+     * @param min
+     * @return
+     */
+    public long minToMili(int min) {
+        return min * 60000;
+    }
+
+    public void setSessionTime(int sessionTime) {
+        this.sessionTime = sessionTime;
+    }
+
+//    public void bindView(Object v, String tag){
+//        viewList.add(v,tag);
+//    }
+//    public void unbindView(String tag){
+//        viewList.unbindView(tag);
+//    }
+
+
+
 }

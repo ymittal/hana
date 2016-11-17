@@ -11,13 +11,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3790291-bbee-401b-8976-21c5fc40af3d" name="Default" comment="Start/Stop Functionality">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-tvdpi/ic_cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_cancel.png" />
+    <list default="true" id="b3790291-bbee-401b-8976-21c5fc40af3d" name="Default" comment="Made the screen kinda pretty">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/ViewList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
@@ -25,10 +21,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pomodoro.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pomodoro.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomBundle.java" afterPath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomBundle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/Pomodoro.java" afterPath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/Pomodoro.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownService.java" afterPath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownView.java" afterPath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/countdown/src/main/res/layout/countdownlayout.xml" afterPath="$PROJECT_DIR$/countdown/src/main/res/layout/countdownlayout.xml" />
     </list>
     <ignored path="ymca.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,28 +62,103 @@
       <file leaf-file-name="CountDownView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="92" column="32" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="32" />
+            <state relative-caret-position="2037">
+              <caret line="116" column="0" selection-start-line="116" selection-start-column="2" selection-end-line="163" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2054#2055#0" expanded="true" />
-                <element signature="e#2088#2089#0" expanded="true" />
+                <element signature="e#2554#2555#0" expanded="true" />
+                <element signature="e#2588#2589#0" expanded="true" />
+                <element signature="e#4619#4620#0" expanded="true" />
+                <element signature="e#4652#4653#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="countdownlayout.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CountDownService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#869#870#0" expanded="true" />
+                <element signature="e#915#916#0" expanded="true" />
+                <element signature="e#2304#2305#0" expanded="true" />
+                <element signature="e#2338#2339#0" expanded="true" />
+                <element signature="e#2388#2389#0" expanded="true" />
+                <element signature="e#2434#2435#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CountDownListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/ViewList.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#293#294#0" expanded="true" />
+                <element signature="e#335#336#0" expanded="true" />
+                <element signature="e#937#938#0" expanded="true" />
+                <element signature="e#963#964#0" expanded="true" />
+                <element signature="e#1001#1002#0" expanded="true" />
+                <element signature="e#1031#1032#0" expanded="true" />
+                <element signature="e#1060#1061#0" expanded="true" />
+                <element signature="e#1087#1088#0" expanded="true" />
+                <element signature="e#1125#1126#0" expanded="true" />
+                <element signature="e#1157#1158#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PomodoroSettings.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomodoroSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PomBundle.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomBundle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="10" column="28" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="28" />
+              <folding>
+                <element signature="e#582#583#0" expanded="true" />
+                <element signature="e#616#617#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="countdownlayout.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/countdown/src/main/res/layout/countdownlayout.xml">
           <provider editor-type-id="android-designer2">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="147">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
-                <element signature="e#1254#1289#0" expanded="true" />
-                <element signature="e#2520#2555#0" expanded="true" />
+                <element signature="e#1268#1303#0" expanded="true" />
+                <element signature="e#2797#2832#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,24 +167,11 @@
       <file leaf-file-name="PomodoroFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
+            <state relative-caret-position="1143">
               <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_pomodoro.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_pomodoro.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -121,11 +181,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="ASInterface" />
         <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
-        <option value="ASClass" />
         <option value="layoutResourceFile" />
+        <option value="ASClass" />
+        <option value="ASInterface" />
       </list>
     </option>
   </component>
@@ -2802,11 +2862,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_gtd_dialog.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/dialog/GTDDialogFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/dialog/QuickTaskDialogFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_nav.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/PomodoroFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/gesture/TaskItemTouchTouchHelperCallback.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/module/Presenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/GTDPresenterInterface.java" />
@@ -2840,7 +2895,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/module/PomodoroInterface.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/Pomodoro.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/module/PomodoroPresenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomBundle.java" />
         <option value="$PROJECT_DIR$/countcown/src/main/java/finalproject/csci205/com/countcown/widget/CircleCountDownView.java" />
         <option value="$PROJECT_DIR$/countcown/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/countcown/src/main/res/layout/layout_count_down_view.xml" />
@@ -2850,9 +2904,15 @@
         <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomodoroSettings.java" />
         <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownTimer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java" />
-        <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_pomodoro.xml" />
         <option value="$PROJECT_DIR$/countdown/src/main/res/layout/countdownlayout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomBundle.java" />
+        <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownSettingsBundle.java" />
+        <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/ViewList.java" />
+        <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDown.java" />
+        <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownListener.java" />
+        <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownView.java" />
+        <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownService.java" />
       </list>
     </option>
   </component>
@@ -3059,24 +3119,6 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ymca" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
@@ -3224,6 +3266,36 @@
               <option name="myItemId" value="ymca" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ymca" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ymca" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -3292,18 +3364,18 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/compiler.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/misc.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/gradle.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/modules.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/app.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Task.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/module/GTDPresenter.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/MainActivity.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/NavActivity.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/task/DetailTaskFragment.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/task/GTDFragment.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/task/dialog/AddQuickTaskDialog.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/task/dialog/TaskFormFragment.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/task/item/TasksAdapter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/util/SharedPreferenceUtil.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -3311,18 +3383,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/task/DetailTaskFragment.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/cliff.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable-hdpi/cliff.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable-hdpi/open_notebook.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable-hdpi/skyscraper.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/drawable-hdpi/splash_map.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/layout/fragment_gtd.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/layout/fragment_taskform.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/open_notebook.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/skyscraper.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/splash_map.jpg</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/layout/fragment_detail_task.xml</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -3330,8 +3391,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/layout/gtdfragment.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/res/layout/taskformfragment.xml</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -3935,7 +3994,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479351644190</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Made the screen kinda pretty">
+      <created>1479354731737</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1479354731738</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -3984,6 +4050,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23819743" sideWeight="0.49317408" order="0" side_tool="false" content_ui="combo" x="496" y="179" width="374" height="347" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325811" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -3993,7 +4060,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32627118" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Fabric" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -4031,7 +4097,8 @@
     <MESSAGE value="Got View to be imported" />
     <MESSAGE value="Progress" />
     <MESSAGE value="Start/Stop Functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Start/Stop Functionality" />
+    <MESSAGE value="Made the screen kinda pretty" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made the screen kinda pretty" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -4043,18 +4110,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_nav.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_nav.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/LifeCycle.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/Pom/PomodoroFragment.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/presenter/module/Presenter.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -4194,6 +4249,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4220,6 +4276,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4246,6 +4303,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1050">
           <caret line="50" column="35" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4257,29 +4315,6 @@
             <element signature="e#15549#15550#0" expanded="false" />
             <element signature="e#15602#15603#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomodoroSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomBundle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -4299,14 +4334,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/task/GTDFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-819">
-          <caret line="30" column="73" selection-start-line="30" selection-start-column="58" selection-end-line="30" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-24/android.jar!/android/view/View.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -4320,24 +4347,16 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="92" column="32" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2054#2055#0" expanded="true" />
-            <element signature="e#2088#2089#0" expanded="true" />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/countdown/src/main/res/layout/countdownlayout.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+        <state relative-caret-position="147">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1268#1303#0" expanded="true" />
+            <element signature="e#2797#2832#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4347,22 +4366,111 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+        <state relative-caret-position="210">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/countdown/src/main/res/layout/countdownlayout.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1143">
+          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/task/GTDFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-914">
+          <caret line="30" column="73" selection-start-line="30" selection-start-column="58" selection-end-line="30" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomodoroSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/model/Pom/PomBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="28" />
+          <folding>
+            <element signature="e#582#583#0" expanded="true" />
+            <element signature="e#616#617#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownSettingsBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/ViewList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
+            <element signature="e#335#336#0" expanded="true" />
+            <element signature="e#937#938#0" expanded="true" />
+            <element signature="e#963#964#0" expanded="true" />
+            <element signature="e#1001#1002#0" expanded="true" />
+            <element signature="e#1031#1032#0" expanded="true" />
+            <element signature="e#1060#1061#0" expanded="true" />
+            <element signature="e#1087#1088#0" expanded="true" />
+            <element signature="e#1125#1126#0" expanded="true" />
+            <element signature="e#1157#1158#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2037">
+          <caret line="116" column="0" selection-start-line="116" selection-start-column="2" selection-end-line="163" selection-end-column="7" />
           <folding>
-            <element signature="e#1254#1289#0" expanded="true" />
-            <element signature="e#2520#2555#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2554#2555#0" expanded="true" />
+            <element signature="e#2588#2589#0" expanded="true" />
+            <element signature="e#4619#4620#0" expanded="true" />
+            <element signature="e#4652#4653#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countcown/CountDownService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#869#870#0" expanded="true" />
+            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#2304#2305#0" expanded="true" />
+            <element signature="e#2338#2339#0" expanded="true" />
+            <element signature="e#2388#2389#0" expanded="true" />
+            <element signature="e#2434#2435#0" expanded="true" />
           </folding>
         </state>
       </provider>
