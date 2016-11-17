@@ -65,7 +65,8 @@ public class TaskFormFragment extends Fragment implements View.OnClickListener, 
      */
     private void save() {
         GTDPresenter gtdPresenter = new GTDPresenter();
-        gtdPresenter.addTask(new Task(editText.getText().toString(), false), false);
+        Task newTask = new Task(editText.getText().toString(), false);
+        gtdPresenter.addTask(newTask, false);
         goToGTDFragment();
     }
 

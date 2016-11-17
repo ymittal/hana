@@ -55,6 +55,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle("Task List");
     }
 
     @Override

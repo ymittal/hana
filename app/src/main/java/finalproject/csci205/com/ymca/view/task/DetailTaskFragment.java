@@ -18,6 +18,8 @@ import finalproject.csci205.com.ymca.model.Task;
  */
 public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
 
+    public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
+
     public DetailTaskFragment() {
     }
 
@@ -35,8 +37,8 @@ public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            Task task = (Task) bundle.getSerializable("TASK");
-            Log.d("LOG_TAG", task.getTitle());
+            Task task = (Task) bundle.getSerializable(SERIALIZED_TASK);
+            getActivity().setTitle(task.getTitle());
         }
 
         return root;
