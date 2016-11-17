@@ -1,13 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgPrimary"
     tools:context=".view.task.GTDFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_horizontal_margin">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvTasks"
@@ -25,4 +27,4 @@
         android:layout_margin="8dp"
         android:src="@drawable/ic_action_add" />
 
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

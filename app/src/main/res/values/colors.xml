@@ -2,6 +2,9 @@
 <resources>
     <color name="colorPrimary">#263238</color>
     <color name="colorPrimaryDark">#212121</color>
-    <color name="colorAccent">#409cff</color>
+    <color name="colorAccent">#9FA8DA</color>
     <color name="black">#000000</color>
+
+    <color name="bgPrimary">#263238</color>
+    <color name="divider">#37474F</color>
 </resources>
