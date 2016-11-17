@@ -10,15 +10,17 @@ import android.preference.PreferenceManager;
 
 public class SharedPreferenceUtil {
 
-    public static boolean getIsOpen(Context context){
+    public static final String PREFS_IS_OPEN = "PREFS_IS_OPEN";
+
+    public static boolean getIsOpen(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getBoolean("PREFS_IS_OPEN", false);
+        return prefs.getBoolean(PREFS_IS_OPEN, false);
     }
 
-    public static void setPreferenceIsOpen(Context context){
+    public static void setPreferenceIsOpen(Context context, boolean isOpen) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("PREFS_IS_OPEN", true);
+        editor.putBoolean(PREFS_IS_OPEN, isOpen);
         editor.apply();
 
     }
