@@ -1,7 +1,9 @@
 package finalproject.csci205.com.ymca.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -29,36 +31,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button tempLogin = (Button) findViewById(R.id.tempLogin);
 
-        if (SharedPreferenceUtil.getIsOpen(getApplicationContext())){
-            Log.d("LOG_TAG", "true");
-        }
-        else {
+
+        //Check HERE if Shared Preference / Sugar data exists
+
+        if (!SharedPreferenceUtil.getIsOpen(getApplicationContext())) { // has not been opened before
+
             Log.d("LOG_TAG", "false");
-        }
-        /*
-            Check HERE if Shared Prefrence / Sugar data exists
 
-            if (data isn't here) {
 
-            Button tempLogin = (Button) findViewById(R.id.tempLogin);
             tempLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, NavActivity.class);
-                startActivity(i);
-                finish();
-            } else {
+                @Override
+                public void onClick(View view) {
+                    SharedPreferenceUtil.setPreference(getApplicationContext());
+                    Intent i = new Intent(MainActivity.this, NavActivity.class);
+                    startActivity(i);
+                    finish();
+                    System.out.println("LOG_TAG " + SharedPreferenceUtil.getIsOpen(getApplicationContext()));
+                }
+            });
 
-                Intent i = new Intent(MainActivity.this, NavActivity.class);
-                startActivity(i);
-                finish();
+        } else {                                            //If it has been opened before
+            Log.d("LOG_TAG", "true");
+            tempLogin.setVisibility(View.INVISIBLE);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    Intent i = new Intent(MainActivity.this, NavActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }, 2000);
 
-            }
-        });
+        }
 
-            }
-         */
+    }
+}
 
         //Note, to keep the close clean, refactor the else block into a method.
         //Here's some useful data to get you started
@@ -69,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             > https://developer.android.com/reference/android/content/SharedPreferences.html
          */
 
-        Button tempLogin = (Button) findViewById(R.id.tempLogin);
+/*
         tempLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,3 +89,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+*/
