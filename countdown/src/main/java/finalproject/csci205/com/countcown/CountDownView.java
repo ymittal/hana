@@ -1,12 +1,15 @@
 package finalproject.csci205.com.countcown;
 
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,11 +18,11 @@ import java.util.Date;
 /******************************************
  * CSCI205 - Software Engineering and Design
  * Fall 2016
- *
+ * <p>
  * Name: YMCA
  * Date: Nov 1, 2016
  * Time: 7:50:26 PM
- *
+ * <p>
  * Project: csci205_final
  * Package: finalproject.csci205.com.countcown
  * File: CountDownView
@@ -42,6 +45,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     private LinearLayout timerContainer;
     private CountDownTimer cdStart = null;
     private CountDownListener countDownListener;
+    private CountDownService cd;
 
 
     public CountDownView(Context context) {
@@ -69,6 +73,15 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         timerContainer = (LinearLayout) root.findViewById(R.id.layoutContainer);
         timerContainer.setOnClickListener(this);
         cancelPom.setOnClickListener(this);
+
+        if (isMyServiceRunning(CountDownService.class)) {
+            Toast.makeText(getContext(), "Running", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent i = new Intent();
+            cd = new CountDownService("test", 30);
+            cd.setCountDownListener(this);
+            //cd.startService(i);
+        }
     }
 
 
@@ -86,90 +99,39 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         seconds.setText(secFor.format(date));
     }
 
-    /**
-     * Converts Minuetes to Miliseconds
-     *
-     * @param min
-     * @return
-     */
-    public long minToMili(int min) {
-        return min * 60000;
-    }
-
 
     @Override
     public void onClick(View view) {
-
+        if (isMyServiceRunning(CountDownService.class)) {
+            Toast.makeText(getContext(), "Running", Toast.LENGTH_SHORT).show();
+        }
 
         if (view.getId() == timerContainer.getId()) {
             cancelPom.setVisibility(VISIBLE);
-            //startPauseCounter();
-            CountDownService cd = new CountDownService("test", 30);
-            cd.setCountDownListener(this);
             cd.startPauseCounter();
         } else if (view.getId() == cancelPom.getId()) {
-//            cdStart.cancel();
-//            mins.setText("30"); //TODO Make same int from settings
-//            seconds.setText("00");
-//            storedTime = minToMili(30);
-//            startPauseCounter++;
-//            cancelPom.setVisibility(GONE);
+
+            cancelPom.setVisibility(GONE);
+            cd.stopTimer();
+            mins.setText("30");//TODO Dont have this hard coded.
+            seconds.setText("00");
+
         }
     }
-
-//    /**
-//     * Starts/Stops counter depending on the state of the counter
-//     * @author Charles
-//     */
-//    private void startPauseCounter() {
-//        if (startPauseCounter == 0) {
-//            startPauseCounter++;
-//            //TODO get right param passing
-//            cdStart = new CountDownTimer(minToMili(30), SECONDSPARAM) {
-//                @Override
-//                public void onTick(long l) {
-//
-//                    countdownResult(l);
-//                    storedTime = l;
-//                }
-//
-//                @Override
-//                public void onFinish() {
-//
-//                }
-//
-//            };
-//            cdStart.start();
-//        } else if (startPauseCounter % 2 != 0) {
-//            Toast.makeText(getContext(), "Paused!", Toast.LENGTH_SHORT).show();
-//            startPauseCounter++;
-//            cdStart.cancel();
-//
-//        } else if (startPauseCounter % 2 == 0) {
-//            Toast.makeText(getContext(), "Resumed!", Toast.LENGTH_SHORT).show();
-//            startPauseCounter++;
-//            cdStart = new CountDownTimer(storedTime, SECONDSPARAM) {
-//                @Override
-//                public void onTick(long l) {
-//
-//                    countdownResult(l);
-//                    storedTime = l;
-//                }
-//
-//                @Override
-//                public void onFinish() {
-//
-//                }
-//
-//            };
-//            cdStart.start();
-//        }
-//    }
-
 
     @Override
     public void countdownResult(long l) {
         updateProgress(l);
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

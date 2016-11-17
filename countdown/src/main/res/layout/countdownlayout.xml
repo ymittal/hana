@@ -22,7 +22,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="00"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@android:color/holo_purple"
             android:textSize="64sp"
             android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="min"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@android:color/holo_purple"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="00"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@android:color/holo_purple"
             android:textSize="64sp"
             android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="sec"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@android:color/holo_purple"
             android:textSize="20sp"
             android:textStyle="bold" />
 

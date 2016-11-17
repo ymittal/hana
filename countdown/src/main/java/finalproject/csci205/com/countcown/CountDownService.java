@@ -17,45 +17,54 @@ package finalproject.csci205.com.countcown;
  */
 
 
-import android.app.IntentService;
+import android.app.Service;
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 
 /**
  * @author Charles
  */
 
-public class CountDownService extends IntentService {
+public class CountDownService extends Service {
     private final int SECONDSPARAM = 1000;
     private int startPauseCounter = 0;
     private long storedTime;
     private int sessionTime; // In mins 
     private CountDownTimer cdStart = null;
     private CountDownListener countDownListener;
-    //    private ViewList viewList;
 
-    //lol dont use this.
-    public CountDownService(String name) {
-        super(name);
-    }
+//    public CountDownService(){
+//        super("Default");
+//    }
+//    //lol dont use this.
+//    public CountDownService(String name) {
+//        super(name);
+//    }
 
     public CountDownService(String name, int sessionTime) {
-        super(name);
+        //super(name);
         this.sessionTime = sessionTime;
-
     }
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-        //startPauseCounter();
+
     }
 
+    @Nullable
     @Override
-    protected void onHandleIntent(Intent intent) {
-
+    public IBinder onBind(Intent intent) {
+        return null;
     }
+
+//    @Override
+//    protected void onHandleIntent(Intent intent) {
+//
+//    }
 
     /**
      * Starts/Stops counter depending on the state of the counter
@@ -68,14 +77,12 @@ public class CountDownService extends IntentService {
             cdStart = new CountDownTimer(minToMili(sessionTime), SECONDSPARAM) {
                 @Override
                 public void onTick(long l) {
-
                     countDownListener.countdownResult(l);
                     storedTime = l;
                 }
 
                 @Override
                 public void onFinish() {
-
                 }
 
             };
@@ -83,26 +90,25 @@ public class CountDownService extends IntentService {
         } else if (startPauseCounter % 2 != 0) {
             startPauseCounter++;
             cdStart.cancel();
-
         } else if (startPauseCounter % 2 == 0) {
 
             startPauseCounter++;
             cdStart = new CountDownTimer(storedTime, SECONDSPARAM) {
                 @Override
                 public void onTick(long l) {
-
                     countDownListener.countdownResult(l);
                     storedTime = l;
                 }
-
                 @Override
                 public void onFinish() {
-
                 }
-
             };
             cdStart.start();
         }
+    }
+
+    public void stopTimer() {
+        cdStart.cancel();
     }
 
 
