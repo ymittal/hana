@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        loadBackground();
+
         if (SharedPreferenceUtil.getIsOpen(getApplicationContext())){
             Log.d("LOG_TAG", "true");
         }
@@ -95,13 +97,22 @@ public class MainActivity extends AppCompatActivity {
 
         RelativeLayout thisRL = (RelativeLayout) findViewById(R.id.relativeLayout);
 
-        Drawable theBackground;
+
 
         //randomly pick a background
         int r = new Random().nextInt(4);
 
+        switch (r){
+            case 0: thisRL.setBackgroundResource(R.drawable.cliff);
+            break;
+            case 1: thisRL.setBackgroundResource(R.drawable.open_notebook);
+            break;
+            case 2: thisRL.setBackgroundResource(R.drawable.skyscraper);
+            break;
+            case 3: thisRL.setBackgroundResource(R.drawable.splash_map);
+        }
 
 
-       // thisRL.setBackground(theBackground);
+
     }
 }
