@@ -17,8 +17,8 @@ import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.task.GTDFragment;
 
-public class NavActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, GTDFragment.OnFragmentInteractionListener,
+public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        GTDFragment.OnFragmentInteractionListener,
         PomodoroFragment.OnFragmentInteractionListener {
 
     private DrawerLayout drawer;

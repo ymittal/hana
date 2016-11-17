@@ -1,7 +1,9 @@
 package finalproject.csci205.com.ymca.view.task.item;
 
+import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +14,13 @@ import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
 import finalproject.csci205.com.ymca.view.gesture.TaskTouchHelperAdapter;
 
-//TODO: ASK Yash on his opinion on how we should re-distribute non-obvious features.
-
-
 public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implements TaskTouchHelperAdapter {
     private GTDPresenter gtdPresenter;
+    private Context context;
 
-    public TasksAdapter(GTDPresenter gtd) {
-        this.gtdPresenter = gtd;
-
-        //tasks = Task.listAll(Task.class); //Find out what this does.
+    public TasksAdapter(GTDPresenter gtdPresenter) {
+        this.gtdPresenter = gtdPresenter;
     }
-
-
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,12 +28,12 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         return new TaskViewHolder(rowView);
     }
 
-
     /**
      * Updates the view if user checks a Task. State is updated in the Model afterwards.
-     * @author Charles and Yash
+     *
      * @param holder
      * @param position
+     * @author Charles and Yash
      */
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, int position) {
@@ -51,12 +47,19 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
             }
         });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gtdPresenter.openDetailedTaskFragment();
+            }
+        });
+
         holder.itemView.setTag(task);
     }
 
     @Override
     public int getItemCount() {
-        return gtdPresenter.taskSize(); //This should be returned by the presenter.
+        return gtdPresenter.taskSize();
     }
 
     /**
