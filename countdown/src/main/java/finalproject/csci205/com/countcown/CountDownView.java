@@ -104,13 +104,16 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         if (view.getId() == timerContainer.getId()) {
             cancelPom.setVisibility(VISIBLE);
             //startPauseCounter();
+            CountDownService cd = new CountDownService("test", 30);
+            cd.setCountDownListener(this);
+            cd.startPauseCounter();
         } else if (view.getId() == cancelPom.getId()) {
-            cdStart.cancel();
-            mins.setText("30"); //TODO Make same int from settings
-            seconds.setText("00");
-            storedTime = minToMili(30);
-            startPauseCounter++;
-            cancelPom.setVisibility(GONE);
+//            cdStart.cancel();
+//            mins.setText("30"); //TODO Make same int from settings
+//            seconds.setText("00");
+//            storedTime = minToMili(30);
+//            startPauseCounter++;
+//            cancelPom.setVisibility(GONE);
         }
     }
 
@@ -162,6 +165,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 //            cdStart.start();
 //        }
 //    }
+
 
     @Override
     public void countdownResult(long l) {

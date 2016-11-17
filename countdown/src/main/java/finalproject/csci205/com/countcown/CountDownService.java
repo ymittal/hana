@@ -17,35 +17,54 @@ package finalproject.csci205.com.countcown;
  */
 
 
+import android.app.IntentService;
+import android.content.Intent;
 import android.os.CountDownTimer;
 
 /**
  * @author Charles
  */
 
-public class CountDownService {
+public class CountDownService extends IntentService {
     private final int SECONDSPARAM = 1000;
     private int startPauseCounter = 0;
     private long storedTime;
     private int sessionTime; // In mins 
     private CountDownTimer cdStart = null;
     private CountDownListener countDownListener;
-//    private ViewList viewList;
+    //    private ViewList viewList;
 
-    public CountDownService(int sessionTime) {
-        this.sessionTime = sessionTime;
+    //lol dont use this.
+    public CountDownService(String name) {
+        super(name);
     }
 
+    public CountDownService(String name, int sessionTime) {
+        super(name);
+        this.sessionTime = sessionTime;
+
+    }
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        //startPauseCounter();
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+
+    }
 
     /**
      * Starts/Stops counter depending on the state of the counter
      *
      * @author Charles
      */
-    private void startPauseCounter() {
+    public void startPauseCounter() {
         if (startPauseCounter == 0) {
             startPauseCounter++;
-            //TODO get right param passing
             cdStart = new CountDownTimer(minToMili(sessionTime), SECONDSPARAM) {
                 @Override
                 public void onTick(long l) {
@@ -101,6 +120,9 @@ public class CountDownService {
         this.sessionTime = sessionTime;
     }
 
+    public void setCountDownListener(CountDownListener countDownListener) {
+        this.countDownListener = countDownListener;
+    }
 //    public void bindView(Object v, String tag){
 //        viewList.add(v,tag);
 //    }
