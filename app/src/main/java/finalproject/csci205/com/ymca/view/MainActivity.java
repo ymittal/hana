@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             > https://developer.android.com/reference/android/content/SharedPreferences.html
          */
 
+
         Button tempLogin = (Button) findViewById(R.id.tempLogin);
         tempLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,5 +79,14 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    /**
+     * Loads the background of the splash screen
+     *
+     * @author Malachi Musick
+     */
+    private void loadBackground() {
+
     }
 }
