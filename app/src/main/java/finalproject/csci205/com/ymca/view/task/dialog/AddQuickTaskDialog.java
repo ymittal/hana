@@ -53,8 +53,8 @@ public class AddQuickTaskDialog extends DialogFragment {
     public void showDialog(String sTask) {
         TaskFormFragment taskFormFragment = new TaskFormFragment();
         taskFormFragment.setTaskName(sTask);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.replace(R.id.content_nav, taskFormFragment).commit();
     }
