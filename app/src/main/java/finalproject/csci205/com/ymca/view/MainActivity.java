@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     goToNavActivity();
                 }
-            }, 1500);
+            }, 500);
 
         }
 

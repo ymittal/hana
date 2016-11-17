@@ -2,7 +2,6 @@ package finalproject.csci205.com.ymca.view.task.dialog;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -56,7 +55,7 @@ public class TaskFormFragment extends Fragment implements View.OnClickListener, 
                 save();
                 break;
             case R.id.cancel:
-                returnToLast();
+                goToGTDFragment();
                 break;
         }
     }
@@ -67,7 +66,7 @@ public class TaskFormFragment extends Fragment implements View.OnClickListener, 
     private void save() {
         GTDPresenter gtdPresenter = new GTDPresenter();
         gtdPresenter.addTask(new Task(editText.getText().toString(), false), false);
-        returnToLast();
+        goToGTDFragment();
     }
 
     /**
@@ -75,11 +74,9 @@ public class TaskFormFragment extends Fragment implements View.OnClickListener, 
      *
      * @author Charles
      */
-    private void returnToLast() {
+    private void goToGTDFragment() {
         Fragment fragment = GTDFragment.newInstance();
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.replace(R.id.content_nav, fragment).commit();
     }
@@ -100,7 +97,7 @@ public class TaskFormFragment extends Fragment implements View.OnClickListener, 
     @Override
     public boolean onKey(View view, int i, KeyEvent keyEvent) {
         if (i == KeyEvent.KEYCODE_BACK) {
-            returnToLast();
+            goToGTDFragment();
             return true;
         }
 

@@ -1,6 +1,7 @@
 package finalproject.csci205.com.ymca.presenter.module;
 
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -148,8 +149,12 @@ public class GTDPresenter implements GTDPresenterInterface {
         view.getView().setVisibility(View.VISIBLE);
     }
 
-    public void openDetailedTaskFragment() {
+    public void openDetailedTaskFragment(Task task) {
         DetailTaskFragment detailTaskFragment = new DetailTaskFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("TASK", task);
+        detailTaskFragment.setArguments(args);
+
         FragmentManager fragmentManager = view.getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
