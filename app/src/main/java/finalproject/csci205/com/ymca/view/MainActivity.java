@@ -1,14 +1,10 @@
 package finalproject.csci205.com.ymca.view;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -23,8 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
+        loadBackground();
         Button tempLogin = (Button) findViewById(R.id.tempLogin);
 
         if (!SharedPreferenceUtil.getIsOpen(getApplicationContext())) {
@@ -65,11 +60,23 @@ public class MainActivity extends AppCompatActivity {
 
         RelativeLayout thisRL = (RelativeLayout) findViewById(R.id.relativeLayout);
 
-        Drawable theBackground;
 
         //randomly pick a background
         int r = new Random().nextInt(4);
 
-        // thisRL.setBackground(theBackground);
+        switch (r) {
+            case 0:
+                thisRL.setBackgroundResource(R.drawable.cliff);
+                break;
+            case 1:
+                thisRL.setBackgroundResource(R.drawable.splash_map);
+                break;
+            case 2:
+                thisRL.setBackgroundResource(R.drawable.skyscraper);
+                break;
+            case 3:
+                thisRL.setBackgroundResource(R.drawable.open_notebook);
+                break;
+        }
     }
 }
