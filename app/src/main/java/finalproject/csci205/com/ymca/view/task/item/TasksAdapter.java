@@ -37,7 +37,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
      */
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, int position) {
-        Task task = gtdPresenter.getTasks().get(position);
+        final Task task = gtdPresenter.getTasks().get(position);
         holder.tvTask.setText(task.getTitle());
         holder.checkboxTask.setChecked(task.isComplete());
         holder.checkboxTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -50,7 +50,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gtdPresenter.openDetailedTaskFragment();
+                gtdPresenter.openDetailedTaskFragment(task);
             }
         });
 

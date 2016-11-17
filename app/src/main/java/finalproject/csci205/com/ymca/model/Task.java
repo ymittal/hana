@@ -2,11 +2,13 @@ package finalproject.csci205.com.ymca.model;
 
 import com.orm.SugarRecord;
 
+import java.io.Serializable;
+
 /**
  * Created by ceh024 on 11/6/16.
  */
 
-public class Task extends SugarRecord {
+public class Task extends SugarRecord implements Serializable {
 
     private String title;
     private String desc;

@@ -1,9 +1,6 @@
 package finalproject.csci205.com.ymca.view;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -24,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        loadBackground();
 
         Button tempLogin = (Button) findViewById(R.id.tempLogin);
-
         if (!SharedPreferenceUtil.getIsOpen(getApplicationContext())) {
             tempLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -43,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     goToNavActivity();
                 }
-            }, 1500);
+            }, 500);
 
         }
 
@@ -61,15 +58,24 @@ public class MainActivity extends AppCompatActivity {
      * @author Malachi Musick
      */
     private void loadBackground() {
-        //current implementation is static. TODO: Dynamically choose theBackground
-
         RelativeLayout thisRL = (RelativeLayout) findViewById(R.id.relativeLayout);
 
-        Drawable theBackground;
-
-        //randomly pick a background
         int r = new Random().nextInt(4);
-
-        // thisRL.setBackground(theBackground);
+        switch (r) {
+            case 0:
+                thisRL.setBackgroundResource(R.drawable.cliff);
+                break;
+            case 1:
+                thisRL.setBackgroundResource(R.drawable.splash_map);
+                break;
+            case 2:
+                thisRL.setBackgroundResource(R.drawable.skyscraper);
+                break;
+            case 3:
+                thisRL.setBackgroundResource(R.drawable.open_notebook);
+                break;
+            default:
+                thisRL.setBackgroundResource(R.drawable.open_notebook);
+        }
     }
 }

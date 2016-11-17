@@ -1,6 +1,7 @@
 package finalproject.csci205.com.ymca.presenter.module;
 
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -14,7 +15,6 @@ import finalproject.csci205.com.ymca.presenter.GTDPresenterInterface;
 import finalproject.csci205.com.ymca.view.task.DetailTaskFragment;
 import finalproject.csci205.com.ymca.view.task.GTDFragment;
 import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
-import finalproject.csci205.com.ymca.view.task.dialog.TaskFormFragment;
 import finalproject.csci205.com.ymca.view.task.item.TasksAdapter;
 
 /**
@@ -23,6 +23,7 @@ import finalproject.csci205.com.ymca.view.task.item.TasksAdapter;
 
 public class GTDPresenter implements GTDPresenterInterface {
 
+    public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
 
     private GTDFragment view;
     private TasksAdapter tasksAdapter;
@@ -148,8 +149,12 @@ public class GTDPresenter implements GTDPresenterInterface {
         view.getView().setVisibility(View.VISIBLE);
     }
 
-    public void openDetailedTaskFragment() {
+    public void openDetailedTaskFragment(Task task) {
         DetailTaskFragment detailTaskFragment = new DetailTaskFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(SERIALIZED_TASK, task);
+        detailTaskFragment.setArguments(args);
+
         FragmentManager fragmentManager = view.getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
