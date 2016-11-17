@@ -5,7 +5,12 @@
     tools:context=".view.module.pomodoro.PomodoroFragment">
 
 
+    <finalproject.csci205.com.countcown.CountDownView
+        android:id="@+id/cdView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+    </finalproject.csci205.com.countcown.CountDownView>
 
 
 </RelativeLayout>

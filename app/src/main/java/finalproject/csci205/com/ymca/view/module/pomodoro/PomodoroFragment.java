@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import finalproject.csci205.com.countcown.CountDownView;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
 
@@ -15,8 +16,8 @@ import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
 public class PomodoroFragment extends Fragment {
 
     private PomodoroPresenter pomodoroPresenter;
-
     private View root;
+    private CountDownView countDownView;
 
 
     private OnFragmentInteractionListener mListener;
@@ -49,8 +50,12 @@ public class PomodoroFragment extends Fragment {
                              Bundle savedInstanceState) {
         pomodoroPresenter = new PomodoroPresenter(this);
 
+
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
+        countDownView = (CountDownView) root.findViewById(R.id.cdView);
+        //countDownView.updateProgress(1,40);
+
 
         return root;
     }
