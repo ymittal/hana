@@ -6,6 +6,8 @@ package finalproject.csci205.com.ymca.model.Pom;
  */
 
 public class PomBundle {
+
+
     private int sessionTime;
     private int normBreakTime;
     private int longBreak;

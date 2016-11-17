@@ -22,14 +22,14 @@ public interface Pomodoro {
     void toggleNotifiation();
 
     /**
-     * Starts CountDown
+     * Starts CountDownListener
      *
      * @author Charles
      */
     void startCountDown();
 
     /**
-     * Pauses CountDown
+     * Pauses CountDownListener
      *
      * @author Charles
      */
