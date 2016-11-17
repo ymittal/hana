@@ -3,7 +3,9 @@ package finalproject.csci205.com.countcown;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.CountDownTimer;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
@@ -64,6 +66,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      *
      * @author Charles
      */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void init() {
         View root = inflate(getContext(), R.layout.countdownlayout, this);
         mins = (TextView) root.findViewById(R.id.mins);
@@ -76,11 +79,14 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
         if (isMyServiceRunning(CountDownService.class)) {
             Toast.makeText(getContext(), "Running", Toast.LENGTH_SHORT).show();
+            cd = getContext().getSystemService(CountDownService.class);
+            cd.setCountDownListener(this);
         } else {
-            Intent i = new Intent();
+            //Intent i = new Intent(this,CountDownService.class);
+            //cd = getContext().getSystemService(CountDownService.class);
             cd = new CountDownService("test", 30);
             cd.setCountDownListener(this);
-            //cd.startService(i);
+            getContext().getApplicationContext().startService(new Intent(getContext(), CountDownService.class));
         }
     }
 

@@ -35,9 +35,9 @@ public class CountDownService extends Service {
     private CountDownTimer cdStart = null;
     private CountDownListener countDownListener;
 
-//    public CountDownService(){
-//        super("Default");
-//    }
+    public CountDownService() {
+        this.sessionTime = 30;
+    }
 //    //lol dont use this.
 //    public CountDownService(String name) {
 //        super(name);
