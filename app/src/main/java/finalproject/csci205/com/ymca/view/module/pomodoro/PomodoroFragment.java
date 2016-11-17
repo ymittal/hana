@@ -54,7 +54,7 @@ public class PomodoroFragment extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.cdView);
-        //countDownView.updateProgress(1,40);
+        countDownView.testCountDown();
 
 
         return root;
