@@ -2,9 +2,11 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layoutContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:clickable="true">
 
 
         <TextView
@@ -13,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="30"
+            android:text=""
             android:textColor="@android:color/holo_red_light"
             android:textSize="64sp"
             android:textStyle="bold" />
@@ -37,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="59"
+            android:text=""
             android:textColor="@android:color/holo_red_light"
             android:textSize="64sp"
             android:textStyle="bold" />
