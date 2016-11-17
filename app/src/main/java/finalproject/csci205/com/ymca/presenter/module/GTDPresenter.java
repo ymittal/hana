@@ -1,15 +1,20 @@
 package finalproject.csci205.com.ymca.presenter.module;
 
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.GTDPresenterInterface;
+import finalproject.csci205.com.ymca.view.task.DetailTaskFragment;
 import finalproject.csci205.com.ymca.view.task.GTDFragment;
 import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
+import finalproject.csci205.com.ymca.view.task.dialog.TaskFormFragment;
 import finalproject.csci205.com.ymca.view.task.item.TasksAdapter;
 
 /**
@@ -103,8 +108,9 @@ public class GTDPresenter implements GTDPresenterInterface {
     /**
      * Removes task from model, updates view.
      * Stores old task if user wish's to immediately restore it.
-     * @author Charles & Yash
+     *
      * @param index
+     * @author Charles & Yash
      */
     public void removeTask(int index) {
         Task todoToBeRemoved = getTasks().get(index);
@@ -116,8 +122,9 @@ public class GTDPresenter implements GTDPresenterInterface {
 
     /**
      * Restore's Task if user so chooses
-     * @author Charles and Yash
+     *
      * @param index
+     * @author Charles and Yash
      */
     public void restoreTask(int index) {
         dismissedTask.save();
@@ -141,4 +148,11 @@ public class GTDPresenter implements GTDPresenterInterface {
         view.getView().setVisibility(View.VISIBLE);
     }
 
+    public void openDetailedTaskFragment() {
+        DetailTaskFragment detailTaskFragment = new DetailTaskFragment();
+        FragmentManager fragmentManager = view.getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.replace(R.id.content_nav, detailTaskFragment).commit();
+    }
 }

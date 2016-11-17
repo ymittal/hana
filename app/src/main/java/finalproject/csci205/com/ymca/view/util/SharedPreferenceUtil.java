@@ -14,4 +14,12 @@ public class SharedPreferenceUtil {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getBoolean("PREFS_IS_OPEN", false);
     }
+
+    public static void setPreference(Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("PREFS_IS_OPEN", true);
+        editor.apply();
+
+    }
 }

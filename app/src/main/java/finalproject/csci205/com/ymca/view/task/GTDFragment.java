@@ -60,7 +60,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.gtdfragment, container, false);
+        View root = inflater.inflate(R.layout.fragment_gtd, container, false);
         FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
