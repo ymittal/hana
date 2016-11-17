@@ -14,15 +14,9 @@ import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
 
 public class PomodoroFragment extends Fragment {
 
-    private PomodoroPresenter pomodoroPresenter;
-
-    private View root;
-
-
     private OnFragmentInteractionListener mListener;
 
     public PomodoroFragment() {
-
     }
 
     /**
@@ -47,11 +41,9 @@ public class PomodoroFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        pomodoroPresenter = new PomodoroPresenter(this);
+        PomodoroPresenter pomodoroPresenter = new PomodoroPresenter(this);
 
-        // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
-
+        View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         return root;
     }
 
@@ -80,7 +72,6 @@ public class PomodoroFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-
         void onFragmentInteraction(Uri uri);
     }
 }
