@@ -12,4 +12,6 @@ public class PomodoroSettings extends SugarRecord {
     public PomodoroSettings(PomBundle bundle) {
         this.bundle = bundle;
     }
+
+
 }
