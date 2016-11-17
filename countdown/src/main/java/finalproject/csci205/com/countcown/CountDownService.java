@@ -22,9 +22,14 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 /**
  * @author Charles
+ *         <p>
+ *         Refrences
+ *         > https://guides.codepath.com/android/Creating-Custom-Listeners
+ *         > https://github.com/commonsguy/cw-andtutorials/tree/master/18-LocalService
  */
 
 public class CountDownService extends Service {
@@ -38,16 +43,15 @@ public class CountDownService extends Service {
     public CountDownService() {
         this.sessionTime = 30;
     }
-//    //lol dont use this.
-//    public CountDownService(String name) {
-//        super(name);
-//    }
 
-    public CountDownService(String name, int sessionTime) {
-        //super(name);
+    public CountDownService(int sessionTime) {
         this.sessionTime = sessionTime;
     }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
+    }
 
     @Override
     public void onCreate() {
@@ -61,54 +65,70 @@ public class CountDownService extends Service {
         return null;
     }
 
-//    @Override
-//    protected void onHandleIntent(Intent intent) {
-//
-//    }
 
     /**
-     * Starts/Stops counter depending on the state of the counter
+     * Starts the inital timer.
+     * @author Charles
+     */
+    public void startTimer() {
+        cdStart = new CountDownTimer(minToMili(sessionTime), SECONDSPARAM) {
+            @Override
+            public void onTick(long l) {
+                countDownListener.countdownResult(l);
+                storedTime = l;
+            }
+
+            @Override
+            public void onFinish() {
+                stopSelf();
+            }
+
+        };
+        cdStart.start();
+    }
+
+    /**
+     * Resume's timer
      *
      * @author Charles
      */
-    public void startPauseCounter() {
-        if (startPauseCounter == 0) {
-            startPauseCounter++;
-            cdStart = new CountDownTimer(minToMili(sessionTime), SECONDSPARAM) {
-                @Override
-                public void onTick(long l) {
-                    countDownListener.countdownResult(l);
-                    storedTime = l;
-                }
-
-                @Override
-                public void onFinish() {
-                }
-
-            };
-            cdStart.start();
-        } else if (startPauseCounter % 2 != 0) {
-            startPauseCounter++;
-            cdStart.cancel();
-        } else if (startPauseCounter % 2 == 0) {
-
-            startPauseCounter++;
+    public void resume() {
+        if (storedTime != 0) {
             cdStart = new CountDownTimer(storedTime, SECONDSPARAM) {
                 @Override
                 public void onTick(long l) {
                     countDownListener.countdownResult(l);
                     storedTime = l;
                 }
+
                 @Override
                 public void onFinish() {
+                    stopSelf();
                 }
             };
             cdStart.start();
+        } else {
+            Toast.makeText(getApplicationContext(), "Unable to resume, restarting", Toast.LENGTH_SHORT).show();
+            startTimer();
         }
     }
 
+    /**
+     * Pauses timer, logically, but really it cancels it
+     *
+     * @author Charles
+     */
+    public void pauseTimer() {
+        cdStart.cancel();
+    }
+
+    /**
+     * Stops timer, destroys task and the service.
+     * @author Charles
+     */
     public void stopTimer() {
         cdStart.cancel();
+        cdStart.onFinish();
     }
 
 
@@ -129,12 +149,6 @@ public class CountDownService extends Service {
     public void setCountDownListener(CountDownListener countDownListener) {
         this.countDownListener = countDownListener;
     }
-//    public void bindView(Object v, String tag){
-//        viewList.add(v,tag);
-//    }
-//    public void unbindView(String tag){
-//        viewList.unbindView(tag);
-//    }
 
 
 

@@ -2,10 +2,7 @@ package finalproject.csci205.com.countcown;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.os.CountDownTimer;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
@@ -66,7 +63,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      *
      * @author Charles
      */
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public void init() {
         View root = inflate(getContext(), R.layout.countdownlayout, this);
         mins = (TextView) root.findViewById(R.id.mins);
@@ -79,14 +75,14 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
         if (isMyServiceRunning(CountDownService.class)) {
             Toast.makeText(getContext(), "Running", Toast.LENGTH_SHORT).show();
-            cd = getContext().getSystemService(CountDownService.class);
-            cd.setCountDownListener(this);
+//            cd = getContext().getSystemService(CountDownService.class);
+//            cd.setCountDownListener(this);
         } else {
             //Intent i = new Intent(this,CountDownService.class);
             //cd = getContext().getSystemService(CountDownService.class);
-            cd = new CountDownService("test", 30);
+            cd = new CountDownService(30);
             cd.setCountDownListener(this);
-            getContext().getApplicationContext().startService(new Intent(getContext(), CountDownService.class));
+            //getContext().getApplicationContext().startService(new Intent(getContext(), CountDownService.class));
         }
     }
 
@@ -110,17 +106,31 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     public void onClick(View view) {
         if (isMyServiceRunning(CountDownService.class)) {
             Toast.makeText(getContext(), "Running", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Not Running", Toast.LENGTH_SHORT).show();
         }
 
         if (view.getId() == timerContainer.getId()) {
-            cancelPom.setVisibility(VISIBLE);
-            cd.startPauseCounter();
-        } else if (view.getId() == cancelPom.getId()) {
 
+            if (startPauseCounter == 0) {
+                cancelPom.setVisibility(VISIBLE);
+                cd.startTimer();
+                startPauseCounter++;
+            } else if (startPauseCounter % 2 != 0) {
+                cd.pauseTimer();
+                startPauseCounter++;
+            } else {
+                cd.resume();
+                startPauseCounter++;
+            }
+
+
+        } else if (view.getId() == cancelPom.getId()) {
             cancelPom.setVisibility(GONE);
             cd.stopTimer();
             mins.setText("30");//TODO Dont have this hard coded.
             seconds.setText("00");
+            startPauseCounter = 0;
 
         }
     }
