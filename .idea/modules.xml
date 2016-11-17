@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/countcown/countcown.iml" filepath="$PROJECT_DIR$/countcown/countcown.iml" />
+      <module fileurl="file://$PROJECT_DIR$/countdown/countdown.iml" filepath="$PROJECT_DIR$/countdown/countdown.iml" />
       <module fileurl="file://$PROJECT_DIR$/ymca.iml" filepath="$PROJECT_DIR$/ymca.iml" />
     </modules>
   </component>
