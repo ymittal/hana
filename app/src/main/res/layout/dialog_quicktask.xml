@@ -8,8 +8,8 @@
     android:paddingRight="@dimen/horizontal_padding">
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
         android:id="@+id/tilAddTask"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hintAnimationEnabled="false">
 
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Task Name"
-            android:inputType="textNoSuggestions"
+            android:inputType="textCapSentences|textNoSuggestions"
             android:textColor="@color/colorPrimary" />
 
     </android.support.design.widget.TextInputLayout>
