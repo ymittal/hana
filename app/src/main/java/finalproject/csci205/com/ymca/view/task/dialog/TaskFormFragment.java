@@ -3,6 +3,7 @@ package finalproject.csci205.com.ymca.view.task.dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
+
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.SubTask;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
 import finalproject.csci205.com.ymca.view.task.GTDFragment;
@@ -33,6 +37,15 @@ public class TaskFormFragment extends Fragment implements View.OnClickListener, 
         root.setOnKeyListener(this);
 
         initUI(root);
+
+        Task newTask = new Task("Hello world!");
+        newTask.save();
+        SubTask subTask = new SubTask(newTask.getId(), "Subtask");
+        subTask.save();
+
+        List<SubTask> subTasks = SubTask.find(SubTask.class, "task_Id = ?", newTask.getId().toString());
+        Log.d("LOG_TAG", subTasks.size() + "");
+        Log.d("LOG_TAG", SubTask.listAll(SubTask.class).size() + "");
 
         return root;
     }
@@ -65,7 +78,7 @@ public class TaskFormFragment extends Fragment implements View.OnClickListener, 
      */
     private void save() {
         GTDPresenter gtdPresenter = new GTDPresenter();
-        Task newTask = new Task(editText.getText().toString(), false);
+        Task newTask = new Task(editText.getText().toString());
         gtdPresenter.addTask(newTask, false);
         goToGTDFragment();
     }

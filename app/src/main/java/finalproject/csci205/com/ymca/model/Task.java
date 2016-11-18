@@ -15,18 +15,15 @@ public class Task extends SugarRecord implements Serializable {
     private Boolean isComplete;
 
     public Task() {
+        this.title = "";
+        this.desc = "";
+        this.isComplete = false;
     }
 
-    public Task(String title, Boolean isComplete) {
+    public Task(String title) {
         this.title = title;
-        this.desc = "Empty desc";
-        this.isComplete = isComplete;
-    }
-
-    public Task(String title, String desc, Boolean isComplete) {
-        this.title = title;
-        this.desc = desc;
-        this.isComplete = isComplete;
+        this.desc = "";
+        this.isComplete = false;
     }
 
     public String getTitle() {

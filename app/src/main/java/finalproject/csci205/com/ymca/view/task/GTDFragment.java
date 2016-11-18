@@ -149,7 +149,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    gtdPresenter.addTask(new Task(sNewTask, false), true);
+                    gtdPresenter.addTask(new Task(sNewTask), true);
                 }
                 break;
         }
