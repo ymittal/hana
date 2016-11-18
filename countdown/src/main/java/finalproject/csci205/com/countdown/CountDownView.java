@@ -37,10 +37,11 @@ import java.util.Date;
 /**
  * @author Charles
  */
-public class CountDownView extends LinearLayout implements View.OnClickListener, ServiceConnection {
+public class CountDownView extends LinearLayout implements View.OnClickListener, ServiceConnection, CountDownListener {
 
 
     private final int SECONDSPARAM = 1000;
+    private final int REBINDSERVICE = 0;
     private int sessionTime;
     private int startPauseCounter = 0;
     private View root;
@@ -81,7 +82,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
         if (isMyServiceRunning(CountDownService.class)) {
             Log.d("SER", "service alive and well");
-            getContext().bindService(i, this, 0);
+            getContext().bindService(i, this, REBINDSERVICE);
             cancelPom.setVisibility(VISIBLE);
 
         } else {
@@ -187,6 +188,16 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         CountDownService.CountDownBinder binder = (CountDownService.CountDownBinder) iBinder;
         cd = binder.getService();
+        cd.setCountDownListener(this);
+
+        switch (cd.getState()) {
+            case ISRUNNING:
+                startPauseCounter = 1;
+                break;
+            case PAUSED:
+                startPauseCounter = 2;
+                break;
+        }
     }
 
     @Override
@@ -211,15 +222,10 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         return false;
     }
 
-    /**
-     * Test method
-     */
-    public void huh() {
-        if (isMyServiceRunning(CountDownService.class)) {
-            Toast.makeText(getContext(), "Running", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getContext(), "Not Running", Toast.LENGTH_SHORT).show();
-        }
+
+    @Override
+    public void countdownResult(long l) {
+        updateProgress(l);
     }
 
     /*

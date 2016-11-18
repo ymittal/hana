@@ -40,6 +40,7 @@ public class CountDownService extends Service {
     private long storedTime;
     private int sessionTime = 30; // In mins
     private CountDownTimer cdStart = null;
+    private ServiceState state = ServiceState.OTHER;
     private CountDownListener countDownListener;
 
 
@@ -85,7 +86,7 @@ public class CountDownService extends Service {
         cdStart = new CountDownTimer(minToMili(sessionTime), SECONDSPARAM) {
             @Override
             public void onTick(long l) {
-                //countDownListener.countdownResult(l);
+                countDownListener.countdownResult(l);
                 Log.d("SERVICE", String.valueOf(l));
                 storedTime = l;
             }
@@ -97,6 +98,7 @@ public class CountDownService extends Service {
 
         };
         cdStart.start();
+        state = ServiceState.ISRUNNING;
     }
 
     /**
@@ -109,7 +111,7 @@ public class CountDownService extends Service {
             cdStart = new CountDownTimer(storedTime, SECONDSPARAM) {
                 @Override
                 public void onTick(long l) {
-                    //countDownListener.countdownResult(l);
+                    countDownListener.countdownResult(l);
                     Log.d("SERVICE", String.valueOf(l));
                     storedTime = l;
                 }
@@ -120,11 +122,13 @@ public class CountDownService extends Service {
                 }
             };
             cdStart.start();
+            state = ServiceState.ISRUNNING;
         } else {
 //            Toast.makeText(getApplicationContext(), "Unable to resume, restarting", Toast.LENGTH_SHORT).show();
 //            startTimer();
         }
     }
+
 
     /**
      * Pauses timer, logically, but really it cancels it
@@ -134,6 +138,8 @@ public class CountDownService extends Service {
      */
     public void pauseTimer() {
         cdStart.cancel();
+        state = ServiceState.PAUSED;
+
     }
 
     /**
@@ -166,6 +172,9 @@ public class CountDownService extends Service {
         this.countDownListener = countDownListener;
     }
 
+    public ServiceState getState() {
+        return state;
+    }
     /**
      * Syncs current timer with a defined notification
      *
