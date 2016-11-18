@@ -44,7 +44,7 @@ public class CountDownService extends Service {
     private CountDownListener countDownListener;
 
 
-    //Lol dont use this
+
     public CountDownService() {
 
     }
@@ -52,8 +52,8 @@ public class CountDownService extends Service {
     /* IntentService / LifeCycle Methods */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        int temp = intent.getExtras().getInt(Constants.STRINGEXTRA,15);
-        this.sessionTime = intent.getIntExtra(Constants.STRINGEXTRA, 15);
+
+        this.sessionTime = intent.getIntExtra(Constants.STRINGEXTRA, 1);
 
         return Service.START_NOT_STICKY;
     }
@@ -93,7 +93,6 @@ public class CountDownService extends Service {
 
             @Override
             public void onFinish() {
-                //stopSelf();
             }
 
         };
@@ -118,14 +117,13 @@ public class CountDownService extends Service {
 
                 @Override
                 public void onFinish() {
-                    //stopSelf();
+
                 }
             };
             cdStart.start();
             state = ServiceState.ISRUNNING;
         } else {
-//            Toast.makeText(getApplicationContext(), "Unable to resume, restarting", Toast.LENGTH_SHORT).show();
-//            startTimer();
+
         }
     }
 
@@ -149,6 +147,7 @@ public class CountDownService extends Service {
     public void stopTimer() {
         cdStart.cancel();
         cdStart.onFinish();
+        state = ServiceState.OTHER;
     }
 
 
@@ -162,9 +161,6 @@ public class CountDownService extends Service {
         return min * 60000;
     }
 
-    public void setSessionTime(int sessionTime) {
-        this.sessionTime = sessionTime;
-    }
 
     public void setCountDownListener(CountDownListener countDownListener) {
         this.countDownListener = countDownListener;

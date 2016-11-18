@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -134,7 +133,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                 startPauseCounter = 0;
             }
         } else {
-            Toast.makeText(getContext(), "Set your session time!", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -151,7 +150,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         if (isMyServiceRunning(CountDownService.class)) {
             Log.d("SER", "service alive and well");
             getContext().bindService(i, this, REBINDSERVICE);
-            cancelPom.setVisibility(VISIBLE);
 
         } else {
             Log.d("SER", "service no no bro, starting new one");
@@ -180,11 +178,14 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         switch (cd.getState()) {
             case ISRUNNING:
                 startPauseCounter = 1;
+                cancelPom.setVisibility(VISIBLE);
                 break;
             case PAUSED:
                 startPauseCounter = 2;
+                cancelPom.setVisibility(VISIBLE);
                 break;
         }
+
     }
 
     @Override
