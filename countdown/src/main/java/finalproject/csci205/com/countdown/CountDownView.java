@@ -77,10 +77,23 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         timerContainer.setOnClickListener(this);
         cancelPom.setOnClickListener(this);
 
-
         Log.d("SERVICE", "Service starting logic");
         CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
-        getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
+        if (isMyServiceRunning(CountDownService.class)) {
+            Log.d("SER", "service alive and well");
+            getContext().bindService(i, this, 0);
+            cancelPom.setVisibility(VISIBLE);
+
+        } else {
+            Log.d("SER", "service no no bro, starting new one");
+            getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
+
+        }
+
+
+
+
+
 
 
     }
@@ -114,14 +127,16 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
         if (cd != null) {
             if (view.getId() == timerContainer.getId()) {
-                Log.i("click", "Start");
+
                 if (startPauseCounter == 0) { //Start
+                    Log.i("click", "Start");
                     cancelPom.setVisibility(VISIBLE);
                     cd.startTimer();
                 } else if (startPauseCounter % 2 != 0) { //Click to pause
                     Log.i("click", "Pause");
                     cd.pauseTimer();
                 } else { //Click to resume
+                    Log.i("click", "Resume");
                     cd.resume();
                 }
                 startPauseCounter++;
