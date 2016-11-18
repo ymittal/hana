@@ -24,14 +24,11 @@ import android.content.Intent;
  */
 public class CountDownIntent extends Intent {
 
-
-    private CountDownView callBackView;
-
-
+    /* Specifies the session param in MINS! */
     public CountDownIntent(Context c, int sessionTime) {
         super(c, CountDownService.class);
         this.putExtra(Constants.STRINGEXTRA, sessionTime);
-        //this.putExtra(Constants.VIEWEXTRA, callBackView);
+
     }
 
 }

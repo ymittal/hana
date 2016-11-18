@@ -50,7 +50,6 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
         countDownView.setSessionTime(30);//TODO GET FROM MODEL -- > PRESENTER
-        //countDownView.setOnClickListener(this);
         return root;
     }
 

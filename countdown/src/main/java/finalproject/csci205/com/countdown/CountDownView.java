@@ -57,6 +57,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         init();
     }
 
+
     public CountDownView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
@@ -77,25 +78,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         timerContainer = (LinearLayout) root.findViewById(R.id.layoutContainer);
         timerContainer.setOnClickListener(this);
         cancelPom.setOnClickListener(this);
-
-        Log.d("SERVICE", "Service starting logic");
-        CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
-        if (isMyServiceRunning(CountDownService.class)) {
-            Log.d("SER", "service alive and well");
-            getContext().bindService(i, this, REBINDSERVICE);
-            cancelPom.setVisibility(VISIBLE);
-
-        } else {
-            Log.d("SER", "service no no bro, starting new one");
-            getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
-
-        }
-
-
-
-
-
-
 
     }
 
@@ -144,46 +126,51 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
 
             } else if (view.getId() == cancelPom.getId()) {
-                //getContext().stopService(new Intent(getContext(),CountDownService.class));
                 Log.i("click", "CANCEL/END");
                 cancelPom.setVisibility(GONE);
                 cd.stopTimer();
                 mins.setText("30");//TODO Dont have this hard coded.
                 seconds.setText("00");
                 startPauseCounter = 0;
-
-
             }
         } else {
             Toast.makeText(getContext(), "Set your session time!", Toast.LENGTH_SHORT).show();
         }
     }
 
-//    @Override
-//    public void countdownResult(long l) {
-//        updateProgress(l);
-//    }
 
     /**
-     * Sets the session time from data model. When this is complete, the Countdown Service is
-     * ready to be launched.
-     * <p>
-     * Will not run if prior service is alive and well. This is ideal if user navigates away from Fragment
-     * and returns.
-     *
+     * Sets the session time from data model, then inits the data.
+     * Cannot create a service without the known session time!
      * @param sessionTime
      */
     public void setSessionTime(int sessionTime) {
         this.sessionTime = sessionTime;
-//        CountDownIntent i = new CountDownIntent(getContext(),sessionTime);
-//        getContext().bindService(i,this,Context.BIND_AUTO_CREATE);
-//            //cd = new CountDownService();
-//            //cd.setCountDownListener(this);
-//            //getContext().startService(i);
+        Log.d("SERVICE", "Service starting logic");
+        CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
+        if (isMyServiceRunning(CountDownService.class)) {
+            Log.d("SER", "service alive and well");
+            getContext().bindService(i, this, REBINDSERVICE);
+            cancelPom.setVisibility(VISIBLE);
+
+        } else {
+            Log.d("SER", "service no no bro, starting new one");
+            getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
+
+        }
 
     }
 
 
+    /**
+     * Gets the binder upon successfull connection, creates our local refrence to our service
+     * Specifc to the view, sets the counter to a proper value depending on state.
+     * Sets Callback listener for value updates.
+     *
+     * @param componentName
+     * @param iBinder
+     * @author Charles
+     */
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         CountDownService.CountDownBinder binder = (CountDownService.CountDownBinder) iBinder;
@@ -223,6 +210,11 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     }
 
 
+    /**
+     * Call Back from service.
+     * @author
+     * @param l
+     */
     @Override
     public void countdownResult(long l) {
         updateProgress(l);

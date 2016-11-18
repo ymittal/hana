@@ -143,14 +143,12 @@ public class CountDownService extends Service {
     }
 
     /**
-     * Stops timer, destroys task and the service.
+     * Stops timer, sends out Finish Msg.
      * @author Charles
      */
     public void stopTimer() {
         cdStart.cancel();
         cdStart.onFinish();
-        stopSelf();
-
     }
 
 
