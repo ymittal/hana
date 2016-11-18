@@ -9,6 +9,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name="finalproject.csci205.com.countdown.CountDownService">
+
+        </service>
         <meta-data
             android:name="DATABASE"
             android:value="task.db" />

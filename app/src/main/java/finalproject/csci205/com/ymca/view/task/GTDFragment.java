@@ -19,6 +19,7 @@ import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
 import finalproject.csci205.com.ymca.view.gesture.TaskItemTouchTouchHelperCallback;
 import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
+import finalproject.csci205.com.ymca.view.task.item.SimpleDividerItemDecoration;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +56,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle("Task List");
     }
 
     @Override
@@ -80,6 +82,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     private void initTaskList(View root) {
         RecyclerView rvTasks = (RecyclerView) root.findViewById(R.id.rvTasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvTasks.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
         rvTasks.setAdapter(gtdPresenter.getTasksAdapter());
 
         // defines swipe to delete functionality
