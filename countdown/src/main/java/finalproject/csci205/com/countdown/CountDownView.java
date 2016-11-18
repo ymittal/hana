@@ -178,14 +178,21 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         switch (cd.getState()) {
             case ISRUNNING:
                 startPauseCounter = 1;
-                cancelPom.setVisibility(VISIBLE);
+                configState();
                 break;
             case PAUSED:
                 startPauseCounter = 2;
-                cancelPom.setVisibility(VISIBLE);
+                configState();
                 break;
+
+
         }
 
+    }
+
+    private void configState() {
+        cancelPom.setVisibility(VISIBLE);
+        updateProgress(cd.getStoredTime());
     }
 
     @Override

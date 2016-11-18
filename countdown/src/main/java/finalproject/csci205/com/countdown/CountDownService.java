@@ -151,12 +151,17 @@ public class CountDownService extends Service {
     }
 
 
+    public long getStoredTime() {
+        return storedTime;
+    }
+
     /**
      * Converts Minuetes to Miliseconds
      *
      * @param min
      * @return
      */
+
     public long minToMili(int min) {
         return min * 60000;
     }
