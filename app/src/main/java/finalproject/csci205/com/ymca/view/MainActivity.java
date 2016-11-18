@@ -60,18 +60,15 @@ public class MainActivity extends AppCompatActivity {
     private void loadBackground() {
         RelativeLayout thisRL = (RelativeLayout) findViewById(R.id.relativeLayout);
 
-        int r = new Random().nextInt(4);
+        int r = new Random().nextInt(3);
         switch (r) {
             case 0:
                 thisRL.setBackgroundResource(R.drawable.cliff);
                 break;
             case 1:
-                thisRL.setBackgroundResource(R.drawable.splash_map);
+                thisRL.setBackgroundResource(R.drawable.open_notebook2);
                 break;
             case 2:
-                thisRL.setBackgroundResource(R.drawable.skyscraper);
-                break;
-            case 3:
                 thisRL.setBackgroundResource(R.drawable.open_notebook);
                 break;
             default:
