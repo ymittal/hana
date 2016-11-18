@@ -1,4 +1,4 @@
-package finalproject.csci205.com.countdown;
+package finalproject.csci205.com.countdown.Service;
 
 /******************************************
  * CSCI205 - Software Engineering and Design
@@ -24,6 +24,9 @@ import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import finalproject.csci205.com.countdown.Ults.Constants;
+import finalproject.csci205.com.countdown.Ults.ServiceState;
 
 /**
  * @author Charles
@@ -176,7 +179,7 @@ public class CountDownService extends Service {
      * @author Charles
      */
     public class CountDownBinder extends Binder {
-        CountDownService getService() {
+        public CountDownService getService() {
             return CountDownService.this;
         }
     }

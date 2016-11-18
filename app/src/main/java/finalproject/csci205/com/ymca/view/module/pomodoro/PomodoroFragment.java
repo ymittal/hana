@@ -1,6 +1,8 @@
 package finalproject.csci205.com.ymca.view.module.pomodoro;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import finalproject.csci205.com.countdown.CountDownView;
+import finalproject.csci205.com.countdown.View.CountDownNotification;
+import finalproject.csci205.com.countdown.View.CountDownView;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
 
@@ -50,6 +53,10 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
         countDownView.setSessionTime(1);//TODO GET FROM MODEL -- > PRESENTER
+        CountDownNotification notification = new CountDownNotification(getContext(), R.drawable.ic_pom);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 1, new Intent(), PendingIntent.FLAG_CANCEL_CURRENT);
+        notification.setIntent(pendingIntent);
+        notification.buildNotfication();
         return root;
     }
 

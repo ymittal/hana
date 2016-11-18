@@ -1,4 +1,4 @@
-package finalproject.csci205.com.countdown;
+package finalproject.csci205.com.countdown.View;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -15,6 +15,11 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import finalproject.csci205.com.countdown.R;
+import finalproject.csci205.com.countdown.Service.CountDownIntent;
+import finalproject.csci205.com.countdown.Service.CountDownListener;
+import finalproject.csci205.com.countdown.Service.CountDownService;
 
 /******************************************
  * CSCI205 - Software Engineering and Design
@@ -194,8 +199,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                 startPauseCounter = 2;
                 configState();
                 break;
-
-
         }
 
     }
