@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import finalproject.csci205.com.ymca.R;
@@ -46,7 +47,9 @@ public class AddQuickTaskDialog extends DialogFragment {
                 });
 
         // create the AlertDialog object and return it
-        return builder.create();
+        Dialog dialog = builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        return dialog;
     }
 
     public void showDialog(String sTask) {
