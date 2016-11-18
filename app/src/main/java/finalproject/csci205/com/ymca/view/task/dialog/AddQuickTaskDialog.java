@@ -24,35 +24,51 @@ public class AddQuickTaskDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_quicktask, null);
-
-        builder.setMessage("Add Task")
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setView(view)
-                .setPositiveButton("Get Thing Done", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
-                        showDialog(etAddTask.getText().toString());
-                    }
-                })
-                .setNegativeButton("Save for Later", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
-                        Intent i = new Intent()
-                                .putExtra(NEW_TASK, etAddTask.getText().toString());
+                .setTitle("Add Task")
+                .setPositiveButton("Edit", null)
+                .setNegativeButton("Save", null)
+                .create();
 
-                        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
-                        dismiss();
-                    }
-                });
+        addOnClickListenersToButtons(view, dialog);
 
-        // create the AlertDialog object and return it
-        Dialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return dialog;
     }
 
-    public void showDialog(String sTask) {
+    private void addOnClickListenersToButtons(View view, final AlertDialog dialog) {
+        final EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dismiss();
+                        showTaskFormDialog(etAddTask.getText().toString());
+                    }
+                });
+
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (etAddTask.getText().toString().equals("")) {
+                            etAddTask.setError("Task name cannot be empty!");
+                        } else {
+                            Intent i = new Intent().putExtra(NEW_TASK, etAddTask.getText().toString());
+                            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
+                            dismiss();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    public void showTaskFormDialog(String sTask) {
         TaskFormFragment taskFormFragment = new TaskFormFragment();
         taskFormFragment.setTaskName(sTask);
 
