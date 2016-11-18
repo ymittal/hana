@@ -1,4 +1,4 @@
-package finalproject.csci205.com.countcown;
+package finalproject.csci205.com.countdown;
 
 import org.junit.Test;
 

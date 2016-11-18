@@ -1,4 +1,4 @@
-package finalproject.csci205.com.countcown;
+package finalproject.csci205.com.countdown;
 
 /**
  * Created by ceh024 on 11/17/16.

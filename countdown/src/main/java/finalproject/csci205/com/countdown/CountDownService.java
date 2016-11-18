@@ -1,4 +1,4 @@
-package finalproject.csci205.com.countcown;
+package finalproject.csci205.com.countdown;
 
 /******************************************
  * CSCI205 - Software Engineering and Design
@@ -19,10 +19,11 @@ package finalproject.csci205.com.countcown;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
+import android.util.Log;
 
 /**
  * @author Charles
@@ -33,25 +34,39 @@ import android.widget.Toast;
  */
 
 public class CountDownService extends Service {
+
     private final int SECONDSPARAM = 1000;
-    private int startPauseCounter = 0;
+    private final IBinder returnBinder = new CountDownBinder();
     private long storedTime;
-    private int sessionTime; // In mins 
+    private int sessionTime = 30; // In mins
     private CountDownTimer cdStart = null;
     private CountDownListener countDownListener;
 
+
+    //Lol dont use this
     public CountDownService() {
-        this.sessionTime = 30;
+
     }
 
-    public CountDownService(int sessionTime) {
-        this.sessionTime = sessionTime;
-    }
-
+    /* IntentService / LifeCycle Methods */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+//        int temp = intent.getExtras().getInt(Constants.STRINGEXTRA,15);
+        this.sessionTime = intent.getIntExtra(Constants.STRINGEXTRA, 15);
+
+        return Service.START_NOT_STICKY;
     }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return returnBinder;
+    }
+
+//    @Override
+//    protected void onHandleIntent(Intent intent) {
+//
+//    }
 
     @Override
     public void onCreate() {
@@ -59,11 +74,7 @@ public class CountDownService extends Service {
 
     }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
+
 
 
     /**
@@ -74,13 +85,14 @@ public class CountDownService extends Service {
         cdStart = new CountDownTimer(minToMili(sessionTime), SECONDSPARAM) {
             @Override
             public void onTick(long l) {
-                countDownListener.countdownResult(l);
+                //countDownListener.countdownResult(l);
+                Log.d("SERVICE", String.valueOf(l));
                 storedTime = l;
             }
 
             @Override
             public void onFinish() {
-                stopSelf();
+                //stopSelf();
             }
 
         };
@@ -97,25 +109,27 @@ public class CountDownService extends Service {
             cdStart = new CountDownTimer(storedTime, SECONDSPARAM) {
                 @Override
                 public void onTick(long l) {
-                    countDownListener.countdownResult(l);
+                    //countDownListener.countdownResult(l);
+                    Log.d("SERVICE", String.valueOf(l));
                     storedTime = l;
                 }
 
                 @Override
                 public void onFinish() {
-                    stopSelf();
+                    //stopSelf();
                 }
             };
             cdStart.start();
         } else {
-            Toast.makeText(getApplicationContext(), "Unable to resume, restarting", Toast.LENGTH_SHORT).show();
-            startTimer();
+//            Toast.makeText(getApplicationContext(), "Unable to resume, restarting", Toast.LENGTH_SHORT).show();
+//            startTimer();
         }
     }
 
     /**
      * Pauses timer, logically, but really it cancels it
-     *
+     * Assumes user properly follows this usage sequence
+     *  1.) Start 2) Pause/Resume/Pause/Resume.....n 3) Stop 4.) Goto 1.
      * @author Charles
      */
     public void pauseTimer() {
@@ -129,6 +143,8 @@ public class CountDownService extends Service {
     public void stopTimer() {
         cdStart.cancel();
         cdStart.onFinish();
+        stopSelf();
+
     }
 
 
@@ -150,6 +166,24 @@ public class CountDownService extends Service {
         this.countDownListener = countDownListener;
     }
 
+    /**
+     * Syncs current timer with a defined notification
+     *
+     * @author Charles
+     */
+    public void deployNotification() {
 
+    }
+
+    /**
+     * Connection between client and service
+     *
+     * @author Charles
+     */
+    public class CountDownBinder extends Binder {
+        CountDownService getService() {
+            return CountDownService.this;
+        }
+    }
 
 }

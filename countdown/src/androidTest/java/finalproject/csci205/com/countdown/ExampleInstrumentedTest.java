@@ -1,4 +1,4 @@
-package finalproject.csci205.com.countcown;
+package finalproject.csci205.com.countdown;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
