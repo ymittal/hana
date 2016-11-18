@@ -13,11 +13,7 @@ import finalproject.csci205.com.countdown.CountDownView;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
 
-/*
- *TODO
-  * http://stackoverflow.com/questions/33508480/fragmenttransactionreplace-with-or-without-addtobackstack
-   * Get this to work?
- */
+
 
 public class PomodoroFragment extends Fragment implements View.OnClickListener {
 
@@ -49,12 +45,11 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         PomodoroPresenter pomodoroPresenter = new PomodoroPresenter(this);
-
-
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
-        countDownView.setSessionTime(30);//TODO GET FROM MODEL -- > PRESENTER
+        countDownView.setSessionTime(1);//TODO GET FROM MODEL -- > PRESENTER
         return root;
     }
 

@@ -31,6 +31,7 @@ import android.util.Log;
  *         Refrences
  *         > https://guides.codepath.com/android/Creating-Custom-Listeners
  *         > https://github.com/commonsguy/cw-andtutorials/tree/master/18-LocalService
+ *         > https://developer.android.com/guide/components/services.html#Stopping
  */
 
 public class CountDownService extends Service {
@@ -38,7 +39,7 @@ public class CountDownService extends Service {
     private final int SECONDSPARAM = 1000;
     private final IBinder returnBinder = new CountDownBinder();
     private long storedTime;
-    private int sessionTime = 30; // In mins
+    private int sessionTime; // In mins
     private CountDownTimer cdStart = null;
     private ServiceState state = ServiceState.OTHER;
     private CountDownListener countDownListener;
@@ -52,31 +53,15 @@ public class CountDownService extends Service {
     /* IntentService / LifeCycle Methods */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        this.sessionTime = intent.getIntExtra(Constants.STRINGEXTRA, 1);
-
         return Service.START_NOT_STICKY;
     }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        this.sessionTime = intent.getIntExtra(Constants.STRINGEXTRA, 1);
         return returnBinder;
     }
-
-//    @Override
-//    protected void onHandleIntent(Intent intent) {
-//
-//    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-    }
-
-
-
 
     /**
      * Starts the inital timer.
@@ -93,6 +78,7 @@ public class CountDownService extends Service {
 
             @Override
             public void onFinish() {
+                countDownListener.onCountFinished();
             }
 
         };
@@ -117,6 +103,7 @@ public class CountDownService extends Service {
 
                 @Override
                 public void onFinish() {
+                    countDownListener.onCountFinished();
 
                 }
             };
@@ -146,7 +133,7 @@ public class CountDownService extends Service {
      */
     public void stopTimer() {
         cdStart.cancel();
-        cdStart.onFinish();
+        //cdStart.onFinish();
         state = ServiceState.OTHER;
     }
 

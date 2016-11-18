@@ -75,7 +75,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         timerContainer = (LinearLayout) root.findViewById(R.id.layoutContainer);
         timerContainer.setOnClickListener(this);
         cancelPom.setOnClickListener(this);
-
     }
 
 
@@ -125,14 +124,27 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
             } else if (view.getId() == cancelPom.getId()) {
                 Log.i("click", "CANCEL/END");
                 cancelPom.setVisibility(GONE);
-                cd.stopTimer();
-                mins.setText("30");//TODO Dont have this hard coded.
-                seconds.setText("00");
-                startPauseCounter = 0;
+                countCancelComplete();
             }
         } else {
 
         }
+    }
+
+    /**
+     * Handles view if the counter was manually canceled by the user, or ran about its
+     * time on its own. This method handles the functionality that is shared between both
+     * events.
+     *
+     * @author Charles
+     */
+    private void countCancelComplete() {
+        cd.stopTimer();
+        Date date = new Date((long) sessionTime * 60000);
+        DateFormat minFor = new SimpleDateFormat("mm");
+        mins.setText(minFor.format(date));
+        seconds.setText("00");
+        startPauseCounter = 0;
     }
 
 
@@ -188,16 +200,16 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
     }
 
-    private void configState() {
-        cancelPom.setVisibility(VISIBLE);
-        updateProgress(cd.getStoredTime());
-    }
 
     @Override
     public void onServiceDisconnected(ComponentName componentName) {
 
     }
 
+    private void configState() {
+        cancelPom.setVisibility(VISIBLE);
+        updateProgress(cd.getStoredTime());
+    }
 
     /**
      * Checks to see if service passed is running
@@ -218,7 +230,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
     /**
      * Call Back from service.
-     * @author
+     * @author Charles
      * @param l
      */
     @Override
@@ -226,10 +238,15 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         updateProgress(l);
     }
 
-    /*
-        TODO
-        Make accessers to change the state of the view for breaks.
+    /**
+     * Call back from Service notifying that the count down is complete
+     * Reset View.
+     * @author Charles
      */
+    @Override
+    public void onCountFinished() {
+        countCancelComplete();
+    }
 
 
 }

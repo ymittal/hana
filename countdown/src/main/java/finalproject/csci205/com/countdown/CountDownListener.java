@@ -14,4 +14,9 @@ public interface CountDownListener {
      * @param l
      */
     void countdownResult(long l);
+
+    /**
+     * Signals that the countdown is complete
+     */
+    void onCountFinished();
 }
