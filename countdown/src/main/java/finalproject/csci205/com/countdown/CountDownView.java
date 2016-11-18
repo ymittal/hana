@@ -38,8 +38,6 @@ import java.util.Date;
  */
 public class CountDownView extends LinearLayout implements View.OnClickListener, ServiceConnection, CountDownListener {
 
-
-    private final int SECONDSPARAM = 1000;
     private final int REBINDSERVICE = 0;
     private int sessionTime;
     private int startPauseCounter = 0;
