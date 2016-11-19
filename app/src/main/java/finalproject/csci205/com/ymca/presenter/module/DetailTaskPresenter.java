@@ -43,4 +43,12 @@ public class DetailTaskPresenter {
         newSubtask.save();
         subtasksAdapter.notifyDataSetChanged();
     }
+
+    public void removeTask(int pos) {
+        Subtask subtaskToBeRemoved = subtasks.get(pos);
+        subtaskToBeRemoved.delete();
+        subtasks.remove(pos);
+        subtasksAdapter.notifyItemRemoved(pos);
+        subtasksAdapter.notifyItemRangeChanged(pos, getNumSubtasks());
+    }
 }

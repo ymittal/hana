@@ -2,6 +2,7 @@ package finalproject.csci205.com.ymca.view.task;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,8 +11,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Subtask;
@@ -57,15 +58,39 @@ public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
         return root;
     }
 
+    /**
+     * @param root
+     * @see <a href="http://stackoverflow.com/questions/8233586/android-execute-function-after-pressing-enter-for-edittext">
+     * </a>
+     */
     private void initUI(View root) {
-        final EditText editText = (EditText) root.findViewById(R.id.editText);
+        final EditText etSubtask = (EditText) root.findViewById(R.id.etSubtask);
+        final TextInputLayout tilSubtask = (TextInputLayout) root.findViewById(R.id.tilSubtask);
 
-        Button addBtn = (Button) root.findViewById(R.id.addBtn);
-        addBtn.setOnClickListener(new View.OnClickListener() {
+        ImageView addSubtaskBtn = (ImageView) root.findViewById(R.id.addSubtaskBtn);
+        addSubtaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Subtask newSubtask = new Subtask(task.getId(), editText.getText().toString());
-                detailTaskPresenter.addSubtask(newSubtask);
+                if (tilSubtask.getVisibility() == View.GONE) {
+                    tilSubtask.setVisibility(View.VISIBLE);
+                    etSubtask.requestFocus();
+                } else {
+                    tilSubtask.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        etSubtask.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN)
+                        && (i == KeyEvent.KEYCODE_ENTER)) {
+                    Subtask newSubtask = new Subtask(task.getId(), etSubtask.getText().toString());
+                    detailTaskPresenter.addSubtask(newSubtask);
+                    tilSubtask.setVisibility(View.GONE);
+                    return true;
+                }
+                return false;
             }
         });
     }

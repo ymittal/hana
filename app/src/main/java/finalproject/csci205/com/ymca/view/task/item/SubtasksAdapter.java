@@ -5,11 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Subtask;
-import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.DetailTaskPresenter;
 
 public class SubtasksAdapter extends RecyclerView.Adapter<SubtaskViewHolder> {
@@ -26,9 +24,17 @@ public class SubtasksAdapter extends RecyclerView.Adapter<SubtaskViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(SubtaskViewHolder holder, int position) {
+    public void onBindViewHolder(final SubtaskViewHolder holder, final int position) {
         Subtask subtask = detailTaskPresenter.getSubtasks().get(position);
         holder.tvSubtask.setText(subtask.getTitle());
+        holder.btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("LOG_TAG", detailTaskPresenter.getNumSubtasks() + " " + position + "");
+                detailTaskPresenter.removeTask(position);
+            }
+        });
+
         holder.itemView.setTag(subtask);
     }
 
