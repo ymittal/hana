@@ -11,13 +11,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
+import finalproject.csci205.com.ymca.view.task.DetailTaskFragment;
 import finalproject.csci205.com.ymca.view.task.GTDFragment;
 
-public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+public class NavActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
         GTDFragment.OnFragmentInteractionListener,
         PomodoroFragment.OnFragmentInteractionListener {
 
@@ -87,6 +90,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (getSupportFragmentManager().findFragmentById(R.id.content_nav) instanceof DetailTaskFragment) {
+            initFragment(new GTDFragment());
         } else {
             super.onBackPressed();
         }

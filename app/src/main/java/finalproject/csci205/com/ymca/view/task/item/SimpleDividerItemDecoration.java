@@ -5,15 +5,17 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import finalproject.csci205.com.ymca.R;
 
 /**
- * The following file has been taken from a GitHub Gist with a few modifications according to needs
+ * Simple Horizontal Divider Item Decoration for {@link RecyclerView}. This file has been
+ * modified by {@author Yash Mittal} to meet application specific needs.
  *
- * @see <a href="https://gist.github.com/polbins/e37206fbc444207c0e92">GitHub Gist</a>
+ * @author polbins
+ * @see <a href="https://gist.github.com/polbins/e37206fbc444207c0e92">
+ * GitHub Gist Simple RecyclerView Divider</a>
  */
 public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
@@ -24,7 +26,6 @@ public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        Log.d("LOG_TAG", parent.getClass().getName());
         int left = parent.getPaddingLeft();
         int right = parent.getWidth() - parent.getPaddingRight();
 

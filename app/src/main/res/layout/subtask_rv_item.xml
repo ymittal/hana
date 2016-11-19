@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/vertical_padding_subtask_item"
+    android:layout_marginTop="@dimen/vertical_padding_subtask_item"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:weightSum="7">
+
+    <TextView
+        android:id="@+id/tvSubtask"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/left_padding_tv_subtask"
+        android:textSize="16dp" />
+
+    <ImageView
+        android:id="@+id/btnCancel"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:src="@drawable/ic_cancel" />
+
+</LinearLayout>

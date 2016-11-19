@@ -17,7 +17,6 @@ import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
 
 
-
 public class PomodoroFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
@@ -41,8 +40,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        getActivity().setTitle("Pomodoro");
     }
 
     @Override

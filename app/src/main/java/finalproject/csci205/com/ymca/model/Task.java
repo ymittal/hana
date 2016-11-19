@@ -5,28 +5,44 @@ import com.orm.SugarRecord;
 import java.io.Serializable;
 
 /**
- * Created by ceh024 on 11/6/16.
+ * A class to represent a task, extending from {@link SugarRecord} to save it to local
+ * database
+ *
+ * @author Aleks, Malachi, and Yash
  */
-
 public class Task extends SugarRecord implements Serializable {
 
+    /**
+     * Task title
+     */
     private String title;
+    /**
+     * Description of task
+     */
     private String desc;
+    /**
+     * Task completion status
+     */
     private Boolean isComplete;
 
+    /**
+     * Empty constructor
+     */
     public Task() {
+        this.title = "";
+        this.desc = "";
+        this.isComplete = false;
     }
 
-    public Task(String title, Boolean isComplete) {
+    /**
+     * Constructs a {@link Task} object with title
+     *
+     * @param title task title
+     */
+    public Task(String title) {
         this.title = title;
-        this.desc = "Empty desc";
-        this.isComplete = isComplete;
-    }
-
-    public Task(String title, String desc, Boolean isComplete) {
-        this.title = title;
-        this.desc = desc;
-        this.isComplete = isComplete;
+        this.desc = "";
+        this.isComplete = false;
     }
 
     public String getTitle() {
