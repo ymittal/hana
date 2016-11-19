@@ -14,7 +14,7 @@ import android.widget.EditText;
 import java.util.List;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.model.SubTask;
+import finalproject.csci205.com.ymca.model.Subtask;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
 import finalproject.csci205.com.ymca.view.task.GTDFragment;
@@ -41,12 +41,12 @@ public class TaskFormFragment extends Fragment implements View.OnClickListener, 
 
         Task newTask = new Task("Hello world!");
         newTask.save();
-        SubTask subTask = new SubTask(newTask.getId(), "Subtask");
-        subTask.save();
+        Subtask subtask = new Subtask(newTask.getId(), "Subtask");
+        subtask.save();
 
-        List<SubTask> subTasks = SubTask.find(SubTask.class, "task_Id = ?", newTask.getId().toString());
-        Log.d("LOG_TAG", subTasks.size() + "");
-        Log.d("LOG_TAG", SubTask.listAll(SubTask.class).size() + "");
+        List<Subtask> subtasks = Subtask.find(Subtask.class, "task_Id = ?", newTask.getId().toString());
+        Log.d("LOG_TAG", subtasks.size() + "");
+        Log.d("LOG_TAG", Subtask.listAll(Subtask.class).size() + "");
 
         return root;
     }

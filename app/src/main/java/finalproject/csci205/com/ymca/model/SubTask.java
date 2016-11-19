@@ -6,16 +6,26 @@ import com.orm.SugarRecord;
  * Created by ym012 on 11/18/2016.
  */
 
-public class SubTask extends SugarRecord {
+public class Subtask extends SugarRecord {
 
     private Long taskId;
-    private String subtask;
+    private String title;
+    private boolean isComplete;
 
-    public SubTask() {
+    public Subtask() {
     }
 
-    public SubTask(Long taskId, String subtask) {
+    public Subtask(Long taskId, String subtask) {
         this.taskId = taskId;
-        this.subtask = subtask;
+        this.title = subtask;
+        this.isComplete = false;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setIsComplete(boolean complete) {
+        isComplete = complete;
     }
 }
