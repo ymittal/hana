@@ -10,10 +10,14 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.Subtask;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.module.DetailTaskPresenter;
+import finalproject.csci205.com.ymca.view.task.item.SimpleDividerItemDecoration;
 
 /**
  * Created by ym012 on 11/16/2016.
@@ -47,14 +51,29 @@ public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
             detailTaskPresenter = new DetailTaskPresenter(this, task);
         }
 
+        initUI(root);
         initSubtaskList(root);
 
         return root;
     }
 
+    private void initUI(View root) {
+        final EditText editText = (EditText) root.findViewById(R.id.editText);
+
+        Button addBtn = (Button) root.findViewById(R.id.addBtn);
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Subtask newSubtask = new Subtask(task.getId(), editText.getText().toString());
+                detailTaskPresenter.addSubtask(newSubtask);
+            }
+        });
+    }
+
     private void initSubtaskList(View root) {
         RecyclerView rvSubtasks = (RecyclerView) root.findViewById(R.id.rvSubtasks);
         rvSubtasks.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvSubtasks.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
         rvSubtasks.setAdapter(detailTaskPresenter.getSubtasksAdapter());
     }
 

@@ -69,12 +69,11 @@ public class GTDPresenter {
      * @author Charles & Yash
      */
     public void addTask(Task t, boolean b) {
-        getTasks().add(t);
+        tasks.add(t);
         t.save();
         if (b) {
             tasksAdapter.notifyDataSetChanged();
         }
-
     }
 
     /**
@@ -85,10 +84,10 @@ public class GTDPresenter {
      * @author Charles & Yash
      */
     public void removeTask(int index) {
-        Task todoToBeRemoved = getTasks().get(index);
+        Task todoToBeRemoved = tasks.get(index);
         dismissedTask = todoToBeRemoved;
         todoToBeRemoved.delete();
-        getTasks().remove(index);
+        tasks.remove(index);
         tasksAdapter.notifyItemRemoved(index);
     }
 
@@ -100,7 +99,7 @@ public class GTDPresenter {
      */
     public void restoreTask(int index) {
         dismissedTask.save();
-        getTasks().add(index, dismissedTask);
+        tasks.add(index, dismissedTask);
         tasksAdapter.notifyItemInserted(index);
     }
 
@@ -112,8 +111,8 @@ public class GTDPresenter {
      * @author Charles and Yash
      */
     public void taskChecked(int index, boolean b) {
-        getTasks().get(index).setIsComplete(b);
-        getTasks().get(index).save();
+        tasks.get(index).setIsComplete(b);
+        tasks.get(index).update();
     }
 
     public void openDetailedTaskFragment(Task task) {

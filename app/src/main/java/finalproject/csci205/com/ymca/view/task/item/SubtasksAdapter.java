@@ -27,7 +27,6 @@ public class SubtasksAdapter extends RecyclerView.Adapter<SubtaskViewHolder> {
 
     @Override
     public void onBindViewHolder(SubtaskViewHolder holder, int position) {
-        Log.d("LOG_TAG", detailTaskPresenter.getNumSubtasks() + "");
         Subtask subtask = detailTaskPresenter.getSubtasks().get(position);
         holder.tvSubtask.setText(subtask.getTitle());
         holder.itemView.setTag(subtask);

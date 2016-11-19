@@ -23,10 +23,6 @@ public class DetailTaskPresenter {
     public DetailTaskPresenter(DetailTaskFragment view, Task task) {
         this.view = view;
         this.subtasks = Subtask.find(Subtask.class, "task_id = ?", task.getId().toString());
-        this.subtasks.add(new Subtask(task.getId(), "Subtask 1"));
-        this.subtasks.add(new Subtask(task.getId(), "Subtask 2"));
-        this.subtasks.add(new Subtask(task.getId(), "Subtask 3"));
-        this.subtasks.add(new Subtask(task.getId(), "Subtask 4"));
         this.subtasksAdapter = new SubtasksAdapter(this);
     }
 
@@ -40,5 +36,11 @@ public class DetailTaskPresenter {
 
     public List<Subtask> getSubtasks() {
         return subtasks;
+    }
+
+    public void addSubtask(Subtask newSubtask) {
+        subtasks.add(newSubtask);
+        newSubtask.save();
+        subtasksAdapter.notifyDataSetChanged();
     }
 }
