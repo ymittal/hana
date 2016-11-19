@@ -11,6 +11,8 @@ import finalproject.csci205.com.countdown.R;
 
 /**
  * Created by ceh024 on 11/18/16.
+ * Refs
+ *  > http://www.vogella.com/tutorials/AndroidNotifications/article.html#notification-manager
  */
 
 public class CountDownNotification {
