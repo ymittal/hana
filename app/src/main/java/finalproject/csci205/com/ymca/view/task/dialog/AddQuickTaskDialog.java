@@ -15,13 +15,27 @@ import android.widget.EditText;
 
 import finalproject.csci205.com.ymca.R;
 
+/**
+ * {@link DialogFragment} to have a user enter a task quickly or move to
+ * {@link finalproject.csci205.com.ymca.view.task.DetailTaskFragment}
+ */
 public class AddQuickTaskDialog extends DialogFragment {
 
     public static final String NEW_TASK = "NEW_TASK";
 
+    /**
+     * Required empty constructor
+     */
     public AddQuickTaskDialog() {
     }
 
+    /**
+     * Sets up {@link AlertDialog} and opens soft keyboard on start
+     *
+     * @param savedInstanceState
+     * @return dialog
+     * @author Charles
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_quicktask, null);
@@ -35,14 +49,21 @@ public class AddQuickTaskDialog extends DialogFragment {
 
         addOnClickListenersToButtons(view, dialog);
 
+        // opens soft keyboard
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return dialog;
     }
 
+    /**
+     * Adds {@link View.OnClickListener} to dialog buttons shown on {@link AlertDialog}
+     *
+     * @param view   view
+     * @param dialog alert dialog
+     * @author Yash
+     */
     private void addOnClickListenersToButtons(View view, final AlertDialog dialog) {
         final EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);
         final TextInputLayout til = (TextInputLayout) view.findViewById(R.id.tilAddTask);
-        til.setErrorEnabled(true);
 
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
@@ -74,6 +95,14 @@ public class AddQuickTaskDialog extends DialogFragment {
         });
     }
 
+    /**
+     * Replaces current fragment to the fragment containing the task list
+     * {@link finalproject.csci205.com.ymca.view.task.GTDFragment}
+     *
+     * @param sTask      title of task to be saved
+     * @param resultType result type <code>Activity.RESULT_CANCELED</code> or <code>Activity.RESULT_OK</code>
+     * @author Charles
+     */
     private void goToGTDFragment(String sTask, int resultType) {
         Intent i = new Intent().putExtra(NEW_TASK, sTask);
         getTargetFragment().onActivityResult(getTargetRequestCode(), resultType, i);

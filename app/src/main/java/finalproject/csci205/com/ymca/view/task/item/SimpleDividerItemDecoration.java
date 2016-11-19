@@ -10,9 +10,12 @@ import android.view.View;
 import finalproject.csci205.com.ymca.R;
 
 /**
- * The following file has been taken from a GitHub Gist with a few modifications according to needs
+ * Simple Horizontal Divider Item Decoration for {@link RecyclerView}. This file has been
+ * modified by {@author Yash Mittal} to meet application specific needs.
  *
- * @see <a href="https://gist.github.com/polbins/e37206fbc444207c0e92">GitHub Gist</a>
+ * @author polbins
+ * @see <a href="https://gist.github.com/polbins/e37206fbc444207c0e92">
+ * GitHub Gist Simple RecyclerView Divider</a>
  */
 public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
