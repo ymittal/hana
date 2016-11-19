@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -23,12 +22,13 @@ import finalproject.csci205.com.ymca.view.task.item.SimpleDividerItemDecoration;
 /**
  * Created by ym012 on 11/16/2016.
  */
-public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
+public class DetailTaskFragment extends Fragment {
 
     public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
 
     private DetailTaskPresenter detailTaskPresenter;
     private Task task;
+    private EditText etSubtask;
 
     public DetailTaskFragment() {
     }
@@ -43,7 +43,6 @@ public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
         View root = inflater.inflate(R.layout.fragment_detail_task, container, false);
         root.setFocusableInTouchMode(true);
         root.requestFocus();
-        root.setOnKeyListener(this);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -64,7 +63,7 @@ public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
      * </a>
      */
     private void initUI(View root) {
-        final EditText etSubtask = (EditText) root.findViewById(R.id.etSubtask);
+        etSubtask = (EditText) root.findViewById(R.id.etSubtask);
         final TextInputLayout tilSubtask = (TextInputLayout) root.findViewById(R.id.tilSubtask);
 
         ImageView addSubtaskBtn = (ImageView) root.findViewById(R.id.addSubtaskBtn);
@@ -83,11 +82,14 @@ public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
         etSubtask.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN)
-                        && (i == KeyEvent.KEYCODE_ENTER)) {
-                    Subtask newSubtask = new Subtask(task.getId(), etSubtask.getText().toString());
-                    detailTaskPresenter.addSubtask(newSubtask);
-                    tilSubtask.setVisibility(View.GONE);
+                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                    String sSubtask = etSubtask.getText().toString();
+                    if (!sSubtask.equals("")) {
+                        Subtask newSubtask = new Subtask(task.getId(), sSubtask);
+                        detailTaskPresenter.addSubtask(newSubtask);
+                        tilSubtask.setVisibility(View.GONE);
+                        etSubtask.setText("");
+                    }
                     return true;
                 }
                 return false;
@@ -100,22 +102,5 @@ public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
         rvSubtasks.setLayoutManager(new LinearLayoutManager(getContext()));
         rvSubtasks.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
         rvSubtasks.setAdapter(detailTaskPresenter.getSubtasksAdapter());
-    }
-
-
-    @Override
-    public boolean onKey(View view, int i, KeyEvent keyEvent) {
-        if (i == KeyEvent.KEYCODE_BACK) {
-            goToGTDFragment();
-            return true;
-        }
-
-        return false;
-    }
-
-    private void goToGTDFragment() {
-        Fragment fragment = GTDFragment.newInstance();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_nav, fragment).commit();
     }
 }
