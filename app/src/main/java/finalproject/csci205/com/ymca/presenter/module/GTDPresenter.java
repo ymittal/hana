@@ -4,7 +4,9 @@ package finalproject.csci205.com.ymca.presenter.module;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
+import java.util.Arrays;
 import java.util.List;
 
 import finalproject.csci205.com.ymca.R;
@@ -44,7 +46,16 @@ public class GTDPresenter {
     public GTDPresenter(GTDFragment view) {
         this.view = view;
         this.tasks = Task.listAll(Task.class);
+        printTasks();
         this.tasksAdapter = new TasksAdapter(this);
+    }
+
+    public void printTasks() {
+        String res = "";
+        for (Task task : tasks) {
+            res += task.getTitle() + " ";
+        }
+        Log.d("LOG_TAG", res);
     }
 
     public TasksAdapter getTasksAdapter() {
@@ -112,7 +123,7 @@ public class GTDPresenter {
      */
     public void taskChecked(int index, boolean b) {
         tasks.get(index).setIsComplete(b);
-        tasks.get(index).update();
+        tasks.get(index).save();
     }
 
     public void openDetailedTaskFragment(Task task) {
