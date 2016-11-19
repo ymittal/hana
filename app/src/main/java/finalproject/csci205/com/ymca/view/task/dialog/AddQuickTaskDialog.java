@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,6 +25,7 @@ public class AddQuickTaskDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_quicktask, null);
+
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setTitle("Add Task")
@@ -54,7 +54,7 @@ public class AddQuickTaskDialog extends DialogFragment {
                                 if (etAddTask.getText().toString().equals("")) {
                                     til.setError("Enter a task name");
                                 } else {
-                                    showTaskFormDialog(etAddTask.getText().toString());
+                                    goToGTDFragment(etAddTask.getText().toString(), Activity.RESULT_OK);
                                 }
                             }
                         });
@@ -66,7 +66,7 @@ public class AddQuickTaskDialog extends DialogFragment {
                                 if (etAddTask.getText().toString().equals("")) {
                                     til.setError("Enter a task name");
                                 } else {
-                                    goToGTDFragment(etAddTask.getText().toString());
+                                    goToGTDFragment(etAddTask.getText().toString(), Activity.RESULT_CANCELED);
                                 }
                             }
                         });
@@ -74,19 +74,9 @@ public class AddQuickTaskDialog extends DialogFragment {
         });
     }
 
-    private void goToGTDFragment(String sTask) {
+    private void goToGTDFragment(String sTask, int resultType) {
         Intent i = new Intent().putExtra(NEW_TASK, sTask);
-        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
-        dismiss();
-    }
-
-    public void showTaskFormDialog(String sTask) {
-        TaskFormFragment taskFormFragment = new TaskFormFragment();
-        taskFormFragment.setTaskName(sTask);
-
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.replace(R.id.content_nav, taskFormFragment).commit();
+        getTargetFragment().onActivityResult(getTargetRequestCode(), resultType, i);
         dismiss();
     }
 }

@@ -157,7 +157,6 @@ public class GTDPresenter implements GTDPresenterInterface {
 
         FragmentManager fragmentManager = view.getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.replace(R.id.content_nav, detailTaskFragment).commit();
     }
 }

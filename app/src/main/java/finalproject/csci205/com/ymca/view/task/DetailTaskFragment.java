@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,8 @@ import finalproject.csci205.com.ymca.model.Task;
 public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
 
     public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
+
+    private Task task;
 
     public DetailTaskFragment() {
     }
@@ -37,7 +38,7 @@ public class DetailTaskFragment extends Fragment implements View.OnKeyListener {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            Task task = (Task) bundle.getSerializable(SERIALIZED_TASK);
+            task = (Task) bundle.getSerializable(SERIALIZED_TASK);
             getActivity().setTitle(task.getTitle());
         }
 

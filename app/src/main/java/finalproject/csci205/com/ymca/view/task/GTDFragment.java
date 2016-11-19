@@ -146,10 +146,19 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_CODE_QUICK:
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == Activity.RESULT_CANCELED) {
                     Bundle bundle = data.getExtras();
                     String sNewTask = bundle.getString(NEW_TASK);
-                    gtdPresenter.addTask(new Task(sNewTask), true);
+                    Task t = new Task(sNewTask);
+                    gtdPresenter.addTask(t, true);
+
+                } else if (resultCode == Activity.RESULT_OK) {
+                    Bundle bundle = data.getExtras();
+                    String sNewTask = bundle.getString(NEW_TASK);
+                    Task t = new Task(sNewTask);
+                    gtdPresenter.addTask(t, true);
+                    gtdPresenter.openDetailedTaskFragment(t);
+
                 }
                 break;
         }

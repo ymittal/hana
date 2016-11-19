@@ -23,6 +23,7 @@ import finalproject.csci205.com.ymca.view.task.GTDFragment;
  * Created by ceh024 on 11/15/16.
  */
 
+@Deprecated
 public class TaskFormFragment extends Fragment implements View.OnClickListener, View.OnKeyListener {
 
     private EditText editText;
