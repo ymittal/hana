@@ -13,7 +13,9 @@
         <service android:name="finalproject.csci205.com.countdown.Service.CountDownService"></service>
 
         <activity
+
             android:name=".view.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +26,7 @@
         <activity
             android:name=".view.NavActivity"
             android:label="@string/title_activity_nav"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

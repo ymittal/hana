@@ -4,7 +4,6 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cliff"
     tools:context="finalproject.csci205.com.ymca.view.MainActivity">
 
     <TextView
