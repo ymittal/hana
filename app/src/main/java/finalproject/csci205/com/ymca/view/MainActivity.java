@@ -19,6 +19,9 @@ import finalproject.csci205.com.ymca.view.util.SharedPreferenceUtil;
  * initial quote as well as starting of the tutorial)
  */
 public class MainActivity extends AppCompatActivity {
+    /**
+     * The amount of time before the splash screen calls the next screen
+     */
     private final int DELAY_MILLIS = 1000;
     /**
      * The number of optional backgrounds in the application
