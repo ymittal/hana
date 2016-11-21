@@ -20,6 +20,7 @@ import finalproject.csci205.com.countdown.R;
 import finalproject.csci205.com.countdown.Service.CountDownIntent;
 import finalproject.csci205.com.countdown.Service.CountDownListener;
 import finalproject.csci205.com.countdown.Service.CountDownService;
+import finalproject.csci205.com.countdown.Ults.ServiceState;
 
 /******************************************
  * CSCI205 - Software Engineering and Design
@@ -190,17 +191,13 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         cd = binder.getService();
         cd.setCountDownListener(this);
 
-        switch (cd.getState()) {
-            case ISRUNNING:
-                startPauseCounter = 1;
-                configState();
-                break;
-            case PAUSED:
-                startPauseCounter = 2;
-                configState();
-                break;
-        }
 
+        if (cd.getState() == ServiceState.ISRUNNING) {
+            startPauseCounter = 1;
+        } else if (cd.getState() == ServiceState.PAUSED) {
+            startPauseCounter = 2;
+        }
+        configState();
     }
 
 

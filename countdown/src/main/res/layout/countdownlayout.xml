@@ -75,7 +75,7 @@
             android:layout_centerVertical="false"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_cancel" />
+            android:src="@drawable/ic_close" />
 
     </RelativeLayout>
 

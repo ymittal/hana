@@ -10,6 +10,12 @@
         <service android:name="finalproject.csci205.com.countdown.Service.CountDownService">
 
         </service>
+
+        <intent-filter>
+            <action android:name="android.intent.action.Start" />
+            <action android:name="android.intent.action.Pause" />
+            <action android:name="android.intent.action.Cacnel" />
+        </intent-filter>
     </application>
 
 </manifest>

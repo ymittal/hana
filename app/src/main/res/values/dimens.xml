@@ -6,7 +6,6 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
 
-    <dimen name="vertical_padding">8dp</dimen>
     <dimen name="horizontal_padding">16dp</dimen>
 
     <dimen name="vertical_padding_rv_subtasks">4dp</dimen>

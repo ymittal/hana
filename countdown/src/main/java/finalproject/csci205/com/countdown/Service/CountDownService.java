@@ -164,6 +164,8 @@ public class CountDownService extends Service {
     public ServiceState getState() {
         return state;
     }
+
+
     /**
      * Syncs current timer with a defined notification
      *
@@ -183,5 +185,6 @@ public class CountDownService extends Service {
             return CountDownService.this;
         }
     }
+
 
 }

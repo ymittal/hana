@@ -1,5 +1,7 @@
 package finalproject.csci205.com.ymca.view.module.pomodoro;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +17,8 @@ import finalproject.csci205.com.countdown.View.CountDownNotification;
 import finalproject.csci205.com.countdown.View.CountDownView;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 
 public class PomodoroFragment extends Fragment implements View.OnClickListener {
@@ -51,10 +55,12 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
         countDownView.setSessionTime(1);//TODO GET FROM MODEL -- > PRESENTER
-        CountDownNotification notification = new CountDownNotification(getContext(), R.drawable.ic_pom);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 1, new Intent(), PendingIntent.FLAG_CANCEL_CURRENT);
-        notification.setIntent(pendingIntent);
-        notification.buildNotfication();
+        CountDownNotification notification =
+                new CountDownNotification(getContext(),
+                        R.drawable.ic_pom,
+                        R.drawable.ic_action_playback_play,
+                        R.drawable.ic_pause,
+                        R.drawable.ic_close);
         return root;
     }
 
@@ -87,6 +93,35 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
         if (view.getId() == countDownView.getId()) {
             Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void test(Context context) {
+
+
+        // prepare intent which is triggered if the
+        // notification is selected
+
+        //Intent intent = new Intent(this, NotificationReceiver.class);
+        // use System.currentTimeMillis() to have a unique ID for the pending intent
+        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), new Intent(), 0);
+
+        // build notification
+        // the addAction re-use the same intent to keep the example short
+        Notification n = new Notification.Builder(context)
+                .setContentTitle("Time Remaining")
+                .setContentText("28 : 00")
+                .setSmallIcon(R.drawable.ic_pom)
+                .setContentIntent(pIntent)
+                .setAutoCancel(true)
+                .addAction(R.drawable.ic_action_add, "Start", pIntent)
+                .addAction(R.drawable.ic_pom, "Pause", pIntent)
+                .addAction(R.drawable.ic_cancel, "Cancel", pIntent).build();
+
+
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0, n);
     }
 
     public interface OnFragmentInteractionListener {

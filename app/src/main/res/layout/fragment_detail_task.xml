@@ -22,7 +22,6 @@
             android:paddingBottom="@dimen/vertical_padding_rv_subtasks">
 
             <TextView
-                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="List of subtasks"
