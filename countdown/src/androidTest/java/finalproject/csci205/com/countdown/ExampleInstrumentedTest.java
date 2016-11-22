@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Instrumentation test, which will execute on an Android device.
+ * Instrumentation cd_notification_layout, which will execute on an Android device.
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
@@ -18,9 +18,9 @@ import static org.junit.Assert.assertEquals;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
-        // Context of the app under test.
+        // Context of the app under cd_notification_layout.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("finalproject.csci205.com.countcown.test", appContext.getPackageName());
+        assertEquals("finalproject.csci205.com.countcown.cd_notification_layout", appContext.getPackageName());
     }
 }

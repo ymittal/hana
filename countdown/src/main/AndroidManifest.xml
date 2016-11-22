@@ -10,6 +10,9 @@
         <service android:name="finalproject.csci205.com.countdown.Service.CountDownService">
 
         </service>
+        <receiver android:name=".View.CountDownNotification$NotificationButtonListener">
+
+        </receiver>
 
         <intent-filter>
             <action android:name="android.intent.action.Start" />

@@ -42,7 +42,7 @@ import finalproject.csci205.com.countdown.Ults.ServiceState;
 /**
  * @author Charles
  */
-public class CountDownView extends LinearLayout implements View.OnClickListener, ServiceConnection, CountDownListener {
+public class CountDownView extends LinearLayout implements View.OnClickListener, ServiceConnection, CountDownListener, NotificationClickedSyncListener {
 
     private final int REBINDSERVICE = 0;
     private int sessionTime;
@@ -113,18 +113,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         if (cd != null) {
             if (view.getId() == timerContainer.getId()) {
 
-                if (startPauseCounter == 0) { //Start
-                    Log.i("click", "Start");
-                    cancelPom.setVisibility(VISIBLE);
-                    cd.startTimer();
-                } else if (startPauseCounter % 2 != 0) { //Click to pause
-                    Log.i("click", "Pause");
-                    cd.pauseTimer();
-                } else { //Click to resume
-                    Log.i("click", "Resume");
-                    cd.resume();
-                }
-                startPauseCounter++;
+                resumeOrPause();
 
 
             } else if (view.getId() == cancelPom.getId()) {
@@ -135,6 +124,26 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         } else {
 
         }
+    }
+
+    /**
+     * Resumes or pauses service depending on num of clicks
+     *
+     * @author Charles
+     */
+    private void resumeOrPause() {
+        if (startPauseCounter == 0) { //Start
+            Log.i("click", "Start");
+            cancelPom.setVisibility(VISIBLE);
+            cd.startTimer();
+        } else if (startPauseCounter % 2 != 0) { //Click to pause
+            Log.i("click", "Pause");
+            cd.pauseTimer();
+        } else { //Click to resume
+            Log.i("click", "Resume");
+            cd.resume();
+        }
+        startPauseCounter++;
     }
 
     /**
@@ -249,4 +258,18 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     }
 
 
+    @Override
+    public void onStartClicked() {
+        resumeOrPause();
+    }
+
+    @Override
+    public void onPausedClicked() {
+        resumeOrPause();
+    }
+
+    @Override
+    public void onStopClicked() {
+        countCancelComplete();
+    }
 }

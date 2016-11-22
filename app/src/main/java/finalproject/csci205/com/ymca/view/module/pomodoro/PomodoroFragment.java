@@ -57,10 +57,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
         countDownView.setSessionTime(1);//TODO GET FROM MODEL -- > PRESENTER
         CountDownNotification notification =
                 new CountDownNotification(getContext(),
-                        R.drawable.ic_pom,
-                        R.drawable.ic_action_playback_play,
-                        R.drawable.ic_pause,
-                        R.drawable.ic_close);
+                        R.drawable.ic_pom, 1, countDownView);//TODO GET FROM MODEL -- > PRESENTER
         return root;
     }
 
