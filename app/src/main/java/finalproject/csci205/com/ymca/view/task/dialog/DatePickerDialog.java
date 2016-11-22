@@ -29,14 +29,11 @@ public class DatePickerDialog extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         Toast.makeText(getContext(), "It's passed!", Toast.LENGTH_SHORT);
     }
 

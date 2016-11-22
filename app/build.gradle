@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '21.1.2'
+    buildToolsVersion '24.0.0'
     defaultConfig {
         applicationId "finalproject.csci205.com.ymca"
         minSdkVersion 19
