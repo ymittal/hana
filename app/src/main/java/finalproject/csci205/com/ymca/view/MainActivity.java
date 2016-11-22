@@ -37,13 +37,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Makes the top status bar transparent. May change...
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
         loadBackground();
 
         //Login button that shows up on the bottom of the screen only the first time the user uses the app
         Button tempLogin = (Button) findViewById(R.id.tempLogin);
-        //if first time...
 
+        //if first time...
         if (!SharedPreferenceUtil.getIsOpen(getApplicationContext())) {
             tempLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
