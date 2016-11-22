@@ -1,30 +1,28 @@
 package finalproject.csci205.com.ymca.view.module.pomodoro;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import finalproject.csci205.com.countdown.View.CountDownView;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
 import finalproject.csci205.com.ymca.view.MainActivity;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
-
 
 public class PomodoroFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private CountDownView countDownView;
+    private ImageButton settingsBtn;
 
     public PomodoroFragment() {
     }
@@ -51,11 +49,14 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        PomodoroPresenter pomodoroPresenter = new PomodoroPresenter(this);
+        final PomodoroPresenter pomodoroPresenter = new PomodoroPresenter(this);
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
         countDownView.setSessionTime(1);//TODO GET FROM MODEL -- > PRESENTER
         countDownView.setJumpTo(MainActivity.class);
+        settingsBtn = (ImageButton) root.findViewById(R.id.settingsButtonYo);
+        settingsBtn.setOnClickListener(this);
+
         return root;
     }
 
@@ -85,38 +86,19 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == countDownView.getId()) {
-            Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();
+        if (view.getId() == settingsBtn.getId()) {
+            FragmentManager fragmentManager = getFragmentManager();
+            PomodoroSettingsDialogFragment pomodoroSettingsDialogFragment = new PomodoroSettingsDialogFragment();
+            // The device is smaller, so show the fragment fullscreen
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            // For a little polish, specify a transition animation
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            // To make it fullscreen, use the 'content' root view as the container
+            // for the fragment, which is always the root view for the activity
+            transaction.add(R.id.content_nav, pomodoroSettingsDialogFragment)
+                    .addToBackStack(null).commit();
+            settingsBtn.setVisibility(View.GONE); //TODO Get view to come back, over-ride back btn
         }
-    }
-
-    public void test(Context context) {
-
-
-        // prepare intent which is triggered if the
-        // notification is selected
-
-        //Intent intent = new Intent(this, NotificationReceiver.class);
-        // use System.currentTimeMillis() to have a unique ID for the pending intent
-        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), new Intent(), 0);
-
-        // build notification
-        // the addAction re-use the same intent to keep the example short
-        Notification n = new Notification.Builder(context)
-                .setContentTitle("Time Remaining")
-                .setContentText("28 : 00")
-                .setSmallIcon(R.drawable.ic_pom)
-                .setContentIntent(pIntent)
-                .setAutoCancel(true)
-                .addAction(R.drawable.ic_action_add, "Start", pIntent)
-                .addAction(R.drawable.ic_pom, "Pause", pIntent)
-                .addAction(R.drawable.ic_cancel, "Cancel", pIntent).build();
-
-
-        NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0, n);
     }
 
     public interface OnFragmentInteractionListener {
