@@ -33,6 +33,7 @@ public class PomodoroSettingsDialogFragment extends DialogFragment implements Vi
         numBreaks = (EditText) root.findViewById(R.id.numBreaks);
         longBreak = (EditText) root.findViewById(R.id.longBreak);
         saveBtn = (ImageButton) root.findViewById(R.id.saveBtn);
+        saveBtn.setOnClickListener(this);
         return root;
     }
 

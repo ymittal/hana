@@ -135,9 +135,10 @@ public class CountDownService extends Service {
      * @author Charles
      */
     public void stopTimer() {
-        cdStart.cancel();
-        //cdStart.onFinish();
-        state = ServiceState.OTHER;
+        if (cdStart != null) {
+            cdStart.cancel();
+            state = ServiceState.OTHER;
+        }
     }
 
 
