@@ -1,5 +1,6 @@
 package finalproject.csci205.com.ymca.presenter.module;
 
+import java.util.Date;
 import java.util.List;
 
 import finalproject.csci205.com.ymca.model.Subtask;
@@ -50,5 +51,10 @@ public class DetailTaskPresenter {
         subtasks.remove(pos);
         subtasksAdapter.notifyItemRemoved(pos);
         subtasksAdapter.notifyItemRangeChanged(pos, getNumSubtasks());
+    }
+
+    public void setTaskDate(Task task, Date date) {
+        task.setDueDate(date);
+        task.save();
     }
 }

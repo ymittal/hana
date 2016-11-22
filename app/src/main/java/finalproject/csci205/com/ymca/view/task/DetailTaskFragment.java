@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +64,8 @@ public class DetailTaskFragment extends Fragment
             task = (Task) bundle.getSerializable(SERIALIZED_TASK);
             getActivity().setTitle(task.getTitle());
             detailTaskPresenter = new DetailTaskPresenter(this, task);
+
+            Log.d("LOG_TAG", "Task due date: " + task.getDueDate().toString());
         }
 
         setupInterfaceComponents(root);
@@ -152,5 +155,6 @@ public class DetailTaskFragment extends Fragment
         myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         myCalendar.set(Calendar.MINUTE, minute);
         Toast.makeText(getActivity(), myCalendar.getTime().toString(), Toast.LENGTH_SHORT).show();
+        detailTaskPresenter.setTaskDate(task, myCalendar.getTime());
     }
 }

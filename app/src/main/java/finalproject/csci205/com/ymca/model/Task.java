@@ -3,6 +3,7 @@ package finalproject.csci205.com.ymca.model;
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * A class to represent a task, extending from {@link SugarRecord} to save it to local
@@ -24,6 +25,10 @@ public class Task extends SugarRecord implements Serializable {
      * Task completion status
      */
     private Boolean isComplete;
+    /**
+     * Task due date
+     */
+    private Date dueDate;
 
     /**
      * Empty constructor
@@ -32,6 +37,7 @@ public class Task extends SugarRecord implements Serializable {
         this.title = "";
         this.desc = "";
         this.isComplete = false;
+        this.dueDate = new Date();
     }
 
     /**
@@ -43,6 +49,7 @@ public class Task extends SugarRecord implements Serializable {
         this.title = title;
         this.desc = "";
         this.isComplete = false;
+        this.dueDate = new Date();
     }
 
     public String getTitle() {
@@ -59,5 +66,13 @@ public class Task extends SugarRecord implements Serializable {
 
     public void setIsComplete(boolean isComplete) {
         this.isComplete = isComplete;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 }
