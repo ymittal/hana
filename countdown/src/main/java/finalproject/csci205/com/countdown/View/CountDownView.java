@@ -1,8 +1,13 @@
 package finalproject.csci205.com.countdown.View;
 
 import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.AttributeSet;
@@ -10,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -20,6 +26,7 @@ import finalproject.csci205.com.countdown.R;
 import finalproject.csci205.com.countdown.Service.CountDownIntent;
 import finalproject.csci205.com.countdown.Service.CountDownListener;
 import finalproject.csci205.com.countdown.Service.CountDownService;
+import finalproject.csci205.com.countdown.Ults.Constants;
 import finalproject.csci205.com.countdown.Ults.ServiceState;
 
 /******************************************
@@ -44,16 +51,21 @@ import finalproject.csci205.com.countdown.Ults.ServiceState;
  */
 public class CountDownView extends LinearLayout implements View.OnClickListener, ServiceConnection, CountDownListener, NotificationClickedSyncListener {
 
+    private static CountDownView cdView;
     private final int REBINDSERVICE = 0;
+    //Notification
+    private final int NOTIFICATION_ID = 1;
     private int sessionTime;
     private int startPauseCounter = 0;
     private View root;
-    private TextView notificationProgress;
     private TextView mins;
     private TextView seconds;
     private ImageButton cancelPom;
     private LinearLayout timerContainer;
     private CountDownService cd;
+    private RemoteViews notificationView;
+    private NotificationManager notificationManager;
+    private Notification notification;
 
 
     public CountDownView(Context context) {
@@ -82,12 +94,15 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         timerContainer = (LinearLayout) root.findViewById(R.id.layoutContainer);
         timerContainer.setOnClickListener(this);
         cancelPom.setOnClickListener(this);
-
+        cdView = this;
         //Notification
-        CountDownNotification notification =
-                new CountDownNotification(getContext(), R.drawable.ic_pom
-                        , sessionTime, this);//
+//        CountDownNotification notification =
+//                new CountDownNotification(getContext(), R.drawable.ic_pom
+//                        , sessionTime, this);//
         //notificationProgress = (TextView) findViewById(R.id.ticker);
+
+
+        startNotification();
     }
 
 
@@ -104,20 +119,8 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         mins.setText(minFor.format(date));
         seconds.setText(secFor.format(date));
 
-
-//        NotificationManager notificationManager =
-//                (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//        Notification notification =
-//                new Notification(R.drawable.ic_pom, null,
-//                Constants.NOTIFICATION_ID_CONSTANT);
-//
-//
-//        RemoteViews notificationView = new RemoteViews(getContext().getPackageName(),
-//                R.layout.cd_notification_layout);
-//
-//        notificationView.setTextViewText(R.id.ticker,minFor.format(date) + " : " + secFor.format(date));
-//        notificationManager.notify(Constants.NOTIFICATION_ID,notification);
+        notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + secFor.format(date));
+        notificationManager.notify(Constants.NOTIFICATION_ID, notification);
     }
 
 
@@ -294,4 +297,102 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     public void onStopClicked() {
         countCancelComplete();
     }
+
+    private void startNotification() {
+        notificationManager =
+                (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notification = new Notification(R.drawable.ic_pom, null,
+                Constants.NOTIFICATION_ID_CONSTANT);
+
+
+        notificationView = new RemoteViews(getContext().getPackageName(),
+                R.layout.cd_notification_layout);
+
+        //the intent that is started when the notification is clicked (works)
+//        Intent notificationIntent = new Intent(context, CountDownService.class);
+//        PendingIntent pendingNotificationIntent = PendingIntent.getActivity(context, 0,
+//                notificationIntent, 0);
+
+        notification.contentView = notificationView;
+        //notification.contentIntent = pendingNotificationIntent;
+        notification.flags |= Notification.FLAG_NO_CLEAR;
+
+
+        /* Create intent, set context and destionation */
+        Intent start = new Intent(getContext(), NotificationButtonListener.class);
+        /* Put extra to identify which action was called. */
+        start.putExtra(Constants.START, Constants.START);
+        PendingIntent pendingStart = PendingIntent.getBroadcast(getContext(), 0,
+                start, 0);
+
+        /* Create intent, set context and destionation */
+        Intent pauseIntent = new Intent(getContext(), NotificationButtonListener.class);
+        /* Put extra to identify which action was called. */
+        pauseIntent.putExtra(Constants.PAUSE, Constants.PAUSE);
+        PendingIntent pendingPause = PendingIntent.getBroadcast(getContext(), 1,
+                pauseIntent, 0);
+
+
+        /* Create intent, set context and destionation */
+        Intent cancelIntent = new Intent(getContext(), NotificationButtonListener.class);
+        /* Put extra to identify which action was called. */
+        cancelIntent.putExtra(Constants.CANCEL, Constants.CANCEL);
+        PendingIntent pendingCancel = PendingIntent.getBroadcast(getContext(), 2,
+                cancelIntent, 0);
+
+        /* Functionally equal to setOnClickListener */
+        notificationView.setOnClickPendingIntent(R.id.start, pendingStart);
+        notificationView.setOnClickPendingIntent(R.id.pause, pendingPause);
+        notificationView.setOnClickPendingIntent(R.id.cancel, pendingCancel);
+        notificationManager.notify(NOTIFICATION_ID, notification);
+
+    }
+
+
+    /**
+     * Broadcast Receiver that intercepts Notification Button Clicks
+     *
+     * @author Charles
+     */
+    public static class NotificationButtonListener extends BroadcastReceiver {
+        private final int NOTIFICATION_ID = 1;
+//
+//        public NotificationButtonListener(){
+//            super();
+//        }
+
+        /**
+         * Determines which button was clicked, then calls the correct listener on
+         * CountDownView to interpert the action. This ensures that both the View
+         * and notification are synced.
+         *
+         * @param context
+         * @param intent
+         * @author Charles
+         */
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("onReceive", "Test");
+            NotificationClickedSyncListener clickedSyncListener = cdView;
+            String startPotential = intent.getStringExtra(Constants.START);
+            String pausePotential = intent.getStringExtra(Constants.PAUSE);
+            String cancelPotential = intent.getStringExtra(Constants.CANCEL);
+            if (startPotential != null) {
+                clickedSyncListener.onStartClicked();
+            } else if (pausePotential != null) {
+                clickedSyncListener.onPausedClicked();
+            } else if (cancelPotential != null) {
+                clickedSyncListener.onStopClicked();
+                NotificationManager notificationManager = (NotificationManager) context
+                        .getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancel(NOTIFICATION_ID);
+                //TODO Get it to come back when user resumes timer
+            }
+        }
+
+
+    }
+
+
 }

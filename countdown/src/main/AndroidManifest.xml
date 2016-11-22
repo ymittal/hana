@@ -10,7 +10,7 @@
         <service android:name="finalproject.csci205.com.countdown.Service.CountDownService">
 
         </service>
-        <receiver android:name=".View.CountDownNotification$NotificationButtonListener">
+        <receiver android:name=".View.CountDownView$NotificationButtonListener">
 
         </receiver>
 
