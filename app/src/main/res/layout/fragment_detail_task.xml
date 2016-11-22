@@ -3,78 +3,97 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgPrimary"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:background="@color/bgPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <RelativeLayout
-            android:id="@+id/relativeLayoutTop"
+            android:id="@+id/relativeLayoutDueAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/horizontal_padding_rv_subtasks"
             android:paddingRight="@dimen/horizontal_padding_rv_subtasks">
 
-            <LinearLayout
-                android:id="@+id/ll2"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvDueAt"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:paddingBottom="@dimen/vertical_padding_rv_subtasks">
+                android:text="Due at"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Subtasks"
-                    android:textAllCaps="true"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/dummyBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_toRightOf="@+id/tvDueAt"
+                android:src="@drawable/ic_action_add" />
 
-                <ImageView
-                    android:id="@+id/addSubtaskBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_action_add" />
-
-            </LinearLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilSubtask"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/ll2"
+                android:layout_below="@+id/tvDueAt"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:text="Time remaining"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutSubtasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/horizontal_padding_rv_subtasks"
+            android:paddingRight="@dimen/horizontal_padding_rv_subtasks">
+
+            <TextView
+                android:id="@+id/tvSubtasks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtasks"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/addSubtaskBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_toRightOf="@+id/tvSubtasks"
+                android:src="@drawable/ic_action_add" />
+
+            <EditText
+                android:id="@+id/etSubtask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubtasks"
+                android:hint="Title"
+                android:inputType="textCapSentences|textNoSuggestions"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
                 android:textColorHint="#BDBDBD"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/etSubtask"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-4dp"
-                    android:hint="title"
-                    android:inputType="textCapSentences|textNoSuggestions"
-                    android:maxLines="1"
-                    android:textColor="@android:color/white" />
-
-            </android.support.design.widget.TextInputLayout>
+                android:visibility="gone" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvSubtasks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/tilSubtask" />
+                android:layout_below="@+id/etSubtask" />
 
         </RelativeLayout>
-
 
         <EditText
             android:layout_width="match_parent"

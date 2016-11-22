@@ -15,14 +15,14 @@ import android.widget.Toast;
 import finalproject.csci205.com.ymca.R;
 
 
-public class DatePickerDialog extends DialogFragment {
+public class MyDatePickerDialog extends DialogFragment {
     private DatePicker datePicker;
 
 
     /**
      * Required empty public constructor
      */
-    public DatePickerDialog() {
+    public MyDatePickerDialog() {
     }
 
 
