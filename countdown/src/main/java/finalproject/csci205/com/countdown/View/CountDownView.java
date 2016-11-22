@@ -48,6 +48,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     private int sessionTime;
     private int startPauseCounter = 0;
     private View root;
+    private TextView notificationProgress;
     private TextView mins;
     private TextView seconds;
     private ImageButton cancelPom;
@@ -81,6 +82,12 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         timerContainer = (LinearLayout) root.findViewById(R.id.layoutContainer);
         timerContainer.setOnClickListener(this);
         cancelPom.setOnClickListener(this);
+
+        //Notification
+        CountDownNotification notification =
+                new CountDownNotification(getContext(), R.drawable.ic_pom
+                        , sessionTime, this);//
+        //notificationProgress = (TextView) findViewById(R.id.ticker);
     }
 
 
@@ -96,6 +103,21 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         DateFormat secFor = new SimpleDateFormat("ss");
         mins.setText(minFor.format(date));
         seconds.setText(secFor.format(date));
+
+
+//        NotificationManager notificationManager =
+//                (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        Notification notification =
+//                new Notification(R.drawable.ic_pom, null,
+//                Constants.NOTIFICATION_ID_CONSTANT);
+//
+//
+//        RemoteViews notificationView = new RemoteViews(getContext().getPackageName(),
+//                R.layout.cd_notification_layout);
+//
+//        notificationView.setTextViewText(R.id.ticker,minFor.format(date) + " : " + secFor.format(date));
+//        notificationManager.notify(Constants.NOTIFICATION_ID,notification);
     }
 
 

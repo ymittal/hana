@@ -5,17 +5,11 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import finalproject.csci205.com.countdown.R;
-import finalproject.csci205.com.countdown.Service.CountDownIntent;
-import finalproject.csci205.com.countdown.Service.CountDownService;
 import finalproject.csci205.com.countdown.Ults.Constants;
 
 
@@ -25,36 +19,40 @@ import finalproject.csci205.com.countdown.Ults.Constants;
  *  > http://www.vogella.com/tutorials/AndroidNotifications/article.html#notification-manager
  */
 
-public class CountDownNotification implements ServiceConnection {
+public class CountDownNotification {
 
-
-    public static CountDownService cd = null;
     public static CountDownView cdView;
-    private final String TITLE = "Time remaining";
-    private final int REFRENCE_ID = 1;
+    private final int NOTIFICATION_ID = 1;
     private Context context;
     private int smallIcon;
+    private RemoteViews notificationView;
+    private NotificationManager notificationManager;
+    private Notification notification;
 
 
     public CountDownNotification(Context context, int smallIcon, int sessionTime, CountDownView cdView) {
         this.context = context;
         this.smallIcon = smallIcon;
         CountDownNotification.cdView = cdView;
-        CountDownIntent i = new CountDownIntent(context, sessionTime);
-        context.bindService(i, this, 0);
+
+        startNotification();
 
     }
 
+    private void updateNotification(String s) {
+        notificationView.setTextViewText(R.id.ticker, s);
+        notificationManager.notify(NOTIFICATION_ID, notification);
+    }
 
     private void startNotification() {
-        NotificationManager notificationManager =
+        notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Notification notification = new Notification(smallIcon, null,
-                System.currentTimeMillis());
+        notification = new Notification(smallIcon, null,
+                Constants.NOTIFICATION_ID_CONSTANT);
 
 
-        RemoteViews notificationView = new RemoteViews(context.getPackageName(),
+        notificationView = new RemoteViews(context.getPackageName(),
                 R.layout.cd_notification_layout);
 
         //the intent that is started when the notification is clicked (works)
@@ -94,49 +92,44 @@ public class CountDownNotification implements ServiceConnection {
         notificationView.setOnClickPendingIntent(R.id.pause, pendingPause);
         notificationView.setOnClickPendingIntent(R.id.cancel, pendingCancel);
 
-        notificationManager.notify(1, notification);
-    }
-
-    @Override
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        CountDownService.CountDownBinder binder = (CountDownService.CountDownBinder) iBinder;
-        cd = binder.getService();
-        //cd.setCountDownListener(this);
-        startNotification();
-    }
-
-    @Override
-    public void onServiceDisconnected(ComponentName componentName) {
-
+        notificationManager.notify(NOTIFICATION_ID, notification);
     }
 
 
+    /**
+     * Broadcast Receiver that intercepts Notification Button Clicks
+     *
+     * @author Charles
+     */
     public static class NotificationButtonListener extends BroadcastReceiver {
+        private final int NOTIFICATION_ID = 1;
 
+        /**
+         * Determines which button was clicked, then calls the correct listener on
+         * CountDownView to interpert the action. This ensures that both the View
+         * and notification are synced.
+         * @author Charles
+         * @param context
+         * @param intent
+         */
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("Broadcast", "Broadcast received");
+
             NotificationClickedSyncListener clickedSyncListener = cdView;
             String startPotential = intent.getStringExtra(Constants.START);
             String pausePotential = intent.getStringExtra(Constants.PAUSE);
             String cancelPotential = intent.getStringExtra(Constants.CANCEL);
             if (startPotential != null) {
-                Log.d("Broadcast", startPotential);
-                //startPotential = null;
-                //cd.resume();
                 clickedSyncListener.onStartClicked();
-
             } else if (pausePotential != null) {
-                Log.d("Broadcast", pausePotential);
-                //pausePotential = null;
                 clickedSyncListener.onPausedClicked();
             } else if (cancelPotential != null) {
-                Log.d("Broadcast", cancelPotential);
-                //cancelPotential = null;
                 clickedSyncListener.onStopClicked();
+                NotificationManager notificationManager = (NotificationManager) context
+                        .getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancel(NOTIFICATION_ID);
+                //TODO Get it to come back when user resumes timer
             }
-
-
         }
 
 

@@ -12,4 +12,7 @@ public class Constants {
     public static final String START = "START";
     public static final String PAUSE = "PAUSE";
     public static final String CANCEL = "CANCEL";
+    //NOTIFICATION
+    public static final int NOTIFICATION_ID_CONSTANT = 123456789;
+    public static final int NOTIFICATION_ID = 1;
 }
