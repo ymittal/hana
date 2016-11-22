@@ -17,8 +17,9 @@
             android:id="@+id/relativeLayoutDueAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/horizontal_padding_rv_subtasks"
-            android:paddingRight="@dimen/horizontal_padding_rv_subtasks">
+            android:layout_marginBottom="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
 
             <TextView
                 android:id="@+id/tvDueAt"
@@ -105,15 +106,6 @@
             android:textColor="@android:color/white"
             android:textColorHint="#BDBDBD"
             android:textSize="12dp" />
-
-        <Button
-            android:id="@+id/dateButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="Set due date"
-            android:textColor="@android:color/white"
-            android:textSize="16dp" />
 
     </LinearLayout>
 

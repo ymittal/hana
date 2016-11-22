@@ -1,6 +1,7 @@
 package finalproject.csci205.com.ymca.view.task;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -26,12 +28,21 @@ import finalproject.csci205.com.ymca.view.task.item.SimpleDividerItemDecoration;
 /**
  * Created by ym012 on 11/16/2016.
  */
-public class DetailTaskFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class DetailTaskFragment extends Fragment
+        implements View.OnClickListener,
+        View.OnKeyListener,
+        DatePickerDialog.OnDateSetListener,
+        TimePickerDialog.OnTimeSetListener {
 
     public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
-    Calendar myCalendar = Calendar.getInstance();
     private DetailTaskPresenter detailTaskPresenter;
     private Task task;
+
+    private Calendar myCalendar = Calendar.getInstance();
+
+    private EditText etSubtask;
+    private ImageView addSubtaskBtn;
+    private ImageView dummyBtn;
 
     public DetailTaskFragment() {
     }
@@ -54,73 +65,20 @@ public class DetailTaskFragment extends Fragment implements View.OnClickListener
             detailTaskPresenter = new DetailTaskPresenter(this, task);
         }
 
-        initDatePicker(root);
-        setupSubtaskControls(root);
+        setupInterfaceComponents(root);
         initSubtaskList(root);
 
         return root;
     }
 
-    private void initDatePicker(View root) {
-        ImageView dummyBtn = (ImageView) root.findViewById(R.id.dummyBtn);
+    private void setupInterfaceComponents(View root) {
+        dummyBtn = (ImageView) root.findViewById(R.id.dummyBtn);
+        addSubtaskBtn = (ImageView) root.findViewById(R.id.addSubtaskBtn);
+        etSubtask = (EditText) root.findViewById(R.id.etSubtask);
+
         dummyBtn.setOnClickListener(this);
-    }
-
-    /**
-     * @param root
-     * @see <a href="http://stackoverflow.com/questions/8233586/android-execute-function-after-pressing-enter-for-edittext">
-     * </a>
-     */
-    private void setupSubtaskControls(final View root) {
-        final EditText etSubtask = (EditText) root.findViewById(R.id.etSubtask);
-        final ImageView addSubtaskBtn = (ImageView) root.findViewById(R.id.addSubtaskBtn);
-
-        etSubtask.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
-                    String sSubtask = etSubtask.getText().toString();
-                    if (!sSubtask.equals("")) {
-                        Subtask newSubtask = new Subtask(task.getId(), sSubtask);
-                        detailTaskPresenter.addSubtask(newSubtask);
-                        addSubtaskBtn.performClick();
-                        etSubtask.setText("");
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        addSubtaskBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (etSubtask.getVisibility() == View.GONE) {
-                    etSubtask.setVisibility(View.VISIBLE);
-                    etSubtask.requestFocus();
-                } else {
-                    etSubtask.setVisibility(View.GONE);
-                }
-            }
-        });
-
-//        dateButton = (Button) root.findViewById(R.id.dateButton);
-//        dateButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                MyDatePickerDialog dialog = new MyDatePickerDialog();
-//                dialog.setTargetFragment(dialog, REQUEST_CODE_QUICK);
-//                dialog.show(getFragmentManager(), "Select Date");
-//            }
-//        });
-//
-//
-//        calendar = Calendar.getInstance();
-//
-//        year = calendar.get(Calendar.YEAR);
-//        month = calendar.get(Calendar.MONTH);
-//        day = calendar.get(Calendar.DAY_OF_MONTH);
-//        showDate(year, month + 1, day);
+        addSubtaskBtn.setOnClickListener(this);
+        etSubtask.setOnKeyListener(this);
     }
 
     private void initSubtaskList(View root) {
@@ -131,15 +89,6 @@ public class DetailTaskFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int monthOfYear,
-                          int dayOfMonth) {
-        myCalendar.set(Calendar.YEAR, year);
-        myCalendar.set(Calendar.MONTH, monthOfYear);
-        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        Toast.makeText(getActivity(), myCalendar.getTime().toString(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.dummyBtn) {
             new DatePickerDialog(getContext(),
@@ -147,19 +96,61 @@ public class DetailTaskFragment extends Fragment implements View.OnClickListener
                     myCalendar.get(Calendar.YEAR),
                     myCalendar.get(Calendar.MONTH),
                     myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+        } else if (view.getId() == R.id.addSubtaskBtn) {
+            if (etSubtask.getVisibility() == View.GONE) {
+                etSubtask.setVisibility(View.VISIBLE);
+                etSubtask.requestFocus();
+            } else {
+                etSubtask.setVisibility(View.GONE);
+            }
         }
     }
 
-//    /**
-//     * Displays on the dateButton the given date in form MM/DD/YYYY
-//     *
-//     * @param year  Year to display
-//     * @param month Month to display
-//     * @param day   Day to display
-//     * @author Malachi
-//     */
-//    private void showDate(int year, int month, int day) {
-//        dateButton.setText(new StringBuilder().append(month).append("/")
-//                .append(day).append("/").append(year));
-//    }
+    /**
+     * @see <a href="http://stackoverflow.com/questions/8233586/android-execute-function-after-pressing-enter-for-edittext">
+     * </a>
+     */
+    @Override
+    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+        if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+            String sSubtask = etSubtask.getText().toString();
+            if (!sSubtask.equals("")) {
+                Subtask newSubtask = new Subtask(task.getId(), sSubtask);
+                detailTaskPresenter.addSubtask(newSubtask);
+                addSubtaskBtn.performClick();
+                etSubtask.setText("");
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param view
+     * @param year
+     * @param monthOfYear
+     * @param dayOfMonth
+     * @author Malachi
+     */
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                          int dayOfMonth) {
+        myCalendar.set(Calendar.YEAR, year);
+        myCalendar.set(Calendar.MONTH, monthOfYear);
+        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        new TimePickerDialog(getContext(),
+                this,
+                myCalendar.get(Calendar.HOUR_OF_DAY),
+                myCalendar.get(Calendar.MINUTE),
+                false).show();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+        myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        myCalendar.set(Calendar.MINUTE, minute);
+        Toast.makeText(getActivity(), myCalendar.getTime().toString(), Toast.LENGTH_SHORT).show();
+    }
 }
