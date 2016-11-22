@@ -5,6 +5,14 @@ package finalproject.csci205.com.countdown.Ults;
  */
 
 public class Constants {
+    //SERVICE
     public static final String STRINGEXTRA = "session time";
     public static final String VIEWEXTRA = "view callback";
+    //NOTIFICATION BROADCAST
+    public static final String START = "START";
+    public static final String PAUSE = "PAUSE";
+    public static final String CANCEL = "CANCEL";
+    //NOTIFICATION
+    public static final int NOTIFICATION_ID_CONSTANT = 123456789;
+    public static final int NOTIFICATION_ID = 1;
 }

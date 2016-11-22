@@ -135,9 +135,10 @@ public class CountDownService extends Service {
      * @author Charles
      */
     public void stopTimer() {
-        cdStart.cancel();
-        //cdStart.onFinish();
-        state = ServiceState.OTHER;
+        if (cdStart != null) {
+            cdStart.cancel();
+            state = ServiceState.OTHER;
+        }
     }
 
 
@@ -164,6 +165,8 @@ public class CountDownService extends Service {
     public ServiceState getState() {
         return state;
     }
+
+
     /**
      * Syncs current timer with a defined notification
      *
@@ -183,5 +186,6 @@ public class CountDownService extends Service {
             return CountDownService.this;
         }
     }
+
 
 }

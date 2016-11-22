@@ -15,5 +15,15 @@
 
     </finalproject.csci205.com.countdown.View.CountDownView>
 
+    <ImageButton
+        android:id="@+id/settingsButtonYo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_settings" />
+
 
 </RelativeLayout>
