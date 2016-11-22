@@ -37,7 +37,7 @@ public class Task extends SugarRecord implements Serializable {
         this.title = "";
         this.desc = "";
         this.isComplete = false;
-        this.dueDate = new Date();
+        this.dueDate = null;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Task extends SugarRecord implements Serializable {
         this.title = title;
         this.desc = "";
         this.isComplete = false;
-        this.dueDate = new Date();
+        this.dueDate = null;
     }
 
     public String getTitle() {

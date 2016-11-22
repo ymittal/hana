@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Subtask;
@@ -44,6 +44,7 @@ public class DetailTaskFragment extends Fragment
     private EditText etSubtask;
     private ImageView addSubtaskBtn;
     private ImageView dummyBtn;
+    private TextView tvDueDate;
 
     public DetailTaskFragment() {
     }
@@ -64,17 +65,17 @@ public class DetailTaskFragment extends Fragment
             task = (Task) bundle.getSerializable(SERIALIZED_TASK);
             getActivity().setTitle(task.getTitle());
             detailTaskPresenter = new DetailTaskPresenter(this, task);
-
-            Log.d("LOG_TAG", "Task due date: " + task.getDueDate().toString());
         }
 
         setupInterfaceComponents(root);
+        setReadableDueDate();
         initSubtaskList(root);
 
         return root;
     }
 
     private void setupInterfaceComponents(View root) {
+        tvDueDate = (TextView) root.findViewById(R.id.tvDueDate);
         dummyBtn = (ImageView) root.findViewById(R.id.dummyBtn);
         addSubtaskBtn = (ImageView) root.findViewById(R.id.addSubtaskBtn);
         etSubtask = (EditText) root.findViewById(R.id.etSubtask);
@@ -82,6 +83,15 @@ public class DetailTaskFragment extends Fragment
         dummyBtn.setOnClickListener(this);
         addSubtaskBtn.setOnClickListener(this);
         etSubtask.setOnKeyListener(this);
+    }
+
+    private void setReadableDueDate() {
+        Date dueDate = task.getDueDate();
+        if (dueDate == null) {
+            tvDueDate.setText("To be set");
+        } else {
+            tvDueDate.setText(dueDate.toString());
+        }
     }
 
     private void initSubtaskList(View root) {
@@ -150,18 +160,11 @@ public class DetailTaskFragment extends Fragment
                 false).show();
     }
 
-
     @Override
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
         myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         myCalendar.set(Calendar.MINUTE, minute);
         detailTaskPresenter.setTaskDate(task, myCalendar.getTime());
         setReadableDueDate();
-    }
-
-    private void setReadableDueDate() {
-        // TODO: make it readable
-        TextView tvDueDate = (TextView) getView().findViewById(R.id.tvDueDate);
-        tvDueDate.setText(task.getDueDate().toString());
     }
 }
