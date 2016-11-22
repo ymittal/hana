@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -150,11 +150,18 @@ public class DetailTaskFragment extends Fragment
                 false).show();
     }
 
+
     @Override
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
         myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         myCalendar.set(Calendar.MINUTE, minute);
-        Toast.makeText(getActivity(), myCalendar.getTime().toString(), Toast.LENGTH_SHORT).show();
         detailTaskPresenter.setTaskDate(task, myCalendar.getTime());
+        setReadableDueDate();
+    }
+
+    private void setReadableDueDate() {
+        // TODO: make it readable
+        TextView tvDueDate = (TextView) getView().findViewById(R.id.tvDueDate);
+        tvDueDate.setText(task.getDueDate().toString());
     }
 }
