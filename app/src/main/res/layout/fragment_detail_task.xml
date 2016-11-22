@@ -7,65 +7,100 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:paddingLeft="@dimen/horizontal_padding_rv_subtasks"
-        android:paddingRight="@dimen/horizontal_padding_rv_subtasks">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/ll2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:paddingBottom="@dimen/vertical_padding_rv_subtasks">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="List of subtasks"
-                android:textAllCaps="true"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/addSubtaskBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_action_add" />
-
-        </LinearLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilSubtask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/ll2"
-            android:textColorHint="#BDBDBD"
-            android:visibility="gone">
-
-            <EditText
-                android:id="@+id/etSubtask"
+            <RelativeLayout
+                android:id="@+id/relativeLayoutTop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="-4dp"
-                android:hint="Title"
-                android:inputType="textCapSentences|textNoSuggestions"
-                android:maxLines="1"
-                android:textColor="@android:color/white" />
+                android:layout_alignParentStart="true"
+                android:paddingLeft="@dimen/horizontal_padding_rv_subtasks"
+                android:paddingRight="@dimen/horizontal_padding_rv_subtasks">
 
-        </android.support.design.widget.TextInputLayout>
+                <LinearLayout
+                    android:id="@+id/ll2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:paddingBottom="@dimen/vertical_padding_rv_subtasks">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvSubtasks"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tilSubtask" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subtasks"
+                        android:textAllCaps="true"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
 
-    </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/addSubtaskBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_action_add" />
 
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilSubtask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/ll2"
+                    android:textColorHint="#BDBDBD"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/etSubtask"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-4dp"
+                        android:hint="title"
+                        android:inputType="textCapSentences|textNoSuggestions"
+                        android:maxLines="1"
+                        android:textColor="@android:color/white" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvSubtasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tilSubtask" />
+
+            </RelativeLayout>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description (optional)"
+                android:maxHeight="80dp"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarStyle="insideInset"
+                android:textColor="@android:color/white"
+                android:textColorHint="#BDBDBD"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/dateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="Set due date"
+                android:textColor="@android:color/white"
+                android:textSize="16dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
