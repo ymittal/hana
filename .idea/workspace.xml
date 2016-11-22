@@ -11,18 +11,17 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3790291-bbee-401b-8976-21c5fc40af3d" name="Default" comment="Need to update textview then its done">
+    <list default="true" id="b3790291-bbee-401b-8976-21c5fc40af3d" name="Default" comment="Updating working!">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/countdown/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/countdown/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownNotification.java" afterPath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownNotification.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownView.java" afterPath="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownView.java" />
     </list>
     <ignored path="ymca.iws" />
@@ -59,8 +58,8 @@
       <file leaf-file-name="PomodoroFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="55" column="76" selection-start-line="55" selection-start-column="76" selection-end-line="55" selection-end-column="76" />
+            <state relative-caret-position="217">
+              <caret line="57" column="51" selection-start-line="55" selection-start-column="8" selection-end-line="57" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -69,8 +68,8 @@
       <file leaf-file-name="CountDownView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-495">
-              <caret line="120" column="45" selection-start-line="120" selection-start-column="45" selection-end-line="120" selection-end-column="45" />
+            <state relative-caret-position="-6900">
+              <caret line="50" column="39" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,7 +81,7 @@
         <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownNotification.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="168">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2780,10 +2779,10 @@
         <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/Service/CountDownService.java" />
         <option value="$PROJECT_DIR$/countdown/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/NotificationClickedSyncListener.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java" />
         <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/Ults/Constants.java" />
         <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownNotification.java" />
         <option value="$PROJECT_DIR$/countdown/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java" />
         <option value="$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownView.java" />
       </list>
     </option>
@@ -3608,7 +3607,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479776030884</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Updating working!">
+      <created>1479784826548</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1479784826548</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -3643,7 +3649,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5077356" sideWeight="0.5028612" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50634694" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5049365" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30606487" sideWeight="0.47711015" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3206751" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3684,7 +3690,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="JUNIT" />
     <MESSAGE value="Got new full screen form working for filling out complete Task. Note Needs details implementation, and needs to be beautiful." />
     <MESSAGE value="Refactored the names" />
     <MESSAGE value="Interfaces" />
@@ -3709,7 +3714,8 @@
     <MESSAGE value="Lota test code for the notification" />
     <MESSAGE value="Progress" />
     <MESSAGE value="Need to update textview then its done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Need to update textview then its done" />
+    <MESSAGE value="Updating working!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating working!" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -4046,14 +4052,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="55" column="76" selection-start-line="55" selection-start-column="76" selection-end-line="55" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/countdown/src/main/AndroidManifest.xml">
       <provider editor-type-id="android-manifest">
         <state />
@@ -4068,15 +4066,23 @@
     <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownNotification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="57" column="51" selection-start-line="55" selection-start-column="8" selection-end-line="57" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/View/CountDownView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-495">
-          <caret line="120" column="45" selection-start-line="120" selection-start-column="45" selection-end-line="120" selection-end-column="45" />
+        <state relative-caret-position="-6900">
+          <caret line="50" column="39" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

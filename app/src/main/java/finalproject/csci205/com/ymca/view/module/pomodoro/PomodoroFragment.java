@@ -16,6 +16,7 @@ import android.widget.Toast;
 import finalproject.csci205.com.countdown.View.CountDownView;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
+import finalproject.csci205.com.ymca.view.NavActivity;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -54,6 +55,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
         countDownView.setSessionTime(1);//TODO GET FROM MODEL -- > PRESENTER
+        countDownView.setJumpTo(NavActivity.class);
         return root;
     }
 

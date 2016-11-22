@@ -42,7 +42,13 @@ import finalproject.csci205.com.countdown.Ults.ServiceState;
  * File: CountDownView
  * Description:
  * Homebrew CountDownView that defines a generic count down timer. Uses custom built
- * count down service
+ * count down service to keep track of ticking time. Deploys a notification that is inSync with
+ * said view!
+ *
+ * Example Usage:
+ countDownView = (CountDownView) root.findViewById(R.id...);
+ countDownView.setSessionTime(someSesstionTime);//
+ countDownView.setJumpTo(SomeActivity.class);
  * ****************************************
  */
 
@@ -53,7 +59,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
     private static CountDownView cdView;
     private final int REBINDSERVICE = 0;
-    //Notification
     private final int NOTIFICATION_ID = 1;
     private int sessionTime;
     private int startPauseCounter = 0;
@@ -63,9 +68,11 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     private ImageButton cancelPom;
     private LinearLayout timerContainer;
     private CountDownService cd;
+    //Notification
     private RemoteViews notificationView;
     private NotificationManager notificationManager;
     private Notification notification;
+    private Class jumpTo;
 
 
     public CountDownView(Context context) {
@@ -95,19 +102,12 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         timerContainer.setOnClickListener(this);
         cancelPom.setOnClickListener(this);
         cdView = this;
-        //Notification
-//        CountDownNotification notification =
-//                new CountDownNotification(getContext(), R.drawable.ic_pom
-//                        , sessionTime, this);//
-        //notificationProgress = (TextView) findViewById(R.id.ticker);
-
-
-        startNotification();
+        //startNotification();
     }
 
 
     /**
-     * Updates view to reflect accurate process
+     * Updates view and notification to reflect accurate process
      *
      * @param l -  time
      * @author Charles
@@ -137,10 +137,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
         if (cd != null) {
             if (view.getId() == timerContainer.getId()) {
-
                 resumeOrPause();
-
-
             } else if (view.getId() == cancelPom.getId()) {
                 Log.i("click", "CANCEL/END");
                 cancelPom.setVisibility(GONE);
@@ -158,14 +155,11 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      */
     private void resumeOrPause() {
         if (startPauseCounter == 0) { //Start
-            Log.i("click", "Start");
             cancelPom.setVisibility(VISIBLE);
             cd.startTimer();
         } else if (startPauseCounter % 2 != 0) { //Click to pause
-            Log.i("click", "Pause");
             cd.pauseTimer();
         } else { //Click to resume
-            Log.i("click", "Resume");
             cd.resume();
         }
         startPauseCounter++;
@@ -185,6 +179,11 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         mins.setText(minFor.format(date));
         seconds.setText("00");
         startPauseCounter = 0;
+
+        //Notification
+        notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + "00");
+        notificationManager.notify(Constants.NOTIFICATION_ID, notification);
+
     }
 
 
@@ -195,14 +194,11 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      */
     public void setSessionTime(int sessionTime) {
         this.sessionTime = sessionTime;
-        Log.d("SERVICE", "Service starting logic");
         CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
         if (isMyServiceRunning(CountDownService.class)) {
-            Log.d("SER", "service alive and well");
             getContext().bindService(i, this, REBINDSERVICE);
 
         } else {
-            Log.d("SER", "service no no bro, starting new one");
             getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
 
         }
@@ -277,12 +273,22 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      * Reset View.
      * @author Charles
      */
+
+    /**
+     * Handles countdown completion
+     *
+     * @author Charles
+     */
     @Override
     public void onCountFinished() {
         countCancelComplete();
     }
 
 
+    /**
+     * Series of Handles that keeps view and notification actions in sync
+     * @author
+     */
     @Override
     public void onStartClicked() {
         resumeOrPause();
@@ -298,6 +304,10 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         countCancelComplete();
     }
 
+    /**
+     * Creates notification that pairs the same action logic tied with the CountDownView
+     * @author Charles
+     */
     private void startNotification() {
         notificationManager =
                 (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -310,12 +320,12 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                 R.layout.cd_notification_layout);
 
         //the intent that is started when the notification is clicked (works)
-//        Intent notificationIntent = new Intent(context, CountDownService.class);
-//        PendingIntent pendingNotificationIntent = PendingIntent.getActivity(context, 0,
-//                notificationIntent, 0);
+        Intent notificationIntent = new Intent(getContext(), jumpTo);
+        PendingIntent pendingNotificationIntent = PendingIntent.getActivity(getContext(), 4,
+                notificationIntent, 0);
 
         notification.contentView = notificationView;
-        //notification.contentIntent = pendingNotificationIntent;
+        notification.contentIntent = pendingNotificationIntent;
         notification.flags |= Notification.FLAG_NO_CLEAR;
 
 
@@ -349,6 +359,17 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
     }
 
+    /**
+     * Defines which class the notification is to open when it is clicked
+     * Once that is complete, the notification is read to be deployed.
+     *
+     * @param jumpTo
+     * @author Charles
+     */
+    public void setJumpTo(Class jumpTo) {
+        this.jumpTo = jumpTo;
+        startNotification();
+    }
 
     /**
      * Broadcast Receiver that intercepts Notification Button Clicks
@@ -357,10 +378,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      */
     public static class NotificationButtonListener extends BroadcastReceiver {
         private final int NOTIFICATION_ID = 1;
-//
-//        public NotificationButtonListener(){
-//            super();
-//        }
 
         /**
          * Determines which button was clicked, then calls the correct listener on
@@ -373,7 +390,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
          */
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("onReceive", "Test");
             NotificationClickedSyncListener clickedSyncListener = cdView;
             String startPotential = intent.getStringExtra(Constants.START);
             String pausePotential = intent.getStringExtra(Constants.PAUSE);
@@ -387,7 +403,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                 NotificationManager notificationManager = (NotificationManager) context
                         .getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.cancel(NOTIFICATION_ID);
-                //TODO Get it to come back when user resumes timer
             }
         }
 
