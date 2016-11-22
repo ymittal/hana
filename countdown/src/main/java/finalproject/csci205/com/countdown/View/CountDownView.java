@@ -321,6 +321,8 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
         //the intent that is started when the notification is clicked (works)
         Intent notificationIntent = new Intent(getContext(), jumpTo);
+        notificationIntent.setAction(Intent.ACTION_MAIN);
+        notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         PendingIntent pendingNotificationIntent = PendingIntent.getActivity(getContext(), 4,
                 notificationIntent, 0);
 
