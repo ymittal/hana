@@ -36,6 +36,8 @@ public class DetailTaskFragment extends Fragment
         TimePickerDialog.OnTimeSetListener {
 
     public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
+    public static final int ROTATE_DEGREE_TO_OPEN = 45;
+    public static final int ROTATE_DEGREE_TO_CLOSE = 0;
     private DetailTaskPresenter detailTaskPresenter;
     private Task task;
 
@@ -101,6 +103,11 @@ public class DetailTaskFragment extends Fragment
         rvSubtasks.setAdapter(detailTaskPresenter.getSubtasksAdapter());
     }
 
+    /**
+     * @param view
+     * @see <a href="http://stackoverflow.com/questions/30209415/rotate-an-imagewith-animation">
+     * Stack Overflow - Rotate an Imagewith Animation</a>
+     */
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.dummyBtn) {
@@ -112,10 +119,12 @@ public class DetailTaskFragment extends Fragment
 
         } else if (view.getId() == R.id.addSubtaskBtn) {
             if (etSubtask.getVisibility() == View.GONE) {
+                addSubtaskBtn.animate().rotation(ROTATE_DEGREE_TO_OPEN).start();
                 etSubtask.setVisibility(View.VISIBLE);
                 etSubtask.requestFocus();
             } else {
                 etSubtask.setVisibility(View.GONE);
+                addSubtaskBtn.animate().rotation(ROTATE_DEGREE_TO_CLOSE).start();
             }
         }
     }
