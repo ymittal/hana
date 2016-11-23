@@ -15,7 +15,6 @@
         <receiver
             android:name=".View.CountDownView$NotificationButtonListener"
             android:exported="true">
-
         </receiver>
 
         <intent-filter>
