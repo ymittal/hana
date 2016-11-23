@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Subtask;
-import finalproject.csci205.com.ymca.presenter.module.DetailTaskPresenter;
+import finalproject.csci205.com.ymca.presenter.DetailTaskPresenter;
 
 public class SubtasksAdapter extends RecyclerView.Adapter<SubtaskViewHolder> {
 

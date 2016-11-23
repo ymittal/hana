@@ -9,7 +9,7 @@ import android.widget.CompoundButton;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
-import finalproject.csci205.com.ymca.presenter.module.GTDPresenter;
+import finalproject.csci205.com.ymca.presenter.GTDPresenter;
 import finalproject.csci205.com.ymca.view.gesture.TaskTouchHelperAdapter;
 
 /**

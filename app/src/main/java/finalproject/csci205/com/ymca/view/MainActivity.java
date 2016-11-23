@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import java.util.Random;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.view.util.SharedPreferenceUtil;
+import finalproject.csci205.com.ymca.util.SharedPreferenceUtil;
 
 /**
  * Class that holds the splash screen. Manages the logic for first time events

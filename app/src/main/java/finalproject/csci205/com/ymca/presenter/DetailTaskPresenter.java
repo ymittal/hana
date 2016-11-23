@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.presenter.module;
+package finalproject.csci205.com.ymca.presenter;
 
 import java.util.Date;
 import java.util.List;

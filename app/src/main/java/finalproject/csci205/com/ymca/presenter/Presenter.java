@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.presenter.module;
+package finalproject.csci205.com.ymca.presenter;
 
 import android.support.v4.app.Fragment;
 

@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 
 import finalproject.csci205.com.countdown.View.CountDownView;
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.presenter.module.PomodoroPresenter;
+import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 import finalproject.csci205.com.ymca.view.MainActivity;
 
 

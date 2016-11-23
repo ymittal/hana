@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.util;
+package finalproject.csci205.com.ymca.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
