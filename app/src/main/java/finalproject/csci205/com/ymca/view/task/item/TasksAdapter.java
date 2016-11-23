@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.GTDPresenter;
+import finalproject.csci205.com.ymca.util.DateTimeUtil;
 import finalproject.csci205.com.ymca.view.gesture.TaskTouchHelperAdapter;
 
 /**
@@ -54,9 +55,12 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, int position) {
         final Task task = gtdPresenter.getTasks().get(position);
-        holder.tvTask.setText(task.getTitle());
 
+        holder.tvTask.setText(task.getTitle());
         holder.checkboxTask.setChecked(task.isComplete());
+        holder.tvTimeLeft.setText(DateTimeUtil.convertDateToTimeRemaining(task.getDueDate()));
+
+        // updates task completion status in Database
         holder.checkboxTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isComplete) {
@@ -64,10 +68,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
             }
         });
 
-        /**
-         * opens {@link finalproject.csci205.com.ymca.view.task.DetailTaskFragment} when recyclerview
-         * item is clicked
-         */
+        // opens DetailTaskFragment when recyclervier item is clicked
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

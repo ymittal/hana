@@ -10,6 +10,7 @@ import finalproject.csci205.com.ymca.R;
 
 /**
  * A container class {@link RecyclerView.ViewHolder} to hold view elements for a task
+ *
  * @author Yash
  */
 public class TaskViewHolder extends RecyclerView.ViewHolder {
@@ -22,6 +23,10 @@ public class TaskViewHolder extends RecyclerView.ViewHolder {
      * {@link CheckBox} for whether task has been completed or not
      */
     public final CheckBox checkboxTask;
+    /**
+     * {@link TextView} for time remaining
+     */
+    public final TextView tvTimeLeft;
 
     /**
      * @param itemView view containing task view elements
@@ -30,5 +35,6 @@ public class TaskViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         tvTask = (TextView) itemView.findViewById(R.id.tvTask);
         checkboxTask = (CheckBox) itemView.findViewById(R.id.checkboxTask);
+        tvTimeLeft = (TextView) itemView.findViewById(R.id.tvTimeLeft);
     }
 }

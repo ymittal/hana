@@ -24,6 +24,7 @@ import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Subtask;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.DetailTaskPresenter;
+import finalproject.csci205.com.ymca.util.DateTimeUtil;
 import finalproject.csci205.com.ymca.view.task.item.SimpleDividerItemDecoration;
 
 /**
@@ -90,7 +91,7 @@ public class DetailTaskFragment extends Fragment
         if (dueDate == null) {
             tvDueDate.setText("To be set");
         } else {
-            tvDueDate.setText(dueDate.toString());
+            tvDueDate.setText(DateTimeUtil.getReadableDate(dueDate));
         }
     }
 
