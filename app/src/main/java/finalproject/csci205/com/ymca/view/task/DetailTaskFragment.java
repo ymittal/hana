@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Subtask;
@@ -87,11 +86,10 @@ public class DetailTaskFragment extends Fragment
     }
 
     private void setReadableDueDate() {
-        Date dueDate = task.getDueDate();
-        if (dueDate == null) {
+        if (task.getDueDate() == null) {
             tvDueDate.setText("To be set");
         } else {
-            tvDueDate.setText(DateTimeUtil.getReadableDate(dueDate));
+            tvDueDate.setText(DateTimeUtil.getReadableDate(task.getDueDate()));
         }
     }
 

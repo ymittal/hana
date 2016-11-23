@@ -58,7 +58,12 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
 
         holder.tvTask.setText(task.getTitle());
         holder.checkboxTask.setChecked(task.isComplete());
-        holder.tvTimeLeft.setText(DateTimeUtil.convertDateToTimeRemaining(task.getDueDate()));
+
+        if (task.getDueDate() == null) {
+            holder.tvTimeLeft.setText("Tap to set a due date");
+        } else {
+            holder.tvTimeLeft.setText(DateTimeUtil.convertDateToTimeRemaining(task.getDueDate()));
+        }
 
         // updates task completion status in Database
         holder.checkboxTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -32,8 +32,10 @@ public class DateTimeUtil {
     }
 
     /**
+     * Computes time remaining until date and formats it in a user-friendly notation
+     *
      * @param date {@link Date} object
-     * @return
+     * @return time remaining in a user-friendly notation
      * @author Yash
      */
     public static String convertDateToTimeRemaining(Date date) {
@@ -62,9 +64,12 @@ public class DateTimeUtil {
     }
 
     /**
-     * @param period
-     * @param unit
-     * @return
+     * Formats time period as would appear in a user-friendly date notation,
+     * considers the plurality of time of period
+     *
+     * @param period period of time (number of days or hours or minutes)
+     * @param unit   unit of time (day or hour or minute)
+     * @return formatted time period
      * @author Yash
      */
     private static String formatTimeUnit(int period, String unit) {
