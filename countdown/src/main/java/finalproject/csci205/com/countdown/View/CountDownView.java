@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.os.Vibrator;
+import android.support.v4.app.NotificationCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -285,6 +287,21 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     @Override
     public void onCountFinished() {
         countCancelComplete();
+        Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(1000);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(getContext())
+                        .setSmallIcon(R.drawable.ic_pom)
+                        .setContentTitle("Timer is up!")
+                        .setContentText("NOW GET BACK TO WORK");
+
+        int mNotificationId = 001;
+
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
     }
 
 
