@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
+import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
 import finalproject.csci205.com.ymca.view.task.DetailTaskFragment;
 import finalproject.csci205.com.ymca.view.task.GTDFragment;
 
@@ -143,7 +144,10 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Handles back button press
-     *
+     * Case 1: App Drawer in Activity
+     * Case 2: Detail to GTDFragment
+     * Case 3: Pomodoro Settings back button
+     * Case 4: Default
      * @author Charles and Yash
      */
     @Override
@@ -156,9 +160,12 @@ public class NavActivity extends AppCompatActivity implements
                 instanceof DetailTaskFragment) {
             initFragment(new GTDFragment());
 
+        } else if (getSupportFragmentManager().findFragmentById(R.id.content_nav)
+                instanceof PomodoroSettingsFragment) {
+            ((PomodoroSettingsFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.content_nav)).handleBackBtnPressed();
         } else {
             super.onBackPressed();
-
         }
     }
 

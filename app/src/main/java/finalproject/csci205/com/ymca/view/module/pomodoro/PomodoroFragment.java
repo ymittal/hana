@@ -14,15 +14,17 @@ import android.widget.ImageButton;
 
 import finalproject.csci205.com.countdown.View.CountDownView;
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 import finalproject.csci205.com.ymca.view.MainActivity;
 
 
-public class PomodoroFragment extends Fragment implements View.OnClickListener {
+public class PomodoroFragment extends Fragment implements View.OnClickListener, OnBackStackListener {
 
     private OnFragmentInteractionListener mListener;
     private CountDownView countDownView;
     private ImageButton settingsBtn;
+    private PomodoroPresenter pomodoroPresenter;
 
     public PomodoroFragment() {
     }
@@ -48,11 +50,18 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        final PomodoroPresenter pomodoroPresenter = new PomodoroPresenter(this);
+        pomodoroPresenter = new PomodoroPresenter(this);
+        PomodoroSettings pomodoroSettings = pomodoroPresenter.getSavedPomSettings();
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
-        countDownView.setSessionTime(1);//TODO GET FROM MODEL -- > PRESENTER
+        //pomodoroPresenter.setCountDownView(countDownView);
+
+        if (pomodoroSettings != null) {
+            countDownView.setSessionTime(pomodoroSettings.getSessionTime());
+        } else {
+            countDownView.setSessionTime(0);
+        }
+
         countDownView.setJumpTo(MainActivity.class);
         settingsBtn = (ImageButton) root.findViewById(R.id.settingsButtonYo);
         settingsBtn.setOnClickListener(this);
@@ -87,18 +96,35 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == settingsBtn.getId()) {
-            FragmentManager fragmentManager = getFragmentManager();
-            PomodoroSettingsDialogFragment pomodoroSettingsDialogFragment = new PomodoroSettingsDialogFragment();
-            // The device is smaller, so show the fragment fullscreen
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            // For a little polish, specify a transition animation
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            // To make it fullscreen, use the 'content' root view as the container
-            // for the fragment, which is always the root view for the activity
-            transaction.add(R.id.content_nav, pomodoroSettingsDialogFragment)
-                    .addToBackStack(null).commit();
-            settingsBtn.setVisibility(View.GONE); //TODO Get view to come back, over-ride back btn
+            showSettings();
         }
+    }
+
+    /**
+     * Overlays a new fragment to gather settings
+     *
+     * @author Charles
+     */
+    private void showSettings() {
+        FragmentManager fragmentManager = getFragmentManager();
+        PomodoroSettingsFragment pomodoroSettingsDialogFragment = new PomodoroSettingsFragment();
+        pomodoroSettingsDialogFragment.setOnBackStackListener(this);
+        pomodoroSettingsDialogFragment.setCdRef(countDownView);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.add(R.id.content_nav, pomodoroSettingsDialogFragment)
+                .addToBackStack(null).commit();
+        settingsBtn.setVisibility(View.GONE);
+    }
+
+    /**
+     * OnBackStackListener
+     *
+     * @author Charles
+     */
+    @Override
+    public void onViewReturn() {
+        settingsBtn.setVisibility(View.VISIBLE);
     }
 
     public interface OnFragmentInteractionListener {

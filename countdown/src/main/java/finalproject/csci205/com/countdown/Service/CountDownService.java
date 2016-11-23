@@ -59,6 +59,12 @@ public class CountDownService extends Service {
         return Service.START_NOT_STICKY;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopSelf();
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -130,12 +136,17 @@ public class CountDownService extends Service {
 
     }
 
+    public void setSessionTime(int sessionTime) {
+        this.sessionTime = sessionTime;
+    }
+
     /**
      * Stops timer, sends out Finish Msg.
      * @author Charles
      */
     public void stopTimer() {
         if (cdStart != null) {
+
             cdStart.cancel();
             state = ServiceState.OTHER;
         }

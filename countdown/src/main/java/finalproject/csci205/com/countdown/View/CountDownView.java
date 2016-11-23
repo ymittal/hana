@@ -184,11 +184,14 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + "00");
         notificationManager.notify(Constants.NOTIFICATION_ID, notification);
 
+        cd.stopSelf();
+
     }
 
 
     /**
      * Sets the session time from data model, then inits the data.
+     * Updates view
      * Cannot create a service without the known session time!
      * @param sessionTime
      */
@@ -371,6 +374,20 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     public void setJumpTo(Class jumpTo) {
         this.jumpTo = jumpTo;
         startNotification();
+    }
+
+    public void setSessionTimeOverride(int time) {
+        this.sessionTime = time;
+        CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
+        if (isMyServiceRunning(CountDownService.class)) {
+            cd.setSessionTime(time);
+            //getContext().stopService(i);
+            //getContext().bindService(i, this, REBINDSERVICE);
+
+        } else {
+            getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
+
+        }
     }
 
     /**
