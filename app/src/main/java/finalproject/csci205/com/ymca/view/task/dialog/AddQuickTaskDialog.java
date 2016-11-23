@@ -59,7 +59,7 @@ public class AddQuickTaskDialog extends DialogFragment {
      *
      * @param view   view
      * @param dialog alert dialog
-     * @author Yash
+     * @author YMCA
      */
     private void addOnClickListenersToButtons(View view, final AlertDialog dialog) {
         final EditText etAddTask = (EditText) view.findViewById(R.id.etAddTask);

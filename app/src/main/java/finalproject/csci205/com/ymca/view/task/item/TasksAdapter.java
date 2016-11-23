@@ -15,6 +15,9 @@ import finalproject.csci205.com.ymca.view.gesture.TaskTouchHelperAdapter;
 
 /**
  * An adapter class {@link RecyclerView.Adapter} to bind task list with view
+ *
+ * @see <a href="https://github.com/codepath/android_guides/wiki/Using-the-RecyclerView">
+ * GitHub - Using the RecyclerView</a>
  */
 public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implements TaskTouchHelperAdapter {
 
@@ -59,6 +62,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         holder.tvTask.setText(task.getTitle());
         holder.checkboxTask.setChecked(task.isComplete());
 
+        // sets time remaining if task due date has been defined by user
         if (task.getDueDate() == null) {
             holder.tvTimeLeft.setText("Tap to set a due date");
         } else {
@@ -104,6 +108,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
     public void onItemDismiss(final int position, RecyclerView recyclerView) {
         gtdPresenter.removeTask(position);
 
+        // allows user to undo task delete
         Snackbar snackbar = Snackbar
                 .make(recyclerView, "Item has been deleted", Snackbar.LENGTH_LONG)
                 .setAction("UNDO", new View.OnClickListener() {

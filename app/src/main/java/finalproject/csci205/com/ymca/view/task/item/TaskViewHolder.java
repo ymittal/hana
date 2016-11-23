@@ -12,6 +12,8 @@ import finalproject.csci205.com.ymca.R;
  * A container class {@link RecyclerView.ViewHolder} to hold view elements for a task
  *
  * @author Yash
+ * @see <a href="https://github.com/codepath/android_guides/wiki/Using-the-RecyclerView">
+ * GitHub - Using the RecyclerView</a>
  */
 public class TaskViewHolder extends RecyclerView.ViewHolder {
 

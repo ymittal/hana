@@ -15,37 +15,39 @@ import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.util.SharedPreferenceUtil;
 
 /**
- * Class that holds the splash screen. Manages the logic for first time events
- * initial quote as well as starting of the tutorial)
+ * {@link android.app.Activity} to hold the splash screen, manages logic for
+ * first time events
  */
 public class MainActivity extends AppCompatActivity {
+
     /**
-     * The amount of time before the splash screen calls the next screen
+     * Amount of time in milliseconds before the splash screen
+     * calls the next screen
      */
     private final int DELAY_MILLIS = 1000;
     /**
-     * The number of optional backgrounds in the application
+     * Number of optional backgrounds in the application
      */
     private final int numOfBackgrounds = 3;
 
     /**
-     * Method within the activity lifecycle that is called on the creation of the activity.
+     * Sets up activity user interface and controls
      *
      * @param savedInstanceState
+     * @author Aleks
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Makes the top status bar transparent. May change...
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+        // makes the status bar transparent
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         loadBackground();
 
-        //Login button that shows up on the bottom of the screen only the first time the user uses the app
         Button tempLogin = (Button) findViewById(R.id.tempLogin);
 
-        //if first time...
+        // checks if user has already opened the app
         if (!SharedPreferenceUtil.getIsOpen(getApplicationContext())) {
             tempLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                     goToNavActivity();
                 }
             });
-            //else don't show button
         } else {
             tempLogin.setVisibility(View.INVISIBLE);
             Handler handler = new Handler();
@@ -63,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
                     goToNavActivity();
                 }
             }, DELAY_MILLIS);
-
         }
-
     }
 
     /**
      * Handles the logic needed to go to the NavActivity
+     *
+     * @author Aleks
      */
     private void goToNavActivity() {
         Intent i = new Intent(MainActivity.this, NavActivity.class);
@@ -85,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadBackground() {
         RelativeLayout thisRL = (RelativeLayout) findViewById(R.id.relativeLayout);
 
-        //Generate a random number between 0 and the numOfBackgrounds available, and randomly select the splash background.
-        //Needs to be more dynamic
+        // randomly chooses a background image for the splash screen
         int r = new Random().nextInt(numOfBackgrounds);
         switch (r) {
             case 0:
@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 thisRL.setBackgroundResource(R.drawable.splash_map);
                 break;
+            default:
+                thisRL.setBackgroundResource(R.drawable.splash_notebook);
         }
     }
 }

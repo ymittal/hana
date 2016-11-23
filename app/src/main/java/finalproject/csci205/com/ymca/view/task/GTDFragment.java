@@ -22,29 +22,42 @@ import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
 import finalproject.csci205.com.ymca.view.task.item.SimpleDividerItemDecoration;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GTDFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GTDFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * A fragment to display a list of {@link Task}s added by a user. Activities containing
+ * this fragment must implement {@link GTDFragment.OnFragmentInteractionListener}
+ * interface to handle interaction events.
  */
 public class GTDFragment extends Fragment implements View.OnClickListener {
 
+    /**
+     * Constant to define request code for {@link AddQuickTaskDialog}'s result
+     */
     public static final int REQUEST_CODE_QUICK = 1;
+    /**
+     * Name of {@link Task} title passed from {@link AddQuickTaskDialog}
+     */
     public static final String NEW_TASK = "NEW_TASK";
 
+    /**
+     * {@link OnFragmentInteractionListener} to setup communication between current
+     * fragment and container activities
+     */
     private OnFragmentInteractionListener mListener;
+    /**
+     * Presenter for {@link GTDFragment}
+     */
     private GTDPresenter gtdPresenter;
 
+    /**
+     * Required empty constructor
+     */
     public GTDFragment() {
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Use this factory method to create a new instance of {@link GTDFragment}
      *
-     * @return A new instance of fragment GTDFragment.
+     * @return A new instance of {@link GTDFragment}
+     * @author Charles
      */
     public static GTDFragment newInstance() {
         GTDFragment fragment = new GTDFragment();
@@ -53,12 +66,27 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
         return fragment;
     }
 
+    /**
+     * Sets up title of {@link GTDFragment}
+     *
+     * @param savedInstanceState
+     * @author Charles and Yash
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle("Task List");
     }
 
+    /**
+     * Sets up fragment user interface and controls
+     *
+     * @param inflater           {@link LayoutInflater} to inflate views inside fragment
+     * @param container          parent view encapsulating the fragment
+     * @param savedInstanceState
+     * @return view for the fragment interface
+     * @author Yash and Charles
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_gtd, container, false);
@@ -73,10 +101,11 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
 
 
     /**
-     * Requests the TaskAdapter from Presenter, set's up view and corresponding
-     * functionality that occurs with user interaction.
+     * Requests {@link finalproject.csci205.com.ymca.view.task.item.TasksAdapter} from
+     * {@link GTDPresenter}, sets up view and gesture functionality associated with recyclerview
+     * items
      *
-     * @param root
+     * @param root root view for the fragment interface
      * @author Charles and Yash
      */
     private void initTaskList(View root) {
@@ -90,6 +119,63 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
                 new TaskItemTouchTouchHelperCallback(gtdPresenter.getTasksAdapter(), rvTasks);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(rvTasks);
+    }
+
+    /**
+     * Handles click events on views implementing {@link android.view.View.OnClickListener}
+     *
+     * @param view clicked view
+     * @author Charles
+     */
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.fab) {
+
+            // shows a dialog box to quickly add a task or extend the
+            // dialog to a full task form
+            AddQuickTaskDialog dialog = new AddQuickTaskDialog();
+            dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
+            dialog.show(getFragmentManager(), "Add Task");
+
+        }
+    }
+
+
+    /**
+     * Handles pending result when user interacts with a dialog spawned from the view,
+     * stores task when user indicates such
+     *
+     * @param requestCode request code supplied by fragment
+     * @param resultCode  result code supplied by {@link AddQuickTaskDialog}
+     * @param data        {@link Intent} object containing {@link Task} data
+     * @author Charles and Yash
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE_QUICK:
+                if (resultCode == Activity.RESULT_CANCELED) {
+                    addNewTask(data);
+                } else if (resultCode == Activity.RESULT_OK) {
+                    Task newTask = addNewTask(data);
+                    gtdPresenter.openDetailedTaskFragment(newTask);
+                }
+                break;
+        }
+    }
+
+    /**
+     * Adds new task through {@link GTDPresenter}
+     *
+     * @param data {@link Intent} object containing {@link Task} data
+     * @return newly added {@link Task}
+     * @author Charles and Yash
+     */
+    private Task addNewTask(Intent data) {
+        String sNewTask = data.getExtras().getString(NEW_TASK);
+        Task newTask = new Task(sNewTask);
+        gtdPresenter.addTask(newTask, true);
+        return newTask;
     }
 
     @Override
@@ -110,68 +196,13 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     }
 
     /**
-     * Handles view actions between the user, and the defined response depending on the
-     * object defined to the OnClickListener.
-     *
-     * @param view
-     * @author Charles
-     */
-    @Override
-    public void onClick(View view) {
-        /*
-           Responses with a dialog box that gives the user a choice of a quick task,
-           or the option to extend it to the full task form.
-
-           This fragment will handle the transition to display the dialog box.
-         */
-        if (view.getId() == R.id.fab) {
-            AddQuickTaskDialog dialog = new AddQuickTaskDialog();
-            dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
-            dialog.show(getFragmentManager(), "Add Task");
-
-        }
-    }
-
-
-    /**
-     * Handle's the pending result when user interacts with a dialog spawned from the view.
-     * Stores task when user indicates such.
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     * @author Charles and Yash
-     */
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_CODE_QUICK:
-                if (resultCode == Activity.RESULT_CANCELED) {
-                    addNewTask(data);
-                } else if (resultCode == Activity.RESULT_OK) {
-                    Task newTask = addNewTask(data);
-                    gtdPresenter.openDetailedTaskFragment(newTask);
-                }
-                break;
-        }
-    }
-
-    private Task addNewTask(Intent data) {
-        String sNewTask = data.getExtras().getString(NEW_TASK);
-        Task newTask = new Task(sNewTask);
-        gtdPresenter.addTask(newTask, true);
-        return newTask;
-    }
-
-    /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     *
+     * @see <a href="http://developer.android.com/training/basics/fragments/communicating.html">
+     * Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
