@@ -1,6 +1,7 @@
 package finalproject.csci205.com.ymca.view;
 
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
@@ -44,14 +47,34 @@ public class NavActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = getDrawerToggle(toolbar);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
+    }
+
+    /**
+     * @param toolbar
+     * @return
+     * @see <a href="http://stackoverflow.com/questions/17515839/navigation-drawer-hide-keyboard-when-ondraweropened">
+     * Stack Overflow - navigation drawer hide keyboard when onDrawerOpened</a>
+     */
+    private ActionBarDrawerToggle getDrawerToggle(final Toolbar toolbar) {
+        return new ActionBarDrawerToggle(this,
+                drawer,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+        };
     }
 
     private void initFragment(Fragment newFragment) {

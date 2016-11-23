@@ -90,6 +90,7 @@ public class DetailTaskFragment extends Fragment
             tvDueDate.setText("To be set");
         } else {
             tvDueDate.setText(DateTimeUtil.getReadableDate(task.getDueDate()));
+            myCalendar.setTime(task.getDueDate());
         }
     }
 
