@@ -71,6 +71,8 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     private TextView seconds;
     private ImageButton cancelPom;
     private LinearLayout timerContainer;
+
+
     private CountDownService cd;
     //Notification
     private RemoteViews notificationView;
@@ -421,6 +423,11 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
         }
     }
+
+    public CountDownService getCd() {
+        return cd;
+    }
+
 
     /**
      * Broadcast Receiver that intercepts Notification Button Clicks

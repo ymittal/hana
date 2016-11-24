@@ -5,6 +5,5 @@ package finalproject.csci205.com.countdown.Ults;
  */
 
 public enum ServiceState {
-
     ISRUNNING, PAUSED, OTHER
 }

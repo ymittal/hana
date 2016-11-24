@@ -1,6 +1,7 @@
 package finalproject.csci205.com.ymca.view;
 
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.util.Constants;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
 import finalproject.csci205.com.ymca.view.task.DetailTaskFragment;
@@ -94,6 +96,20 @@ public class NavActivity extends AppCompatActivity implements
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
             }
         };
+    }
+
+    /**
+     * Destroys the Notification Spawned from CountDownView
+     *
+     * @author Charles
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext()
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(Constants.NOTIFICATION_ID);
+
     }
 
     /**
