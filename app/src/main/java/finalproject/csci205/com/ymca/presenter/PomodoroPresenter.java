@@ -3,8 +3,9 @@ package finalproject.csci205.com.ymca.presenter;
 import android.content.Context;
 import android.widget.Toast;
 
-import finalproject.csci205.com.countdown.View.CountDownView;
+import finalproject.csci205.com.countdown.Service.CountDownListener;
 import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
+import finalproject.csci205.com.ymca.view.module.pomodoro.CountDownView;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
 
@@ -12,7 +13,7 @@ import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragme
  * Created by ceh024 on 11/6/16.
  */
 
-public class PomodoroPresenter {
+public class PomodoroPresenter implements CountDownListener {
 
     private final long DB_ID = 4l;
     private CountDownView cdView;
@@ -24,6 +25,8 @@ public class PomodoroPresenter {
     private int breakTime;
     private int numBreaks;
     private int longBreak;
+
+    private int cycleCounter;
 
 
     public PomodoroPresenter(PomodoroFragment p) {
@@ -90,4 +93,17 @@ public class PomodoroPresenter {
         this.cdView = cdView;
     }
 
+    public void incCounter() {
+        cycleCounter++;
+    }
+
+    @Override
+    public void countdownResult(long l) {
+
+    }
+
+    @Override
+    public void onCountFinished() {
+        incCounter();
+    }
 }

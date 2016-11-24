@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import finalproject.csci205.com.countdown.View.CountDownView;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
@@ -54,17 +53,17 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         PomodoroSettings pomodoroSettings = pomodoroPresenter.getSavedPomSettings();
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
-        //pomodoroPresenter.setCountDownView(countDownView);
 
         if (pomodoroSettings != null) {
             countDownView.setSessionTime(pomodoroSettings.getSessionTime());
         } else {
-            countDownView.setSessionTime(0);
-        }
 
+            countDownView.setSessionTime(0); //Temp Config!
+        }
         countDownView.setJumpTo(MainActivity.class);
         settingsBtn = (ImageButton) root.findViewById(R.id.settingsButtonYo);
         settingsBtn.setOnClickListener(this);
+
 
         return root;
     }

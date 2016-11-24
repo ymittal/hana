@@ -13,7 +13,7 @@
 
         </service>
         <receiver
-            android:name=".View.CountDownView$NotificationButtonListener"
+            android:name="finalproject.csci205.com.ymca.view.module.pomodoro.CountDownView$NotificationButtonListener"
             android:exported="true">
         </receiver>
 
