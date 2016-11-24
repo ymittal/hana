@@ -454,7 +454,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                 clickedSyncListener.onStopClicked();
                 NotificationManager notificationManager = (NotificationManager) context
                         .getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.cancel(NOTIFICATION_ID);
+                notificationManager.cancel(Constants.NOTIFICATION_ID);
             }
         }
 

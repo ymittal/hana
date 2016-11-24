@@ -1,6 +1,7 @@
 package finalproject.csci205.com.ymca.view.module.pomodoro;
 
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
+import finalproject.csci205.com.ymca.util.Constants;
 import finalproject.csci205.com.ymca.view.MainActivity;
 
 
@@ -66,6 +68,14 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
 
 
         return root;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        NotificationManager notificationManager = (NotificationManager) getContext()
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(Constants.NOTIFICATION_ID);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
