@@ -1,7 +1,6 @@
 package finalproject.csci205.com.ymca.view;
 
 
-import android.app.NotificationManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -106,10 +105,7 @@ public class NavActivity extends AppCompatActivity implements
     @Override
     public void onDestroy() {
         super.onDestroy();
-        NotificationManager notificationManager = (NotificationManager) getApplicationContext()
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(Constants.NOTIFICATION_ID);
-
+        Constants.destroyPomNotification(getApplicationContext());
     }
 
     /**

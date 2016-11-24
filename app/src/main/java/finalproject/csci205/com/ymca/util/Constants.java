@@ -1,5 +1,8 @@
 package finalproject.csci205.com.ymca.util;
 
+import android.app.NotificationManager;
+import android.content.Context;
+
 /**
  * Created by ceh024 on 11/24/16.
  */
@@ -12,4 +15,10 @@ public class Constants {
     //NOTIFICATION
     public static final int NOTIFICATION_ID_CONSTANT = 123456789;
     public static final int NOTIFICATION_ID = 1;
+
+    public static void destroyPomNotification(Context context) {
+        NotificationManager notificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(NOTIFICATION_ID);
+    }
 }

@@ -12,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import finalproject.csci205.com.countdown.Ults.ServiceState;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
+import finalproject.csci205.com.ymca.util.Constants;
 import finalproject.csci205.com.ymca.view.MainActivity;
 
 
@@ -68,6 +70,13 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         return root;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (countDownView.getCd().getState() == ServiceState.OTHER) {
+            Constants.destroyPomNotification(getContext());
+        }
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
