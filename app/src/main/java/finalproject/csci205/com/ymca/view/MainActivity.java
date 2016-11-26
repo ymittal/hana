@@ -6,8 +6,12 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -24,17 +28,19 @@ public class MainActivity extends AppCompatActivity {
      * Amount of time in milliseconds before the splash screen
      * calls the next screen
      */
-    private final int DELAY_MILLIS = 1000;
+    private final int DELAY_MILLIS = 1500;
     /**
      * Number of optional backgrounds in the application
      */
     private final int numOfBackgrounds = 3;
 
+    private final int durationMillis = 5000;
+
     /**
      * Sets up activity user interface and controls
      *
      * @param savedInstanceState
-     * @author Aleks
+     * @author Aleks and Malachi
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +51,37 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         loadBackground();
 
-        Button tempLogin = (Button) findViewById(R.id.tempLogin);
+        //The TextView that takes the user to the next screen
+        final TextView loginView = (TextView) findViewById(R.id.beginButton);
+        final TextView quote = (TextView) findViewById(R.id.quote);
+        final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
 
         // checks if user has already opened the app
         if (!SharedPreferenceUtil.getIsOpen(getApplicationContext())) {
-            tempLogin.setOnClickListener(new View.OnClickListener() {
+
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+                    alphaAnimation.setDuration(durationMillis);
+
+                    Animation translationAnimation = new TranslateAnimation(0.0f, 0.0f, -100.0f, 0.0f);
+                    translationAnimation.setDuration(durationMillis);
+
+                    AnimationSet animationSet = new AnimationSet(false);
+                    animationSet.addAnimation(alphaAnimation);
+                    animationSet.addAnimation(translationAnimation);
+
+                    loginView.startAnimation(animationSet);
+                    loginView.setAlpha(1.0f);
+                }
+
+            }, DELAY_MILLIS);
+
+
+            loginView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     SharedPreferenceUtil.setPreferenceIsOpen(getApplicationContext(), true);
@@ -57,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } else {
-            tempLogin.setVisibility(View.INVISIBLE);
+            quote.setVisibility(View.INVISIBLE);
+            loginView.setVisibility(View.INVISIBLE);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
