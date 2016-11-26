@@ -23,7 +23,6 @@ import android.os.Binder;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import finalproject.csci205.com.countdown.Ults.Constants;
 import finalproject.csci205.com.countdown.Ults.ServiceState;
@@ -81,7 +80,6 @@ public class CountDownService extends Service {
             @Override
             public void onTick(long l) {
                 countDownListener.countdownResult(l);
-                Log.d("SERVICE", String.valueOf(l));
                 storedTime = l;
             }
 
@@ -106,14 +104,12 @@ public class CountDownService extends Service {
                 @Override
                 public void onTick(long l) {
                     countDownListener.countdownResult(l);
-                    Log.d("SERVICE", String.valueOf(l));
                     storedTime = l;
                 }
 
                 @Override
                 public void onFinish() {
                     countDownListener.onCountFinished();
-
                 }
             };
             cdStart.start();
@@ -133,7 +129,6 @@ public class CountDownService extends Service {
     public void pauseTimer() {
         cdStart.cancel();
         state = ServiceState.PAUSED;
-
     }
 
     public void setSessionTime(int sessionTime) {
