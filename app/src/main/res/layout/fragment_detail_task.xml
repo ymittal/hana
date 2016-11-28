@@ -7,17 +7,48 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <RelativeLayout
+            android:id="@+id/relativeLayoutDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textAllCaps="true"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvDesc"
+                android:hint="Optional"
+                android:inputType="textCapSentences|textMultiLine"
+                android:scrollHorizontally="false"
+                android:textColor="@android:color/white"
+                android:textColorHint="#BDBDBD"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/relativeLayoutDueAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="12dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp">
 
@@ -30,14 +61,6 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/dummyBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:layout_toRightOf="@+id/tvDueAt"
-                android:src="@drawable/ic_action_add" />
-
             <TextView
                 android:id="@+id/tvDueDate"
                 android:layout_width="wrap_content"
@@ -47,6 +70,7 @@
                 android:paddingBottom="8dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="8dp"
+                android:text="Tap to set"
                 android:textSize="14dp" />
 
         </RelativeLayout>
@@ -54,7 +78,7 @@
         <RelativeLayout
             android:id="@+id/relativeLayoutSubtasks"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingLeft="@dimen/horizontal_padding_rv_subtasks"
             android:paddingRight="@dimen/horizontal_padding_rv_subtasks">
 
@@ -85,6 +109,7 @@
                 android:maxLines="1"
                 android:textColor="@android:color/white"
                 android:textColorHint="#BDBDBD"
+                android:textSize="14dp"
                 android:visibility="gone" />
 
             <android.support.v7.widget.RecyclerView
@@ -95,17 +120,6 @@
                 android:layout_below="@+id/etSubtask" />
 
         </RelativeLayout>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Description (optional)"
-            android:maxHeight="80dp"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbarStyle="insideInset"
-            android:textColor="@android:color/white"
-            android:textColorHint="#BDBDBD"
-            android:textSize="12dp" />
 
     </LinearLayout>
 

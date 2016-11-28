@@ -13,8 +13,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.util.Constants;
@@ -90,8 +92,7 @@ public class NavActivity extends AppCompatActivity implements
             public void onDrawerOpened(View drawerView) {
                 // hides soft keyboard when nav drawer is opened
                 super.onDrawerOpened(drawerView);
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                hideKeyboard();
             }
         };
     }
@@ -155,10 +156,11 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Handles back button press
-     * Case 1: App Drawer in Activity
-     * Case 2: Detail to GTDFragment
-     * Case 3: Pomodoro Settings back button
-     * Case 4: Default
+     * Case 1: {@link DrawerLayout} in current activity
+     * Case 2: {@link DetailTaskFragment} to {@link GTDFragment}
+     * Case 3: {@link PomodoroSettingsFragment} back button handler
+     * Case 4: default handler
+     *
      * @author Charles and Yash
      */
     @Override
@@ -173,8 +175,10 @@ public class NavActivity extends AppCompatActivity implements
 
         } else if (getSupportFragmentManager().findFragmentById(R.id.content_nav)
                 instanceof PomodoroSettingsFragment) {
-            ((PomodoroSettingsFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.content_nav)).handleBackBtnPressed();
+            PomodoroSettingsFragment psf = (PomodoroSettingsFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.content_nav);
+            psf.handleBackBtnPressed();
+
         } else {
             super.onBackPressed();
         }
@@ -182,5 +186,40 @@ public class NavActivity extends AppCompatActivity implements
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+    }
+
+    /**
+     * Handles touch motion event of the view
+     *
+     * @param event {@link MotionEvent} to be dispatched
+     * @return true if touch event was handled
+     * @see <a href="http://stackoverflow.com/questions/4165414/how-to-hide-soft-keyboard-on-android-after-clicking-outside-edittext">
+     * Stack Overflow - how to hide soft keyboard on android after clicking outside EditText?</a>
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (getCurrentFocus() instanceof EditText) {
+            int coords[] = new int[2];
+            View w = getCurrentFocus();
+            w.getLocationOnScreen(coords);
+
+            float x = event.getRawX() + w.getLeft() - coords[0];
+            float y = event.getRawY() + w.getTop() - coords[1];
+
+            if (event.getAction() == MotionEvent.ACTION_UP
+                    && (x < w.getLeft() || x >= w.getRight() || y < w.getTop() || y > w.getBottom())) {
+                hideKeyboard();
+            }
+        }
+
+        return super.dispatchTouchEvent(event);
+    }
+
+    /**
+     * Hides Android soft keyboard
+     */
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
     }
 }

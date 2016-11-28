@@ -65,7 +65,6 @@ public class DetailTaskFragment extends Fragment
     private EditText etSubtask;
     private TextView tvDueDate;
     private ImageView addSubtaskBtn;
-    private ImageView dummyBtn;
 
     /**
      * Required empty constructor
@@ -116,11 +115,10 @@ public class DetailTaskFragment extends Fragment
      */
     private void setupInterfaceComponents(View root) {
         tvDueDate = (TextView) root.findViewById(R.id.tvDueDate);
-        dummyBtn = (ImageView) root.findViewById(R.id.dummyBtn);
         addSubtaskBtn = (ImageView) root.findViewById(R.id.addSubtaskBtn);
         etSubtask = (EditText) root.findViewById(R.id.etSubtask);
 
-        dummyBtn.setOnClickListener(this);
+        tvDueDate.setOnClickListener(this);
         addSubtaskBtn.setOnClickListener(this);
         etSubtask.setOnKeyListener(this);
     }
@@ -131,9 +129,7 @@ public class DetailTaskFragment extends Fragment
      * @author Yash
      */
     private void setReadableDueDate() {
-        if (task.getDueDate() == null) {
-            tvDueDate.setText("To be set");
-        } else {
+        if (task.getDueDate() != null) {
             tvDueDate.setText(DateTimeUtil.getReadableDate(task.getDueDate()));
             myCalendar.setTime(task.getDueDate());
         }
@@ -163,7 +159,7 @@ public class DetailTaskFragment extends Fragment
      */
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.dummyBtn) {
+        if (view.getId() == R.id.tvDueDate) {
 
             // shows a DatePicker dialog
             new DatePickerDialog(getContext(),
@@ -190,9 +186,9 @@ public class DetailTaskFragment extends Fragment
     /**
      * Handles key events on views implementing {@link android.view.View.OnKeyListener}
      *
-     * @param view
-     * @param i
-     * @param keyEvent
+     * @param view     view to handle key event on
+     * @param i        key code
+     * @param keyEvent {@link KeyEvent} object containing information about event
      * @return
      * @author Yash
      * @see <a href="http://stackoverflow.com/questions/8233586/android-execute-function-after-pressing-enter-for-edittext">
@@ -206,7 +202,6 @@ public class DetailTaskFragment extends Fragment
             if (!subtask.equals("")) {
                 Subtask newSubtask = new Subtask(task.getId(), subtask);
                 detailTaskPresenter.addSubtask(newSubtask);
-                addSubtaskBtn.performClick();
                 etSubtask.setText("");
             }
             return true;
