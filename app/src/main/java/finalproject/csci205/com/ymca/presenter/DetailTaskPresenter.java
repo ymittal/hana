@@ -9,42 +9,86 @@ import finalproject.csci205.com.ymca.view.task.DetailTaskFragment;
 import finalproject.csci205.com.ymca.view.task.item.SubtasksAdapter;
 
 /**
- * Created by ym012 on 11/18/2016.
+ * A class to encapsulate a presenter for the {@link DetailTaskFragment} following
+ * MVP design pattern for Android development
  */
-
 public class DetailTaskPresenter {
 
-    private DetailTaskFragment view;
+    /**
+     * {@link DetailTaskFragment} fragment containing information about
+     * a specific {@link Task}
+     */
+    private DetailTaskFragment fragment;
+    /**
+     * {@link SubtasksAdapter} object
+     */
     private SubtasksAdapter subtasksAdapter;
+    /**
+     * List of subtasks under given {@link Task}
+     */
     private List<Subtask> subtasks;
 
+    /**
+     * Default constructor
+     */
     public DetailTaskPresenter() {
     }
 
-    public DetailTaskPresenter(DetailTaskFragment view, Task task) {
-        this.view = view;
+    /**
+     * Sets up presenter and initializes list of subtasks by querying database using {@link Task#id}
+     *
+     * @param fragment {@link DetailTaskFragment} object
+     * @param task     {@link Task} object
+     * @author Yash
+     */
+    public DetailTaskPresenter(DetailTaskFragment fragment, Task task) {
+        this.fragment = fragment;
         this.subtasks = Subtask.find(Subtask.class, "task_id = ?", task.getId().toString());
         this.subtasksAdapter = new SubtasksAdapter(this);
     }
 
+    /**
+     * @return number of subtasks under {@link Task}
+     * @author Yash
+     */
     public int getNumSubtasks() {
         return subtasks.size();
     }
 
+    /**
+     * @return {@link SubtasksAdapter} object
+     * @author Yash
+     */
     public SubtasksAdapter getSubtasksAdapter() {
         return subtasksAdapter;
     }
 
+    /**
+     * @return list of subtasks
+     * @author Yash
+     */
     public List<Subtask> getSubtasks() {
         return subtasks;
     }
 
+    /**
+     * Adds new {@link Subtask} to subtasks list
+     *
+     * @param newSubtask new {@link Subtask} object
+     * @author Yash
+     */
     public void addSubtask(Subtask newSubtask) {
         subtasks.add(newSubtask);
         newSubtask.save();
         subtasksAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Removes {@link Subtask} recyclerview item at given position
+     *
+     * @param pos position in list
+     * @author Yash
+     */
     public void removeTask(int pos) {
         Subtask subtaskToBeRemoved = subtasks.get(pos);
         subtaskToBeRemoved.delete();
@@ -53,11 +97,25 @@ public class DetailTaskPresenter {
         subtasksAdapter.notifyItemRangeChanged(pos, getNumSubtasks());
     }
 
+    /**
+     * Sets due date of {@link Task} object
+     *
+     * @param task {@link Task} object
+     * @param date task due date
+     * @author Yash
+     */
     public void setTaskDate(Task task, Date date) {
         task.setDueDate(date);
         task.save();
     }
 
+    /**
+     * Sets description of {@link Task} object
+     *
+     * @param task {@link Task} object
+     * @param desc task description
+     * @author Yash
+     */
     public void setDescription(Task task, String desc) {
         task.setDesc(desc);
         task.save();

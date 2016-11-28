@@ -14,20 +14,37 @@ import finalproject.csci205.com.ymca.view.task.GTDFragment;
 import finalproject.csci205.com.ymca.view.task.item.TasksAdapter;
 
 /**
- * Created by ceh024 on 11/6/16.
+ * A class to encapsulate a presenter for the {@link GTDFragment} following
+ * MVP design pattern for Android development
  */
-
 public class GTDPresenter {
 
+    /**
+     * Constant for {@link Task} serializable passed when an instance of
+     * {@link DetailTaskFragment} is launched
+     */
     public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
 
+    /**
+     * {@link GTDFragment} object
+     */
     private GTDFragment view;
+    /**
+     * {@link TasksAdapter} object
+     */
     private TasksAdapter tasksAdapter;
+    /**
+     * List of tasks added by user
+     */
     private List<Task> tasks;
+    /**
+     * A {@link Task} object removed by user but currently in contention of
+     * getting restored through {@link android.support.design.widget.Snackbar} message
+     */
     private Task dismissedTask;
 
     /**
-     * Special Case Constructor for model access, used for TaskFormFragment.
+     * Default constructor
      *
      * @author Charles
      */
@@ -36,9 +53,9 @@ public class GTDPresenter {
     }
 
     /**
-     * Standard Constructor scheme used for Presenter-->Fragment
+     * Sets up presenter and initializes list of tasks by querying database
      *
-     * @param view
+     * @param view {@link GTDFragment} object
      * @author Charles
      */
     public GTDPresenter(GTDFragment view) {
@@ -47,25 +64,35 @@ public class GTDPresenter {
         this.tasksAdapter = new TasksAdapter(this);
     }
 
+    /**
+     * @return {@link TasksAdapter} object
+     */
     public TasksAdapter getTasksAdapter() {
         return tasksAdapter;
     }
 
+    /**
+     * @return list of tasks
+     * @author Charles
+     */
     public List<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * @return nunber of {@link Task} object in list
+     * @author Charles
+     */
     public int taskSize() {
         return tasks.size();
     }
 
     /**
-     * Add's task to model, updates view
+     * Adds {@link Task} object to database, updates view
      *
-     * @param t
-     * @param b checks to see if we are adjusting the view. Relies on which constructor
-     *          was used. Expects programmer to be aware of which class depends on each case.
-     *          GTDFragment, b = true. Otherwise it is false.
+     * @param t new {@link Task} object to be stored
+     * @param b checks to see if we are adjusting the view, relies on which constructor
+     *          was used
      * @author Charles & Yash
      */
     public void addTask(Task t, boolean b) {
@@ -77,8 +104,8 @@ public class GTDPresenter {
     }
 
     /**
-     * Removes task from model, updates view.
-     * Stores old task if user wish's to immediately restore it.
+     * Removes {@link Task} object from database, updates view.
+     * Stores old task if user wishes to restore it immediately
      *
      * @param index
      * @author Charles & Yash
@@ -92,9 +119,9 @@ public class GTDPresenter {
     }
 
     /**
-     * Restore's Task if user so chooses
+     * Restores {@link Task} object if user so chooses
      *
-     * @param index
+     * @param index position in task list
      * @author Charles and Yash
      */
     public void restoreTask(int index) {
@@ -104,10 +131,10 @@ public class GTDPresenter {
     }
 
     /**
-     * Changes the state of the Task in the model, updates the model.
+     * Changes task completion status for {@link Task} in database
      *
-     * @param index
-     * @param b
+     * @param index position of {@link Task} object in list
+     * @param b     new completion status
      * @author Charles and Yash
      */
     public void taskChecked(int index, boolean b) {
@@ -115,6 +142,12 @@ public class GTDPresenter {
         tasks.get(index).save();
     }
 
+    /**
+     * Launches {@link DetailTaskFragment} for when a specific {@link Task} is
+     * tapped on {@link android.support.v7.widget.RecyclerView}
+     *
+     * @param task {@link Task} object tapped
+     */
     public void openDetailedTaskFragment(Task task) {
         DetailTaskFragment detailTaskFragment = new DetailTaskFragment();
         Bundle args = new Bundle();
