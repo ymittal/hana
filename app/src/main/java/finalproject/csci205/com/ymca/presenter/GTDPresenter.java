@@ -4,7 +4,9 @@ package finalproject.csci205.com.ymca.presenter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
+import java.util.Collections;
 import java.util.List;
 
 import finalproject.csci205.com.ymca.R;
@@ -61,6 +63,7 @@ public class GTDPresenter {
     public GTDPresenter(GTDFragment view) {
         this.view = view;
         this.tasks = Task.listAll(Task.class);
+        Collections.sort(this.tasks);
         this.tasksAdapter = new TasksAdapter(this);
     }
 
@@ -96,7 +99,7 @@ public class GTDPresenter {
      * @author Charles & Yash
      */
     public void addTask(Task t, boolean b) {
-        tasks.add(t);
+        tasks.add(0, t);    // adds task as the first list item
         t.save();
         if (b) {
             tasksAdapter.notifyDataSetChanged();

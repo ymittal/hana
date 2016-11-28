@@ -3,15 +3,37 @@ package finalproject.csci205.com.ymca.model.Pom;
 import com.orm.SugarRecord;
 
 /**
- * Created by ceh024 on 11/6/16.
+ * A class to represent different settings regarding Pomodoro technique,
+ * extending from {@link SugarRecord} to save it to local database
  */
-
 public class PomodoroSettings extends SugarRecord {
+
+    // TODO: finish Javadocs
+    /**
+     *
+     */
     private int sessionTime;
+    /**
+     *
+     */
     private int normBreakTime;
+    /**
+     *
+     */
     private int longBreak;
+    /**
+     *
+     */
     private int numCyclesTillBreak;
 
+    /**
+     * Constructs a {@link PomodoroSettings} object with the given fields
+     *
+     * @param sessionTime
+     * @param normBreakTime
+     * @param longBreak
+     * @param numCyclesTillBreak
+     */
     public PomodoroSettings(int sessionTime, int normBreakTime, int longBreak, int numCyclesTillBreak) {
         this.sessionTime = sessionTime;
         this.normBreakTime = normBreakTime;
@@ -19,8 +41,10 @@ public class PomodoroSettings extends SugarRecord {
         this.numCyclesTillBreak = numCyclesTillBreak;
     }
 
+    /**
+     * Required empty constructor
+     */
     public PomodoroSettings() {
-
     }
 
     public int getSessionTime() {

@@ -64,7 +64,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
 
         // sets time remaining if task due date has been defined by user
         if (task.getDueDate() == null) {
-            holder.tvTimeLeft.setText("Tap to set a due date");
+            holder.tvTimeLeft.setText("Tap to edit details");
         } else {
             holder.tvTimeLeft.setText(DateTimeUtil.convertDateToTimeRemaining(task.getDueDate()));
         }

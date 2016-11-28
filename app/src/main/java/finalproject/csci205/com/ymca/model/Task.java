@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Aleks, Malachi, and Yash
  */
-public class Task extends SugarRecord implements Serializable {
+public class Task extends SugarRecord implements Serializable, Comparable {
 
     /**
      * Task title
@@ -78,5 +78,31 @@ public class Task extends SugarRecord implements Serializable {
 
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
+    }
+
+    /**
+     * Method used to sort a list of {@link Task} objects by priority.
+     * Existing priority criterion is as follows:
+     * If either of the two tasks is complete, the completed task is greater than the other.
+     * Otherwise, the task having an earlier due date is considered smaller.
+     *
+     * @param obj {@link Task} object to compare current object with
+     * @return a negative, zero, or a positive value denoting whether the current object
+     * is less than, equal to, or greater than the passed object
+     */
+    @Override
+    public int compareTo(Object obj) {
+        Task task2 = (Task) obj;
+        if ((isComplete() && task2.isComplete()) || !(isComplete() || task2.isComplete())) {
+            if (getDueDate() == null) {
+                return -1;
+            } else if (task2.getDueDate() == null) {
+                return 1;
+            } else {
+                return getDueDate().compareTo(task2.getDueDate());
+            }
+        } else {
+            return isComplete() ? 1 : -1;
+        }
     }
 }
