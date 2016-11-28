@@ -57,4 +57,9 @@ public class DetailTaskPresenter {
         task.setDueDate(date);
         task.save();
     }
+
+    public void setDescription(Task task, String desc) {
+        task.setDesc(desc);
+        task.save();
+    }
 }

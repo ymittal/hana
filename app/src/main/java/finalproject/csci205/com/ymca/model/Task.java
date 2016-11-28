@@ -60,6 +60,10 @@ public class Task extends SugarRecord implements Serializable {
         return desc;
     }
 
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public Boolean isComplete() {
         return isComplete;
     }

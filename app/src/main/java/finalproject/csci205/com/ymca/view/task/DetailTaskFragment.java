@@ -65,6 +65,7 @@ public class DetailTaskFragment extends Fragment
     private EditText etSubtask;
     private TextView tvDueDate;
     private ImageView addSubtaskBtn;
+    private EditText etDesc;
 
     /**
      * Required empty constructor
@@ -100,7 +101,6 @@ public class DetailTaskFragment extends Fragment
         }
 
         setupInterfaceComponents(root);
-        setReadableDueDate();
         initSubtaskList(root);
 
         return root;
@@ -114,6 +114,7 @@ public class DetailTaskFragment extends Fragment
      * @author Malachi
      */
     private void setupInterfaceComponents(View root) {
+        etDesc = (EditText) root.findViewById(R.id.etDesc);
         tvDueDate = (TextView) root.findViewById(R.id.tvDueDate);
         addSubtaskBtn = (ImageView) root.findViewById(R.id.addSubtaskBtn);
         etSubtask = (EditText) root.findViewById(R.id.etSubtask);
@@ -121,6 +122,9 @@ public class DetailTaskFragment extends Fragment
         tvDueDate.setOnClickListener(this);
         addSubtaskBtn.setOnClickListener(this);
         etSubtask.setOnKeyListener(this);
+
+        etDesc.setText(task.getDesc());
+        setReadableDueDate();
     }
 
     /**
@@ -147,6 +151,15 @@ public class DetailTaskFragment extends Fragment
         rvSubtasks.setLayoutManager(new LinearLayoutManager(getContext()));
         rvSubtasks.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
         rvSubtasks.setAdapter(detailTaskPresenter.getSubtasksAdapter());
+    }
+
+    /**
+     * Saves {@link Task#desc} (description) before destroying fragment view
+     */
+    @Override
+    public void onDestroyView() {
+        detailTaskPresenter.setDescription(task, etDesc.getText().toString());
+        super.onDestroyView();
     }
 
     /**
