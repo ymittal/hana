@@ -121,7 +121,7 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
     }
 
 
-    public void setCdRef(CountDownView cdRef) {
+    public void setCountDownView(CountDownView cdRef) {
         this.cdRef = cdRef;
     }
 }

@@ -1,11 +1,8 @@
 package finalproject.csci205.com.ymca.view.module.pomodoro;
 
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +19,13 @@ import finalproject.csci205.com.ymca.view.MainActivity;
 
 public class PomodoroFragment extends Fragment implements View.OnClickListener, OnBackStackListener {
 
-    private OnFragmentInteractionListener mListener;
     private CountDownView countDownView;
-    private ImageButton settingsBtn;
+    private ImageButton btnPomodoroSettings;
     private PomodoroPresenter pomodoroPresenter;
 
+    /**
+     * Required empty constructor
+     */
     public PomodoroFragment() {
     }
 
@@ -34,7 +33,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment PomodoroFragment.
+     * @return A new instance of fragment {@link PomodoroFragment}.
      */
 
     public static PomodoroFragment newInstance() {
@@ -42,6 +41,12 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         return fragment;
     }
 
+    /**
+     * Sets up title of {@link PomodoroFragment}
+     *
+     * @param savedInstanceState
+     * @author Charles
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +68,8 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
             countDownView.setSessionTime(0); //Temp Config!
         }
         countDownView.setJumpTo(MainActivity.class);
-        settingsBtn = (ImageButton) root.findViewById(R.id.btnPomodoroSettings);
-        settingsBtn.setOnClickListener(this);
+        btnPomodoroSettings = (ImageButton) root.findViewById(R.id.btnPomodoroSettings);
+        btnPomodoroSettings.setOnClickListener(this);
 
 
         return root;
@@ -78,65 +83,42 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
+    /**
+     * Handles click events on views implementing {@link android.view.View.OnClickListener}
+     *
+     * @param view clicked view
+     * @author Charles
+     */
     @Override
     public void onClick(View view) {
-        if (view.getId() == settingsBtn.getId()) {
+        if (view.getId() == R.id.btnPomodoroSettings) {
+            btnPomodoroSettings.setVisibility(View.GONE);
             showSettings();
         }
     }
 
     /**
-     * Overlays a new fragment to gather settings
+     * Overlays {@link PomodoroSettingsFragment} to gather Pomodoro settings
      *
      * @author Charles
      */
     private void showSettings() {
-        FragmentManager fragmentManager = getFragmentManager();
-        PomodoroSettingsFragment pomodoroSettingsDialogFragment = new PomodoroSettingsFragment();
-        pomodoroSettingsDialogFragment.setOnBackStackListener(this);
-        pomodoroSettingsDialogFragment.setCdRef(countDownView);
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        PomodoroSettingsFragment settingsFragment = new PomodoroSettingsFragment();
+        settingsFragment.setOnBackStackListener(this);
+        settingsFragment.setCountDownView(countDownView);
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.add(R.id.content_nav, pomodoroSettingsDialogFragment)
-                .addToBackStack(null).commit();
-        settingsBtn.setVisibility(View.GONE);
+        transaction.add(R.id.content_nav, settingsFragment).addToBackStack(null).commit();
     }
 
     /**
-     * OnBackStackListener
+     * Sets visibility of Pomodoro settings button to {@link View#VISIBLE}
      *
      * @author Charles
      */
     @Override
     public void onViewReturn() {
-        settingsBtn.setVisibility(View.VISIBLE);
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+        btnPomodoroSettings.setVisibility(View.VISIBLE);
     }
 }

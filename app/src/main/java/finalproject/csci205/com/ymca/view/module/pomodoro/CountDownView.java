@@ -100,7 +100,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      * @author Charles
      */
     public void init() {
-        root = inflate(getContext(), R.layout.countdownlayout, this);
+        root = inflate(getContext(), R.layout.countdown_layout, this);
         mins = (TextView) root.findViewById(R.id.mins);
         seconds = (TextView) root.findViewById(R.id.seconds);
         cancelPom = (ImageButton) root.findViewById(R.id.cancelBtn);
