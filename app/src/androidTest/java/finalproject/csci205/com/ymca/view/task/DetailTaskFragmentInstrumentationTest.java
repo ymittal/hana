@@ -1,13 +1,10 @@
 package finalproject.csci205.com.ymca.view.task;
 
-import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
-import android.view.View;
 
 import org.junit.After;
 import org.junit.Before;
@@ -24,11 +21,9 @@ import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
-import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Class to test {@link DetailTaskFragment} UI functionality
@@ -96,31 +91,4 @@ public class DetailTaskFragmentInstrumentationTest {
         onView(withId(R.id.btnCancel)).perform(click());
         onView(withId(R.id.rvSubtasks)).check(new RecyclerViewItemCountAssertion(0));
     }
-
-    /**
-     * A {@link ViewAssertion} class to quickly assert the number of items in a
-     * {@link RecyclerView}
-     *
-     * @see <a href="http://stackoverflow.com/questions/36399787/espresso-count-recyclerview-items">
-     * Espresso - Count recyclerview items</a>
-     */
-    public class RecyclerViewItemCountAssertion implements ViewAssertion {
-        private final int expectedCount;
-
-        public RecyclerViewItemCountAssertion(int expectedCount) {
-            this.expectedCount = expectedCount;
-        }
-
-        @Override
-        public void check(View view, NoMatchingViewException noViewFoundException) {
-            if (noViewFoundException != null) {
-                throw noViewFoundException;
-            }
-
-            RecyclerView recyclerView = (RecyclerView) view;
-            RecyclerView.Adapter adapter = recyclerView.getAdapter();
-            assertThat(adapter.getItemCount(), is(expectedCount));
-        }
-    }
-
 }
