@@ -61,12 +61,11 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
 
-        if (pomodoroSettings != null) {
-            countDownView.setSessionTime(pomodoroSettings.getSessionTime());
-        } else {
-
-            countDownView.setSessionTime(0); //Temp Config!
+        if (pomodoroSettings == null) {
+            pomodoroPresenter.savePomodoroSettings(getDefaultPomodoroSettings());
         }
+        countDownView.setSessionTime(pomodoroSettings.getSessionTime());
+
         countDownView.setJumpTo(MainActivity.class);
         btnPomodoroSettings = (ImageButton) root.findViewById(R.id.btnPomodoroSettings);
         btnPomodoroSettings.setOnClickListener(this);
@@ -120,5 +119,15 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onViewReturn() {
         btnPomodoroSettings.setVisibility(View.VISIBLE);
+    }
+
+    public PomodoroSettings getDefaultPomodoroSettings() {
+        // TODO: extract constants
+        PomodoroSettings ps = new PomodoroSettings();
+        ps.setSessionTime(25);
+        ps.setNormBreakTime(5);
+        ps.setNumCyclesTillBreak(5);
+        ps.setLongBreak(60);
+        return ps;
     }
 }

@@ -7,7 +7,7 @@
     tools:context="finalproject.csci205.com.ymca.view.MainActivity">
 
     <TextView
-        android:id="@+id/quote"
+        android:id="@+id/tvQuote"
         style="@style/quoteTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,11 +16,11 @@
         android:text="@string/encouraging_quote_default" />
 
     <TextView
-        android:id="@+id/beginButton"
+        android:id="@+id/tvBeginButton"
         style="@style/BeginButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/quote"
+        android:layout_below="@id/tvQuote"
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:fontFamily="sans-serif-smallcaps"

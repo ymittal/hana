@@ -15,11 +15,11 @@ import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragme
 
 public class PomodoroPresenter implements CountDownListener {
 
-    private final long DB_ID = 4l;
+    private final static long DB_ID = 4l;
+    private static PomodoroSettings pomSettings;
     private CountDownView cdView;
     private PomodoroFragment view;
     private PomodoroSettingsFragment settingsView;
-    private PomodoroSettings pomSettings;
     private Context context;
     private int sessionTime;
     private int breakTime;
@@ -28,6 +28,8 @@ public class PomodoroPresenter implements CountDownListener {
 
     private int cycleCounter;
 
+    public PomodoroPresenter() {
+    }
 
     public PomodoroPresenter(PomodoroFragment p) {
         view = p;
@@ -104,5 +106,11 @@ public class PomodoroPresenter implements CountDownListener {
     @Override
     public void onCountFinished() {
         incCounter();
+    }
+
+    public void savePomodoroSettings(PomodoroSettings pomodoroSettings) {
+        pomSettings = pomodoroSettings;
+        pomSettings.setId(DB_ID);
+        pomodoroSettings.save();
     }
 }

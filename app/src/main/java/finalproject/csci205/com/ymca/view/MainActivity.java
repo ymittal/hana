@@ -22,19 +22,26 @@ import finalproject.csci205.com.ymca.util.SharedPreferenceUtil;
  * {@link android.app.Activity} to hold the splash screen, manages logic for
  * first time events
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * Amount of time in milliseconds before the splash screen
      * calls the next screen
      */
-    private final int DELAY_MILLIS = 1500;
+    private final static int DELAY_MILLIS = 1500;
     /**
      * Number of optional backgrounds in the application
      */
-    private final int numOfBackgrounds = 3;
+    private final static int NUM_BACKGROUNDS = 3;
 
-    private final int durationMillis = 5000;
+    /**
+     * Duration of animation in milliseconds
+     */
+    private final static int ANIMATION_DURATION_MILLIS = 4000;
+
+    // User Interface components of MainActivity
+    private TextView tvBeginButton;
+    private TextView tvQuote;
 
     /**
      * Sets up activity user interface and controls
@@ -49,55 +56,67 @@ public class MainActivity extends AppCompatActivity {
 
         // makes the status bar transparent
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        loadBackground();
-
-        //The TextView that takes the user to the next screen
-        final TextView loginView = (TextView) findViewById(R.id.beginButton);
-        final TextView quote = (TextView) findViewById(R.id.quote);
-        final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        initUI();
 
         // checks if user has already opened the app
         if (!SharedPreferenceUtil.getIsOpen(getApplicationContext())) {
+            beginAnimationOnFirstLaunch();
 
-
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Animation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-                    alphaAnimation.setDuration(durationMillis);
-
-                    Animation translationAnimation = new TranslateAnimation(0.0f, 0.0f, -100.0f, 0.0f);
-                    translationAnimation.setDuration(durationMillis);
-
-                    AnimationSet animationSet = new AnimationSet(false);
-                    animationSet.addAnimation(alphaAnimation);
-                    animationSet.addAnimation(translationAnimation);
-
-                    loginView.startAnimation(animationSet);
-                    loginView.setAlpha(1.0f);
-                }
-
-            }, DELAY_MILLIS);
-
-
-            loginView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SharedPreferenceUtil.setPreferenceIsOpen(getApplicationContext(), true);
-                    goToNavActivity();
-                }
-            });
         } else {
-            quote.setVisibility(View.INVISIBLE);
-            loginView.setVisibility(View.INVISIBLE);
+            tvQuote.setVisibility(View.INVISIBLE);
+            tvBeginButton.setVisibility(View.INVISIBLE);
+
+            // delays proceeding to NavActivity by DELAY_MILLIS milliseconds
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
                     goToNavActivity();
                 }
             }, DELAY_MILLIS);
+
         }
+    }
+
+    /**
+     * Initializes User Interface elements and loads splash screen background
+     *
+     * @author Malachi and Aleks
+     */
+    private void initUI() {
+        tvQuote = (TextView) findViewById(R.id.tvQuote);
+        tvBeginButton = (TextView) findViewById(R.id.tvBeginButton);
+
+        tvBeginButton.setOnClickListener(this);
+
+        loadBackground();
+    }
+
+    /**
+     * Starts animation on {@link #tvBeginButton} on every instance of
+     * {@link MainActivity} launch until user opens the main app for the
+     * first time
+     *
+     * @author Malachi
+     */
+    private void beginAnimationOnFirstLaunch() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+                alphaAnimation.setDuration(ANIMATION_DURATION_MILLIS);
+
+                Animation translationAnimation = new TranslateAnimation(0.0f, 0.0f, -100.0f, 0.0f);
+                translationAnimation.setDuration(ANIMATION_DURATION_MILLIS);
+
+                AnimationSet animationSet = new AnimationSet(false);
+                animationSet.addAnimation(alphaAnimation);
+                animationSet.addAnimation(translationAnimation);
+
+                tvBeginButton.startAnimation(animationSet);
+                tvBeginButton.setAlpha(1.0f);
+            }
+        }, DELAY_MILLIS);
     }
 
     /**
@@ -120,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         RelativeLayout thisRL = (RelativeLayout) findViewById(R.id.relativeLayout);
 
         // randomly chooses a background image for the splash screen
-        int r = new Random().nextInt(numOfBackgrounds);
+        int r = new Random().nextInt(NUM_BACKGROUNDS);
         switch (r) {
             case 0:
                 thisRL.setBackgroundResource(R.drawable.splash_cliff);
@@ -133,6 +152,20 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 thisRL.setBackgroundResource(R.drawable.splash_notebook);
+        }
+    }
+
+    /**
+     * Handles click events on views implementing {@link android.view.View.OnClickListener}
+     *
+     * @param view clicked view
+     * @author Malachi
+     */
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.tvBeginButton) {
+            SharedPreferenceUtil.setPreferenceIsOpen(getApplicationContext(), true);
+            goToNavActivity();
         }
     }
 }
