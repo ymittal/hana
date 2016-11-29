@@ -70,13 +70,12 @@ public class PomodoroPresenter implements CountDownListener {
     }
 
     /**
-     * Restores old PomSettings
+     * Restores saved {@link PomodoroSettings} from local database
      *
      * @author Charles
      */
     public PomodoroSettings getSavedPomSettings() {
-        PomodoroSettings oldSettings = PomodoroSettings.findById(PomodoroSettings.class, DB_ID);
-        return oldSettings;
+        return PomodoroSettings.findById(PomodoroSettings.class, DB_ID);
     }
 
     /**

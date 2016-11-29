@@ -33,7 +33,7 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.pomodorosettings_dialog, container, false);
+        root = inflater.inflate(R.layout.fragment_pomodoro_settings, container, false);
         sessionTime = (EditText) root.findViewById(R.id.sessionTime);
         breakTime = (EditText) root.findViewById(R.id.breakTime);
         numBreaks = (EditText) root.findViewById(R.id.numBreaks);
@@ -121,7 +121,7 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
     }
 
 
-    public void setCdRef(CountDownView cdRef) {
+    public void setCountDownView(CountDownView cdRef) {
         this.cdRef = cdRef;
     }
 }

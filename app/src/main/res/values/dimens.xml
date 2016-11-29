@@ -8,7 +8,6 @@
 
     <dimen name="horizontal_padding">16dp</dimen>
 
-    <dimen name="vertical_padding_rv_subtasks">4dp</dimen>
     <dimen name="horizontal_padding_rv_subtasks">12dp</dimen>
 
     <dimen name="vertical_padding_subtask_item">8dp</dimen>

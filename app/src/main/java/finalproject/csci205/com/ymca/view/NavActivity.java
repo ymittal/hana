@@ -31,8 +31,7 @@ import finalproject.csci205.com.ymca.view.task.GTDFragment;
  */
 public class NavActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
-        GTDFragment.OnFragmentInteractionListener,
-        PomodoroFragment.OnFragmentInteractionListener {
+        GTDFragment.OnFragmentInteractionListener {
 
     /**
      * Top-level container for {@link NavigationView}
