@@ -21,6 +21,14 @@ public class Constants {
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(NOTIFICATION_ID);
     }
-
-
+//    public enum NotificationState{
+//        START = ("START"),
+//        PAUSE = ("PAUSE"),
+//        CANCEL = ("CANCEL");
+//
+//        @Override
+//        public String toString() {
+//            return super.toString();
+//        }
+//    }
 }
