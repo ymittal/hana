@@ -33,6 +33,8 @@ import static org.hamcrest.Matchers.is;
 
 /**
  * Class to test {@link AddQuickTaskDialog} UI functionality
+ *
+ * @author Yash
  */
 public class AddQuickTaskDialogInstrumentationTest {
 

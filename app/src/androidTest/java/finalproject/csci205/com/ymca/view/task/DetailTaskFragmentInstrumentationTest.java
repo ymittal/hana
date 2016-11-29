@@ -27,6 +27,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Class to test {@link DetailTaskFragment} UI functionality
+ *
+ * @author Yash
  */
 public class DetailTaskFragmentInstrumentationTest {
 

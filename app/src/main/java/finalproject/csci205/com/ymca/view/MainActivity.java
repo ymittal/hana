@@ -28,17 +28,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Amount of time in milliseconds before the splash screen
      * calls the next screen
      */
-    private final static int DELAY_MILLIS = 1500;
+    public final static int DELAY_MILLIS = 1500;
+    /**
+     * Duration of animation in milliseconds
+     */
+    public final static int ANIMATION_DURATION_MILLIS = 4000;
     /**
      * Number of optional backgrounds in the application
      */
     private final static int NUM_BACKGROUNDS = 3;
-
-    /**
-     * Duration of animation in milliseconds
-     */
-    private final static int ANIMATION_DURATION_MILLIS = 4000;
-
     // User Interface components of MainActivity
     private TextView tvBeginButton;
     private TextView tvQuote;

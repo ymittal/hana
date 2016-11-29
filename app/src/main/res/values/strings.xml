@@ -11,4 +11,6 @@
     <string name="error_til_add_task">Enter a task name</string>
     <string name="negative_btn_save">Save</string>
     <string name="positive_btn_edit">Edit</string>
+    <string name="menuitem_tasks">Tasks</string>
+    <string name="menuitem_pomodoro">Pomodoro</string>
 </resources>
