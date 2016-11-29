@@ -63,7 +63,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
             countDownView.setSessionTime(0); //Temp Config!
         }
         countDownView.setJumpTo(MainActivity.class);
-        settingsBtn = (ImageButton) root.findViewById(R.id.settingsButtonYo);
+        settingsBtn = (ImageButton) root.findViewById(R.id.btnPomodoroSettings);
         settingsBtn.setOnClickListener(this);
 
 

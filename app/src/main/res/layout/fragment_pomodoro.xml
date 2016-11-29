@@ -5,25 +5,21 @@
     android:background="@color/colorPrimary"
     tools:context=".view.module.pomodoro.PomodoroFragment">
 
-
     <finalproject.csci205.com.ymca.view.module.pomodoro.CountDownView
         android:id="@+id/countDownViewInFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerInParent="true">
-
-    </finalproject.csci205.com.ymca.view.module.pomodoro.CountDownView>
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
-        android:id="@+id/settingsButtonYo"
+        android:id="@+id/btnPomodoroSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:background="@android:color/transparent"
+        android:layout_marginBottom="18dp"
+        android:background="@null"
         android:src="@drawable/ic_settings" />
-
 
 </RelativeLayout>
