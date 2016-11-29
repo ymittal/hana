@@ -43,8 +43,8 @@ public class AddQuickTaskDialog extends DialogFragment {
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setTitle("Add Task")
-                .setPositiveButton("Edit", null)
-                .setNegativeButton("Save", null)
+                .setPositiveButton(R.string.positive_btn_edit, null)
+                .setNegativeButton(R.string.negative_btn_save, null)
                 .create();
 
         addOnClickListenersToButtons(view, dialog);
@@ -73,7 +73,7 @@ public class AddQuickTaskDialog extends DialogFragment {
                             @Override
                             public void onClick(View view) {
                                 if (etAddTask.getText().toString().equals("")) {
-                                    til.setError("Enter a task name");
+                                    til.setError(getString(R.string.error_til_add_task));
                                 } else {
                                     goToGTDFragment(etAddTask.getText().toString(), Activity.RESULT_OK);
                                 }

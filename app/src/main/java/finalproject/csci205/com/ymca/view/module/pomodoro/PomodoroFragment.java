@@ -19,9 +19,34 @@ import finalproject.csci205.com.ymca.view.MainActivity;
 
 public class PomodoroFragment extends Fragment implements View.OnClickListener, OnBackStackListener {
 
+    /**
+     * Default Pomodoro session period in minutes
+     */
+    public static final int DEFAULT_SESSION_TIME_IN_MINS = 25;
+    /**
+     * Default Pomodoro normal break period in minutes
+     */
+    public static final int DEFAULT_NORMAL_BREAK_IN_MINS = 5;
+    /**
+     * Default number of Pomodoro cycles
+     */
+    public static final int DEFAULT_NUM_CYCLES = 5;
+    /**
+     * Default Pomodoro long break period in minutes
+     */
+    public static final int DEFAULT_LONG_BREAK_IN_MINS = 60;
+
+    /**
+     * A {@link CountDownView} to display time left until next Pomodoro break
+     */
     private CountDownView countDownView;
-    private ImageButton btnPomodoroSettings;
+    /**
+     * Presenter for {@link PomodoroFragment}
+     */
     private PomodoroPresenter pomodoroPresenter;
+
+    // User Interface elements for PomodoroFragment
+    private ImageButton btnPomodoroSettings;
 
     /**
      * Required empty constructor
@@ -35,7 +60,6 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
      *
      * @return A new instance of fragment {@link PomodoroFragment}.
      */
-
     public static PomodoroFragment newInstance() {
         PomodoroFragment fragment = new PomodoroFragment();
         return fragment;
@@ -56,25 +80,38 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        pomodoroPresenter = new PomodoroPresenter(this);
-        PomodoroSettings pomodoroSettings = pomodoroPresenter.getSavedPomSettings();
         View root = inflater.inflate(R.layout.fragment_pomodoro, container, false);
-        countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
 
+        pomodoroPresenter = new PomodoroPresenter(this);
+        initUI(root);
+
+        PomodoroSettings pomodoroSettings = pomodoroPresenter.getSavedPomSettings();
         if (pomodoroSettings != null) {
             countDownView.setSessionTime(pomodoroSettings.getSessionTime());
         } else {
-
-            countDownView.setSessionTime(0); //Temp Config!
+            pomodoroPresenter.savePomodoroSettingsToDatabase(getDefaultPomodoroSettings());
+            countDownView.setSessionTime(0); // temp config
         }
-        countDownView.setJumpTo(MainActivity.class);
-        btnPomodoroSettings = (ImageButton) root.findViewById(R.id.btnPomodoroSettings);
-        btnPomodoroSettings.setOnClickListener(this);
 
+        countDownView.setJumpTo(MainActivity.class);
 
         return root;
     }
 
+    /**
+     * Initializes user interface elements and sets {@link android.view.View.OnClickListener}
+     *
+     * @param root root view for the fragment interface
+     * @author Charles
+     */
+    private void initUI(View root) {
+        countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
+        btnPomodoroSettings = (ImageButton) root.findViewById(R.id.btnPomodoroSettings);
+
+        btnPomodoroSettings.setOnClickListener(this);
+    }
+
+    // TODO: write Javadocs (Charles)
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -92,13 +129,14 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnPomodoroSettings) {
-            btnPomodoroSettings.setVisibility(View.GONE);
+            btnPomodoroSettings.setVisibility(View.INVISIBLE);
             showSettings();
         }
     }
 
     /**
-     * Overlays {@link PomodoroSettingsFragment} to gather Pomodoro settings
+     * Overlays {@link PomodoroFragment} with an instance of
+     * {@link PomodoroSettingsFragment} to gather Pomodoro settings
      *
      * @author Charles
      */
@@ -120,5 +158,18 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onViewReturn() {
         btnPomodoroSettings.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * @return default {@link PomodoroSettings} configuration for the Pomodoro module
+     * of the application
+     */
+    public PomodoroSettings getDefaultPomodoroSettings() {
+        PomodoroSettings ps = new PomodoroSettings();
+        ps.setSessionTime(DEFAULT_SESSION_TIME_IN_MINS);
+        ps.setNormBreakTime(DEFAULT_NORMAL_BREAK_IN_MINS);
+        ps.setNumCyclesTillBreak(DEFAULT_NUM_CYCLES);
+        ps.setLongBreak(DEFAULT_LONG_BREAK_IN_MINS);
+        return ps;
     }
 }
