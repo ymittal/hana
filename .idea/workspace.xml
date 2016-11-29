@@ -12,10 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list id="b3790291-bbee-401b-8976-21c5fc40af3d" name="Default" comment="GTD Presenter testing. Utilizing blank constructor made for testing." />
-    <list default="true" id="02b070c7-d914-428b-809b-c7748bf5a7f7" name="Rejected commit: Default" comment="GTD Presenter testing. Utilizing blank constructor made for testing.&#10;Considering mock library.">
+    <list default="true" id="02b070c7-d914-428b-809b-c7748bf5a7f7" name="Rejected commit: Default" comment="GTD Presenter testing. Utilizing blank constructor made for testing; Javadoc&#10;Considering mock library.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/test/java/finalproject/csci205/com/ymca/ExampleUnitTest.java" afterPath="$PROJECT_DIR$/app/src/test/java/finalproject/csci205/com/ymca/ExampleUnitTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/test/java/finalproject/csci205/com/ymca/GTDPresenterTest.java" afterPath="$PROJECT_DIR$/app/src/test/java/finalproject/csci205/com/ymca/GTDPresenterTest.java" />
     </list>
     <ignored path="ymca.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -3442,13 +3440,6 @@
       <option name="presentableId" value="Default" />
       <updated>1478096901601</updated>
     </task>
-    <task id="LOCAL-00004" summary="Fixed broken commit. Need to clean up .gitignore or ignore it for now. - Charles">
-      <created>1478461439054</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1478461439054</updated>
-    </task>
     <task id="LOCAL-00005" summary="Added new file resources to use. &#10;&#10;Settings &gt; Plugins &gt;  Search for Android Drawable, first plugin. Refer to facebook &#10;chat if you need more help. No need to download the file pack I linked. It does it all for you!&#10;&#10;Added Nav drawer fuctionality that navigates to two empty fragments. &#10;NOTE: Basic Implmentation. Doesn't account for any backstacks. It merely updates the VIEW. Thus, the fragment is destroyed as asoon as the user navigates away. Much of the code is auto generated.&#10;&#10;Note to yash: there is an option to create a list fragment, but its highly broken. I felt that if I had to do it myself, I'd roll my own code!&#10;&#10;-Charles">
       <created>1478466476122</created>
       <option name="number" value="00005" />
@@ -3785,7 +3776,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480346656240</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="GTD Presenter testing. Utilizing blank constructor made for testing; Javadoc&#10;Considering mock library.">
+      <created>1480417199433</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1480417199436</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -3864,7 +3862,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Start/Stop Functionality" />
     <MESSAGE value="Made the screen kinda pretty" />
     <MESSAGE value="Event Listener Code" />
     <MESSAGE value="CountDownLib almost done" />
@@ -3889,7 +3886,8 @@
     <MESSAGE value="Critical bug fix. Updated build tools so that this works on devices 4.4 and earlier." />
     <MESSAGE value="GTD Presenter testing. Utilizing blank constructor made for testing." />
     <MESSAGE value="GTD Presenter testing. Utilizing blank constructor made for testing.&#10;Considering mock library." />
-    <option name="LAST_COMMIT_MESSAGE" value="GTD Presenter testing. Utilizing blank constructor made for testing.&#10;Considering mock library." />
+    <MESSAGE value="GTD Presenter testing. Utilizing blank constructor made for testing; Javadoc&#10;Considering mock library." />
+    <option name="LAST_COMMIT_MESSAGE" value="GTD Presenter testing. Utilizing blank constructor made for testing; Javadoc&#10;Considering mock library." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
