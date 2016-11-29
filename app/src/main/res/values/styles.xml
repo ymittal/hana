@@ -44,4 +44,30 @@
         <item name="android:drawablePadding">@dimen/sheet_item_image_spacing</item>
     </style>
 
+    <style name="quoteTextStyle">
+        <item name="android:padding">16px</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+    </style>
+
+    <style name="BeginButtonStyle">
+        <item name="android:padding">16px</item>
+        <item name="android:alpha">0.0</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textSize">48sp</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+    </style>
+
 </resources>
