@@ -5,6 +5,8 @@
     <color name="colorAccent">#9FA8DA</color>
     <color name="black">#000000</color>
 
+    <color name="timerDigits">#B39DDB</color>
+    <color name="timerUnits">#D1C4E9</color>
     <color name="bgPrimary">#263238</color>
     <color name="divider">#37474F</color>
     <color name="etPomodoroSettingsHint">#9e9e9e</color>
