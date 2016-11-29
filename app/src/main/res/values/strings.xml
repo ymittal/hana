@@ -8,4 +8,7 @@
     <string name="encouraging_quote_default">You\'re moments away from beginning\nyour journey towards a more \nproductive you</string>
     <string name="start_button">Begin</string>
     <string name="beginButton">BEGIN</string>
+    <string name="error_til_add_task">Enter a task name</string>
+    <string name="negative_btn_save">Save</string>
+    <string name="positive_btn_edit">Edit</string>
 </resources>
