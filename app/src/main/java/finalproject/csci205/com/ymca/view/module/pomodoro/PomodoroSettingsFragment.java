@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
@@ -21,27 +22,54 @@ import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 public class PomodoroSettingsFragment extends Fragment implements View.OnClickListener {
 
     CountDownView cdRef;
-    private View root;
+    private PomodoroPresenter pomodoroPresenter;
+    private OnBackStackListener backStackListener;
+
+    // User Interface elements for PomodoroSettingsFragment
     private EditText sessionTime;
     private EditText breakTime;
     private EditText numBreaks;
     private EditText longBreak;
     private ImageButton saveBtn;
-    private PomodoroPresenter pomodoroPresenter;
-    private OnBackStackListener backStackListener;
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_pomodoro_settings, container, false);
+        View root = inflater.inflate(R.layout.fragment_pomodoro_settings, container, false);
+
+        pomodoroPresenter = new PomodoroPresenter(this);
+        initUI(root);
+        setCurrentPomodoroSettings();
+
+        return root;
+    }
+
+    /**
+     * Initializes user interface elements and sets {@link android.view.View.OnClickListener}
+     *
+     * @param root root view for the fragment interface
+     * @author Charles
+     */
+    private void initUI(View root) {
         sessionTime = (EditText) root.findViewById(R.id.sessionTime);
         breakTime = (EditText) root.findViewById(R.id.breakTime);
         numBreaks = (EditText) root.findViewById(R.id.numBreaks);
         longBreak = (EditText) root.findViewById(R.id.longBreak);
         saveBtn = (ImageButton) root.findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(this);
-        pomodoroPresenter = new PomodoroPresenter(this);
 
+        saveBtn.setOnClickListener(this);
+    }
+
+    /**
+     * @author Charles
+     */
+    private void setCurrentPomodoroSettings() {
         PomodoroSettings oldSettings = pomodoroPresenter.getSavedPomSettings();
         if (oldSettings != null) {
             sessionTime.setText(String.valueOf(oldSettings.getSessionTime()));
@@ -49,25 +77,40 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
             numBreaks.setText(String.valueOf(oldSettings.getNumCyclesTillBreak()));
             longBreak.setText(String.valueOf(oldSettings.getLongBreak()));
         }
-        return root;
+    }
+
+    /**
+     * @return
+     * @author Charles and Yash
+     */
+    public PomodoroSettings getCurrentPomodoroSettings() {
+        try {
+            PomodoroSettings ps = new PomodoroSettings();
+            ps.setSessionTime(Integer.valueOf(sessionTime.getText().toString()));
+            ps.setNormBreakTime(Integer.valueOf(breakTime.getText().toString()));
+            ps.setNumCyclesTillBreak(Integer.valueOf(numBreaks.getText().toString()));
+            ps.setLongBreak(Integer.valueOf(longBreak.getText().toString()));
+            return ps;
+
+        } catch (NumberFormatException ex) {
+            Toast.makeText(getContext(), "Invalid input parameter(s). Please try again!", Toast.LENGTH_SHORT).show();
+            return null;
+
+        }
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == saveBtn.getId()) {
-            if (pomodoroPresenter.saveSettiings()) {
+            PomodoroSettings ps = getCurrentPomodoroSettings();
+            if (ps != null) {
+                pomodoroPresenter.savePomodoroSettingsToDatabase(ps);
                 backStackListener.onViewReturn();
                 cdRef.setSessionTimeOverride(Integer.valueOf(sessionTime.getText().toString()));
                 removeSelf();
             }
-
         }
     }
-
-    public View getRoot() {
-        return root;
-    }
-
 
     /**
      * Auto pops this fragment allowing the user to return to the prior view.
@@ -77,15 +120,14 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
     private void removeSelf() {
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction trans = manager.beginTransaction();
-        trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         trans.remove(this).commit();
         manager.popBackStack();
     }
 
     /**
-     * Defines the listener when the back / save button is pressed
+     * Defines {@link OnBackStackListener} when the back or save button is pressed
      *
-     * @param p
+     * @param p {@link PomodoroFragment} instance
      * @author Charles
      */
     public void setOnBackStackListener(PomodoroFragment p) {
@@ -94,7 +136,7 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
 
 
     /**
-     * Nav Activity Method that handles when user clicks back button
+     * {@link finalproject.csci205.com.ymca.view.NavActivity} method to handle when user clicks back button
      *
      * @author Charles
      */
@@ -103,24 +145,12 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
         removeSelf();
     }
 
-    /* Getters for presenter */
-    public EditText getSessionTime() {
-        return sessionTime;
-    }
-
-    public EditText getBreakTime() {
-        return breakTime;
-    }
-
-    public EditText getNumBreaks() {
-        return numBreaks;
-    }
-
-    public EditText getLongBreak() {
-        return longBreak;
-    }
-
-
+    /**
+     * Sets {@link CountDownView} for the fragment
+     *
+     * @param cdRef {@link CountDownView} instance
+     * @author Charles
+     */
     public void setCountDownView(CountDownView cdRef) {
         this.cdRef = cdRef;
     }

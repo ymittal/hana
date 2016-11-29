@@ -88,8 +88,8 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         PomodoroSettings pomodoroSettings = pomodoroPresenter.getSavedPomSettings();
         if (pomodoroSettings != null) {
             countDownView.setSessionTime(pomodoroSettings.getSessionTime());
-            pomodoroPresenter.savePomodoroSettings(getDefaultPomodoroSettings());
         } else {
+            pomodoroPresenter.savePomodoroSettingsToDatabase(getDefaultPomodoroSettings());
             countDownView.setSessionTime(0); // temp config
         }
 
@@ -111,7 +111,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         btnPomodoroSettings.setOnClickListener(this);
     }
 
-    // TODO: write Javadocs
+    // TODO: write Javadocs (Charles)
     @Override
     public void onDestroyView() {
         super.onDestroyView();

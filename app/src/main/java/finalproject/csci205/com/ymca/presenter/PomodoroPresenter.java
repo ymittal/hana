@@ -1,7 +1,6 @@
 package finalproject.csci205.com.ymca.presenter;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import finalproject.csci205.com.countdown.Service.CountDownListener;
 import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
@@ -10,69 +9,50 @@ import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
 
 /**
- * Created by ceh024 on 11/6/16.
+ * A class to encapsulate a presenter for the {@link PomodoroFragment} and
+ * {@link PomodoroSettingsFragment} following MVP design pattern for Android development
  */
-
 public class PomodoroPresenter implements CountDownListener {
 
     private final static long DB_ID = 4l;
-    private static PomodoroSettings pomSettings;
+
+    private static PomodoroSettings pomodoroSettings;
     private CountDownView cdView;
     private PomodoroFragment view;
     private PomodoroSettingsFragment settingsView;
     private Context context;
-    private int sessionTime;
-    private int breakTime;
-    private int numBreaks;
-    private int longBreak;
-
     private int cycleCounter;
 
+    /**
+     * Default constructor
+     */
     public PomodoroPresenter() {
     }
 
-    public PomodoroPresenter(PomodoroFragment p) {
-        view = p;
-        this.context = p.getContext();
-    }
-
-    public PomodoroPresenter(PomodoroSettingsFragment q) {
-        settingsView = q;
-        this.context = q.getContext();
-    }
-
     /**
-     * Stores all settings to model
+     * Sets up presenter for {@link PomodoroFragment} fragment
      *
+     * @param pomodoroFrag {@link PomodoroFragment} object
      * @author Charles
      */
-    public boolean saveSettiings() {
-        try {
-            sessionTime = Integer.valueOf(settingsView.getSessionTime().getText().toString());
-            breakTime = Integer.valueOf(settingsView.getBreakTime().getText().toString());
-            numBreaks = Integer.valueOf(settingsView.getNumBreaks().getText().toString());
-            longBreak = Integer.valueOf(settingsView.getLongBreak().getText().toString());
-            pomSettings = getSavedPomSettings();
-            if (pomSettings == null) {
-                pomSettings = new PomodoroSettings(sessionTime, breakTime, numBreaks, longBreak);
-                pomSettings.setId(DB_ID);
-                pomSettings.save();
-            } else {
-                pomSettings.setSessionTime(sessionTime);
-                pomSettings.setNormBreakTime(breakTime);
-                pomSettings.setNumCyclesTillBreak(numBreaks);
-                pomSettings.setLongBreak(longBreak);
-                pomSettings.save();
-            }
-            return true;
-        } catch (NumberFormatException ex) {
-            Toast.makeText(settingsView.getContext(), "Invalid input paramater, try again", Toast.LENGTH_SHORT).show();
-        }
-        return false;
+    public PomodoroPresenter(PomodoroFragment pomodoroFrag) {
+        view = pomodoroFrag;
+        this.context = pomodoroFrag.getContext();
     }
 
     /**
-     * Restores saved {@link PomodoroSettings} from local database
+     * Sets up presenter for {@link PomodoroSettingsFragment} fragment
+     *
+     * @param pomodoroSettingsFram {@link PomodoroSettingsFragment} object
+     * @author Charles
+     */
+    public PomodoroPresenter(PomodoroSettingsFragment pomodoroSettingsFram) {
+        settingsView = pomodoroSettingsFram;
+        this.context = pomodoroSettingsFram.getContext();
+    }
+
+    /**
+     * Restores saved {@link PomodoroSettings} from local database using {@link #DB_ID}
      *
      * @author Charles
      */
@@ -81,14 +61,16 @@ public class PomodoroPresenter implements CountDownListener {
     }
 
     /**
-     * Updates Session time
+     * Updates session time of {@link CountDownView}
      *
-     * @param update
+     * @param update updated session time
      * @author Charles
      */
     public void setSessionUpdate(int update) {
         cdView.setSessionTime(update);
     }
+
+    // TODO: Charles add Javadocs for the following methods
 
     public void setCountDownView(CountDownView cdView) {
         this.cdView = cdView;
@@ -100,7 +82,6 @@ public class PomodoroPresenter implements CountDownListener {
 
     @Override
     public void countdownResult(long l) {
-
     }
 
     @Override
@@ -108,9 +89,15 @@ public class PomodoroPresenter implements CountDownListener {
         incCounter();
     }
 
-    public void savePomodoroSettings(PomodoroSettings pomodoroSettings) {
-        pomSettings = pomodoroSettings;
-        pomSettings.setId(DB_ID);
-        pomodoroSettings.save();
+    /**
+     * Saves latest {@link PomodoroSettings} to local database
+     *
+     * @param ps new {@link PomodoroSettings} object
+     * @author Yash
+     */
+    public void savePomodoroSettingsToDatabase(PomodoroSettings ps) {
+        pomodoroSettings = ps;
+        pomodoroSettings.setId(DB_ID);
+        ps.save();
     }
 }
