@@ -4,7 +4,6 @@ package finalproject.csci205.com.ymca.presenter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +45,7 @@ public class GTDPresenter {
     private Task dismissedTask;
 
     /**
-     * Default constructor
+     * Default constructor; for performing unit testing.
      *
      * @author Charles
      */
@@ -110,7 +109,7 @@ public class GTDPresenter {
      * Removes {@link Task} object from database, updates view.
      * Stores old task if user wishes to restore it immediately
      *
-     * @param index
+     * @param index position in task list
      * @author Charles & Yash
      */
     public void removeTask(int index) {

@@ -34,7 +34,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
     /**
      * Default Pomodoro long break period in minutes
      */
-    public static final int DEFAULT_LONG_BREAK_IN_MINS = 60;
+    public static final int DEFAULT_LONG_BREAK_IN_MINS = 15;
 
     /**
      * A {@link CountDownView} to display time left until next Pomodoro break
