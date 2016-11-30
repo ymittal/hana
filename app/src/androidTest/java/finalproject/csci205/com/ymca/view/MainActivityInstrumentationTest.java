@@ -75,6 +75,7 @@ public class MainActivityInstrumentationTest {
      * app start
      *
      * @throws Exception
+     * @author Yash
      */
     @Test
     public void onClick() throws Exception {

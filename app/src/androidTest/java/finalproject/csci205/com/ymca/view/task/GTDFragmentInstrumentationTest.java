@@ -41,6 +41,7 @@ public class GTDFragmentInstrumentationTest {
      * {@link finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog}
      *
      * @throws Exception
+     * @author Yash
      */
     @Before
     public void setUp() throws Exception {
@@ -57,6 +58,7 @@ public class GTDFragmentInstrumentationTest {
      * from list of task
      *
      * @throws Exception
+     * @author Yash
      */
     @After
     public void tearDown() throws Exception {
@@ -68,6 +70,7 @@ public class GTDFragmentInstrumentationTest {
      * Test to restore {@link finalproject.csci205.com.ymca.model.Task} by clicking on
      * action button of {@link android.support.design.widget.Snackbar}
      *
+     * @author Yash
      * @see <a href="http://stackoverflow.com/questions/33381366/how-to-click-the-snackbar-button-in-espresso-testing">
      * Stack Overflow - How to click the snackbar button in Espresso testing?</a>
      */

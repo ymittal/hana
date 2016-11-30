@@ -38,6 +38,8 @@ public class NavActivityInstrumentationTest {
     /**
      * Tests whether {@link android.support.design.widget.NavigationView} navigation to
      * fragments works fine
+     *
+     * @author Yash
      */
     @Test
     public void testNavDrawerOpen() {
