@@ -167,6 +167,10 @@ public class CountDownService extends Service {
         this.countDownListener = countDownListener;
     }
 
+    public void resetStoredTime() {
+        storedTime = sessionTime * 60000; //miliseconds conv.
+    }
+
     public ServiceState getState() {
         return state;
     }
