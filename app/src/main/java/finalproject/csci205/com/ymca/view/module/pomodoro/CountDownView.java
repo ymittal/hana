@@ -192,7 +192,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         mins.setText(minFor.format(date));
         seconds.setText("00");
         startPauseCounter = 0;
-//        //Reset Service Internals.
+        //Reset Service Internals.
         if (isMyServiceRunning(CountDownService.class)) {
             cd.resetStoredTime();
         }

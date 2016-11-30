@@ -90,7 +90,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
             countDownView.setSessionTime(pomodoroSettings.getSessionTime());
         } else {
             pomodoroPresenter.savePomodoroSettingsToDatabase(getDefaultPomodoroSettings());
-            countDownView.setSessionTime(0); // temp config
+            countDownView.setSessionTime(0); // 0 is the default placeholder
         }
 
         countDownView.setJumpTo(MainActivity.class);
