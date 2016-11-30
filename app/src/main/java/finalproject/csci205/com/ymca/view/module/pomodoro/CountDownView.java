@@ -195,11 +195,16 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         //Reset Service Internals.
         if (isMyServiceRunning(CountDownService.class)) {
             cd.resetStoredTime();
+            Constants.destroyPomNotification(getContext());
+            getContext().unbindService(this);
         }
         //Notification
         notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + "00");
         notificationManager.notify(Constants.NOTIFICATION_ID, notification);
-        cd.stopSelf();
+        //cd.stopSelf();
+
+
+
 
     }
 
