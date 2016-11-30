@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.is;
 /**
  * A {@link ViewAssertion} class to quickly assert the number of items in a {@link RecyclerView}.
  *
+ * @author Yash
  * @see <a href="http://stackoverflow.com/questions/36399787/espresso-count-recyclerview-items">
  * Espresso - Count recyclerview items</a>
  */

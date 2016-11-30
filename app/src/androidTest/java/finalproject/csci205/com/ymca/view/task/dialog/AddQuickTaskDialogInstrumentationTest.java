@@ -33,6 +33,8 @@ import static org.hamcrest.Matchers.is;
 
 /**
  * Class to test {@link AddQuickTaskDialog} UI functionality
+ *
+ * @author Yash
  */
 public class AddQuickTaskDialogInstrumentationTest {
 
@@ -79,6 +81,7 @@ public class AddQuickTaskDialogInstrumentationTest {
      * present on the {@link NavActivity}
      *
      * @throws Exception
+     * @author Yash
      */
     @Before
     public void setUp() throws Exception {
@@ -96,6 +99,8 @@ public class AddQuickTaskDialogInstrumentationTest {
     /**
      * Tests whether {@link finalproject.csci205.com.ymca.view.task.DetailTaskFragment} opens up
      * successfully when user enters a {@link finalproject.csci205.com.ymca.model.Task} title
+     *
+     * @author Yash
      */
     @Test
     public void checkAddDetailTask() {
