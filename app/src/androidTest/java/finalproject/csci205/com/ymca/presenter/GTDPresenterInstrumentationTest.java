@@ -41,6 +41,7 @@ public class GTDPresenterInstrumentationTest {
 
     @After
     public void tearDown() throws Exception {
+        Task.deleteAll(Task.class);
     }
 
 
@@ -89,7 +90,7 @@ public class GTDPresenterInstrumentationTest {
 
         List<Task> expectedTasks = Task.listAll(Task.class);
         List<Task> resultTasks = gtdPresenter.getTasks();
-        Collections.reverse(resultTasks);
+        Collections.reverse(resultTasks);   // to consider for Task.compareTo() method which auto-orders newly added Tasks
 
         assertEquals(expectedTasks.size(), resultTasks.size());
         assertEquals(expectedTasks.get(0).getTitle(), resultTasks.get(0).getTitle());
