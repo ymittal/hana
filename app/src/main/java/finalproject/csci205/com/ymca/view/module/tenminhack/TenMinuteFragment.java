@@ -1,13 +1,12 @@
 package finalproject.csci205.com.ymca.view.module.tenminhack;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import finalproject.csci205.com.ymca.R;
-
 
 
 public class TenMinuteFragment extends Fragment implements View.OnClickListener {
