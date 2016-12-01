@@ -22,6 +22,7 @@ import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.util.Constants;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
+import finalproject.csci205.com.ymca.view.module.tenminhack.TenMinuteFragment;
 import finalproject.csci205.com.ymca.view.task.DetailTaskFragment;
 import finalproject.csci205.com.ymca.view.task.GTDFragment;
 
@@ -137,6 +138,9 @@ public class NavActivity extends AppCompatActivity implements
                 break;
             case R.id.menuitem_pomodoro:
                 fragmentClass = PomodoroFragment.class;
+                break;
+            case R.id.menuitem_tenminute:
+                fragmentClass = TenMinuteFragment.class;
                 break;
             default:
                 fragmentClass = GTDFragment.class;

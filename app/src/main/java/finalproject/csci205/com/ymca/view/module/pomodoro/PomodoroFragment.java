@@ -16,7 +16,10 @@ import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 import finalproject.csci205.com.ymca.util.Constants;
 import finalproject.csci205.com.ymca.view.MainActivity;
 
-
+/**
+ * A fragment to utilize the Pomodoro Technique, allowing a user to set frequencies and intervals of time during
+ * which they will be working and taking breaks.
+ */
 public class PomodoroFragment extends Fragment implements View.OnClickListener, OnBackStackListener {
 
     /**

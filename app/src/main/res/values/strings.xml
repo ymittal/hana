@@ -13,5 +13,6 @@
     <string name="positive_btn_edit">Edit</string>
     <string name="menuitem_tasks">Tasks</string>
     <string name="menuitem_pomodoro">Pomodoro</string>
+    <string name="menuitem_tenminute">10-minute Hack</string>
     <string name="tv_due_date">Tap to set due date</string>
 </resources>
