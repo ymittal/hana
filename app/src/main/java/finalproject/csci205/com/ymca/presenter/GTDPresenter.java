@@ -51,7 +51,10 @@ public class GTDPresenter {
      */
     public GTDPresenter() {
         this.tasks = Task.listAll(Task.class);
+        Collections.sort(this.tasks);
+        this.tasksAdapter = new TasksAdapter(this);
     }
+
 
     /**
      * Sets up presenter and initializes list of tasks by querying database

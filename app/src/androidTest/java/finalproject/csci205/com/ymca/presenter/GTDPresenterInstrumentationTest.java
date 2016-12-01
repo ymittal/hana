@@ -1,19 +1,38 @@
-package finalproject.csci205.com.ymca;
+package finalproject.csci205.com.ymca.presenter;
 
+import android.support.test.rule.ActivityTestRule;
+
+import com.orm.SugarContext;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import finalproject.csci205.com.ymca.model.Task;
-import finalproject.csci205.com.ymca.presenter.GTDPresenter;
+import finalproject.csci205.com.ymca.view.NavActivity;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- *  Class for testing the functionality of various GTDPresenter
- *  methods.
+ * Class to test the functionality of {@link GTDPresenter}
  *
- * Created by ala021 on 11/13/16.
+ * Created by Alekzander
  */
-public class GTDPresenterTest {
+public class GTDPresenterInstrumentationTest {
+
+    @Rule
+    public ActivityTestRule<NavActivity> activityTestRule = new ActivityTestRule<>(NavActivity.class);
+
+    @Before
+    public void setUp() throws Exception {
+        SugarContext.init(activityTestRule.getActivity());
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        SugarContext.terminate();
+    }
 
 
     /**
@@ -30,6 +49,7 @@ public class GTDPresenterTest {
         int actual = test.getTasks().size();
         assertEquals(expectedListLength, actual);
     }
+
 
     /**
      * Unit Test for adding tasks to the GTD Presenter
