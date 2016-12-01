@@ -52,7 +52,7 @@ public class SubtasksAdapter extends RecyclerView.Adapter<SubtaskViewHolder> {
         holder.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                detailTaskPresenter.removeTask(position);
+                detailTaskPresenter.removeSubtask(position);
             }
         });
 

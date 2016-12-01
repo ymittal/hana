@@ -1,5 +1,6 @@
 package finalproject.csci205.com.ymca.presenter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class DetailTaskPresenter {
      * Default constructor
      */
     public DetailTaskPresenter() {
+        this.subtasks = new ArrayList<>();
+        this.subtasksAdapter = new SubtasksAdapter(this);
     }
 
     /**
@@ -89,7 +92,7 @@ public class DetailTaskPresenter {
      * @param pos position in list
      * @author Yash
      */
-    public void removeTask(int pos) {
+    public void removeSubtask(int pos) {
         Subtask subtaskToBeRemoved = subtasks.get(pos);
         subtaskToBeRemoved.delete();
         subtasks.remove(pos);
