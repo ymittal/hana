@@ -24,14 +24,18 @@ public class GTDPresenterInstrumentationTest {
     @Rule
     public ActivityTestRule<NavActivity> activityTestRule = new ActivityTestRule<>(NavActivity.class);
 
+    private GTDPresenter gtdPresenter;
+
     @Before
     public void setUp() throws Exception {
         SugarContext.init(activityTestRule.getActivity());
+
+        Task.deleteAll(Task.class);
+        gtdPresenter = new GTDPresenter();
     }
 
     @After
     public void tearDown() throws Exception {
-        SugarContext.terminate();
     }
 
 
@@ -42,12 +46,10 @@ public class GTDPresenterInstrumentationTest {
      */
     @Test
     public void test_AddTask() throws Exception {
-        GTDPresenter test = new GTDPresenter();
-        Task testTask = new Task();
-        test.addTask(testTask, true);
-        int expectedListLength = 1;
-        int actual = test.getTasks().size();
-        assertEquals(expectedListLength, actual);
+        gtdPresenter.addTask(new Task(), true);
+        int actualLength = gtdPresenter.getTasks().size();
+        int expectedLength = 1;
+        assertEquals(expectedLength, actualLength);
     }
 
 
@@ -58,12 +60,14 @@ public class GTDPresenterInstrumentationTest {
      */
     @Test
     public void test_removeTask() throws Exception {
-        GTDPresenter test = new GTDPresenter();
-        Task testTask = new Task();
-        test.addTask(testTask, true);
-        test.removeTask(0);
-        int expectedListLength = 0;
-        int actual = test.getTasks().size();
-        assertEquals(expectedListLength, actual);
+        gtdPresenter.addTask(new Task(), false);
+        int actualLength = gtdPresenter.getTasks().size();
+        int expectedLength = 1;
+        assertEquals(expectedLength, actualLength);
+
+        gtdPresenter.removeTask(0);
+        actualLength = gtdPresenter.getTasks().size();
+        expectedLength = 0;
+        assertEquals(expectedLength, actualLength);
     }
 }
