@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.List;
+
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.view.NavActivity;
 
@@ -16,11 +19,13 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Class to test the functionality of {@link GTDPresenter}
- *
+ * <p>
  * Created by Alekzander
  */
 public class GTDPresenterInstrumentationTest {
 
+    public static final String DUMMY_TASK_2 = "Dummy Task 2";
+    public static final String DUMMY_TASK_1 = "Dummy Task 1";
     @Rule
     public ActivityTestRule<NavActivity> activityTestRule = new ActivityTestRule<>(NavActivity.class);
 
@@ -45,9 +50,11 @@ public class GTDPresenterInstrumentationTest {
      * @throws Exception
      */
     @Test
-    public void test_AddTask() throws Exception {
-        gtdPresenter.addTask(new Task(), true);
-        int actualLength = gtdPresenter.getTasks().size();
+    public void testAddTask() throws Exception {
+        Task newTask = new Task();
+        gtdPresenter.addTask(newTask, true);
+
+        int actualLength = gtdPresenter.taskSize();
         int expectedLength = 1;
         assertEquals(expectedLength, actualLength);
     }
@@ -59,15 +66,48 @@ public class GTDPresenterInstrumentationTest {
      * @throws Exception
      */
     @Test
-    public void test_removeTask() throws Exception {
-        gtdPresenter.addTask(new Task(), false);
-        int actualLength = gtdPresenter.getTasks().size();
+    public void testRemoveTask() throws Exception {
+        Task newTask = new Task();
+        gtdPresenter.addTask(newTask, false);
+
+        int actualLength = gtdPresenter.taskSize();
         int expectedLength = 1;
         assertEquals(expectedLength, actualLength);
 
         gtdPresenter.removeTask(0);
-        actualLength = gtdPresenter.getTasks().size();
+        actualLength = gtdPresenter.taskSize();
         expectedLength = 0;
         assertEquals(expectedLength, actualLength);
     }
+
+    @Test
+    public void getTasks() throws Exception {
+        Task newTask1 = new Task(DUMMY_TASK_1);
+        Task newTask2 = new Task(DUMMY_TASK_2);
+        gtdPresenter.addTask(newTask1, false);
+        gtdPresenter.addTask(newTask2, false);
+
+        List<Task> expectedTasks = Task.listAll(Task.class);
+        List<Task> resultTasks = gtdPresenter.getTasks();
+        Collections.reverse(resultTasks);
+
+        assertEquals(expectedTasks.size(), resultTasks.size());
+        assertEquals(expectedTasks.get(0).getTitle(), resultTasks.get(0).getTitle());
+        assertEquals(expectedTasks.get(1).getTitle(), resultTasks.get(1).getTitle());
+    }
+
+    @Test
+    public void taskChecked() throws Exception {
+        Task newTask = new Task();
+        gtdPresenter.addTask(newTask, false);
+
+        gtdPresenter.taskChecked(0, true);
+        boolean expectedCheckedStatus = Task.listAll(Task.class).get(0).isComplete();
+        assertEquals(expectedCheckedStatus, true);
+
+        gtdPresenter.taskChecked(0, false);
+        expectedCheckedStatus = Task.listAll(Task.class).get(0).isComplete();
+        assertEquals(expectedCheckedStatus, false);
+    }
+
 }
