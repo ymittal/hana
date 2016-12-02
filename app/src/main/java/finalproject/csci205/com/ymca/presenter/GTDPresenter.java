@@ -138,13 +138,15 @@ public class GTDPresenter {
     /**
      * Changes task completion status for {@link Task} in database
      *
-     * @param index position of {@link Task} object in list
-     * @param b     new completion status
+     * @param index    position of {@link Task} object in list
+     * @param changeTo new completion status
      * @author Charles and Yash
      */
-    public void taskChecked(int index, boolean b) {
-        tasks.get(index).setIsComplete(b);
+    public void taskChecked(int index, boolean changeTo) {
+        tasks.get(index).setIsComplete(changeTo);
         tasks.get(index).save();
+        Collections.sort(this.tasks);
+        tasksAdapter.notifyDataSetChanged();
     }
 
     /**
