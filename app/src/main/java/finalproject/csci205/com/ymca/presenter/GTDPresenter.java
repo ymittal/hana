@@ -1,6 +1,7 @@
 package finalproject.csci205.com.ymca.presenter;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -47,12 +48,13 @@ public class GTDPresenter {
     /**
      * Default constructor; for performing unit testing.
      *
+     * @param ctx view {@link Context}
      * @author Charles
      */
-    public GTDPresenter() {
+    public GTDPresenter(Context ctx) {
         this.tasks = Task.listAll(Task.class);
         Collections.sort(this.tasks);
-        this.tasksAdapter = new TasksAdapter(this);
+        this.tasksAdapter = new TasksAdapter(this, ctx);
     }
 
 
@@ -66,7 +68,7 @@ public class GTDPresenter {
         this.view = view;
         this.tasks = Task.listAll(Task.class);
         Collections.sort(this.tasks);
-        this.tasksAdapter = new TasksAdapter(this);
+        this.tasksAdapter = new TasksAdapter(this, view.getContext());
     }
 
     /**

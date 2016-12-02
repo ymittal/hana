@@ -36,7 +36,7 @@ public class GTDPresenterInstrumentationTest {
         SugarContext.init(activityTestRule.getActivity());
 
         Task.deleteAll(Task.class);
-        gtdPresenter = new GTDPresenter();
+        gtdPresenter = new GTDPresenter(activityTestRule.getActivity());
     }
 
     @After
