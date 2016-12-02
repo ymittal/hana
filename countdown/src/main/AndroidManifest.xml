@@ -12,10 +12,7 @@
         <service android:name="finalproject.csci205.com.countdown.Service.CountDownService">
 
         </service>
-        <receiver
-            android:name="finalproject.csci205.com.ymca.view.module.pomodoro.CountDownView$NotificationButtonListener"
-            android:exported="true">
-        </receiver>
+
 
         <intent-filter>
             <action android:name="android.intent.action.Start" />
