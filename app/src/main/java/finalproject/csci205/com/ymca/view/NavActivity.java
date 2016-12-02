@@ -152,7 +152,6 @@ public class NavActivity extends AppCompatActivity implements
             e.printStackTrace();
         }
         initFragment(fragment);
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
