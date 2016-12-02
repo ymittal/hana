@@ -145,7 +145,6 @@ public class NavActivity extends AppCompatActivity implements
             default:
                 fragmentClass = GTDFragment.class;
         }
-
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
