@@ -153,6 +153,7 @@ public class NavActivity extends AppCompatActivity implements
         }
         initFragment(fragment);
 
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
