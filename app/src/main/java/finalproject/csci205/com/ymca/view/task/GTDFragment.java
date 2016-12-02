@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.presenter.GTDPresenter;
-import finalproject.csci205.com.ymca.view.gesture.TaskItemTouchTouchHelperCallback;
+import finalproject.csci205.com.ymca.view.gesture.TaskItemTouchHelperCallback;
 import finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog;
 import finalproject.csci205.com.ymca.view.task.item.SimpleDividerItemDecoration;
 
@@ -116,7 +116,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
 
         // defines swipe to delete functionality
         ItemTouchHelper.Callback callback =
-                new TaskItemTouchTouchHelperCallback(gtdPresenter.getTasksAdapter(), rvTasks);
+                new TaskItemTouchHelperCallback(gtdPresenter.getTasksAdapter(), rvTasks);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(rvTasks);
     }

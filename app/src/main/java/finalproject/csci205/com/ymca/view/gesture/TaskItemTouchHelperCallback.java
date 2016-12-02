@@ -26,7 +26,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
  * @see <a href="https://github.com/iPaulPro/Android-ItemTouchHelper-Demo">
  * GitHub Android-ItemTouchHelper-Demo</a>
  */
-public class TaskItemTouchTouchHelperCallback extends ItemTouchHelper.Callback {
+public class TaskItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     /**
      * Adapter attached to recyclerview
@@ -41,7 +41,7 @@ public class TaskItemTouchTouchHelperCallback extends ItemTouchHelper.Callback {
      * @param adapter      adapter attached to recyclerview
      * @param recyclerView recyclerview object
      */
-    public TaskItemTouchTouchHelperCallback(TaskTouchHelperAdapter adapter, RecyclerView recyclerView) {
+    public TaskItemTouchHelperCallback(TaskTouchHelperAdapter adapter, RecyclerView recyclerView) {
         mAdapter = adapter;
         this.recyclerView = recyclerView;
     }
