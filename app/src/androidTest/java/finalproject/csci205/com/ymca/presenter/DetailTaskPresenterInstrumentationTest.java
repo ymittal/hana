@@ -50,7 +50,7 @@ public class DetailTaskPresenterInstrumentationTest {
     }
 
     private void addDummyTask() {
-        GTDPresenter gtdPresenter = new GTDPresenter();
+        GTDPresenter gtdPresenter = new GTDPresenter(activityTestRule.getActivity());
         task = new Task(DUMMY_TASK);
         gtdPresenter.addTask(task, false);
     }

@@ -1,11 +1,13 @@
 package finalproject.csci205.com.ymca.view.task.item;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
@@ -22,16 +24,31 @@ import finalproject.csci205.com.ymca.view.gesture.TaskTouchHelperAdapter;
 public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implements TaskTouchHelperAdapter {
 
     /**
+     * Alpha of {@link TaskViewHolder#tvTimeLeft} when {@link Task} is done
+     */
+    public static final float ALPHA_TASK_DONE = 0.25f;
+    /**
+     * Alpha of {@link TaskViewHolder#tvTimeLeft} when {@link Task} is not done
+     */
+    public static final float ALPHA_TASK_UNDONE = 1.0f;
+
+    /**
+     * Holds the view {@link Context}
+     */
+    private final Context context;
+    /**
      * {@link GTDPresenter} presenter
      */
     private GTDPresenter gtdPresenter;
 
     /**
      * @param gtdPresenter {@link GTDPresenter} presenter
+     * @param context      view {@link Context}
      * @author Charles
      */
-    public TasksAdapter(GTDPresenter gtdPresenter) {
+    public TasksAdapter(GTDPresenter gtdPresenter, Context context) {
         this.gtdPresenter = gtdPresenter;
+        this.context = context;
     }
 
     /**
@@ -58,22 +75,14 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, int position) {
         final Task task = gtdPresenter.getTasks().get(position);
-
-        holder.tvTask.setText(task.getTitle());
-        holder.checkboxTask.setChecked(task.isComplete());
-
-        // sets time remaining if task due date has been defined by user
-        if (task.getDueDate() == null) {
-            holder.tvTimeLeft.setText("Tap to edit details");
-        } else {
-            holder.tvTimeLeft.setText(DateTimeUtil.convertDateToTimeRemaining(task.getDueDate()));
-        }
+        setViewHolderUI(holder, task);
 
         // updates task completion status in Database
-        holder.checkboxTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.checkboxTask.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isComplete) {
-                gtdPresenter.taskChecked(holder.getAdapterPosition(), isComplete);
+            public void onClick(View view) {
+                boolean changeTo = !task.isComplete();
+                gtdPresenter.taskChecked(holder.getAdapterPosition(), changeTo);
             }
         });
 
@@ -86,6 +95,35 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         });
 
         holder.itemView.setTag(task);
+    }
+
+    /**
+     * Initializes the UI elements for a {@link TaskViewHolder} and designs it according to
+     * whether the {@link Task} has been completed or its due date has been set
+     *
+     * @param holder {@link TaskViewHolder} object
+     * @param task   {@link Task} represented by view
+     */
+    private void setViewHolderUI(TaskViewHolder holder, Task task) {
+        holder.tvTask.setText(task.getTitle());
+        holder.checkboxTask.setChecked(task.isComplete());
+
+        if (task.isComplete()) {
+            holder.itemView.setAlpha(ALPHA_TASK_DONE);
+            holder.tvTimeLeft.setVisibility(View.GONE);
+        } else {
+            holder.itemView.setAlpha(ALPHA_TASK_UNDONE);
+            holder.tvTimeLeft.setVisibility(View.VISIBLE);
+
+            // sets time remaining if task due date has been defined by user
+            if (task.getDueDate() != null) {
+                holder.tvTimeLeft.setText(DateTimeUtil.convertDateToTimeRemaining(task.getDueDate()));
+                holder.tvTimeLeft.setTextColor(Color.WHITE);
+            } else {
+                holder.tvTimeLeft.setText(R.string.tv_time_left_unset);
+                holder.tvTimeLeft.setTextColor(ContextCompat.getColor(context, R.color.tv_time_left_unset));
+            }
+        }
     }
 
     /**
