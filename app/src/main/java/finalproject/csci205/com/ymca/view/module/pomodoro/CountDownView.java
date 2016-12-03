@@ -85,6 +85,13 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     private int breakTime;
     private int numCyclesTillBreak;
     private int longBreakTime;
+    /* Determines if system should countdown as a break, or work peroid.
+     * On first run, it should be true. */
+    private boolean breakMode = true;
+
+    //Model Ref
+    private PomodoroPresenter presenter;
+    private PomodoroSettings settings;
 
     public CountDownView(Context context) {
         super(context);
@@ -114,6 +121,10 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         cancelPom.setOnClickListener(this);
         cdView = this;
 
+        //Pomodoro data
+        presenter = new PomodoroPresenter();
+        settings = presenter.getSavedPomSettings();
+
 
     }
 
@@ -124,8 +135,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      */
     public void setInternalSettings() {
         //Pomodoro Init;
-        PomodoroPresenter presenter = new PomodoroPresenter();
-        PomodoroSettings settings = presenter.getSavedPomSettings();
+
         if (settings != null) {
             breakTime = settings.getNormBreakTime();
             numCyclesTillBreak = settings.getNumCyclesTillBreak();
@@ -200,17 +210,47 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     /**
      * Handles view if the counter was manually canceled by the user, or ran about its
      * time on its own. This method handles the functionality that is shared between both
-     * events.
+     * events. Method will also configure the timer for breaks@|!
      *
      * @author Charles
      */
     private void countCancelComplete() {
-        cd.stopTimer();
-        Date date = new Date((long) sessionTime * 60000);
+        //Formatting variables, doing general reset
+        Date date = null;
         DateFormat minFor = new SimpleDateFormat("mm");
-        mins.setText(minFor.format(date));
+        numCyclesTillBreak--; //Decrement counter
         seconds.setText("00");
-        startPauseCounter = 0;
+        cd.stopTimer();
+        /**
+         * If breakMode == false, then config completion for another work peroid
+         * If true, then config for a break.
+         */
+        if (!breakMode) {
+
+            sessionTime = settings.getSessionTime();
+            date = new Date((long) sessionTime * 60000);
+            mins.setText(minFor.format(date));
+            startPauseCounter = 0;
+
+            breakMode = false;
+        } else if (breakMode) {
+
+            //Pomodoro internals
+            if (numCyclesTillBreak == 0) { //Time for a long break
+                Toast.makeText(getContext(), "Long Break time!", Toast.LENGTH_SHORT).show();
+                sessionTime = longBreakTime;
+                date = new Date((long) longBreakTime * 60000);
+                mins.setText(minFor.format(date));
+                setInternalSettings();
+            } else { //Time for a short break
+                Toast.makeText(getContext(), "Short Break time!", Toast.LENGTH_SHORT).show();
+                sessionTime = breakTime;
+                date = new Date((long) breakTime * 60000);
+                mins.setText(minFor.format(date));
+            }
+
+            breakMode = false;
+        }
         //Reset Service Internals.
         if (isMyServiceRunning(CountDownService.class)) {
             cd.resetStoredTime();
@@ -221,14 +261,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + "00");
 
 
-        //Pomodoro internals
-        numCyclesTillBreak--;
-        if (numCyclesTillBreak == 0) { //Time for a long break
-            Toast.makeText(getContext(), "Long Break time!", Toast.LENGTH_SHORT).show();
-            setInternalSettings();
-        } else {
-            Toast.makeText(getContext(), "Short Break time!", Toast.LENGTH_SHORT).show();
-        }
     }
 
 

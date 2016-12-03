@@ -10,7 +10,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3790291-bbee-401b-8976-21c5fc40af3d" name="Default" comment="Pomodoro implementation part 2">
+    <list default="true" id="b3790291-bbee-401b-8976-21c5fc40af3d" name="Default" comment="Corrected Settings View">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
@@ -22,7 +22,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/CountDownView.java" afterPath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/CountDownView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pomodoro_settings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pomodoro_settings.xml" />
     </list>
     <ignored path="ymca.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,8 +57,8 @@
       <file leaf-file-name="CountDownView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/CountDownView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="229" column="47" selection-start-line="229" selection-start-column="47" selection-end-line="229" selection-end-column="47" />
+            <state relative-caret-position="-714">
+              <caret line="229" column="52" selection-start-line="229" selection-start-column="52" selection-end-line="229" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -2824,7 +2823,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="827" />
+    <option name="height" value="825" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -3318,13 +3317,6 @@
       <option name="presentableId" value="Default" />
       <updated>1478096901601</updated>
     </task>
-    <task id="LOCAL-00024" summary="Got View to be imported">
-      <created>1479345366513</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1479345366513</updated>
-    </task>
     <task id="LOCAL-00025" summary="Progress">
       <created>1479348957939</created>
       <option name="number" value="00025" />
@@ -3661,7 +3653,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480726899964</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Corrected Settings View">
+      <created>1480727774619</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1480727774621</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -3685,7 +3684,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="827" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="825" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3705,7 +3704,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31497175" sideWeight="0.49713877" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2937853" sideWeight="0.47138768" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2925457" sideWeight="0.47138768" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32627118" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -3772,7 +3771,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Working with view2" />
     <MESSAGE value="Lota test code for the notification" />
     <MESSAGE value="Progress" />
     <MESSAGE value="Need to update textview then its done" />
@@ -3797,7 +3795,8 @@
     <MESSAGE value="Design Manual" />
     <MESSAGE value="Pomodoro implementation" />
     <MESSAGE value="Pomodoro implementation part 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pomodoro implementation part 2" />
+    <MESSAGE value="Corrected Settings View" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected Settings View" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -4137,8 +4136,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/CountDownView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="229" column="47" selection-start-line="229" selection-start-column="47" selection-end-line="229" selection-end-column="47" />
+        <state relative-caret-position="-714">
+          <caret line="229" column="52" selection-start-line="229" selection-start-column="52" selection-end-line="229" selection-end-column="52" />
           <folding />
         </state>
       </provider>
