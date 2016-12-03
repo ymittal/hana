@@ -162,7 +162,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     @Override
     public void onClick(View view) {
 
-
         if (cd != null) {
             if (view.getId() == timerContainer.getId()) {
                 resumeOrPause();
@@ -220,12 +219,14 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         }
         //Notification
         notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + "00");
-        notificationManager.notify(Constants.NOTIFICATION_ID, notification);
-        //cd.stopSelf();
 
 
-
-
+        //Pomodoro internals
+        numCyclesTillBreak--;
+        if (numCyclesTillBreak == 0) {
+            Toast.makeText(getContext(), "Break time!", Toast.LENGTH_SHORT).show();
+            setInternalSettings();
+        }
     }
 
 
@@ -263,8 +264,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         CountDownService.CountDownBinder binder = (CountDownService.CountDownBinder) iBinder;
         cd = binder.getService();
         cd.setCountDownListener(this);
-
-
         if (cd.getState() == ServiceState.ISRUNNING) {
             startPauseCounter = 1;
         } else if (cd.getState() == ServiceState.PAUSED) {
