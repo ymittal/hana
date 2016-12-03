@@ -123,16 +123,9 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         cancelPom.setOnClickListener(this);
         cdView = this;
         minFor = new SimpleDateFormat("mm");
+        pomodoroDataUpdate();
 
-        //Pomodoro data
-        presenter = new PomodoroPresenter();
-        settings = presenter.getSavedPomSettings();
-        if (settings != null) {
-            this.sessionTime = settings.getSessionTime();
-            setInternalSettings();
-        } else {
-            this.sessionTime = Constants.DEFAULT_SESSION_TIME_IN_MINS;
-        }
+
         //Service
         CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
         if (isMyServiceRunning(CountDownService.class)) {
@@ -142,6 +135,24 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
             getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
         }
 
+
+    }
+
+    /**
+     * Creates Pomodoro Data Objects when user chooses to save new variables.
+     *
+     * @author Charles
+     */
+    public void pomodoroDataUpdate() {
+        //Pomodoro data
+        presenter = new PomodoroPresenter();
+        settings = presenter.getSavedPomSettings();
+        if (settings != null) {
+            this.sessionTime = settings.getSessionTime();
+            setInternalSettings();
+        } else {
+            this.sessionTime = Constants.DEFAULT_SESSION_TIME_IN_MINS;
+        }
 
     }
 
@@ -160,6 +171,17 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         }
     }
 
+    /**
+     * Used saved new data to PomodoroSettings, we must update the view now
+     *
+     * @Charles
+     */
+    public void newSavedConfig() {
+        pomodoroDataUpdate();
+        setInternalSettings();
+        sessionTime = settings.getSessionTime();
+        breakMode = true;
+    }
 
     /**
      * Updates view and notification to reflect accurate process
@@ -233,6 +255,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      */
     private void countCancelComplete() {
         //Formatting variables, doing general reset
+        Constants.destroyPomNotification(getContext());
         numCyclesTillBreak--; //Decrement counter
         seconds.setText("00");
         startPauseCounter = 0;
@@ -244,22 +267,24 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         if (!breakMode) {
             sessionTime = settings.getSessionTime();
             configBreakOrPomoSession(sessionTime);
-            breakMode = false;
-        } else if (breakMode) {
+            breakMode = true;
+        } else {
 
             //Pomodoro internals
-            if (numCyclesTillBreak == 0) { //Time for a long break
+            if (numCyclesTillBreak < 0) { //Time for a long break
                 Toast.makeText(getContext(), "Long Break time!", Toast.LENGTH_SHORT).show();
                 sessionTime = longBreakTime;
                 configBreakOrPomoSession(sessionTime);
                 setInternalSettings();
+
             } else { //Time for a short break
                 Toast.makeText(getContext(), "Short Break time!", Toast.LENGTH_SHORT).show();
                 sessionTime = breakTime;
                 configBreakOrPomoSession(sessionTime);
-            }
 
+            }
             breakMode = false;
+
         }
         //Reset Service Internals.
         if (isMyServiceRunning(CountDownService.class)) {
@@ -268,7 +293,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
             getContext().unbindService(this);
         }
         //Notification
-        notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + "00");
+        //notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + "00");
 
 
     }
