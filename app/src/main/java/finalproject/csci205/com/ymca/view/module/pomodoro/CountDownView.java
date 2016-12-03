@@ -30,6 +30,8 @@ import finalproject.csci205.com.countdown.Service.CountDownListener;
 import finalproject.csci205.com.countdown.Service.CountDownService;
 import finalproject.csci205.com.countdown.Ults.ServiceState;
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
+import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 import finalproject.csci205.com.ymca.util.Constants;
 
 /******************************************
@@ -66,23 +68,23 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     private final int REBINDSERVICE = 0;
     private final int NOTIFICATION_ID = 1;
     private final int TIMERUP_ID = 9;
-    private int sessionTime;
     private int startPauseCounter = 0;
     private View root;
     private TextView mins;
     private TextView seconds;
     private ImageButton cancelPom;
     private LinearLayout timerContainer;
-
-
     private CountDownService cd;
     //Notification
     private RemoteViews notificationView;
     private NotificationManager notificationManager;
     private Notification notification;
     private Class jumpTo;
-    //
-
+    //Pomodoro Specifics
+    private int sessionTime;
+    private int breakTime;
+    private int numCyclesTillBreak;
+    private int longBreakTime;
 
     public CountDownView(Context context) {
         super(context);
@@ -113,6 +115,22 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         cdView = this;
 
 
+    }
+
+    /**
+     * Inits local vars with stored settings if they exist
+     *
+     * @author Charles
+     */
+    public void setInternalSettings() {
+        //Pomodoro Init;
+        PomodoroPresenter presenter = new PomodoroPresenter();
+        PomodoroSettings settings = presenter.getSavedPomSettings();
+        if (settings != null) {
+            breakTime = settings.getNormBreakTime();
+            numCyclesTillBreak = settings.getNumCyclesTillBreak();
+            longBreakTime = settings.getLongBreak();
+        }
     }
 
 

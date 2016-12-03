@@ -22,22 +22,7 @@ import finalproject.csci205.com.ymca.view.MainActivity;
  */
 public class PomodoroFragment extends Fragment implements View.OnClickListener, OnBackStackListener {
 
-    /**
-     * Default Pomodoro session period in minutes
-     */
-    public static final int DEFAULT_SESSION_TIME_IN_MINS = 25;
-    /**
-     * Default Pomodoro normal break period in minutes
-     */
-    public static final int DEFAULT_NORMAL_BREAK_IN_MINS = 5;
-    /**
-     * Default number of Pomodoro cycles
-     */
-    public static final int DEFAULT_NUM_CYCLES = 5;
-    /**
-     * Default Pomodoro long break period in minutes
-     */
-    public static final int DEFAULT_LONG_BREAK_IN_MINS = 15;
+
 
     /**
      * A {@link CountDownView} to display time left until next Pomodoro break
@@ -110,7 +95,6 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
     private void initUI(View root) {
         countDownView = (CountDownView) root.findViewById(R.id.countDownViewInFragment);
         btnPomodoroSettings = (ImageButton) root.findViewById(R.id.btnPomodoroSettings);
-
         btnPomodoroSettings.setOnClickListener(this);
     }
 
@@ -155,12 +139,13 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
 
     /**
      * Sets visibility of Pomodoro settings button to {@link View#VISIBLE}
-     *
+     * Once this is complete, the countdown view can init the local values needed to run pomodoro.
      * @author Charles
      */
     @Override
     public void onViewReturn() {
         btnPomodoroSettings.setVisibility(View.VISIBLE);
+        countDownView.setInternalSettings();
     }
 
     /**
@@ -169,10 +154,10 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
      */
     public PomodoroSettings getDefaultPomodoroSettings() {
         PomodoroSettings ps = new PomodoroSettings();
-        ps.setSessionTime(DEFAULT_SESSION_TIME_IN_MINS);
-        ps.setNormBreakTime(DEFAULT_NORMAL_BREAK_IN_MINS);
-        ps.setNumCyclesTillBreak(DEFAULT_NUM_CYCLES);
-        ps.setLongBreak(DEFAULT_LONG_BREAK_IN_MINS);
+        ps.setSessionTime(Constants.DEFAULT_SESSION_TIME_IN_MINS);
+        ps.setNormBreakTime(Constants.DEFAULT_NORMAL_BREAK_IN_MINS);
+        ps.setNumCyclesTillBreak(Constants.DEFAULT_NUM_CYCLES);
+        ps.setLongBreak(Constants.DEFAULT_LONG_BREAK_IN_MINS);
         return ps;
     }
 }
