@@ -10,19 +10,19 @@ public class PomodoroSettings extends SugarRecord {
 
     // TODO: finish Javadocs
     /**
-     *
+     * Time for standard work peroid. Should be 30-60 mins.
      */
     private int sessionTime;
     /**
-     *
+     * Default time for break, usually 5min but can be up to 10
      */
     private int normBreakTime;
     /**
-     *
+     * Time for long break, usually 10-15 min but can be longer
      */
     private int longBreak;
     /**
-     *
+     * Cycles in between short/long breaks
      */
     private int numCyclesTillBreak;
 

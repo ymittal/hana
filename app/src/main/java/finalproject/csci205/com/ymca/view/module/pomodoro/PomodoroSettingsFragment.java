@@ -95,7 +95,6 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
         } catch (NumberFormatException ex) {
             Toast.makeText(getContext(), "Invalid input parameter(s). Please try again!", Toast.LENGTH_SHORT).show();
             return null;
-
         }
     }
 
@@ -103,6 +102,12 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
     public void onClick(View view) {
         if (view.getId() == saveBtn.getId()) {
             PomodoroSettings ps = getCurrentPomodoroSettings();
+            /*
+                Saves current settings to DB
+                Alerts Listener in PomodoroFragment
+                Calls method in CountDownView to get new refrences for internal Pomodoro data
+                from model -- > presenter -- > CountDownView
+             */
             if (ps != null) {
                 pomodoroPresenter.savePomodoroSettingsToDatabase(ps);
                 backStackListener.onViewReturn();

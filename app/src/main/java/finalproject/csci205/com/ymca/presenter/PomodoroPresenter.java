@@ -101,10 +101,4 @@ public class PomodoroPresenter implements CountDownListener {
         ps.save();
     }
 
-    /**
-     * Invoked if system doesn't find stored data.
-     */
-    public void createDefaultProfile() {
-
-    }
 }
