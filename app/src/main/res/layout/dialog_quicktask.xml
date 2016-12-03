@@ -18,7 +18,7 @@
             android:id="@+id/etAddTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Task Name"
+            android:hint="@string/et_add_task"
             android:inputType="textCapSentences|textNoSuggestions"
             android:textColor="@color/colorPrimary" />
 

@@ -60,7 +60,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle("Pomodoro");
+        getActivity().setTitle(getString(R.string.title_pomodoro_fragment));
     }
 
     /**
@@ -158,7 +158,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
      * @return default {@link PomodoroSettings} configuration for the Pomodoro module
      * of the application
      */
-    public PomodoroSettings getDefaultPomodoroSettings() {
+    private PomodoroSettings getDefaultPomodoroSettings() {
         PomodoroSettings ps = new PomodoroSettings();
         ps.setSessionTime(PomodoroSettings.DEFAULT_SESSION_TIME_IN_MINS);
         ps.setNormBreakTime(PomodoroSettings.DEFAULT_NORMAL_BREAK_IN_MINS);

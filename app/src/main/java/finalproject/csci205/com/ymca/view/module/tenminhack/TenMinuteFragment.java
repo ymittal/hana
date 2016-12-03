@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 
 import finalproject.csci205.com.ymca.R;
 
-
 public class TenMinuteFragment extends Fragment implements View.OnClickListener {
-
 
     /**
      * Required empty constructor
@@ -33,7 +31,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle("Ten Minute Hack");
+        getActivity().setTitle(getString(R.string.title_ten_minute_fragment));
     }
 
     @Override
@@ -46,10 +44,5 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 }

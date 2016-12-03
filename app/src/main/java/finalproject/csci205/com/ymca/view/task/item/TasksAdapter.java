@@ -26,11 +26,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
     /**
      * Alpha of {@link TaskViewHolder#tvTimeLeft} when {@link Task} is done
      */
-    public static final float ALPHA_TASK_DONE = 0.25f;
+    private static final float ALPHA_TASK_DONE = 0.25f;
     /**
      * Alpha of {@link TaskViewHolder#tvTimeLeft} when {@link Task} is not done
      */
-    public static final float ALPHA_TASK_UNDONE = 1.0f;
+    private static final float ALPHA_TASK_UNDONE = 1.0f;
 
     /**
      * Holds the view {@link Context}
@@ -39,7 +39,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
     /**
      * {@link GTDPresenter} presenter
      */
-    private GTDPresenter gtdPresenter;
+    private final GTDPresenter gtdPresenter;
 
     /**
      * @param gtdPresenter {@link GTDPresenter} presenter
@@ -148,8 +148,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
 
         // allows user to undo task delete
         Snackbar snackbar = Snackbar
-                .make(recyclerView, "Item has been deleted", Snackbar.LENGTH_LONG)
-                .setAction("UNDO", new View.OnClickListener() {
+                .make(recyclerView, R.string.snackbar_task_delete, Snackbar.LENGTH_LONG)
+                .setAction(R.string.snackbar_task_undo, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         gtdPresenter.restoreTask(position);

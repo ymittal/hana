@@ -12,7 +12,7 @@ public class SharedPreferenceUtil {
     /**
      * Constant for {@link SharedPreferences} whether user has started using the app
      */
-    public static final String PREFS_IS_OPEN = "PREFS_IS_OPEN";
+    private static final String PREFS_IS_OPEN = "PREFS_IS_OPEN";
 
     /**
      * @param context context object

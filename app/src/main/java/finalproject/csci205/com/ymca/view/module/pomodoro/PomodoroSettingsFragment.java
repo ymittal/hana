@@ -22,7 +22,7 @@ import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 public class PomodoroSettingsFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Charles, please add Javadocs for these
-    CountDownView cdRef;
+    private CountDownView cdRef;
     private PomodoroPresenter pomodoroPresenter;
     private OnBackStackListener backStackListener;
 
@@ -89,7 +89,7 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
      * @return currently configured Pomodoro settings
      * @author Charles and Yash
      */
-    public PomodoroSettings getCurrentPomodoroSettings() {
+    private PomodoroSettings getCurrentPomodoroSettings() {
         try {
             PomodoroSettings ps = new PomodoroSettings();
             ps.setSessionTime(Integer.valueOf(sessionTime.getText().toString()));
@@ -99,7 +99,7 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
             return ps;
 
         } catch (NumberFormatException ex) {
-            Toast.makeText(getContext(), "Invalid input parameter(s). Please try again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.err_pom_settings_invalid, Toast.LENGTH_SHORT).show();
             return null;
         }
     }

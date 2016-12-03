@@ -17,7 +17,7 @@
                 android:id="@+id/mins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00"
+                android:text="@string/tv_mins"
                 android:textColor="@color/timerDigits"
                 android:textSize="64sp"
                 android:textStyle="bold" />
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:text="min"
+                android:text="@string/tv_min_label"
                 android:textColor="@color/timerUnits"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -36,7 +36,7 @@
                 android:id="@+id/seconds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00"
+                android:text="@string/tv_seconds"
                 android:textColor="@color/timerDigits"
                 android:textSize="64sp"
                 android:textStyle="bold" />
@@ -45,7 +45,7 @@
                 android:id="@+id/secLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="sec"
+                android:text="@string/tv_sec_label"
                 android:textColor="@color/timerUnits"
                 android:textSize="20sp"
                 android:textStyle="bold" />

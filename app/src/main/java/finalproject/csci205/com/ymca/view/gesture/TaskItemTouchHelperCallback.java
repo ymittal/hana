@@ -35,7 +35,7 @@ public class TaskItemTouchHelperCallback extends ItemTouchHelper.Callback {
     /**
      * RecyclerView used
      */
-    private RecyclerView recyclerView;
+    private final RecyclerView recyclerView;
 
     /**
      * @param adapter      adapter attached to recyclerview

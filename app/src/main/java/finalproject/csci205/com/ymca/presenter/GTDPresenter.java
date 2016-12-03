@@ -25,20 +25,19 @@ public class GTDPresenter {
      * Constant for {@link Task} serializable passed when an instance of
      * {@link DetailTaskFragment} is launched
      */
-    public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
-
+    private static final String SERIALIZED_TASK = "SERIALIZED_TASK";
+    /**
+     * {@link TasksAdapter} object
+     */
+    private final TasksAdapter tasksAdapter;
+    /**
+     * List of tasks added by user
+     */
+    private final List<Task> tasks;
     /**
      * {@link GTDFragment} object
      */
     private GTDFragment view;
-    /**
-     * {@link TasksAdapter} object
-     */
-    private TasksAdapter tasksAdapter;
-    /**
-     * List of tasks added by user
-     */
-    private List<Task> tasks;
     /**
      * A {@link Task} object removed by user but currently in contention of
      * getting restored through {@link android.support.design.widget.Snackbar} message

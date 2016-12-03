@@ -1,5 +1,7 @@
 package finalproject.csci205.com.ymca.model;
 
+import android.support.annotation.NonNull;
+
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
@@ -16,7 +18,7 @@ public class Task extends SugarRecord implements Serializable, Comparable {
     /**
      * Task title
      */
-    private String title;
+    private final String title;
     /**
      * Description of task
      */
@@ -91,7 +93,7 @@ public class Task extends SugarRecord implements Serializable, Comparable {
      * is less than, equal to, or greater than the passed object
      */
     @Override
-    public int compareTo(Object obj) {
+    public int compareTo(@NonNull Object obj) {
         Task task2 = (Task) obj;
         if ((isComplete() && task2.isComplete()) || !(isComplete() || task2.isComplete())) {
             if (getDueDate() == null) {

@@ -5,7 +5,7 @@ package finalproject.csci205.com.ymca.view.module.pomodoro;
 /**
  * @author Charles
  */
-public interface OnBackStackListener {
+interface OnBackStackListener {
 
     /**
      * Function evoked when user clicks Android back button

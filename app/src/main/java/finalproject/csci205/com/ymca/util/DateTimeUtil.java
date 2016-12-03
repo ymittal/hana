@@ -9,10 +9,10 @@ import java.util.Locale;
  */
 public class DateTimeUtil {
 
-    public static final int MILLIS_IN_SECOND = 1000;
-    public static final int SECS_IN_DAY = (24 * 60 * 60);
-    public static final int SECS_IN_HOUR = (60 * 60);
-    public static final int SECS_IN_MINUTE = (60);
+    private static final int MILLIS_IN_SECOND = 1000;
+    private static final int SECS_IN_DAY = (24 * 60 * 60);
+    private static final int SECS_IN_HOUR = (60 * 60);
+    private static final int SECS_IN_MINUTE = (60);
     /**
      * {@link SimpleDateFormat} to represent a user-friendly date notation,
      * e.g. 10:50 PM on April 18, 2016 (Tuesday)

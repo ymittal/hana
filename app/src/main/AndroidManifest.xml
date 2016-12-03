@@ -10,8 +10,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name="finalproject.csci205.com.countdown.Service.CountDownService"></service>
-        <receiver android:name=".view.module.pomodoro.CountDownView$NotificationButtonListener"></receiver>
+
+        <service android:name="finalproject.csci205.com.countdown.Service.CountDownService" />
+        <receiver android:name=".view.module.pomodoro.CountDownView$NotificationButtonListener" />
+
         <activity
 
             android:name=".view.MainActivity"

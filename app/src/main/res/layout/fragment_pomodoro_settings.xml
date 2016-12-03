@@ -24,7 +24,7 @@
                 android:id="@+id/sessionTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Session length (minutes)"
+                android:hint="@string/et_session_time"
                 android:inputType="number"
                 android:textColor="@android:color/white" />
 
@@ -41,7 +41,7 @@
                 android:id="@+id/breakTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Break length (minutes)"
+                android:hint="@string/et_break_time"
                 android:inputType="number"
                 android:textColor="@android:color/white" />
 
@@ -57,7 +57,7 @@
                 android:id="@+id/numBreaks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Number of cycles till long break"
+                android:hint="@string/et_num_breaks"
                 android:inputType="number"
                 android:textColor="@android:color/white" />
 
@@ -73,7 +73,7 @@
                 android:id="@+id/longBreak"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Long break length (minutes)"
+                android:hint="@string/et_long_break"
                 android:inputType="number"
                 android:textColor="@android:color/white" />
 

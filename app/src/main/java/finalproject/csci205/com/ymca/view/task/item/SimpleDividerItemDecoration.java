@@ -18,7 +18,7 @@ import finalproject.csci205.com.ymca.R;
  * GitHub Gist Simple RecyclerView Divider</a>
  */
 public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
-    private Drawable mDivider;
+    private final Drawable mDivider;
 
     public SimpleDividerItemDecoration(Context context) {
         mDivider = ContextCompat.getDrawable(context, R.drawable.line_divider);

@@ -5,7 +5,7 @@ package finalproject.csci205.com.ymca.view.module.pomodoro;
  *
  * @author Charles
  */
-public interface NotificationClickedSyncListener {
+interface NotificationClickedSyncListener {
 
     /**
      * Handler when start button is clicked

@@ -14,7 +14,7 @@ import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragme
  */
 public class PomodoroPresenter implements CountDownListener {
 
-    private final static long DB_ID = 4l;
+    private final static long DB_ID = 4L;
 
     private static PomodoroSettings pomodoroSettings;
     private CountDownView cdView;
@@ -60,23 +60,12 @@ public class PomodoroPresenter implements CountDownListener {
         return PomodoroSettings.findById(PomodoroSettings.class, DB_ID);
     }
 
-    /**
-     * Updates session time of {@link CountDownView}
-     *
-     * @param update updated session time
-     * @author Charles
-     */
-//    public void setSessionUpdate(int update) {
-//        cdView.setSessionTime(update);
-//    }
-
     // TODO: Charles, add Javadocs for the following methods
-
     public void setCountDownView(CountDownView cdView) {
         this.cdView = cdView;
     }
 
-    public void incCounter() {
+    private void incCounter() {
         cycleCounter++;
     }
 

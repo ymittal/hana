@@ -4,6 +4,7 @@ package finalproject.csci205.com.ymca.view;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -127,9 +128,9 @@ public class NavActivity extends AppCompatActivity implements
      */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
-        Class fragmentClass = null;
+        Class fragmentClass;
 
         // determines appropriate fragment using item Id
         switch (item.getItemId()) {

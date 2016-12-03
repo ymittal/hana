@@ -38,16 +38,19 @@ public class DetailTaskFragment extends Fragment
     /**
      * Name of {@link Task} serializable passed from {@link GTDFragment}
      */
-    public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
+    private static final String SERIALIZED_TASK = "SERIALIZED_TASK";
     /**
      * Number of degrees to rotate to open addSubtaskBtn
      */
-    public static final int ROTATE_DEGREE_TO_OPEN = 45;
+    private static final int ROTATE_DEGREE_TO_OPEN = 45;
     /**
      * Number of degrees to rotate to close addSubtaskBtn
      */
-    public static final int ROTATE_DEGREE_TO_CLOSE = 0;
-
+    private static final int ROTATE_DEGREE_TO_CLOSE = 0;
+    /**
+     * Calendar object to hold last task due date set by user
+     */
+    private final Calendar myCalendar = Calendar.getInstance();
     /**
      * Presenter for {@link DetailTaskFragment}
      */
@@ -56,11 +59,6 @@ public class DetailTaskFragment extends Fragment
      * Task associated with current {@link DetailTaskFragment}
      */
     private Task task;
-    /**
-     * Calendar object to hold last task due date set by user
-     */
-    private Calendar myCalendar = Calendar.getInstance();
-
     // User Interface components of DetailTaskFragment
     private EditText etSubtask;
     private TextView tvDueDate;

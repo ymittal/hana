@@ -114,7 +114,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      *
      * @author Charles
      */
-    public void init() {
+    private void init() {
         root = inflate(getContext(), R.layout.countdown_layout, this);
         mins = (TextView) root.findViewById(R.id.mins);
         seconds = (TextView) root.findViewById(R.id.seconds);
@@ -145,7 +145,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      *
      * @author Charles
      */
-    public void pomodoroDataUpdate() {
+    private void pomodoroDataUpdate() {
         //Pomodoro data
         presenter = new PomodoroPresenter();
         settings = presenter.getSavedPomSettings();
@@ -175,7 +175,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     /**
      * Used saved new data to PomodoroSettings, we must update the view now
      *
-     * @Charles
+     * @author Charles
      */
     public void newSavedConfig() {
         pomodoroDataUpdate();
@@ -190,7 +190,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      * @param l -  time
      * @author Charles
      */
-    public void updateProgress(long l) {
+    private void updateProgress(long l) {
         Date date = new Date(l);
         DateFormat minFor = new SimpleDateFormat("mm");
         DateFormat secFor = new SimpleDateFormat("ss");
@@ -220,8 +220,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                 cancelPom.setVisibility(GONE);
                 countCancelComplete();
             }
-        } else {
-
         }
     }
 
