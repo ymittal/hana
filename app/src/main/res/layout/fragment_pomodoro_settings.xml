@@ -57,7 +57,7 @@
                 android:id="@+id/numBreaks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Number of breaks"
+                android:hint="Number of cycles till long break"
                 android:inputType="number"
                 android:textColor="@android:color/white" />
 

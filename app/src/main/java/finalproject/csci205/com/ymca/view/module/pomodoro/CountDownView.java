@@ -223,9 +223,11 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
         //Pomodoro internals
         numCyclesTillBreak--;
-        if (numCyclesTillBreak == 0) {
-            Toast.makeText(getContext(), "Break time!", Toast.LENGTH_SHORT).show();
+        if (numCyclesTillBreak == 0) { //Time for a long break
+            Toast.makeText(getContext(), "Long Break time!", Toast.LENGTH_SHORT).show();
             setInternalSettings();
+        } else {
+            Toast.makeText(getContext(), "Short Break time!", Toast.LENGTH_SHORT).show();
         }
     }
 
