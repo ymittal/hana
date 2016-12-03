@@ -18,7 +18,9 @@ import finalproject.csci205.com.ymca.view.NavActivity;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by ym012 on 11/30/2016.
+ * Class to test the functionality of {@link DetailTaskPresenter}
+ *
+ * @author Alekzander and Yash
  */
 public class DetailTaskPresenterInstrumentationTest {
 
@@ -32,6 +34,13 @@ public class DetailTaskPresenterInstrumentationTest {
     private DetailTaskPresenter detailTaskPresenter;
     private Task task;
 
+    /**
+     * Initializes {@link SugarContext} (SugarORM database) and clears
+     * stored {@link Task} and {@link Subtask} objects
+     *
+     * @throws Exception
+     * @author Aleks
+     */
     @Before
     public void setUp() throws Exception {
         SugarContext.init(activityTestRule.getActivity());
@@ -43,18 +52,33 @@ public class DetailTaskPresenterInstrumentationTest {
         addDummyTask();
     }
 
+    /**
+     * Clears stored {@link Task} and {@link Subtask} objects
+     *
+     * @throws Exception
+     * @author Yash
+     */
     @After
     public void tearDown() throws Exception {
         Task.deleteAll(Task.class);
         Subtask.deleteAll(Subtask.class);
     }
 
+    /**
+     * Adds a dummy {@link Task} to test the functionality of {@link DetailTaskPresenter}
+     */
     private void addDummyTask() {
         GTDPresenter gtdPresenter = new GTDPresenter(activityTestRule.getActivity());
         task = new Task(DUMMY_TASK);
         gtdPresenter.addTask(task, false);
     }
 
+    /**
+     * Gets a list of {@link Subtask} through {@link DetailTaskPresenter}
+     *
+     * @throws Exception
+     * @author Yash
+     */
     @Test
     public void getSubtasks() throws Exception {
         Subtask newSubtask = new Subtask(task.getId(), DUMMY_SUBTASK);
@@ -70,6 +94,12 @@ public class DetailTaskPresenterInstrumentationTest {
         assertEquals(expectedTasks.get(1).getTitle(), resultTasks.get(1).getTitle());
     }
 
+    /**
+     * Unit test for adding subtasks through {@link DetailTaskPresenter}
+     *
+     * @throws Exception
+     * @author Aleks
+     */
     @Test
     public void addSubtask() throws Exception {
         Subtask newSubtask = new Subtask(task.getId(), DUMMY_SUBTASK);
@@ -80,6 +110,12 @@ public class DetailTaskPresenterInstrumentationTest {
         assertEquals(expectedLength, actualLength);
     }
 
+    /**
+     * Unit test for removing subtasks through {@link DetailTaskPresenter}
+     *
+     * @throws Exception
+     * @author Aleks
+     */
     @Test
     public void removeTask() throws Exception {
         Subtask newSubtask = new Subtask();
@@ -95,6 +131,12 @@ public class DetailTaskPresenterInstrumentationTest {
         assertEquals(expectedLength, actualLength);
     }
 
+    /**
+     * Unit test for setting the title of a subtask through {@link DetailTaskPresenter}
+     *
+     * @throws Exception
+     * @author Aleks
+     */
     @Test
     public void setDescription() throws Exception {
         Subtask newSubtask = new Subtask(task.getId(), DUMMY_SUBTASK);

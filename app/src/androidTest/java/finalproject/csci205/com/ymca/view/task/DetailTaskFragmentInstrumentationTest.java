@@ -23,6 +23,7 @@ import org.junit.Test;
 import java.util.Calendar;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.util.DateTimeUtil;
 import finalproject.csci205.com.ymca.view.NavActivity;
 
@@ -60,6 +61,7 @@ public class DetailTaskFragmentInstrumentationTest {
      * the {@link DetailTaskFragment} by clicking on the first {@link RecyclerView} item.
      * Also sets up a {@link Calendar} object to test {@link android.app.DatePickerDialog}
      * and {@link android.app.TimePickerDialog} functionality
+     * Tests {@link finalproject.csci205.com.ymca.presenter.GTDPresenter#openDetailedTaskFragment(Task)}
      *
      * @throws Exception
      * @author Yash
