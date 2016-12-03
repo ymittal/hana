@@ -30,9 +30,9 @@ import finalproject.csci205.com.countdown.Service.CountDownListener;
 import finalproject.csci205.com.countdown.Service.CountDownService;
 import finalproject.csci205.com.countdown.Ults.ServiceState;
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
+import finalproject.csci205.com.ymca.model.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
-import finalproject.csci205.com.ymca.util.Constants;
+import finalproject.csci205.com.ymca.util.NotificationUtil;
 
 /******************************************
  * CSCI205 - Software Engineering and Design
@@ -198,7 +198,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         seconds.setText(secFor.format(date));
 
         notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + secFor.format(date));
-        notificationManager.notify(Constants.NOTIFICATION_ID, notification);
+        notificationManager.notify(NotificationUtil.NOTIFICATION_ID, notification);
     }
 
 
@@ -256,7 +256,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      */
     private void countCancelComplete() {
         //Formatting variables, doing general reset
-        Constants.destroyPomNotification(getContext());
+        NotificationUtil.destroyPomNotification(getContext());
         numCyclesTillBreak--; //Decrement counter
         seconds.setText("00");
         startPauseCounter = 0;
@@ -290,7 +290,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         //Reset Service Internals.
         if (isMyServiceRunning(CountDownService.class)) {
             cd.resetStoredTime();
-            Constants.destroyPomNotification(getContext());
+            NotificationUtil.destroyPomNotification(getContext());
             getContext().unbindService(this);
         }
     }
@@ -459,7 +459,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                 (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
         notification = new Notification(R.drawable.ic_pom, null,
-                Constants.NOTIFICATION_ID_CONSTANT);
+                NotificationUtil.NOTIFICATION_ID_CONSTANT);
 
 
         notificationView = new RemoteViews(getContext().getPackageName(),
@@ -480,14 +480,14 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         /* Create intent, set context and destionation */
         Intent start = new Intent(getContext(), NotificationButtonListener.class);
         /* Put extra to identify which action was called. */
-        start.putExtra(Constants.START, Constants.START);
+        start.putExtra(NotificationUtil.START, NotificationUtil.START);
         PendingIntent pendingStart = PendingIntent.getBroadcast(getContext(), 0,
                 start, 0);
 
         /* Create intent, set context and destionation */
         Intent pauseIntent = new Intent(getContext(), NotificationButtonListener.class);
         /* Put extra to identify which action was called. */
-        pauseIntent.putExtra(Constants.PAUSE, Constants.PAUSE);
+        pauseIntent.putExtra(NotificationUtil.PAUSE, NotificationUtil.PAUSE);
         PendingIntent pendingPause = PendingIntent.getBroadcast(getContext(), 1,
                 pauseIntent, 0);
 
@@ -495,7 +495,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         /* Create intent, set context and destionation */
         Intent cancelIntent = new Intent(getContext(), NotificationButtonListener.class);
         /* Put extra to identify which action was called. */
-        cancelIntent.putExtra(Constants.CANCEL, Constants.CANCEL);
+        cancelIntent.putExtra(NotificationUtil.CANCEL, NotificationUtil.CANCEL);
         PendingIntent pendingCancel = PendingIntent.getBroadcast(getContext(), 2,
                 cancelIntent, 0);
 
@@ -562,9 +562,9 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         public void onReceive(Context context, Intent intent) {
             Log.d("onRec", "Yo");
             NotificationClickedSyncListener clickedSyncListener = cdView;
-            String startPotential = intent.getStringExtra(Constants.START);
-            String pausePotential = intent.getStringExtra(Constants.PAUSE);
-            String cancelPotential = intent.getStringExtra(Constants.CANCEL);
+            String startPotential = intent.getStringExtra(NotificationUtil.START);
+            String pausePotential = intent.getStringExtra(NotificationUtil.PAUSE);
+            String cancelPotential = intent.getStringExtra(NotificationUtil.CANCEL);
             if (startPotential != null) {
                 clickedSyncListener.onStartClicked();
             } else if (pausePotential != null) {
@@ -573,7 +573,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                 clickedSyncListener.onStopClicked();
                 NotificationManager notificationManager = (NotificationManager) context
                         .getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.cancel(Constants.NOTIFICATION_ID);
+                notificationManager.cancel(NotificationUtil.NOTIFICATION_ID);
             }
         }
 

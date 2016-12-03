@@ -3,7 +3,7 @@ package finalproject.csci205.com.ymca.presenter;
 import android.content.Context;
 
 import finalproject.csci205.com.countdown.Service.CountDownListener;
-import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
+import finalproject.csci205.com.ymca.model.PomodoroSettings;
 import finalproject.csci205.com.ymca.view.module.pomodoro.CountDownView;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
@@ -70,7 +70,7 @@ public class PomodoroPresenter implements CountDownListener {
 //        cdView.setSessionTime(update);
 //    }
 
-    // TODO: Charles add Javadocs for the following methods
+    // TODO: Charles, add Javadocs for the following methods
 
     public void setCountDownView(CountDownView cdView) {
         this.cdView = cdView;

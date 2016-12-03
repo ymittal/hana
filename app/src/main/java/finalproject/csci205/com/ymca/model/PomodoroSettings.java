@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.model.Pom;
+package finalproject.csci205.com.ymca.model;
 
 import com.orm.SugarRecord;
 
@@ -8,13 +8,29 @@ import com.orm.SugarRecord;
  */
 public class PomodoroSettings extends SugarRecord {
 
-    // TODO: finish Javadocs
     /**
-     * Time for standard work peroid. Should be 30-60 mins.
+     * Default Pomodoro session period in minutes
+     */
+    public static final int DEFAULT_SESSION_TIME_IN_MINS = 25;
+    /**
+     * Default Pomodoro normal break period in minutes
+     */
+    public static final int DEFAULT_NORMAL_BREAK_IN_MINS = 5;
+    /**
+     * Default number of Pomodoro cycles
+     */
+    public static final int DEFAULT_NUM_CYCLES = 5;
+    /**
+     * Default Pomodoro long break period in minutes
+     */
+    public static final int DEFAULT_LONG_BREAK_IN_MINS = 15;
+
+    /**
+     * Time for standard work period. Should be 30-60 min
      */
     private int sessionTime;
     /**
-     * Default time for break, usually 5min but can be up to 10
+     * Default time for break, usually 5 min but can be up to 10
      */
     private int normBreakTime;
     /**

@@ -11,18 +11,16 @@ import android.widget.ImageButton;
 
 import finalproject.csci205.com.countdown.Ults.ServiceState;
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
+import finalproject.csci205.com.ymca.model.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
-import finalproject.csci205.com.ymca.util.Constants;
+import finalproject.csci205.com.ymca.util.NotificationUtil;
 import finalproject.csci205.com.ymca.view.MainActivity;
 
 /**
- * A fragment to utilize the Pomodoro Technique, allowing a user to set frequencies and intervals of time during
- * which they will be working and taking breaks.
+ * A fragment to utilize the Pomodoro Technique, allowing a user to set frequencies
+ * and intervals of time during which they will be working and taking breaks.
  */
 public class PomodoroFragment extends Fragment implements View.OnClickListener, OnBackStackListener {
-
-
 
     /**
      * A {@link CountDownView} to display time left until next Pomodoro break
@@ -65,6 +63,15 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         getActivity().setTitle("Pomodoro");
     }
 
+    /**
+     * Sets up fragment user interface
+     *
+     * @param inflater           {@link LayoutInflater} to inflate views inside fragment
+     * @param container          parent view encapsulating the fragment
+     * @param savedInstanceState
+     * @return view for the fragment interface
+     * @author Yash and Charles
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,13 +81,6 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         initUI(root);
 
         PomodoroSettings pomodoroSettings = pomodoroPresenter.getSavedPomSettings();
-//        if (pomodoroSettings != null) {
-//            //countDownView.setSessionTime(pomodoroSettings.getSessionTime());
-//        } else {
-//            pomodoroPresenter.savePomodoroSettingsToDatabase(getDefaultPomodoroSettings());
-//            //countDownView.setSessionTime(0); // 0 is the default placeholder
-//        }
-
         if (pomodoroSettings == null) {
             pomodoroPresenter.savePomodoroSettingsToDatabase(getDefaultPomodoroSettings());
         }
@@ -102,12 +102,12 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         btnPomodoroSettings.setOnClickListener(this);
     }
 
-    // TODO: write Javadocs (Charles)
+    // TODO: Charles, please write Javadocs for this
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (countDownView.getCd().getState() == ServiceState.OTHER) {
-            Constants.destroyPomNotification(getContext());
+            NotificationUtil.destroyPomNotification(getContext());
         }
     }
 
@@ -144,6 +144,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
     /**
      * Sets visibility of Pomodoro settings button to {@link View#VISIBLE}
      * Once this is complete, the countdown view can init the local values needed to run pomodoro.
+     *
      * @author Charles
      */
     @Override
@@ -159,10 +160,10 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
      */
     public PomodoroSettings getDefaultPomodoroSettings() {
         PomodoroSettings ps = new PomodoroSettings();
-        ps.setSessionTime(Constants.DEFAULT_SESSION_TIME_IN_MINS);
-        ps.setNormBreakTime(Constants.DEFAULT_NORMAL_BREAK_IN_MINS);
-        ps.setNumCyclesTillBreak(Constants.DEFAULT_NUM_CYCLES);
-        ps.setLongBreak(Constants.DEFAULT_LONG_BREAK_IN_MINS);
+        ps.setSessionTime(PomodoroSettings.DEFAULT_SESSION_TIME_IN_MINS);
+        ps.setNormBreakTime(PomodoroSettings.DEFAULT_NORMAL_BREAK_IN_MINS);
+        ps.setNumCyclesTillBreak(PomodoroSettings.DEFAULT_NUM_CYCLES);
+        ps.setLongBreak(PomodoroSettings.DEFAULT_LONG_BREAK_IN_MINS);
         return ps;
     }
 }

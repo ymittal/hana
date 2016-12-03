@@ -19,7 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.util.Constants;
+import finalproject.csci205.com.ymca.util.NotificationUtil;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
 import finalproject.csci205.com.ymca.view.module.tenminhack.TenMinuteFragment;
@@ -105,7 +105,7 @@ public class NavActivity extends AppCompatActivity implements
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Constants.destroyPomNotification(getApplicationContext());
+        NotificationUtil.destroyPomNotification(getApplicationContext());
     }
 
     /**
