@@ -10,14 +10,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3790291-bbee-401b-8976-21c5fc40af3d" name="Default" comment="Pomodoro Functionalty appears to be complete. NEEDS TESTNG. Next thing is persistance!">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+    <list default="true" id="b3790291-bbee-401b-8976-21c5fc40af3d" name="Default" comment="Notification touch up">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/CountDownView.java" afterPath="$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/CountDownView.java" />
     </list>
@@ -55,24 +48,14 @@
       <file leaf-file-name="CountDownView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/CountDownView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="427" column="43" selection-start-line="427" selection-start-column="43" selection-end-line="427" selection-end-column="43" />
+            <state relative-caret-position="378">
+              <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
               <folding>
-                <element signature="e#9853#9854#0" expanded="true" />
-                <element signature="e#9892#9893#0" expanded="true" />
-                <element signature="e#13267#13320#0" expanded="true" />
-                <element signature="e#13362#13417#0" expanded="true" />
+                <element signature="e#9871#9872#0" expanded="true" />
+                <element signature="e#9910#9911#0" expanded="true" />
+                <element signature="e#13285#13338#0" expanded="true" />
+                <element signature="e#13380#13435#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="19" column="63" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -90,7 +73,7 @@
       <file leaf-file-name="PomodoroSettingsFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroSettingsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
+            <state relative-caret-position="-411">
               <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
               <folding>
                 <element signature="e#4497#4498#0" expanded="true" />
@@ -3505,13 +3488,6 @@
       <option name="presentableId" value="Default" />
       <updated>1478096901601</updated>
     </task>
-    <task id="LOCAL-00029" summary="Event Listener Code">
-      <created>1479360370580</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1479360370580</updated>
-    </task>
     <task id="LOCAL-00030" summary="CountDownLib almost done">
       <created>1479361593304</created>
       <option name="number" value="00030" />
@@ -3848,7 +3824,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480734350451</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="Notification touch up">
+      <created>1480735511370</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1480735511370</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -3959,7 +3942,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Notification Complete" />
     <MESSAGE value="Notification settings half way" />
     <MESSAGE value="Updated drawables and gradle" />
     <MESSAGE value="Critical bug fix. Updated build tools so that this works on devices 4.4 and earlier." />
@@ -3984,7 +3966,8 @@
     <MESSAGE value="Pomodoro Almost done..." />
     <MESSAGE value="Basic Func Done" />
     <MESSAGE value="Pomodoro Functionalty appears to be complete. NEEDS TESTNG. Next thing is persistance!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pomodoro Functionalty appears to be complete. NEEDS TESTNG. Next thing is persistance!" />
+    <MESSAGE value="Notification touch up" />
+    <option name="LAST_COMMIT_MESSAGE" value="Notification touch up" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -4301,17 +4284,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroSettingsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
-          <folding>
-            <element signature="e#4497#4498#0" expanded="true" />
-            <element signature="e#4534#4535#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/countdown/src/main/java/finalproject/csci205/com/countdown/Service/CountDownListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -4336,15 +4308,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/PomodoroSettingsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-411">
+          <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
+          <folding>
+            <element signature="e#4497#4498#0" expanded="true" />
+            <element signature="e#4534#4535#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/finalproject/csci205/com/ymca/view/module/pomodoro/CountDownView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="427" column="43" selection-start-line="427" selection-start-column="43" selection-end-line="427" selection-end-column="43" />
+        <state relative-caret-position="378">
+          <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
           <folding>
-            <element signature="e#9853#9854#0" expanded="true" />
-            <element signature="e#9892#9893#0" expanded="true" />
-            <element signature="e#13267#13320#0" expanded="true" />
-            <element signature="e#13362#13417#0" expanded="true" />
+            <element signature="e#9871#9872#0" expanded="true" />
+            <element signature="e#9910#9911#0" expanded="true" />
+            <element signature="e#13285#13338#0" expanded="true" />
+            <element signature="e#13380#13435#0" expanded="true" />
           </folding>
         </state>
       </provider>

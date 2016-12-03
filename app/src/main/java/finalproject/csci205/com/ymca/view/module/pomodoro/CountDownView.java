@@ -88,6 +88,8 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     /* Determines if system should countdown as a break, or work peroid.
      * On first run, it should be true. */
     private boolean breakMode = true;
+
+    //Formatting
     private Date date = null;
     private DateFormat minFor;
 
@@ -427,10 +429,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                         .setContentText(getResources().getString(R.string.notification_context))
                         .setAutoCancel(true)
                         .setContentIntent(pendingNotificationIntent);
-
-
         notificationManager.notify(TIMERUP_ID, mBuilder.build());
-
     }
 
 
