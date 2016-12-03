@@ -88,6 +88,8 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     /* Determines if system should countdown as a break, or work peroid.
      * On first run, it should be true. */
     private boolean breakMode = true;
+    private Date date = null;
+    private DateFormat minFor;
 
     //Model Ref
     private PomodoroPresenter presenter;
@@ -120,10 +122,25 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         timerContainer.setOnClickListener(this);
         cancelPom.setOnClickListener(this);
         cdView = this;
+        minFor = new SimpleDateFormat("mm");
 
         //Pomodoro data
         presenter = new PomodoroPresenter();
         settings = presenter.getSavedPomSettings();
+        if (settings != null) {
+            this.sessionTime = settings.getSessionTime();
+            setInternalSettings();
+        } else {
+            this.sessionTime = Constants.DEFAULT_SESSION_TIME_IN_MINS;
+        }
+        //Service
+        CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
+        if (isMyServiceRunning(CountDownService.class)) {
+            getContext().bindService(i, this, REBINDSERVICE);
+
+        } else {
+            getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
+        }
 
 
     }
@@ -216,22 +233,17 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      */
     private void countCancelComplete() {
         //Formatting variables, doing general reset
-        Date date = null;
-        DateFormat minFor = new SimpleDateFormat("mm");
         numCyclesTillBreak--; //Decrement counter
         seconds.setText("00");
+        startPauseCounter = 0;
         cd.stopTimer();
         /**
          * If breakMode == false, then config completion for another work peroid
          * If true, then config for a break.
          */
         if (!breakMode) {
-
             sessionTime = settings.getSessionTime();
-            date = new Date((long) sessionTime * 60000);
-            mins.setText(minFor.format(date));
-            startPauseCounter = 0;
-
+            configBreakOrPomoSession(sessionTime);
             breakMode = false;
         } else if (breakMode) {
 
@@ -239,14 +251,12 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
             if (numCyclesTillBreak == 0) { //Time for a long break
                 Toast.makeText(getContext(), "Long Break time!", Toast.LENGTH_SHORT).show();
                 sessionTime = longBreakTime;
-                date = new Date((long) longBreakTime * 60000);
-                mins.setText(minFor.format(date));
+                configBreakOrPomoSession(sessionTime);
                 setInternalSettings();
             } else { //Time for a short break
                 Toast.makeText(getContext(), "Short Break time!", Toast.LENGTH_SHORT).show();
                 sessionTime = breakTime;
-                date = new Date((long) breakTime * 60000);
-                mins.setText(minFor.format(date));
+                configBreakOrPomoSession(sessionTime);
             }
 
             breakMode = false;
@@ -261,6 +271,27 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + "00");
 
 
+    }
+
+    /**
+     * Helper method that resets internal values depending on if we have a break or not.
+     *
+     * @param newTimeValue
+     * @author Charles
+     */
+    private void configBreakOrPomoSession(int newTimeValue) {
+        cd.setSessionTime(newTimeValue);
+        date = new Date((long) newTimeValue * 60000);
+        mins.setText(minFor.format(date));
+    }
+
+    /**
+     * Sets CD_Service session time externally
+     *
+     * @author Charles
+     */
+    public void setCDTime(int time) {
+        cd.setSessionTime(time);
     }
 
 

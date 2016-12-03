@@ -106,7 +106,7 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
             if (ps != null) {
                 pomodoroPresenter.savePomodoroSettingsToDatabase(ps);
                 backStackListener.onViewReturn();
-                cdRef.setSessionTimeOverride(Integer.valueOf(sessionTime.getText().toString()));
+                //cdRef.setSessionTimeOverride(Integer.valueOf(sessionTime.getText().toString()));
                 removeSelf();
             }
         }

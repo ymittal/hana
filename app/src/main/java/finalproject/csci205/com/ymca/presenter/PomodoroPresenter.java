@@ -66,9 +66,9 @@ public class PomodoroPresenter implements CountDownListener {
      * @param update updated session time
      * @author Charles
      */
-    public void setSessionUpdate(int update) {
-        cdView.setSessionTime(update);
-    }
+//    public void setSessionUpdate(int update) {
+//        cdView.setSessionTime(update);
+//    }
 
     // TODO: Charles add Javadocs for the following methods
 
