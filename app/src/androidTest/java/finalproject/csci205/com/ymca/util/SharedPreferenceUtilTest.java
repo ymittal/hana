@@ -25,6 +25,12 @@ public class SharedPreferenceUtilTest {
     private SharedPreferences.Editor editor;
     private SharedPreferences prefs;
 
+    /**
+     * Initializes {@link SharedPreferences} and {@link SharedPreferences.Editor}
+     *
+     * @throws Exception
+     * @author Yash
+     */
     @Before
     public void setUp() throws Exception {
         instrumantationCtx = InstrumentationRegistry.getContext();
@@ -33,6 +39,12 @@ public class SharedPreferenceUtilTest {
         editor = prefs.edit();
     }
 
+    /**
+     * Clears {@link SharedPreferences}
+     *
+     * @throws Exception
+     * @author Yash
+     */
     @After
     public void tearDown() throws Exception {
         editor.clear();

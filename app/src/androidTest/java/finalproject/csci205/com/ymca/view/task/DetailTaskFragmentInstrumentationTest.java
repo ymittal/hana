@@ -1,13 +1,18 @@
 package finalproject.csci205.com.ymca.view.task;
 
+import android.content.Context;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.PickerActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+
+import junit.framework.Assert;
 
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -195,6 +200,23 @@ public class DetailTaskFragmentInstrumentationTest {
                         myCalendar.get(Calendar.DAY_OF_MONTH))
                 );
         onView(withText(PICKER_OK_BTN)).perform(click());
+    }
+
+    /**
+     * Tests whether soft keyboard gets closed when user taps outside current EditText
+     * with focus; basically tests {@link NavActivity#dispatchTouchEvent(MotionEvent)} method
+     *
+     * @author Yash
+     */
+    @Test
+    public void testCloseKeyboardTapOutside() {
+        onView(withId(R.id.addSubtaskBtn)).perform(click());
+        onView(withId(R.id.etSubtask)).perform(typeText(DUMMY_SUBTASK));
+        onView(withId(R.id.tvDueAt)).perform(click());  // simulates a click outside Subtask EditText
+
+        InputMethodManager imm = (InputMethodManager)
+                activityTestRule.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        Assert.assertEquals(true, imm.isAcceptingText());
     }
 
 }
