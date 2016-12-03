@@ -74,11 +74,15 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         initUI(root);
 
         PomodoroSettings pomodoroSettings = pomodoroPresenter.getSavedPomSettings();
-        if (pomodoroSettings != null) {
-            //countDownView.setSessionTime(pomodoroSettings.getSessionTime());
-        } else {
+//        if (pomodoroSettings != null) {
+//            //countDownView.setSessionTime(pomodoroSettings.getSessionTime());
+//        } else {
+//            pomodoroPresenter.savePomodoroSettingsToDatabase(getDefaultPomodoroSettings());
+//            //countDownView.setSessionTime(0); // 0 is the default placeholder
+//        }
+
+        if (pomodoroSettings == null) {
             pomodoroPresenter.savePomodoroSettingsToDatabase(getDefaultPomodoroSettings());
-            //countDownView.setSessionTime(0); // 0 is the default placeholder
         }
 
         countDownView.setJumpTo(MainActivity.class);
