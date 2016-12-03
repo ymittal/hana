@@ -425,6 +425,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                         .setSmallIcon(R.drawable.ic_pom)
                         .setContentTitle(getResources().getString(R.string.notification_title))
                         .setContentText(getResources().getString(R.string.notification_context))
+                        .setAutoCancel(true)
                         .setContentIntent(pendingNotificationIntent);
 
 
