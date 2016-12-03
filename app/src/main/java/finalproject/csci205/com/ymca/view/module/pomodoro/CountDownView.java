@@ -154,9 +154,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
             setInternalSettings();
         } else {
             this.sessionTime = 0;
-
         }
-
     }
 
     /**
