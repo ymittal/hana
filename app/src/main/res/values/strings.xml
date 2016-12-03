@@ -16,4 +16,6 @@
     <string name="menuitem_tenminute">10-minute Hack</string>
     <string name="tv_due_date">Tap to set due date</string>
     <string name="tv_time_left_unset">Tap to edit details</string>
+    <string name="notification_title">Timer is up!</string>
+    <string name="notification_context">Click to return to app!</string>
 </resources>

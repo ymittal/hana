@@ -151,7 +151,8 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
             this.sessionTime = settings.getSessionTime();
             setInternalSettings();
         } else {
-            this.sessionTime = Constants.DEFAULT_SESSION_TIME_IN_MINS;
+            this.sessionTime = 0;
+
         }
 
     }
@@ -292,10 +293,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
             Constants.destroyPomNotification(getContext());
             getContext().unbindService(this);
         }
-        //Notification
-        //notificationView.setTextViewText(R.id.ticker, minFor.format(date) + " : " + "00");
-
-
     }
 
     /**
@@ -426,8 +423,8 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(getContext())
                         .setSmallIcon(R.drawable.ic_pom)
-                        .setContentTitle("Timer is up!")
-                        .setContentText("NOW GET BACK TO WORK")
+                        .setContentTitle(getResources().getString(R.string.notification_title))
+                        .setContentText(getResources().getString(R.string.notification_context))
                         .setContentIntent(pendingNotificationIntent);
 
 
