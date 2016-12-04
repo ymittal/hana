@@ -20,11 +20,23 @@ import java.util.Calendar;
 
 import finalproject.csci205.com.ymca.R;
 
-
+/**
+ * Created by Malachi on 12/2/2016.
+ */
 public class TenMinuteFragment extends Fragment implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
 
+    /**
+     * Key to save user-set alarm time
+     */
     protected static final String PREF_TENMIN_ALARM_MILLI_KEY = "PREF_TENMIN_ALARM_MILLI";
+    /**
+     * Key to save the state of the alarm toggle
+     */
     protected static final String PREF_TENMIN_ALARM_TOGGLE_KEY = "PREF_TENMIN_ALARM_TOGGLE";
+
+    /**
+     * Necessary tools of the trade
+     */
     private Calendar myCalendar;
     private TextView tvClock;
     private Switch alarmSwitch;
@@ -54,8 +66,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
     }
 
     /**
-     * A method called within the activity lifecycle. Comes before onCreate
-     *
+     * A method called within the activity lifecycle. Comes before onCreateView, but after onStart
      * @param savedInstanceState
      * @author Malachi
      */
@@ -123,12 +134,14 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
                     myCalendar.get(Calendar.MINUTE),
                     false).show();
         } else if (view.getId() == R.id.alarmSwitch) {
-            //if the switch is toggled to be on,
+
             if (alarmSwitch.isChecked()) {
+                //if the switch was toggled on, set the alarm, let the user know, and save the state of the toggle
                 Toast.makeText(getContext(), "Alarm on", Toast.LENGTH_SHORT).show();
                 editor.putBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, true);
                 onTimeSet(null, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE));
             } else {
+                //else, the alarm was turned off, so cancel the alarm, let the user know, and save the state of the toggle
                 Toast.makeText(getContext(), "Alarm off", Toast.LENGTH_SHORT).show();
                 alarmManager.cancel(pendingIntent);
                 editor.putBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, false);
@@ -136,11 +149,6 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         }
 
 
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 
     /**
@@ -176,12 +184,13 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
      *
      * @param hourOfDay The hour of the day (in 24-hour mode) to be displayed.
      * @param minute    The minute of the day to be displayed
-     * @return String representation that is displayed on the clock TextView
+     * @return String representation that is displayed on the clock TextView. Just a ref, nothing needed to be done with it
      * @author Malachi
      */
     private String updateTvClock(int hourOfDay, int minute) {
         boolean isAM;
 
+        //Since hourOfDay is in 24-hour mode, convert to 12 hour mode appropriately
         if (hourOfDay <= 12) {
             isAM = true;
             if (hourOfDay == 0) {
@@ -192,6 +201,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
             hourOfDay = hourOfDay - 12;
         }
 
+        //Make the text that is to be displayed
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
                 .append(hourOfDay)

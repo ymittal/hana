@@ -9,29 +9,32 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Vibrator;
 import android.support.v4.content.WakefulBroadcastReceiver;
-import android.util.Log;
 
 /**
  * Created by Malachi on 12/2/2016.
  */
 public class AlarmReceiver extends WakefulBroadcastReceiver {
 
+    /**
+     * The method called when the alarm is scheduled to go off
+     * <p>
+     * Currently when alarm is triggered, a notification popped up saying the user completed
+     * their 10 minutes, however this is not currently implemented. So far 10-minute hack is
+     * only a user-set alarm.
+     *
+     * @param context The passed context from when the alarm was created
+     * @param intent  The passed intent from when the alarm was created
+     */
     @Override
     public void onReceive(final Context context, Intent intent) {
-        Log.i("AlarmSettings", "Alarm Received");
-
-
-//        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-//
-//        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 10 * 1000, 10 * 1000, pendingIntent);
-
+        //Do a little ring and vibrate for the notification
         Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         if (alarmUri == null) {
             alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         }
         Ringtone ringtone = RingtoneManager.getRingtone(context, alarmUri);
         ringtone.play();
+
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(1000);
 

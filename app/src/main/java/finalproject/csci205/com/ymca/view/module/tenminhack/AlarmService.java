@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.view.MainActivity;
@@ -17,32 +16,49 @@ import finalproject.csci205.com.ymca.view.MainActivity;
 public class AlarmService extends IntentService {
     private NotificationManager alarmNotificationManager;
 
+    /**
+     * Required Constructor
+     */
     public AlarmService() {
         super("AlarmService");
     }
 
+    /**
+     * The method called when the notification is to be created
+     *
+     * @param intent The passed intent from the creation of the notification
+     * @author Malachi
+     */
     @Override
     public void onHandleIntent(Intent intent) {
-        sendNotification("Good Job! Keep up the good work!");
+        sendNotification("10 minutes are up!", "Good Job! Keep up the good work!");
     }
 
-    private void sendNotification(String msg) {
-        Log.i("AlarmService", "Preparing to send notification...: " + msg);
+    /**
+     * Send a notification to the notification bar
+     *
+     * @param title   The title of the notification to be displayed
+     * @param content The body of the notification to be displayed
+     * @author Malachi
+     */
+    private void sendNotification(String title, String content) {
         alarmNotificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+        //Intent to pull up the app when the alarm goes off
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, MainActivity.class), 0);
 
+        //Build the Notification
         NotificationCompat.Builder alarmNotificationBuilder = new NotificationCompat.Builder(
                 this)
-                .setContentTitle("10 minutes are up!")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                .setContentText(msg)
-                .setContentIntent(contentIntent);
+                .setContentTitle(title)
+                .setSmallIcon(R.drawable.ic_tenmin)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
+                .setContentText(content)
+                .setContentIntent(pendingIntent);
 
+        //Send the notification
         alarmNotificationManager.notify(1, alarmNotificationBuilder.build());
-        Log.i("AlarmService", "Notification sent.");
     }
 }
