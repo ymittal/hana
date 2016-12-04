@@ -124,6 +124,7 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Displays the fragment depending on whether or not it exists.
+     * @see https://guides.codepath.com/android/Creating-and-Using-Fragments#managing-fragment-backstack
      * @author Charles
      */
     private void displayGTDFragment() {
