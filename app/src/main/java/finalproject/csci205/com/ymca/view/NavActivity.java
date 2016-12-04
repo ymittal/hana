@@ -20,6 +20,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.util.FragmentTags;
 import finalproject.csci205.com.ymca.util.NotificationUtil;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
@@ -46,6 +47,13 @@ public class NavActivity extends AppCompatActivity implements
     private NavigationView navigationView;
 
     /**
+     * Instance Fragments
+     */
+    private GTDFragment gtdFragment;
+    private PomodoroFragment pomoFragment;
+    private TenMinuteFragment tenMinFragment;
+
+    /**
      * Sets up activity user interface and controls
      *
      * @param savedInstanceState
@@ -56,7 +64,11 @@ public class NavActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
         initUI();
-        initFragment(new GTDFragment());
+        gtdFragment = GTDFragment.newInstance();
+        pomoFragment = PomodoroFragment.newInstance();
+        tenMinFragment = TenMinuteFragment.newInstance();
+        //initFragment(new GTDFragment(),GTDFragment.class.getName());
+        displayGTDFragment();
     }
 
     /**
@@ -116,9 +128,64 @@ public class NavActivity extends AppCompatActivity implements
      * @param newFragment new {@link Fragment} object
      * @author Charles and Yash
      */
-    private void initFragment(Fragment newFragment) {
+    private void initFragment(Fragment newFragment, String tag) {
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        //transaction.add(R.id.content_nav,newFragment);
+//        transaction.replace(R.id.content_nav, newFragment);
+//        transaction.addToBackStack(tag);
+//        transaction.commit();
+//        //getSupportFragmentManager().executePendingTransactions();
+
+        getSupportFragmentManager().beginTransaction().
+                replace(R.id.content_nav, newFragment, tag).
+                commit();
+    }
+
+    private void displayGTDFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_nav, newFragment);
+        if (gtdFragment.isAdded()) {
+            transaction.show(gtdFragment);
+        } else {
+            transaction.add(R.id.content_nav, gtdFragment, FragmentTags.GTD_FRAGMENT);
+        }
+        if (pomoFragment.isAdded()) {
+            transaction.hide(pomoFragment);
+        }
+        if (tenMinFragment.isAdded()) {
+            transaction.hide(tenMinFragment);
+        }
+        transaction.commit();
+    }
+
+    private void displayPomodoroFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (pomoFragment.isAdded()) {
+            transaction.show(pomoFragment);
+        } else {
+            transaction.add(R.id.content_nav, pomoFragment, FragmentTags.POMO_FRAGMENT);
+        }
+        if (gtdFragment.isAdded()) {
+            transaction.hide(gtdFragment);
+        }
+        if (tenMinFragment.isAdded()) {
+            transaction.hide(tenMinFragment);
+        }
+        transaction.commit();
+    }
+
+    private void displayTenMinFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (tenMinFragment.isAdded()) {
+            transaction.show(tenMinFragment);
+        } else {
+            transaction.add(R.id.content_nav, tenMinFragment, FragmentTags.TEN_MIN_FRAGMENT);
+        }
+        if (pomoFragment.isAdded()) {
+            transaction.hide(pomoFragment);
+        }
+        if (gtdFragment.isAdded()) {
+            transaction.hide(gtdFragment);
+        }
         transaction.commit();
     }
 
@@ -133,29 +200,64 @@ public class NavActivity extends AppCompatActivity implements
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         Class fragmentClass;
+        String tag = null;
 
         // determines appropriate fragment using item Id
         switch (item.getItemId()) {
             case R.id.menuitem_tasks:
-                fragmentClass = GTDFragment.class;
+                //fragmentClass = GTDFragment.class;
+                displayGTDFragment();
                 break;
             case R.id.menuitem_pomodoro:
-                fragmentClass = PomodoroFragment.class;
+                //fragmentClass = PomodoroFragment.class;
+                displayPomodoroFragment();
                 break;
             case R.id.menuitem_tenminute:
-                fragmentClass = TenMinuteFragment.class;
+                //fragmentClass = TenMinuteFragment.class;
+                displayTenMinFragment();
                 break;
             default:
-                fragmentClass = GTDFragment.class;
+                //fragmentClass = GTDFragment.class;
         }
         try {
-            fragment = (Fragment) fragmentClass.newInstance();
+            //fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        initFragment(fragment);
+        //tag = fragmentClass.getName(); //Used for BackStack Tag
+//        if (restoreFragmentFromBackStack(tag)){
+//            //Logic is in method
+//        } else {
+//            initFragment(fragment,tag);
+//        }
+        //initFragment(fragment,tag);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    /**
+     * Restores old fragment to view if it exists
+     *
+     * @param tag
+     * @author Charles
+     */
+    private boolean restoreFragmentFromBackStack(String tag) {
+
+        //Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
+        Fragment fragment =
+                getSupportFragmentManager().findFragmentByTag(tag);
+        if (fragment != null) {
+//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.content_nav, fragment);
+//            //transaction.addToBackStack(tag);
+//            transaction.commit();
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.content_nav, fragment, tag).
+                    commit();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -175,7 +277,8 @@ public class NavActivity extends AppCompatActivity implements
 
         } else if (getSupportFragmentManager().findFragmentById(R.id.content_nav)
                 instanceof DetailTaskFragment) {
-            initFragment(new GTDFragment());
+            //initFragment(new GTDFragment(),GTDFragment.class.getName());
+            displayGTDFragment();
 
         } else if (getSupportFragmentManager().findFragmentById(R.id.content_nav)
                 instanceof PomodoroSettingsFragment) {
