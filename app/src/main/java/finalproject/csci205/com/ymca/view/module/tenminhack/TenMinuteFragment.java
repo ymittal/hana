@@ -139,12 +139,14 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
                 //if the switch was toggled on, set the alarm, let the user know, and save the state of the toggle
                 Toast.makeText(getContext(), "Alarm on", Toast.LENGTH_SHORT).show();
                 editor.putBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, true);
+                editor.commit();
                 onTimeSet(null, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE));
             } else {
                 //else, the alarm was turned off, so cancel the alarm, let the user know, and save the state of the toggle
                 Toast.makeText(getContext(), "Alarm off", Toast.LENGTH_SHORT).show();
                 alarmManager.cancel(pendingIntent);
                 editor.putBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, false);
+                editor.commit();
             }
         }
 
