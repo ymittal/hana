@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.TestUtil;
+import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.view.NavActivity;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -52,6 +53,8 @@ public class AddQuickTaskDialogInstrumentationTest {
      */
     @Before
     public void setUp() throws Exception {
+        Task.deleteAll(Task.class);
+
         sSave = activityTestRule.getActivity().getString(R.string.negative_btn_save);
         sEdit = activityTestRule.getActivity().getString(R.string.positive_btn_edit);
 
@@ -61,7 +64,7 @@ public class AddQuickTaskDialogInstrumentationTest {
 
     @After
     public void tearDown() throws Exception {
-
+        Task.deleteAll(Task.class);
     }
 
     /**

@@ -1,7 +1,6 @@
 package finalproject.csci205.com.ymca.view;
 
 import android.content.Context;
-import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -16,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.Task;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -43,10 +43,12 @@ public class NavActivityInstrumentationTest {
 
     @Before
     public void setUp() throws Exception {
+        Task.deleteAll(Task.class);
     }
 
     @After
     public void tearDown() throws Exception {
+        Task.deleteAll(Task.class);
     }
 
     /**
@@ -96,7 +98,6 @@ public class NavActivityInstrumentationTest {
         onView(withText(sEdit)).perform(click());
 
         onView(isRoot()).perform(pressBack());
-        onView(withId(R.id.fragmentDetailTask)).check(ViewAssertions.doesNotExist());
         onView(withId(R.id.fragmentGTD)).check(matches(isDisplayed()));
         onView(withId(R.id.rvTasks)).perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeRight()));
     }

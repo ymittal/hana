@@ -23,6 +23,7 @@ import org.junit.Test;
 import java.util.Calendar;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.Subtask;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.util.DateTimeUtil;
 import finalproject.csci205.com.ymca.view.NavActivity;
@@ -68,6 +69,9 @@ public class DetailTaskFragmentInstrumentationTest {
      */
     @Before
     public void setUp() throws Exception {
+        Task.deleteAll(Task.class);
+        Subtask.deleteAll(Subtask.class);
+
         String sSave = activityTestRule.getActivity().getString(R.string.negative_btn_save);
         onView(withId(R.id.fab)).perform(click());
         onView(withText(sSave)).inRoot(isDialog()).check(matches(isDisplayed()));
@@ -96,6 +100,9 @@ public class DetailTaskFragmentInstrumentationTest {
         onView(withId(R.id.fragmentDetailTask)).perform(closeSoftKeyboard());
         onView(withId(R.id.fragmentDetailTask)).perform(ViewActions.pressBack());
         onView(withId(R.id.rvTasks)).perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeRight()));
+
+        Task.deleteAll(Task.class);
+        Subtask.deleteAll(Subtask.class);
     }
 
     /**
