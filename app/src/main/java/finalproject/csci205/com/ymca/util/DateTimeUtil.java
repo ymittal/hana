@@ -6,6 +6,7 @@ import java.util.Locale;
 
 /**
  * Utility class to get user-friendly date representations
+ * @author Yash, Malachi, Aleks, and Charles
  */
 public class DateTimeUtil {
 

@@ -9,15 +9,16 @@ import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
 
 /**
- * A class to encapsulate a presenter for the {@link PomodoroFragment} and
- * {@link PomodoroSettingsFragment} following MVP design pattern for Android development
+ * A class to encapsulate a presenter for the {@link PomodoroFragment},
+ * {@link PomodoroSettingsFragment}, and {@link CountDownView} following MVP
+ * design pattern for Android development
+ * @author Charles
  */
 public class PomodoroPresenter implements CountDownListener {
 
     private final static long DB_ID = 4L;
 
     private static PomodoroSettings pomodoroSettings;
-    private CountDownView cdView;
     private PomodoroFragment view;
     private PomodoroSettingsFragment settingsView;
     private Context context;
@@ -36,7 +37,7 @@ public class PomodoroPresenter implements CountDownListener {
      * @author Charles
      */
     public PomodoroPresenter(PomodoroFragment pomodoroFrag) {
-        view = pomodoroFrag;
+        this.view = pomodoroFrag;
         this.context = pomodoroFrag.getContext();
     }
 
@@ -58,11 +59,6 @@ public class PomodoroPresenter implements CountDownListener {
      */
     public PomodoroSettings getSavedPomSettings() {
         return PomodoroSettings.findById(PomodoroSettings.class, DB_ID);
-    }
-
-    // TODO: Charles, add Javadocs for the following methods
-    public void setCountDownView(CountDownView cdView) {
-        this.cdView = cdView;
     }
 
     private void incCounter() {

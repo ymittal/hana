@@ -18,6 +18,7 @@ import finalproject.csci205.com.ymca.view.task.item.TasksAdapter;
 /**
  * A class to encapsulate a presenter for the {@link GTDFragment} following
  * MVP design pattern for Android development
+ * @author Charles and Yash
  */
 public class GTDPresenter {
 

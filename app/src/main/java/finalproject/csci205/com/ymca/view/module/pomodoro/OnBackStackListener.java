@@ -1,8 +1,9 @@
 package finalproject.csci205.com.ymca.view.module.pomodoro;
 
-// TODO: Charles, describe the use of this interface below
+
 
 /**
+ * Custom listener for when user navigates away from PomodoroSettings back to the PomodoroFragment
  * @author Charles
  */
 interface OnBackStackListener {

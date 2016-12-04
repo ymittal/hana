@@ -5,6 +5,7 @@ import com.orm.SugarRecord;
 /**
  * A class to represent different settings regarding Pomodoro technique,
  * extending from {@link SugarRecord} to save it to local database
+ * @author Charles
  */
 public class PomodoroSettings extends SugarRecord {
 

@@ -17,11 +17,14 @@ import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 
 /**
  * A fragment to encapsulate the different settings related to the
- * Pomodoro technique
+ * Pomodoro technique, storing them through the presenter.
+ * @author Charles
  */
 public class PomodoroSettingsFragment extends Fragment implements View.OnClickListener {
 
-    // TODO: Charles, please add Javadocs for these
+    /*
+        Model, View, Presenter and listener refrences.
+     */
     private CountDownView cdRef;
     private PomodoroPresenter pomodoroPresenter;
     private OnBackStackListener backStackListener;

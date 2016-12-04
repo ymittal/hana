@@ -21,6 +21,7 @@ import finalproject.csci205.com.ymca.util.SharedPreferenceUtil;
 /**
  * {@link android.app.Activity} to hold the splash screen, manages logic for
  * first time events
+ * @author Yash, Malachi, Aleks, and Charles
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

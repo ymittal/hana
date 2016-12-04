@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 
 /**
  * Utility class to access and modify {@link SharedPreferences}
+ * @author Yash, Malachi, and Aleks
  */
 public class SharedPreferenceUtil {
 

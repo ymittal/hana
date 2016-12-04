@@ -19,7 +19,12 @@ public class NotificationUtil {
     public static final int NOTIFICATION_ID_CONSTANT = 123456789;
     public static final int NOTIFICATION_ID = 1;
 
-    // TODO: Charles, please add Javadocs for constants and this method
+    /**
+     * Destroys Pomodoro Notification
+     *
+     * @param context
+     * @author Charles
+     */
     public static void destroyPomNotification(Context context) {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

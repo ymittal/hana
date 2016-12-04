@@ -30,6 +30,7 @@ import finalproject.csci205.com.ymca.view.task.GTDFragment;
 /**
  * {@link android.app.Activity} to hold the hamburger menu allowing user to
  * switch between different productivity techniques
+ * @author Yash, Malachi, Aleks, and Charles
  */
 public class NavActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -48,7 +49,7 @@ public class NavActivity extends AppCompatActivity implements
      * Sets up activity user interface and controls
      *
      * @param savedInstanceState
-     * @author
+     * @author Charles and Yash
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class NavActivity extends AppCompatActivity implements
     /**
      * Initializes user interface elements including {@link Toolbar},
      * {@link ActionBarDrawerToggle}, and {@link NavigationView}
+     * @author Yash
      */
     private void initUI() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -111,8 +113,8 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Initializes fragment by changing container view content
-     *
      * @param newFragment new {@link Fragment} object
+     * @author Charles and Yash
      */
     private void initFragment(Fragment newFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -122,9 +124,9 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Handles event of selecting a {@link NavigationView} item
-     *
      * @param item {@link NavigationView} menu item selected
      * @return true if the event was handles, false otherwise
+     * @author Charles
      */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -197,6 +199,7 @@ public class NavActivity extends AppCompatActivity implements
      * @return true if touch event was handled
      * @see <a href="http://stackoverflow.com/questions/4165414/how-to-hide-soft-keyboard-on-android-after-clicking-outside-edittext">
      * Stack Overflow - how to hide soft keyboard on android after clicking outside EditText?</a>
+     * @author Yash
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -219,6 +222,7 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Hides Android soft keyboard
+     * @author Yash
      */
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

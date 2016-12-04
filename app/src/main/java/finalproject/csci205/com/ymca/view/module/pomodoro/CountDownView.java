@@ -34,39 +34,21 @@ import finalproject.csci205.com.ymca.model.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 import finalproject.csci205.com.ymca.util.NotificationUtil;
 
-/******************************************
- * CSCI205 - Software Engineering and Design
- * Fall 2016
- * <p>
- * Name: YMCA
- * Date: Nov 1, 2016
- * Time: 7:50:26 PM
- * <p>
- * Project: csci205_final
- * Package: finalproject.csci205.com.countcown
- * File: CountDownView
- * Description:
- * Homebrew CountDownView that defines a generic count down timer. Uses custom built
- * count down service to keep track of ticking time. Deploys a notification that is inSync with
- * said view!
- *
- * Example Usage:
- countDownView = (CountDownView) root.findViewById(R.id...);
- countDownView.setSessionTime(someSesstionTime);//
- countDownView.setJumpTo(SomeActivity.class);
- * ****************************************
- */
 
 
 
 /**
+ *
+ * Homebrew CountDownView that defines a generic count down timer. Uses custom built
+ * count down service to keep track of ticking time. Deploys a notification that is inSync with
+ * said view!
+ *
  * @author Charles
  */
 public class CountDownView extends LinearLayout implements View.OnClickListener, ServiceConnection, CountDownListener, NotificationClickedSyncListener {
 
     private static CountDownView cdView;
     private final int REBINDSERVICE = 0;
-    private final int NOTIFICATION_ID = 1;
     private final int TIMERUP_ID = 9;
     private int startPauseCounter = 0;
     private View root;
@@ -410,7 +392,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
     public void onCountFinished() {
         countCancelComplete();
         Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(1000);
+        v.vibrate(2000);
 
         //the intent that is started when the notification is clicked (works)
         Intent notificationIntent = new Intent(getContext(), jumpTo);
@@ -501,7 +483,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         notificationView.setOnClickPendingIntent(R.id.start, pendingStart);
         notificationView.setOnClickPendingIntent(R.id.pause, pendingPause);
         notificationView.setOnClickPendingIntent(R.id.cancel, pendingCancel);
-        notificationManager.notify(NOTIFICATION_ID, notification);
+        notificationManager.notify(NotificationUtil.NOTIFICATION_ID, notification);
 
     }
 
