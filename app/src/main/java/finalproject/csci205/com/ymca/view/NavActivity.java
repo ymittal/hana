@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -67,7 +66,6 @@ public class NavActivity extends AppCompatActivity implements
         gtdFragment = GTDFragment.newInstance();
         pomoFragment = PomodoroFragment.newInstance();
         tenMinFragment = TenMinuteFragment.newInstance();
-        //initFragment(new GTDFragment(),GTDFragment.class.getName());
         displayGTDFragment();
     }
 
@@ -123,24 +121,11 @@ public class NavActivity extends AppCompatActivity implements
         NotificationUtil.destroyPomNotification(getApplicationContext());
     }
 
+
     /**
-     * Initializes fragment by changing container view content
-     * @param newFragment new {@link Fragment} object
-     * @author Charles and Yash
+     * Displays the fragment depending on whether or not it exists.
+     * @author Charles
      */
-    private void initFragment(Fragment newFragment, String tag) {
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        //transaction.add(R.id.content_nav,newFragment);
-//        transaction.replace(R.id.content_nav, newFragment);
-//        transaction.addToBackStack(tag);
-//        transaction.commit();
-//        //getSupportFragmentManager().executePendingTransactions();
-
-        getSupportFragmentManager().beginTransaction().
-                replace(R.id.content_nav, newFragment, tag).
-                commit();
-    }
-
     private void displayGTDFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (gtdFragment.isAdded()) {
@@ -158,6 +143,11 @@ public class NavActivity extends AppCompatActivity implements
         transaction.commit();
     }
 
+    /**
+     * Displays the fragment depending on whether or not it exists.
+     *
+     * @author Charles
+     */
     private void displayPomodoroFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (pomoFragment.isAdded()) {
@@ -175,6 +165,10 @@ public class NavActivity extends AppCompatActivity implements
         transaction.commit();
     }
 
+    /**
+     * Displays the fragment depending on whether or not it exists.
+     * @author Charles
+     */
     private void displayTenMinFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (tenMinFragment.isAdded()) {
@@ -201,66 +195,24 @@ public class NavActivity extends AppCompatActivity implements
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
-        Class fragmentClass;
-        String tag = null;
+
 
         // determines appropriate fragment using item Id
         switch (item.getItemId()) {
             case R.id.menuitem_tasks:
-                //fragmentClass = GTDFragment.class;
                 displayGTDFragment();
                 break;
             case R.id.menuitem_pomodoro:
-                //fragmentClass = PomodoroFragment.class;
                 displayPomodoroFragment();
                 break;
             case R.id.menuitem_tenminute:
-                //fragmentClass = TenMinuteFragment.class;
                 displayTenMinFragment();
                 break;
             default:
-                //fragmentClass = GTDFragment.class;
+                displayGTDFragment();
         }
-        try {
-            //fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //tag = fragmentClass.getName(); //Used for BackStack Tag
-//        if (restoreFragmentFromBackStack(tag)){
-//            //Logic is in method
-//        } else {
-//            initFragment(fragment,tag);
-//        }
-        //initFragment(fragment,tag);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-
-    /**
-     * Restores old fragment to view if it exists
-     *
-     * @param tag
-     * @author Charles
-     */
-    private boolean restoreFragmentFromBackStack(String tag) {
-
-        //Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
-        Fragment fragment =
-                getSupportFragmentManager().findFragmentByTag(tag);
-        if (fragment != null) {
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.content_nav, fragment);
-//            //transaction.addToBackStack(tag);
-//            transaction.commit();
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.content_nav, fragment, tag).
-                    commit();
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -280,7 +232,6 @@ public class NavActivity extends AppCompatActivity implements
 
         } else if (getSupportFragmentManager().findFragmentById(R.id.content_nav)
                 instanceof DetailTaskFragment) {
-            //initFragment(new GTDFragment(),GTDFragment.class.getName());
             displayGTDFragment();
 
         } else if (getSupportFragmentManager().findFragmentById(R.id.content_nav)

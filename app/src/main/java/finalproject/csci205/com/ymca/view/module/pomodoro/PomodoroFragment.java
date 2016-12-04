@@ -91,6 +91,7 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         return root;
     }
 
+
     /**
      * Initializes user interface elements and sets {@link android.view.View.OnClickListener}
      *
@@ -110,6 +111,11 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         if (countDownView.getCd().getState() == ServiceState.OTHER) {
             NotificationUtil.destroyPomNotification(getContext());
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     /**
