@@ -145,6 +145,7 @@ public class NavActivity extends AppCompatActivity implements
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (gtdFragment.isAdded()) {
             transaction.show(gtdFragment);
+            setTitle("Task List");
         } else {
             transaction.add(R.id.content_nav, gtdFragment, FragmentTags.GTD_FRAGMENT);
         }
@@ -161,6 +162,7 @@ public class NavActivity extends AppCompatActivity implements
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (pomoFragment.isAdded()) {
             transaction.show(pomoFragment);
+            setTitle("Pomodoro");
         } else {
             transaction.add(R.id.content_nav, pomoFragment, FragmentTags.POMO_FRAGMENT);
         }
@@ -177,6 +179,7 @@ public class NavActivity extends AppCompatActivity implements
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (tenMinFragment.isAdded()) {
             transaction.show(tenMinFragment);
+            setTitle("Ten Minute Hack");
         } else {
             transaction.add(R.id.content_nav, tenMinFragment, FragmentTags.TEN_MIN_FRAGMENT);
         }
