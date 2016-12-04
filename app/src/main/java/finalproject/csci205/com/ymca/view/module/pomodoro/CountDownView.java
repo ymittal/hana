@@ -34,18 +34,20 @@ import finalproject.csci205.com.ymca.model.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 import finalproject.csci205.com.ymca.util.NotificationUtil;
 
-
-
-
 /**
- *
  * Homebrew CountDownView that defines a generic count down timer. Uses custom built
  * count down service to keep track of ticking time. Deploys a notification that is inSync with
  * said view!
  *
  * @author Charles
  */
-public class CountDownView extends LinearLayout implements View.OnClickListener, ServiceConnection, CountDownListener, NotificationClickedSyncListener {
+public class CountDownView extends LinearLayout implements
+        View.OnClickListener,
+        ServiceConnection,
+        CountDownListener,
+        NotificationClickedSyncListener {
+
+    //TODO: Charles, Javadocs for all these fields :-( (Ikr?)
 
     private static CountDownView cdView;
     private final int REBINDSERVICE = 0;
@@ -84,12 +86,10 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         init();
     }
 
-
     public CountDownView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
-
 
     /**
      * Creates view elements
@@ -109,7 +109,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         minFor = new SimpleDateFormat("mm");
         pomodoroDataUpdate();
 
-
         //Service
         CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
         if (isMyServiceRunning(CountDownService.class)) {
@@ -118,8 +117,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         } else {
             getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
         }
-
-
     }
 
     /**
@@ -301,6 +298,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
      * Sets the session time from data model, then inits the data.
      * Updates view
      * Cannot create a service without the known session time!
+     *
      * @param sessionTime
      */
     public void setSessionTime(int sessionTime) {
@@ -369,8 +367,9 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
     /**
      * Call Back from service.
-     * @author Charles
+     *
      * @param l
+     * @author Charles
      */
     @Override
     public void countdownResult(long l) {
@@ -413,6 +412,7 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
 
     /**
      * Series of Handles that keeps view and notification actions in sync
+     *
      * @author
      */
     @Override
@@ -430,8 +430,10 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
         countCancelComplete();
     }
 
+    //TODO: Charles, split this into smaller methods please
     /**
      * Creates notification that pairs the same action logic tied with the CountDownView
+     *
      * @author Charles
      */
     private void startNotification() {
@@ -556,9 +558,6 @@ public class CountDownView extends LinearLayout implements View.OnClickListener,
                 notificationManager.cancel(NotificationUtil.NOTIFICATION_ID);
             }
         }
-
-
     }
-
 
 }

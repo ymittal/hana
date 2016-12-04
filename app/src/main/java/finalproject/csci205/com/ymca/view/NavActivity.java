@@ -19,7 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.util.FragmentTags;
 import finalproject.csci205.com.ymca.util.NotificationUtil;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
 import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragment;
@@ -30,6 +29,7 @@ import finalproject.csci205.com.ymca.view.task.GTDFragment;
 /**
  * {@link android.app.Activity} to hold the hamburger menu allowing user to
  * switch between different productivity techniques
+ *
  * @author Yash, Malachi, Aleks, and Charles
  */
 public class NavActivity extends AppCompatActivity implements
@@ -72,6 +72,7 @@ public class NavActivity extends AppCompatActivity implements
     /**
      * Initializes user interface elements including {@link Toolbar},
      * {@link ActionBarDrawerToggle}, and {@link NavigationView}
+     *
      * @author Yash
      */
     private void initUI() {
@@ -124,8 +125,9 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Displays the fragment depending on whether or not it exists.
-     * @see https://guides.codepath.com/android/Creating-and-Using-Fragments#managing-fragment-backstack
+     *
      * @author Charles
+     * @see https://guides.codepath.com/android/Creating-and-Using-Fragments#managing-fragment-backstack
      */
     private void displayGTDFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -168,6 +170,7 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Displays the fragment depending on whether or not it exists.
+     *
      * @author Charles
      */
     private void displayTenMinFragment() {
@@ -189,6 +192,7 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Handles event of selecting a {@link NavigationView} item
+     *
      * @param item {@link NavigationView} menu item selected
      * @return true if the event was handles, false otherwise
      * @author Charles
@@ -255,9 +259,9 @@ public class NavActivity extends AppCompatActivity implements
      *
      * @param event {@link MotionEvent} to be dispatched
      * @return true if touch event was handled
+     * @author Yash
      * @see <a href="http://stackoverflow.com/questions/4165414/how-to-hide-soft-keyboard-on-android-after-clicking-outside-edittext">
      * Stack Overflow - how to hide soft keyboard on android after clicking outside EditText?</a>
-     * @author Yash
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -280,6 +284,7 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Hides Android soft keyboard
+     *
      * @author Yash
      */
     private void hideKeyboard() {
