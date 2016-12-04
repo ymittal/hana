@@ -24,12 +24,14 @@ import finalproject.csci205.com.ymca.R;
 public class TenMinuteFragment extends Fragment implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
 
     protected static final String PREF_TENMIN_ALARM_MILLI_KEY = "PREF_TENMIN_ALARM_MILLI";
+    protected static final String PREF_TENMIN_ALARM_TOGGLE_KEY = "PREF_TENMIN_ALARM_TOGGLE";
     private Calendar myCalendar;
     private TextView tvClock;
     private Switch alarmSwitch;
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
     private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
 
     /**
@@ -62,6 +64,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         myCalendar = Calendar.getInstance();
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
     }
 
     /**
@@ -75,18 +78,29 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle saveInstanceState) {
+        //set the title of the view
         getActivity().setTitle("10-Minute Hack");
 
+        //instantiate variables
         View root = inflater.inflate(R.layout.fragment_tenmin, container, false);
         alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         tvClock = (TextView) root.findViewById(R.id.tvClock);
         alarmSwitch = (Switch) root.findViewById(R.id.alarmSwitch);
+        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
 
+        //set on click listeners for the views I want to clickable
         tvClock.setOnClickListener(this);
+        alarmSwitch.setOnClickListener(this);
 
-        //if the user had set the alarm previously, update the view to this alarm's time
+        //if the user had set the alarm previously, update the calendar to this alarm's time
         if (sharedPreferences.getLong(PREF_TENMIN_ALARM_MILLI_KEY, 0) != 0) {
             myCalendar.setTimeInMillis(sharedPreferences.getLong(PREF_TENMIN_ALARM_MILLI_KEY, 0));
+        }
+
+        //if the user has the alarm toggled on, update the ui
+        if (sharedPreferences.getBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, false)) {
+            alarmSwitch.setChecked(true);
         }
         //Update the clock with whatever the calendar is set to
         updateTvClock(myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE));
@@ -109,12 +123,18 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
                     myCalendar.get(Calendar.MINUTE),
                     false).show();
         } else if (view.getId() == R.id.alarmSwitch) {
-            //TODO: change SharedPreferences to alarm on or off
+            //if the switch is toggled to be on,
             if (alarmSwitch.isChecked()) {
-                
+                Toast.makeText(getContext(), "Alarm on", Toast.LENGTH_SHORT).show();
+                editor.putBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, true);
+                onTimeSet(null, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE));
+            } else {
+                Toast.makeText(getContext(), "Alarm off", Toast.LENGTH_SHORT).show();
+                alarmManager.cancel(pendingIntent);
+                editor.putBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, false);
             }
         }
-        Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT);
+
 
     }
 
@@ -142,17 +162,13 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         updateTvClock(hourOfDay, minute);
 
         //update the database
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong(PREF_TENMIN_ALARM_MILLI_KEY, myCalendar.getTimeInMillis());
         editor.commit();
-
-        //Make the alarm
-        Intent intent = new Intent(getContext(), AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, myCalendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, pendingIntent);
-
+        if (sharedPreferences.getBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, false)) {
+            //Make the alarm. If the user doesn't have the toggle selected, the alarm won't be set
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, myCalendar.getTimeInMillis(),
+                    AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
     }
 
     /**

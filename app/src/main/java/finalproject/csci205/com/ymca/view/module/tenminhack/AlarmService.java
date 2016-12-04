@@ -9,7 +9,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroFragment;
+import finalproject.csci205.com.ymca.view.MainActivity;
 
 /**
  * Created by Malachi on 12/2/2016.
@@ -23,26 +23,26 @@ public class AlarmService extends IntentService {
 
     @Override
     public void onHandleIntent(Intent intent) {
-        sendNotification("Wake Up! Wake Up!");
+        sendNotification("Good Job! Keep up the good work!");
     }
 
     private void sendNotification(String msg) {
-        Log.d("AlarmService", "Preparing to send notification...: " + msg);
+        Log.i("AlarmService", "Preparing to send notification...: " + msg);
         alarmNotificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, PomodoroFragment.class), 0);
+                new Intent(this, MainActivity.class), 0);
 
         NotificationCompat.Builder alarmNotificationBuilder = new NotificationCompat.Builder(
                 this)
-                .setContentTitle("Alarm")
+                .setContentTitle("10 minutes are up!")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .setContentText(msg)
                 .setContentIntent(contentIntent);
 
         alarmNotificationManager.notify(1, alarmNotificationBuilder.build());
-        Log.d("AlarmService", "Notification sent.");
+        Log.i("AlarmService", "Notification sent.");
     }
 }
