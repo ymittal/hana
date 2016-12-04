@@ -13,7 +13,7 @@
         <!-- TODO: change icon -->
         <item
             android:id="@+id/menuitem_tenminute"
-            android:icon="@drawable/ic_pom"
+            android:icon="@drawable/ic_tenmin"
             android:title="@string/menuitem_tenminute" />
     </group>
 

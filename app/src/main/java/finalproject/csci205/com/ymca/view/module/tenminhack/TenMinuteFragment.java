@@ -3,9 +3,11 @@ package finalproject.csci205.com.ymca.view.module.tenminhack;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +19,16 @@ import java.util.Calendar;
 
 import finalproject.csci205.com.ymca.R;
 
-import static android.content.Context.ALARM_SERVICE;
-
 
 public class TenMinuteFragment extends Fragment implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
 
-    private Calendar myCalendar = Calendar.getInstance();
+    private Calendar myCalendar;
 
     private TextView tvClock;
 
     private AlarmManager alarmManager;
 
     private PendingIntent pendingIntent;
-
-
 
 
     /**
@@ -51,10 +49,11 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle("Ten Minute Hack");
+        myCalendar = Calendar.getInstance();
     }
 
     @Override
@@ -64,13 +63,12 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         View root = inflater.inflate(R.layout.fragment_tenmin, container, false);
         getActivity().setTitle("10-Minute Hack");
 
-        alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
 
         tvClock = (TextView) root.findViewById(R.id.tvClock);
         tvClock.setOnClickListener(this);
 
-        //TODO: Get saved time from sugar
-        // textClock.setText("The set time");
+        //TODO: Get saved time from systemprefs
         updateTvClock(myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE));
 
         return root;
@@ -97,16 +95,30 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         super.onDestroyView();
     }
 
+    /**
+     * Called when the "ok" has been hit in the time picker
+     *
+     * @param timePicker The timePicker object that called this method
+     * @param hourOfDay  The hour of day picked in 24-hour mode
+     * @param minute     The minute of the day from within the given hour
+     * @author Malachi
+     */
     @Override
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+        myCalendar.setTimeInMillis(System.currentTimeMillis());
         myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         myCalendar.set(Calendar.MINUTE, minute);
 
         updateTvClock(hourOfDay, minute);
 
-        Intent intent = new Intent(TenMinuteFragment.this.getActivity(), AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(TenMinuteFragment.this.getActivity(), 0, intent, 0);
-        alarmManager.set(AlarmManager.RTC, myCalendar.getTimeInMillis(), pendingIntent);
+        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+        //testing
+        // Log.i("AlarmSettings", "Current time_in_ms:     " + myCalendar.getTimeInMillis());
+        Log.i("AlarmSettings", "Alarm at time_in_ms:      " + myCalendar.getTimeInMillis());
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, myCalendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, pendingIntent);
+        //  alarmManager.set(AlarmManager.RTC, myCalendar.getTimeInMillis(), pendingIntent);
 
     }
 
@@ -120,9 +132,13 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
      */
     private String updateTvClock(int hourOfDay, int minute) {
         boolean isAM;
+
         if (hourOfDay <= 12) {
             isAM = true;
-        } else {
+            if (hourOfDay == 0) {
+                hourOfDay = 12;
+            }
+        } else{
             isAM = false;
             hourOfDay = hourOfDay - 12;
         }

@@ -17,7 +17,7 @@ public class SharedPreferenceUtil {
     /**
      * @param context context object
      * @return boolean denoting whether user has pressed begin button on first app start
-     * @author Malachi and Aleks
+     * @author Aleks
      */
     public static boolean getIsOpen(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -29,7 +29,7 @@ public class SharedPreferenceUtil {
      *
      * @param context context
      * @param isOpen  whether user pressed the begin button
-     * @author Malachi and Aleks
+     * @author Aleks
      */
     public static void setPreferenceIsOpen(Context context, boolean isOpen) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
