@@ -19,8 +19,8 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Class to test the functionality of {@link GTDPresenter}
- * <p>
- * Created by Alekzander
+ *
+ * @author Alekzander and Yash
  */
 public class GTDPresenterInstrumentationTest {
 
@@ -31,6 +31,13 @@ public class GTDPresenterInstrumentationTest {
 
     private GTDPresenter gtdPresenter;
 
+    /**
+     * Initializes {@link SugarContext} (SugarORM database) and clears
+     * stored {@link Task} objects
+     *
+     * @throws Exception
+     * @author Aleks
+     */
     @Before
     public void setUp() throws Exception {
         SugarContext.init(activityTestRule.getActivity());
@@ -39,6 +46,12 @@ public class GTDPresenterInstrumentationTest {
         gtdPresenter = new GTDPresenter(activityTestRule.getActivity());
     }
 
+    /**
+     * Clears existing {@link Task} objects
+     *
+     * @throws Exception
+     * @author Aleks
+     */
     @After
     public void tearDown() throws Exception {
         Task.deleteAll(Task.class);
@@ -46,9 +59,10 @@ public class GTDPresenterInstrumentationTest {
 
 
     /**
-     * Unit Test for adding tasks to the GTD Presenter
+     * Unit test for adding tasks through {@link GTDPresenter}
      *
      * @throws Exception
+     * @author Aleks
      */
     @Test
     public void testAddTask() throws Exception {
@@ -62,9 +76,10 @@ public class GTDPresenterInstrumentationTest {
 
 
     /**
-     * Unit Test for adding tasks to the GTD Presenter
+     * Unit test for removing tasks through {@link GTDPresenter}
      *
      * @throws Exception
+     * @author Aleks
      */
     @Test
     public void testRemoveTask() throws Exception {
@@ -81,6 +96,12 @@ public class GTDPresenterInstrumentationTest {
         assertEquals(expectedLength, actualLength);
     }
 
+    /**
+     * Gets a list of {@link Task} through {@link GTDPresenter}
+     *
+     * @throws Exception
+     * @author Yash
+     */
     @Test
     public void getTasks() throws Exception {
         Task newTask1 = new Task(DUMMY_TASK_1);
@@ -97,6 +118,12 @@ public class GTDPresenterInstrumentationTest {
         assertEquals(expectedTasks.get(1).getTitle(), resultTasks.get(1).getTitle());
     }
 
+    /**
+     * Unit test to check off a task through {@link GTDPresenter}
+     *
+     * @throws Exception
+     * @author Aleks
+     */
     @Test
     public void taskChecked() throws Exception {
         Task newTask = new Task();

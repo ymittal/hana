@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.TestUtil;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -70,15 +71,15 @@ public class MainActivityInstrumentationTest {
     }
 
     /**
-     * Tests {@link MainActivity#onClick(View)}} by checking whether
+     * Tests {@link MainActivity#onClick(View)} by checking whether
      * {@link finalproject.csci205.com.ymca.view.task.GTDFragment} opens successfully on
-     * app start
+     * app start; also tests {@link MainActivity#goToNavActivity()}
      *
      * @throws Exception
      * @author Yash
      */
     @Test
-    public void onClick() throws Exception {
+    public void onClick() {
         try {
             // user has not started using the application
             String sBeginButton = activityTestRule.getActivity().getString(R.string.beginButton);
@@ -94,4 +95,21 @@ public class MainActivityInstrumentationTest {
         }
     }
 
+    /**
+     * Tests whether {@link MainActivity} background is loaded as one of the three images
+     *
+     * @author Yash
+     */
+    @Test
+    public void testLoadBackground() {
+        try {
+            onView(withId(R.id.relativeLayout)).check(matches(TestUtil.withBackground(R.drawable.splash_cliff)));
+        } catch (AssertionFailedError e1) {
+            try {
+                onView(withId(R.id.relativeLayout)).check(matches(TestUtil.withBackground(R.drawable.splash_notebook)));
+            } catch (AssertionFailedError e2) {
+                onView(withId(R.id.relativeLayout)).check(matches(TestUtil.withBackground(R.drawable.splash_map)));
+            }
+        }
+    }
 }

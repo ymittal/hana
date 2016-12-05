@@ -31,11 +31,11 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     /**
      * Constant to define request code for {@link AddQuickTaskDialog}'s result
      */
-    public static final int REQUEST_CODE_QUICK = 1;
+    private static final int REQUEST_CODE_QUICK = 1;
     /**
      * Name of {@link Task} title passed from {@link AddQuickTaskDialog}
      */
-    public static final String NEW_TASK = "NEW_TASK";
+    private static final String NEW_TASK = "NEW_TASK";
 
     /**
      * {@link OnFragmentInteractionListener} to setup communication between current
@@ -75,7 +75,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle("Task List");
+        getActivity().setTitle(getString(R.string.title_gtd_fragment));
     }
 
     /**
@@ -135,7 +135,7 @@ public class GTDFragment extends Fragment implements View.OnClickListener {
             // dialog to a full task form
             AddQuickTaskDialog dialog = new AddQuickTaskDialog();
             dialog.setTargetFragment(GTDFragment.this, REQUEST_CODE_QUICK);
-            dialog.show(getFragmentManager(), "Add Task");
+            dialog.show(getFragmentManager(), getString(R.string.tag_add_quick_task_frag));
 
         }
     }

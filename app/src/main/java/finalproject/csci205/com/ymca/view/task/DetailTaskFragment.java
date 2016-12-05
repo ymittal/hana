@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,21 +35,25 @@ public class DetailTaskFragment extends Fragment
         implements View.OnClickListener,
         View.OnKeyListener,
         DatePickerDialog.OnDateSetListener,
-        TimePickerDialog.OnTimeSetListener {
+        TimePickerDialog.OnTimeSetListener,
+        TextWatcher {
 
     /**
      * Name of {@link Task} serializable passed from {@link GTDFragment}
      */
-    public static final String SERIALIZED_TASK = "SERIALIZED_TASK";
+    private static final String SERIALIZED_TASK = "SERIALIZED_TASK";
     /**
      * Number of degrees to rotate to open addSubtaskBtn
      */
-    public static final int ROTATE_DEGREE_TO_OPEN = 45;
+    private static final int ROTATE_DEGREE_TO_OPEN = 45;
     /**
      * Number of degrees to rotate to close addSubtaskBtn
      */
-    public static final int ROTATE_DEGREE_TO_CLOSE = 0;
-
+    private static final int ROTATE_DEGREE_TO_CLOSE = 0;
+    /**
+     * Calendar object to hold last task due date set by user
+     */
+    private final Calendar myCalendar = Calendar.getInstance();
     /**
      * Presenter for {@link DetailTaskFragment}
      */
@@ -56,11 +62,6 @@ public class DetailTaskFragment extends Fragment
      * Task associated with current {@link DetailTaskFragment}
      */
     private Task task;
-    /**
-     * Calendar object to hold last task due date set by user
-     */
-    private Calendar myCalendar = Calendar.getInstance();
-
     // User Interface components of DetailTaskFragment
     private EditText etSubtask;
     private TextView tvDueDate;
@@ -122,6 +123,7 @@ public class DetailTaskFragment extends Fragment
         tvDueDate.setOnClickListener(this);
         addSubtaskBtn.setOnClickListener(this);
         etSubtask.setOnKeyListener(this);
+        etDesc.addTextChangedListener(this);
 
         etDesc.setText(task.getDesc());
         setReadableDueDate();
@@ -158,7 +160,7 @@ public class DetailTaskFragment extends Fragment
      */
     @Override
     public void onDestroyView() {
-        detailTaskPresenter.setDescription(task, etDesc.getText().toString());
+//        detailTaskPresenter.setDescription(task, etDesc.getText().toString());
         super.onDestroyView();
     }
 
@@ -263,5 +265,28 @@ public class DetailTaskFragment extends Fragment
         myCalendar.set(Calendar.MINUTE, minute);
         detailTaskPresenter.setTaskDate(task, myCalendar.getTime());
         setReadableDueDate();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    /**
+     * When the user is done editing the textview, we save the data
+     *
+     * @param editable
+     * @author Yash
+     */
+    @Override
+    public void afterTextChanged(Editable editable) {
+        if (etDesc.getText().hashCode() == editable.hashCode()) {
+            detailTaskPresenter.setDescription(task, etDesc.getText().toString());
+        }
     }
 }

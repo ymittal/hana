@@ -14,7 +14,7 @@ public class SubtasksAdapter extends RecyclerView.Adapter<SubtaskViewHolder> {
     /**
      * {@link DetailTaskPresenter} presenter
      */
-    private DetailTaskPresenter detailTaskPresenter;
+    private final DetailTaskPresenter detailTaskPresenter;
 
     /**
      * @param detailTaskPresenter {@link DetailTaskPresenter} presenter

@@ -1,14 +1,17 @@
 package finalproject.csci205.com.ymca.view.module.pomodoro;
 
-/**
- * Created by ceh024 on 11/23/16.
- */
 
-public interface OnBackStackListener {
+/**
+ * Custom listener for when user navigates away from
+ * {@link finalproject.csci205.com.ymca.model.PomodoroSettings} back to the
+ * {@link PomodoroFragment}
+ *
+ * @author Charles
+ */
+interface OnBackStackListener {
+
     /**
-     * Evoked when user clicks back button.
-     *
-     * @author Charles
+     * Function evoked when user clicks Android back button
      */
     void onViewReturn();
 }

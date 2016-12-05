@@ -1,6 +1,7 @@
 package finalproject.csci205.com.countdown.Service;
 
 /**
+ * Listener interface deisnged to react to Count events
  * Created by ceh024 on 11/17/16.
  */
 

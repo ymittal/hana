@@ -1,13 +1,18 @@
 package finalproject.csci205.com.ymca.view.task;
 
+import android.content.Context;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.PickerActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+
+import junit.framework.Assert;
 
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -18,6 +23,8 @@ import org.junit.Test;
 import java.util.Calendar;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.Subtask;
+import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.util.DateTimeUtil;
 import finalproject.csci205.com.ymca.view.NavActivity;
 
@@ -55,12 +62,16 @@ public class DetailTaskFragmentInstrumentationTest {
      * the {@link DetailTaskFragment} by clicking on the first {@link RecyclerView} item.
      * Also sets up a {@link Calendar} object to test {@link android.app.DatePickerDialog}
      * and {@link android.app.TimePickerDialog} functionality
+     * Tests {@link finalproject.csci205.com.ymca.presenter.GTDPresenter#openDetailedTaskFragment(Task)}
      *
      * @throws Exception
      * @author Yash
      */
     @Before
     public void setUp() throws Exception {
+        Task.deleteAll(Task.class);
+        Subtask.deleteAll(Subtask.class);
+
         String sSave = activityTestRule.getActivity().getString(R.string.negative_btn_save);
         onView(withId(R.id.fab)).perform(click());
         onView(withText(sSave)).inRoot(isDialog()).check(matches(isDisplayed()));
@@ -89,6 +100,9 @@ public class DetailTaskFragmentInstrumentationTest {
         onView(withId(R.id.fragmentDetailTask)).perform(closeSoftKeyboard());
         onView(withId(R.id.fragmentDetailTask)).perform(ViewActions.pressBack());
         onView(withId(R.id.rvTasks)).perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeRight()));
+
+        Task.deleteAll(Task.class);
+        Subtask.deleteAll(Subtask.class);
     }
 
     /**
@@ -195,6 +209,23 @@ public class DetailTaskFragmentInstrumentationTest {
                         myCalendar.get(Calendar.DAY_OF_MONTH))
                 );
         onView(withText(PICKER_OK_BTN)).perform(click());
+    }
+
+    /**
+     * Tests whether soft keyboard gets closed when user taps outside current EditText
+     * with focus; basically tests {@link NavActivity#dispatchTouchEvent(MotionEvent)} method
+     *
+     * @author Yash
+     */
+    @Test
+    public void testCloseKeyboardTapOutside() {
+        onView(withId(R.id.addSubtaskBtn)).perform(click());
+        onView(withId(R.id.etSubtask)).perform(typeText(DUMMY_SUBTASK));
+        onView(withId(R.id.tvDueAt)).perform(click());  // simulates a click outside Subtask EditText
+
+        InputMethodManager imm = (InputMethodManager)
+                activityTestRule.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        Assert.assertEquals(true, imm.isAcceptingText());
     }
 
 }

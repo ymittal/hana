@@ -1,21 +1,5 @@
 package finalproject.csci205.com.countdown.Service;
 
-/******************************************
- * CSCI205 - Software Engineering and Design
- * Fall 2016
- * <p>
- * Name: YMCA
- * Date: Nov 1, 2016
- * Time: 7:50:26 PM
- * <p>
- * Project: csci205_final
- * Package: finalproject.csci205.com.countcown
- * File: CountDownView
- * Description:
- * Services that keeps track of counting down time.
- * ****************************************
- */
-
 
 import android.app.Service;
 import android.content.Intent;
@@ -28,6 +12,10 @@ import finalproject.csci205.com.countdown.Ults.Constants;
 import finalproject.csci205.com.countdown.Ults.ServiceState;
 
 /**
+ *
+ * Custom service that implments a count down timer with start, pause, stop, and cancel
+ * functionality.
+ *
  * @author Charles
  *         <p>
  *         Refrences

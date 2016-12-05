@@ -12,16 +12,20 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import finalproject.csci205.com.ymca.R;
-import finalproject.csci205.com.ymca.model.Pom.PomodoroSettings;
+import finalproject.csci205.com.ymca.model.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 
 /**
- * Created by ceh024 on 11/21/16.
+ * A fragment to encapsulate the different settings related to the
+ * Pomodoro technique, storing them through the presenter.
+ * @author Charles
  */
-
 public class PomodoroSettingsFragment extends Fragment implements View.OnClickListener {
 
-    CountDownView cdRef;
+    /*
+        Model, View, Presenter and listener refrences.
+     */
+    private CountDownView cdRef;
     private PomodoroPresenter pomodoroPresenter;
     private OnBackStackListener backStackListener;
 
@@ -33,10 +37,13 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
     private ImageButton saveBtn;
 
     /**
-     * @param inflater
-     * @param container
+     * Sets up fragment user interface and sets current Pomodoro settings
+     *
+     * @param inflater           {@link LayoutInflater} to inflate views inside fragment
+     * @param container          parent view encapsulating the fragment
      * @param savedInstanceState
-     * @return
+     * @return view for the fragment interface
+     * @author Yash and Charles
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,6 +74,8 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
     }
 
     /**
+     * Sets the current Pomodoro settings in the appropriate EditTexts
+     *
      * @author Charles
      */
     private void setCurrentPomodoroSettings() {
@@ -80,10 +89,10 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
     }
 
     /**
-     * @return
+     * @return currently configured Pomodoro settings
      * @author Charles and Yash
      */
-    public PomodoroSettings getCurrentPomodoroSettings() {
+    private PomodoroSettings getCurrentPomodoroSettings() {
         try {
             PomodoroSettings ps = new PomodoroSettings();
             ps.setSessionTime(Integer.valueOf(sessionTime.getText().toString()));
@@ -93,20 +102,30 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
             return ps;
 
         } catch (NumberFormatException ex) {
-            Toast.makeText(getContext(), "Invalid input parameter(s). Please try again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.err_pom_settings_invalid, Toast.LENGTH_SHORT).show();
             return null;
-
         }
     }
 
+    /**
+     * Handles click events on views implementing {@link android.view.View.OnClickListener}
+     *
+     * @param view clicked view
+     * @author Charles
+     */
     @Override
     public void onClick(View view) {
         if (view.getId() == saveBtn.getId()) {
             PomodoroSettings ps = getCurrentPomodoroSettings();
+
+            // saves current Pomodoro settings to database
+            // alerts BackStackListener in PomodoroFragment
+            // updates CountDownView references to internal Pomodoro data
+            // flow: model --> presenter --> CountDownView
             if (ps != null) {
                 pomodoroPresenter.savePomodoroSettingsToDatabase(ps);
                 backStackListener.onViewReturn();
-                cdRef.setSessionTimeOverride(Integer.valueOf(sessionTime.getText().toString()));
+                cdRef.newSavedConfig();
                 removeSelf();
             }
         }
@@ -136,7 +155,8 @@ public class PomodoroSettingsFragment extends Fragment implements View.OnClickLi
 
 
     /**
-     * {@link finalproject.csci205.com.ymca.view.NavActivity} method to handle when user clicks back button
+     * {@link finalproject.csci205.com.ymca.view.NavActivity} method to handle when user
+     * clicks back button
      *
      * @author Charles
      */

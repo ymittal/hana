@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -21,7 +22,7 @@ import finalproject.csci205.com.ymca.R;
  */
 public class AddQuickTaskDialog extends DialogFragment {
 
-    public static final String NEW_TASK = "NEW_TASK";
+    private static final String NEW_TASK = "NEW_TASK";
 
     /**
      * Required empty constructor
@@ -36,13 +37,14 @@ public class AddQuickTaskDialog extends DialogFragment {
      * @return dialog
      * @author Charles
      */
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_quicktask, null);
 
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setView(view)
-                .setTitle("Add Task")
+                .setTitle(R.string.title_add_quick_task_dialog)
                 .setPositiveButton(R.string.positive_btn_edit, null)
                 .setNegativeButton(R.string.negative_btn_save, null)
                 .create();
@@ -85,7 +87,7 @@ public class AddQuickTaskDialog extends DialogFragment {
                             @Override
                             public void onClick(View view) {
                                 if (etAddTask.getText().toString().equals("")) {
-                                    til.setError("Enter a task name");
+                                    til.setError(getString(R.string.err_negative_btn_task));
                                 } else {
                                     goToGTDFragment(etAddTask.getText().toString(), Activity.RESULT_CANCELED);
                                 }

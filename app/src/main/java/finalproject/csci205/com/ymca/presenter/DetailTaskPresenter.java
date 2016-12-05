@@ -16,18 +16,18 @@ import finalproject.csci205.com.ymca.view.task.item.SubtasksAdapter;
 public class DetailTaskPresenter {
 
     /**
+     * {@link SubtasksAdapter} object
+     */
+    private final SubtasksAdapter subtasksAdapter;
+    /**
+     * List of subtasks under given {@link Task}
+     */
+    private final List<Subtask> subtasks;
+    /**
      * {@link DetailTaskFragment} fragment containing information about
      * a specific {@link Task}
      */
     private DetailTaskFragment fragment;
-    /**
-     * {@link SubtasksAdapter} object
-     */
-    private SubtasksAdapter subtasksAdapter;
-    /**
-     * List of subtasks under given {@link Task}
-     */
-    private List<Subtask> subtasks;
 
     /**
      * Default constructor

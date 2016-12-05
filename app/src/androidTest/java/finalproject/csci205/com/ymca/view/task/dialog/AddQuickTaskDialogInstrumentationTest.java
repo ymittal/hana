@@ -3,27 +3,25 @@ package finalproject.csci205.com.ymca.view.task.dialog;
 import android.support.design.widget.TextInputLayout;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.rule.ActivityTestRule;
-import android.view.View;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.TestUtil;
+import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.view.NavActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.core.deps.guava.base.Preconditions.checkNotNull;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -47,36 +45,6 @@ public class AddQuickTaskDialogInstrumentationTest {
     private String sEdit;
 
     /**
-     * A custom ViewMatcher for views with errors which are not supported by the library
-     *
-     * @param stringMatcher {@link Matcher<String>} containing error string of {@link TextInputLayout}
-     * @return {@link Matcher<View>} object
-     * @see <a href="http://stackoverflow.com/questions/37073050/how-can-you-check-a-textinputlayouts-error-with-espresso">
-     * Stack Overflow - How can you check a TextinputLayout's error with Espresso</a>
-     */
-    private static Matcher<View> withErrorInInputLayout(final Matcher<String> stringMatcher) {
-        checkNotNull(stringMatcher);
-
-        return new BoundedMatcher<View, TextInputLayout>(TextInputLayout.class) {
-            String actualError = "";
-
-            @Override
-            public void describeTo(Description description) {
-            }
-
-            @Override
-            public boolean matchesSafely(TextInputLayout textInputLayout) {
-                CharSequence error = textInputLayout.getError();
-                if (error != null) {
-                    actualError = error.toString();
-                    return stringMatcher.matches(actualError);
-                }
-                return false;
-            }
-        };
-    }
-
-    /**
      * Automates click on {@link android.support.design.widget.FloatingActionButton}
      * present on the {@link NavActivity}
      *
@@ -85,6 +53,8 @@ public class AddQuickTaskDialogInstrumentationTest {
      */
     @Before
     public void setUp() throws Exception {
+        Task.deleteAll(Task.class);
+
         sSave = activityTestRule.getActivity().getString(R.string.negative_btn_save);
         sEdit = activityTestRule.getActivity().getString(R.string.positive_btn_edit);
 
@@ -94,6 +64,7 @@ public class AddQuickTaskDialogInstrumentationTest {
 
     @After
     public void tearDown() throws Exception {
+        Task.deleteAll(Task.class);
     }
 
     /**
@@ -125,13 +96,27 @@ public class AddQuickTaskDialogInstrumentationTest {
 
     /**
      * Validates user input and checks if {@link TextInputLayout} has an error when user enters
-     * an empty {@link finalproject.csci205.com.ymca.model.Task} title
+     * an empty {@link finalproject.csci205.com.ymca.model.Task} title for a quick task
      */
     @Test
     public void validateAddTaskEditText() {
         onView(withText(sSave)).perform(click());
         onView(withId(R.id.tilAddTask)).check(
-                matches(withErrorInInputLayout(is(activityTestRule.getActivity().getString(R.string.error_til_add_task))))
+                matches(TestUtil.withErrorInInputLayout(is(activityTestRule.getActivity().getString(R.string.error_til_add_task))))
         );
+        onView(withText(sSave)).perform(closeSoftKeyboard(), pressBack());
+    }
+
+    /**
+     * Validates user input and checks if {@link TextInputLayout} has an error when user enters
+     * an empty {@link finalproject.csci205.com.ymca.model.Task} title for a detailed task
+     */
+    @Test
+    public void validateAddDetailTaskEditText() {
+        onView(withText(sEdit)).perform(click());
+        onView(withId(R.id.tilAddTask)).check(
+                matches(TestUtil.withErrorInInputLayout(is(activityTestRule.getActivity().getString(R.string.error_til_add_task))))
+        );
+        onView(withText(sSave)).perform(closeSoftKeyboard(), pressBack());
     }
 }

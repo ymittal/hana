@@ -9,11 +9,13 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import finalproject.csci205.com.ymca.R;
+import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.view.NavActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -45,6 +47,8 @@ public class GTDFragmentInstrumentationTest {
      */
     @Before
     public void setUp() throws Exception {
+        Task.deleteAll(Task.class);
+
         String sSave = activityTestRule.getActivity().getString(R.string.negative_btn_save);
         onView(withId(R.id.fab)).perform(click());
         onView(withText(sSave)).inRoot(isDialog()).check(matches(isDisplayed()));
@@ -64,6 +68,8 @@ public class GTDFragmentInstrumentationTest {
     public void tearDown() throws Exception {
         onView(withId(R.id.rvTasks)).perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeRight()));
         onView(withId(R.id.rvTasks)).check(new RecyclerViewItemCountAssertion(0));
+
+        Task.deleteAll(Task.class);
     }
 
     /**
@@ -80,4 +86,19 @@ public class GTDFragmentInstrumentationTest {
         onView(allOf(withId(android.support.design.R.id.snackbar_action))).perform(click());
         onView(withId(R.id.rvTasks)).check(new RecyclerViewItemCountAssertion(1));
     }
+
+    /**
+     * Ensures that {@link finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog}
+     * shows up when {@link android.support.design.widget.FloatingActionButton} is tapped
+     *
+     * @author Yash
+     */
+    @Test
+    public void testOnFabClick() {
+        String sSave = activityTestRule.getActivity().getString(R.string.negative_btn_save);
+        onView(withId(R.id.fab)).perform(click());
+        onView(withText(sSave)).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withText(sSave)).perform(closeSoftKeyboard(), pressBack());
+    }
+
 }
