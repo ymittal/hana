@@ -60,4 +60,5 @@ public class AlarmService extends IntentService {
         //Send the notification
         alarmNotificationManager.notify(1, alarmNotificationBuilder.build());
     }
+    //TODO: Malachi, please refactor magic numbers
 }

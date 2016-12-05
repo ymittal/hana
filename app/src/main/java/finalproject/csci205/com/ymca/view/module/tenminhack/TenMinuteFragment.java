@@ -20,6 +20,7 @@ import java.util.Calendar;
 
 import finalproject.csci205.com.ymca.R;
 
+//TODO: Malachi, add the descriptions of the three classes in /module/tenminhack
 /**
  * Created by Malachi on 12/2/2016.
  */
@@ -44,7 +45,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
     private PendingIntent pendingIntent;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-
+    //TODO: Malachi, please write Javadocs for ^ fields
 
     /**
      * Required empty constructor
@@ -92,7 +93,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle saveInstanceState) {
         //set the title of the view
-        getActivity().setTitle("10-Minute Hack");
+        getActivity().setTitle(R.string.title_tenmin_fragment);
 
         //instantiate variables
         View root = inflater.inflate(R.layout.fragment_tenmin, container, false);
@@ -152,8 +153,6 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
                 editor.commit();
             }
         }
-
-
     }
 
     /**

@@ -12,6 +12,7 @@ import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragme
  * A class to encapsulate a presenter for the {@link PomodoroFragment},
  * {@link PomodoroSettingsFragment}, and {@link CountDownView} following MVP
  * design pattern for Android development
+ *
  * @author Charles
  */
 public class PomodoroPresenter implements CountDownListener {
@@ -23,6 +24,7 @@ public class PomodoroPresenter implements CountDownListener {
     private PomodoroSettingsFragment settingsView;
     private Context context;
     private int cycleCounter;
+    //TODO: Charles, add docs for the above fields
 
     /**
      * Default constructor
@@ -61,6 +63,7 @@ public class PomodoroPresenter implements CountDownListener {
         return PomodoroSettings.findById(PomodoroSettings.class, DB_ID);
     }
 
+    //TODO: Charles, add docs for the following methods
     private void incCounter() {
         cycleCounter++;
     }
