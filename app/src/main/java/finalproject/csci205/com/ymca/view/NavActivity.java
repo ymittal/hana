@@ -122,12 +122,12 @@ public class NavActivity extends AppCompatActivity implements
         NotificationUtil.destroyPomNotification(getApplicationContext());
     }
 
-
     /**
      * Displays the fragment depending on whether or not it exists.
      *
      * @author Charles
-     * @see https://guides.codepath.com/android/Creating-and-Using-Fragments#managing-fragment-backstack
+     * @see <a href="https://guides.codepath.com/android/Creating-and-Using-Fragments#managing-fragment-backstack">
+     * Codepath Creating and Using Fragments Managing Fragment Backstack</a>
      */
     private void displayGTDFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -201,11 +201,8 @@ public class NavActivity extends AppCompatActivity implements
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
         // determines appropriate fragment using item Id
         switch (item.getItemId()) {
-
-
             case R.id.menuitem_tasks:
                 displayGTDFragment();
                 break;

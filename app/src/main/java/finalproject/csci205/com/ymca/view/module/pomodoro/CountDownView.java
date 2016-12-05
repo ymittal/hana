@@ -431,6 +431,7 @@ public class CountDownView extends LinearLayout implements
     }
 
     //TODO: Charles, split this into smaller methods please
+
     /**
      * Creates notification that pairs the same action logic tied with the CountDownView
      *

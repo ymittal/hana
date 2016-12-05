@@ -19,6 +19,7 @@ import finalproject.csci205.com.ymca.view.MainActivity;
 /**
  * A fragment that displays a custom view and allows for the collection & setting of prefrences
  * regarding Pomodoro
+ *
  * @author Charles
  */
 public class PomodoroFragment extends Fragment implements View.OnClickListener, OnBackStackListener {

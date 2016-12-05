@@ -18,6 +18,7 @@ import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
 /**
  * A fragment to encapsulate the different settings related to the
  * Pomodoro technique, storing them through the presenter.
+ *
  * @author Charles
  */
 public class PomodoroSettingsFragment extends Fragment implements View.OnClickListener {

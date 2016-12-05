@@ -67,6 +67,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
 
     /**
      * A method called within the activity lifecycle. Comes before onCreateView, but after onStart
+     *
      * @param savedInstanceState
      * @author Malachi
      */
@@ -80,6 +81,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
 
     /**
      * The method called within the activity lifecycle. Comes after onCreate
+     *
      * @param inflater
      * @param container
      * @param saveInstanceState
@@ -121,6 +123,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
 
     /**
      * When any view within this fragment is clicked, this method is called
+     *
      * @param view The view within the fragment that was clicked
      * @author Malachi
      */
@@ -198,7 +201,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
             if (hourOfDay == 0) {
                 hourOfDay = 12;
             }
-        } else{
+        } else {
             isAM = false;
             hourOfDay = hourOfDay - 12;
         }
