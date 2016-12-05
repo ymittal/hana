@@ -233,6 +233,7 @@ public class CountDownView extends LinearLayout implements
      */
     private void countCancelComplete() {
         //Formatting variables, doing general reset
+        cancelPom.setVisibility(INVISIBLE);
         NotificationUtil.destroyPomNotification(getContext());
         numCyclesTillBreak--; //Decrement counter
         seconds.setText("00");
@@ -344,7 +345,6 @@ public class CountDownView extends LinearLayout implements
     }
 
     private void configState() {
-        cancelPom.setVisibility(VISIBLE);
         updateProgress(cd.getStoredTime());
     }
 
