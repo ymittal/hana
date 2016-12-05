@@ -75,7 +75,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         myCalendar = Calendar.getInstance();
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();//commit() is done later...
     }
 
     /**
