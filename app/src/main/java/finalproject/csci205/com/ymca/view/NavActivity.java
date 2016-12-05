@@ -204,10 +204,13 @@ public class NavActivity extends AppCompatActivity implements
 
         // determines appropriate fragment using item Id
         switch (item.getItemId()) {
+
+
             case R.id.menuitem_tasks:
                 displayGTDFragment();
                 break;
             case R.id.menuitem_pomodoro:
+
                 displayPomodoroFragment();
                 break;
             case R.id.menuitem_tenminute:

@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +35,8 @@ public class DetailTaskFragment extends Fragment
         implements View.OnClickListener,
         View.OnKeyListener,
         DatePickerDialog.OnDateSetListener,
-        TimePickerDialog.OnTimeSetListener {
+        TimePickerDialog.OnTimeSetListener,
+        TextWatcher {
 
     /**
      * Name of {@link Task} serializable passed from {@link GTDFragment}
@@ -120,6 +123,7 @@ public class DetailTaskFragment extends Fragment
         tvDueDate.setOnClickListener(this);
         addSubtaskBtn.setOnClickListener(this);
         etSubtask.setOnKeyListener(this);
+        etDesc.addTextChangedListener(this);
 
         etDesc.setText(task.getDesc());
         setReadableDueDate();
@@ -156,7 +160,7 @@ public class DetailTaskFragment extends Fragment
      */
     @Override
     public void onDestroyView() {
-        detailTaskPresenter.setDescription(task, etDesc.getText().toString());
+//        detailTaskPresenter.setDescription(task, etDesc.getText().toString());
         super.onDestroyView();
     }
 
@@ -261,5 +265,28 @@ public class DetailTaskFragment extends Fragment
         myCalendar.set(Calendar.MINUTE, minute);
         detailTaskPresenter.setTaskDate(task, myCalendar.getTime());
         setReadableDueDate();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    /**
+     * When the user is done editing the textview, we save the data
+     *
+     * @param editable
+     * @author Yash
+     */
+    @Override
+    public void afterTextChanged(Editable editable) {
+        if (etDesc.getText().hashCode() == editable.hashCode()) {
+            detailTaskPresenter.setDescription(task, etDesc.getText().toString());
+        }
     }
 }
