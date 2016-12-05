@@ -210,7 +210,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
                 .append(":");
         //checking if a '0' needs to be placed in front of the single_digit minute
         if (minute < 10) {
-            stringBuilder.append("0" + minute);
+            stringBuilder.append("0").append(minute);
         } else {
             stringBuilder.append(minute);
         }

@@ -16,4 +16,5 @@
     <string name="menuitem_tenminute">10-minute Hack</string>
     <string name="tv_due_date">Tap to set due date</string>
     <string name="tv_time_left_unset">Tap to edit details</string>
+    <string name="when_do_you_wake_up">When do you wake up?</string>
 </resources>

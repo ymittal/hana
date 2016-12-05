@@ -14,7 +14,6 @@ import finalproject.csci205.com.ymca.view.MainActivity;
  * Created by Malachi on 12/2/2016.
  */
 public class AlarmService extends IntentService {
-    private NotificationManager alarmNotificationManager;
 
     /**
      * Required Constructor
@@ -42,7 +41,7 @@ public class AlarmService extends IntentService {
      * @author Malachi
      */
     private void sendNotification(String title, String content) {
-        alarmNotificationManager = (NotificationManager) this
+        NotificationManager alarmNotificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         //Intent to pull up the app when the alarm goes off
