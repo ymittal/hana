@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="@string/when_do_you_wake_up"
+        android:text="@string/tenmin_initial_prompt"
         android:textAllCaps="true"
         android:textSize="16sp"
         android:textStyle="bold" />

@@ -20,8 +20,10 @@ import java.util.Calendar;
 
 import finalproject.csci205.com.ymca.R;
 
-//TODO: Malachi, add the descriptions of the three classes in /module/tenminhack
 /**
+ * A fragment that displays a custom view and allows for the collection & setting of preferences
+ * regarding the 10-minute hack productivity technique
+ *
  * Created by Malachi on 12/2/2016.
  */
 public class TenMinuteFragment extends Fragment implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
@@ -36,16 +38,45 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
     protected static final String PREF_TENMIN_ALARM_TOGGLE_KEY = "PREF_TENMIN_ALARM_TOGGLE";
 
     /**
-     * Necessary tools of the trade
+     * Code used for PendingIntent.
+     */
+    protected static final int REQUEST_CODE = 0;
+
+    /**
+     * Symbol for there being no flag to pass to a PendingIntent
+     */
+    protected static final int NO_FLAG = 0;
+
+    /**
+     * SharedPreferences default value to be returned if the system does not contain a value
+     * for the specified KEY during a get function
+     */
+    protected static final long DEFAULT_VALUE = 0;
+    /**
+     * A reference to the Calendar managed by android. Used to manage times
      */
     private Calendar myCalendar;
+    /**
+     * The Clock on the 10-Minute Hack screen, non-traditionally made from a TextView
+     */
     private TextView tvClock;
+    /**
+     * The switch, or toggle, on the 10-Minute Hack screen
+     */
     private Switch alarmSwitch;
+    /**
+     * Reference to the AlarmManager used to start an alarm at the user's given time
+     */
     private AlarmManager alarmManager;
+    /**
+     * Reference to the PendingIntent used by the alarm when it goes off
+     */
     private PendingIntent pendingIntent;
+    /**
+     * Reference to a simple choice of data persistence
+     */
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    //TODO: Malachi, please write Javadocs for ^ fields
+
 
     /**
      * Required empty constructor
@@ -77,7 +108,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         myCalendar = Calendar.getInstance();
         sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();//commit() is done later...
+
     }
 
     /**
@@ -101,15 +132,16 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         tvClock = (TextView) root.findViewById(R.id.tvClock);
         alarmSwitch = (Switch) root.findViewById(R.id.alarmSwitch);
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+        pendingIntent = PendingIntent.getBroadcast(getContext(), REQUEST_CODE, intent, NO_FLAG);
+
 
         //set on click listeners for the views I want to clickable
         tvClock.setOnClickListener(this);
         alarmSwitch.setOnClickListener(this);
 
         //if the user had set the alarm previously, update the calendar to this alarm's time
-        if (sharedPreferences.getLong(PREF_TENMIN_ALARM_MILLI_KEY, 0) != 0) {
-            myCalendar.setTimeInMillis(sharedPreferences.getLong(PREF_TENMIN_ALARM_MILLI_KEY, 0));
+        if (sharedPreferences.getLong(PREF_TENMIN_ALARM_MILLI_KEY, DEFAULT_VALUE) != 0) {
+            myCalendar.setTimeInMillis(sharedPreferences.getLong(PREF_TENMIN_ALARM_MILLI_KEY, DEFAULT_VALUE));
         }
 
         //if the user has the alarm toggled on, update the ui
@@ -139,19 +171,21 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
                     false).show();
         } else if (view.getId() == R.id.alarmSwitch) {
 
+            //Open SharedPreferences for saving
+            SharedPreferences.Editor editor = sharedPreferences.edit();//IDE is messing up
             if (alarmSwitch.isChecked()) {
                 //if the switch was toggled on, set the alarm, let the user know, and save the state of the toggle
                 Toast.makeText(getContext(), "Alarm on", Toast.LENGTH_SHORT).show();
                 editor.putBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, true);
-                editor.commit();
                 onTimeSet(null, myCalendar.get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE));
             } else {
                 //else, the alarm was turned off, so cancel the alarm, let the user know, and save the state of the toggle
                 Toast.makeText(getContext(), "Alarm off", Toast.LENGTH_SHORT).show();
                 alarmManager.cancel(pendingIntent);
                 editor.putBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, false);
-                editor.commit();
             }
+            //Close SharedPreferences for saving
+            editor.apply();
         }
     }
 
@@ -174,8 +208,9 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
         updateTvClock(hourOfDay, minute);
 
         //update the database
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong(PREF_TENMIN_ALARM_MILLI_KEY, myCalendar.getTimeInMillis());
-        editor.commit();
+        editor.apply();
         if (sharedPreferences.getBoolean(PREF_TENMIN_ALARM_TOGGLE_KEY, false)) {
             //Make the alarm. If the user doesn't have the toggle selected, the alarm won't be set
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, myCalendar.getTimeInMillis(),

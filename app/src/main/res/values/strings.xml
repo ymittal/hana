@@ -5,8 +5,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    --MainActivity Strings--
     <string name="encouraging_quote_default">You\'re moments away from beginning\nyour journey towards a more \nproductive you</string>
     <string name="beginButton">BEGIN</string>
+
     <string name="error_til_add_task">Enter a task name</string>
     <string name="negative_btn_save">Save</string>
     <string name="positive_btn_edit">Edit</string>
@@ -41,6 +43,8 @@
     <string name="et_long_break">Long break length (minutes)</string>
     <string name="tv_subtasks">Subtasks</string>
     <string name="et_subtask">Title</string>
-    <string name="when_do_you_wake_up">When do you wake up?</string>
+    <string name="tenmin_initial_prompt">When do you wake up?</string>
     <string name="title_tenmin_fragment">10-Minute Hack</string>
+    <string name="tenmin_completion_title">10 minutes are up!</string>
+    <string name="tenmin_completion_content">Good job! Keep up the good work!</string>
 </resources>
