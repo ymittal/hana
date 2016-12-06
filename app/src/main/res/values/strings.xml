@@ -43,4 +43,5 @@
     <string name="et_long_break">Long break length (minutes)</string>
     <string name="tv_subtasks">Subtasks</string>
     <string name="et_subtask">Title</string>
+    <string name="when_do_you_wake_up">When do you wake up?</string>
 </resources>
