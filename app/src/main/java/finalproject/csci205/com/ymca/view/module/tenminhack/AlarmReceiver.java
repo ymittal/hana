@@ -11,7 +11,8 @@ import android.os.Vibrator;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
 /**
- * Class to handle Alarm receive event
+ * Class to handle Alarm receive event, which should have been originally created in
+ * TenMinuteFragment
  *
  * @author Malachi
  */

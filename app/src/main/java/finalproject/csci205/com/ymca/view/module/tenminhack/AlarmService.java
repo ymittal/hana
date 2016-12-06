@@ -11,9 +11,16 @@ import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.view.MainActivity;
 
 /**
+ * The class that manages what to do when the alarm has been sent. Should be sent from AlarmReceiver
+ *
  * @author Malachi
  */
 public class AlarmService extends IntentService {
+
+    /**
+     * Random and unique 10 digit id for the notification the TenMinuteFragment is responsible for
+     */
+    public static final int NOTIFICATION_ID = 19283792;
 
     /**
      * Required Constructor
@@ -30,7 +37,7 @@ public class AlarmService extends IntentService {
      */
     @Override
     public void onHandleIntent(Intent intent) {
-        sendNotification("10 minutes are up!", "Good job! Keep up the good work!");
+        sendNotification(getString(R.string.tenmin_completion_title), getString(R.string.tenmin_completion_content));
     }
 
     /**
@@ -45,8 +52,8 @@ public class AlarmService extends IntentService {
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         //Intent to pull up the app when the alarm goes off
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MainActivity.class), 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, TenMinuteFragment.REQUEST_CODE,
+                new Intent(this, MainActivity.class), TenMinuteFragment.NO_FLAG);
 
         //Build the Notification
         NotificationCompat.Builder alarmNotificationBuilder =
@@ -58,7 +65,6 @@ public class AlarmService extends IntentService {
                         .setContentIntent(pendingIntent);
 
         //Send the notification
-        alarmNotificationManager.notify(1, alarmNotificationBuilder.build());
+        alarmNotificationManager.notify(NOTIFICATION_ID, alarmNotificationBuilder.build());
     }
-    //TODO: Malachi, please refactor magic numbers
 }
