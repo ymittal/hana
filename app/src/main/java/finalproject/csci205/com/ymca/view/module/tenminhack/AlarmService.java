@@ -11,7 +11,7 @@ import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.view.MainActivity;
 
 /**
- * Created by Malachi on 12/2/2016.
+ * @author Malachi
  */
 public class AlarmService extends IntentService {
 
@@ -30,7 +30,7 @@ public class AlarmService extends IntentService {
      */
     @Override
     public void onHandleIntent(Intent intent) {
-        sendNotification("10 minutes are up!", "Good Job! Keep up the good work!");
+        sendNotification("10 minutes are up!", "Good job! Keep up the good work!");
     }
 
     /**
@@ -49,15 +49,16 @@ public class AlarmService extends IntentService {
                 new Intent(this, MainActivity.class), 0);
 
         //Build the Notification
-        NotificationCompat.Builder alarmNotificationBuilder = new NotificationCompat.Builder(
-                this)
-                .setContentTitle(title)
-                .setSmallIcon(R.drawable.ic_tenmin)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
-                .setContentText(content)
-                .setContentIntent(pendingIntent);
+        NotificationCompat.Builder alarmNotificationBuilder =
+                new NotificationCompat.Builder(this)
+                        .setContentTitle(title)
+                        .setSmallIcon(R.drawable.ic_tenmin)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
+                        .setContentText(content)
+                        .setContentIntent(pendingIntent);
 
         //Send the notification
         alarmNotificationManager.notify(1, alarmNotificationBuilder.build());
     }
+    //TODO: Malachi, please refactor magic numbers
 }

@@ -11,9 +11,16 @@ import android.os.Vibrator;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
 /**
- * Created by Malachi on 12/2/2016.
+ * Class to handle Alarm receive event
+ *
+ * @author Malachi
  */
 public class AlarmReceiver extends WakefulBroadcastReceiver {
+
+    /**
+     * Length of vibration in milliseconds
+     */
+    public static final int VIBRATION_LENGTH_IN_MILLIS = 1000;
 
     /**
      * The method called when the alarm is scheduled to go off
@@ -36,7 +43,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         ringtone.play();
 
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(1000);
+        vibrator.vibrate(VIBRATION_LENGTH_IN_MILLIS);
 
         //this will send a notification message
         ComponentName comp = new ComponentName(context.getPackageName(),

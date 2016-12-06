@@ -20,6 +20,7 @@ import java.util.Calendar;
 
 import finalproject.csci205.com.ymca.R;
 
+//TODO: Malachi, add the descriptions of the three classes in /module/tenminhack
 /**
  * Created by Malachi on 12/2/2016.
  */
@@ -44,7 +45,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
     private PendingIntent pendingIntent;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-
+    //TODO: Malachi, please write Javadocs for ^ fields
 
     /**
      * Required empty constructor
@@ -67,6 +68,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
 
     /**
      * A method called within the activity lifecycle. Comes before onCreateView, but after onStart
+     *
      * @param savedInstanceState
      * @author Malachi
      */
@@ -80,6 +82,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
 
     /**
      * The method called within the activity lifecycle. Comes after onCreate
+     *
      * @param inflater
      * @param container
      * @param saveInstanceState
@@ -90,7 +93,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle saveInstanceState) {
         //set the title of the view
-        getActivity().setTitle("10-Minute Hack");
+        getActivity().setTitle(R.string.title_tenmin_fragment);
 
         //instantiate variables
         View root = inflater.inflate(R.layout.fragment_tenmin, container, false);
@@ -121,6 +124,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
 
     /**
      * When any view within this fragment is clicked, this method is called
+     *
      * @param view The view within the fragment that was clicked
      * @author Malachi
      */
@@ -149,8 +153,6 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
                 editor.commit();
             }
         }
-
-
     }
 
     /**
@@ -198,7 +200,7 @@ public class TenMinuteFragment extends Fragment implements View.OnClickListener,
             if (hourOfDay == 0) {
                 hourOfDay = 12;
             }
-        } else{
+        } else {
             isAM = false;
             hourOfDay = hourOfDay - 12;
         }

@@ -48,7 +48,6 @@ public class CountDownView extends LinearLayout implements
         NotificationClickedSyncListener {
 
     //TODO: Charles, Javadocs for all these fields :-( (Ikr?)
-
     private static CountDownView cdView;
     private final int REBINDSERVICE = 0;
     private final int TIMERUP_ID = 9;
@@ -431,6 +430,7 @@ public class CountDownView extends LinearLayout implements
     }
 
     //TODO: Charles, split this into smaller methods please
+    //TODO: remove magic numbers from this class (can use Linting to find where they are)
     /**
      * Creates notification that pairs the same action logic tied with the CountDownView
      *

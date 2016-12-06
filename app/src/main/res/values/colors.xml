@@ -11,6 +11,5 @@
     <color name="divider">#37474F</color>
     <color name="etPomodoroSettingsHint">#9e9e9e</color>
 
-    <color name="etTaskOverdue">#F06292</color>
     <color name="tv_time_left_unset">#9E9E9E</color>
 </resources>

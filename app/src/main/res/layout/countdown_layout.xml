@@ -23,7 +23,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/minLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -42,7 +41,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/secLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_sec_label"

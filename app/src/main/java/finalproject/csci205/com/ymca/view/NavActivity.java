@@ -122,18 +122,18 @@ public class NavActivity extends AppCompatActivity implements
         NotificationUtil.destroyPomNotification(getApplicationContext());
     }
 
-
     /**
      * Displays the fragment depending on whether or not it exists.
      *
      * @author Charles
-     * @see https://guides.codepath.com/android/Creating-and-Using-Fragments#managing-fragment-backstack
+     * @see <a href="https://guides.codepath.com/android/Creating-and-Using-Fragments#managing-fragment-backstack">
+     * Codepath Creating and Using Fragments Managing Fragment Backstack</a>
      */
     private void displayGTDFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (gtdFragment.isAdded()) {
             transaction.show(gtdFragment);
-            setTitle("Task List");
+            setTitle(R.string.title_gtd_fragment);
         } else {
             transaction.add(R.id.content_nav, gtdFragment, FragmentTags.GTD_FRAGMENT);
         }
@@ -155,7 +155,7 @@ public class NavActivity extends AppCompatActivity implements
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (pomoFragment.isAdded()) {
             transaction.show(pomoFragment);
-            setTitle("Pomodoro");
+            setTitle(R.string.title_pomodoro_fragment);
         } else {
             transaction.add(R.id.content_nav, pomoFragment, FragmentTags.POMO_FRAGMENT);
         }
@@ -177,7 +177,7 @@ public class NavActivity extends AppCompatActivity implements
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (tenMinFragment.isAdded()) {
             transaction.show(tenMinFragment);
-            setTitle("Ten Minute Hack");
+            setTitle(R.string.title_tenmin_fragment);
         } else {
             transaction.add(R.id.content_nav, tenMinFragment, FragmentTags.TEN_MIN_FRAGMENT);
         }
@@ -201,11 +201,8 @@ public class NavActivity extends AppCompatActivity implements
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
         // determines appropriate fragment using item Id
         switch (item.getItemId()) {
-
-
             case R.id.menuitem_tasks:
                 displayGTDFragment();
                 break;
