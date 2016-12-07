@@ -6,6 +6,8 @@ package finalproject.csci205.com.countdown.Ults;
  */
 
 public class Constants {
-    //SERVICE
+    /**
+     * Service
+     */
     public static final String STRINGEXTRA = "session time";
 }
