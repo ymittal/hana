@@ -1,4 +1,4 @@
-package finalproject.csci205.com.countdown.Ults;
+package finalproject.csci205.com.countdown.Ult;
 
 /**
  * Enum that specifies state of the service

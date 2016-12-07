@@ -3,7 +3,7 @@ package finalproject.csci205.com.countdown.Service;
 import android.content.Context;
 import android.content.Intent;
 
-import finalproject.csci205.com.countdown.Ults.Constants;
+import finalproject.csci205.com.countdown.Ult.Constants;
 
 /**
  *

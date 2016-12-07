@@ -28,7 +28,7 @@ import java.util.Date;
 import finalproject.csci205.com.countdown.Service.CountDownIntent;
 import finalproject.csci205.com.countdown.Service.CountDownListener;
 import finalproject.csci205.com.countdown.Service.CountDownService;
-import finalproject.csci205.com.countdown.Ults.ServiceState;
+import finalproject.csci205.com.countdown.Ult.ServiceState;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;

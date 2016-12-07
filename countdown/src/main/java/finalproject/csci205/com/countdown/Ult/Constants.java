@@ -1,4 +1,4 @@
-package finalproject.csci205.com.countdown.Ults;
+package finalproject.csci205.com.countdown.Ult;
 
 /**
  * Basic set of constants for service.

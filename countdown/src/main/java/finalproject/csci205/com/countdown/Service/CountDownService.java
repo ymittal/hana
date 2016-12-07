@@ -8,8 +8,8 @@ import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import finalproject.csci205.com.countdown.Ults.Constants;
-import finalproject.csci205.com.countdown.Ults.ServiceState;
+import finalproject.csci205.com.countdown.Ult.Constants;
+import finalproject.csci205.com.countdown.Ult.ServiceState;
 
 /**
  *

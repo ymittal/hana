@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import finalproject.csci205.com.countdown.Ults.ServiceState;
+import finalproject.csci205.com.countdown.Ult.ServiceState;
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.PomodoroSettings;
 import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
