@@ -1,7 +1,9 @@
 # Hana
 
 Hana is an research-based productivity application built for Android. This app was developed for CSCI 205: Software Engineering & Design course during Fall 2016 at Bucknell University.
+
 This application came to life when we realized that there was a need for a Pomodoro timer which freely offered greater levels of customization. When browsing the market, we found several applications falling short due to a poor User Interface or lack of extensibility. When our team came together, we decided that it was possible to extend our application to serve a broader purpose.
+
 Productivity hackers often employ a series of applications to ensure maximum output with their time. We found it absurd that many groups suggested the use of 3 or more apps which offered similar functionality. To service the broader needs of the market, we wanted to create an application that is modular and can implement many popular techniques. Our end product **Hana!** fulfills these needs by implementing Get Things Done, Pomodoro Technique, and the 10-Minute Hack techniques. 
 
 ## Files
