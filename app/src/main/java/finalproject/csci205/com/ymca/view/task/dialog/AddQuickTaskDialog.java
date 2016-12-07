@@ -17,8 +17,10 @@ import android.widget.EditText;
 import finalproject.csci205.com.ymca.R;
 
 /**
+ * View that is spawned when user wishes to add a quick task.
  * {@link DialogFragment} to have a user enter a task quickly or move to
  * {@link finalproject.csci205.com.ymca.view.task.DetailTaskFragment}
+ * @author Yash and Charles
  */
 public class AddQuickTaskDialog extends DialogFragment {
 

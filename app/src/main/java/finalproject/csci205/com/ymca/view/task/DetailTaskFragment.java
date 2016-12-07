@@ -267,6 +267,14 @@ public class DetailTaskFragment extends Fragment
         setReadableDueDate();
     }
 
+    /**
+     * Manitory method , not used. Nor is the next.
+     *
+     * @param charSequence
+     * @param i
+     * @param i1
+     * @param i2
+     */
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 

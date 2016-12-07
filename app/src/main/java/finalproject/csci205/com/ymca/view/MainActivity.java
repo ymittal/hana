@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Number of optional backgrounds in the application
      */
     private final static int NUM_BACKGROUNDS = 3;
-    // User Interface components of MainActivity
+    /**
+     * UI elements
+     */
     private TextView tvBeginButton;
     private TextView tvQuote;
 
