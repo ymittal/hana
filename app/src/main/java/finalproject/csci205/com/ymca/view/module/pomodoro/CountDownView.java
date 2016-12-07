@@ -362,7 +362,7 @@ public class CountDownView extends LinearLayout implements
 
     /**
      * Checks to see if service passed is running
-     *
+     * @see http://stackoverflow.com/questions/600207/how-to-check-if-a-service-is-running-on-android
      * @param serviceClass
      * @return
      */
