@@ -105,7 +105,9 @@ public class PomodoroFragment extends Fragment implements View.OnClickListener, 
         btnPomodoroSettings.setOnClickListener(this);
     }
 
-    // TODO: Charles, please write Javadocs for this
+    /**
+     * If Service isn't in an active usage state (Other), kill it upon view distruction
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();

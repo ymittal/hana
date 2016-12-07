@@ -47,8 +47,6 @@ public class CountDownView extends LinearLayout implements
         CountDownListener,
         NotificationClickedSyncListener {
 
-    //TODO: Charles, Javadocs for all these fields :-( (Ikr?)
-
     /**
      * Static refrence of this, used with BroadCastReceiver
      */

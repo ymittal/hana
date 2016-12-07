@@ -23,14 +23,16 @@ import finalproject.csci205.com.ymca.presenter.PomodoroPresenter;
  */
 public class PomodoroSettingsFragment extends Fragment implements View.OnClickListener {
 
-    /*
-        Model, View, Presenter and listener refrences.
+    /**
+     * Model, View, Presenter and listener refrences.
      */
     private CountDownView cdRef;
     private PomodoroPresenter pomodoroPresenter;
     private OnBackStackListener backStackListener;
 
-    // User Interface elements for PomodoroSettingsFragment
+    /**
+     * UI elements
+     */
     private EditText sessionTime;
     private EditText breakTime;
     private EditText numBreaks;
