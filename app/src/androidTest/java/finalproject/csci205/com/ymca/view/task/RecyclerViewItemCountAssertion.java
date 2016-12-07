@@ -16,6 +16,9 @@ import static org.hamcrest.Matchers.is;
  * Espresso - Count recyclerview items</a>
  */
 public class RecyclerViewItemCountAssertion implements ViewAssertion {
+    /**
+     * Local counter of expected result
+     */
     private final int expectedCount;
 
     public RecyclerViewItemCountAssertion(int expectedCount) {

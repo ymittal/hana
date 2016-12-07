@@ -33,6 +33,9 @@ import static org.hamcrest.Matchers.allOf;
  */
 public class GTDFragmentInstrumentationTest {
 
+    /**
+     * Testing constants
+     */
     public static final String DUMMY_TASK = "Dummy Task";
 
     @Rule

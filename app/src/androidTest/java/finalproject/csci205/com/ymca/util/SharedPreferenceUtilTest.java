@@ -19,8 +19,13 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class SharedPreferenceUtilTest {
 
+    /**
+     * Testing constants
+     */
     public static final String PREFS_IS_OPEN = "PREFS_IS_OPEN";
-
+    /**
+     * Local context & System level service refrences
+     */
     private Context instrumantationCtx;
     private SharedPreferences.Editor editor;
     private SharedPreferences prefs;

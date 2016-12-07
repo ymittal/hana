@@ -24,6 +24,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class DetailTaskPresenterInstrumentationTest {
 
+    /**
+     * Testing constants
+     */
     public static final String DUMMY_TASK = "Dummy Task";
     public static final String DUMMY_SUBTASK = "Dummy Subtask";
     private static final String DUMMY_SUBTASK_2 = "Dummy Subtask 2";

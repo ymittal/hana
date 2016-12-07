@@ -47,6 +47,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 public class DetailTaskFragmentInstrumentationTest {
 
+    /**
+     * Testing constants
+     */
     public static final String DUMMY_TASK = "Dummy Task";
     public static final String DUMMY_SUBTASK = "Dummy Subtask";
     public static final String PICKER_OK_BTN = "OK";

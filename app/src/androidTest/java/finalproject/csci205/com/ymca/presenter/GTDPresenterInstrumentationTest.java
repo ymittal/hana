@@ -24,11 +24,17 @@ import static org.junit.Assert.assertEquals;
  */
 public class GTDPresenterInstrumentationTest {
 
+    /**
+     * Testing constants
+     */
     public static final String DUMMY_TASK_2 = "Dummy Task 2";
     public static final String DUMMY_TASK_1 = "Dummy Task 1";
     @Rule
     public ActivityTestRule<NavActivity> activityTestRule = new ActivityTestRule<>(NavActivity.class);
 
+    /**
+     * GTD refrence
+     */
     private GTDPresenter gtdPresenter;
 
     /**
