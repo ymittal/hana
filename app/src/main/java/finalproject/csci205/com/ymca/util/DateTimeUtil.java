@@ -10,6 +10,9 @@ import java.util.Locale;
  */
 public class DateTimeUtil {
 
+    /**
+     * Unit conversions
+     */
     private static final int MILLIS_IN_SECOND = 1000;
     private static final int SECS_IN_DAY = (24 * 60 * 60);
     private static final int SECS_IN_HOUR = (60 * 60);

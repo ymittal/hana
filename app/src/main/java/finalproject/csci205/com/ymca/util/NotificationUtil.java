@@ -10,12 +10,16 @@ import android.content.Context;
  * @author Charles
  */
 public class NotificationUtil {
-    //NOTIFICATION BROADCAST
+    /**
+     * Notificaion broadcast constants
+     */
     public static final String START = "START";
     public static final String PAUSE = "PAUSE";
     public static final String CANCEL = "CANCEL";
 
-    //NOTIFICATION
+    /**
+     * System level notificaion IDs
+     */
     public static final int NOTIFICATION_ID_CONSTANT = 123456789;
     public static final int NOTIFICATION_ID = 1;
 

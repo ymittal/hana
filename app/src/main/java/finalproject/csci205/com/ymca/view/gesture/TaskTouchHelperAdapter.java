@@ -29,5 +29,11 @@ import android.support.v7.widget.RecyclerView;
  * GitHub Android-ItemTouchHelper-Demo</a>
  */
 public interface TaskTouchHelperAdapter {
+    /**
+     * Invoked when system detects the dismissal of an item within a recycler view.
+     *
+     * @param position
+     * @param recyclerView
+     */
     void onItemDismiss(int position, RecyclerView recyclerView);
 }

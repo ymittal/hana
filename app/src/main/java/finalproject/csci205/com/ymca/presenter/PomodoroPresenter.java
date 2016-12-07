@@ -17,6 +17,10 @@ import finalproject.csci205.com.ymca.view.module.pomodoro.PomodoroSettingsFragme
  */
 public class PomodoroPresenter implements CountDownListener {
 
+    /**
+     * Database ID refrence. Only one DB per-system. No need to have a system level
+     * refrence because the ID would be the same across all devices.
+     */
     private final static long DB_ID = 4L;
 
     private static PomodoroSettings pomodoroSettings;
@@ -24,7 +28,7 @@ public class PomodoroPresenter implements CountDownListener {
     private PomodoroSettingsFragment settingsView;
     private Context context;
     private int cycleCounter;
-    //TODO: Charles, add docs for the above fields
+
 
     /**
      * Default constructor
@@ -63,11 +67,18 @@ public class PomodoroPresenter implements CountDownListener {
         return PomodoroSettings.findById(PomodoroSettings.class, DB_ID);
     }
 
-    //TODO: Charles, add docs for the following methods
+    /**
+     * Increments cycle counter
+     */
     private void incCounter() {
         cycleCounter++;
     }
 
+    /**
+     * Manditory method to implement, not used however.
+     *
+     * @param l
+     */
     @Override
     public void countdownResult(long l) {
     }

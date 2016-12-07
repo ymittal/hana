@@ -22,6 +22,9 @@ import finalproject.csci205.com.ymca.R;
  */
 public class AddQuickTaskDialog extends DialogFragment {
 
+    /**
+     * Intent constant
+     */
     private static final String NEW_TASK = "NEW_TASK";
 
     /**
