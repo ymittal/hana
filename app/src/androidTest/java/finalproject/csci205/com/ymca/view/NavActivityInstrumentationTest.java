@@ -37,6 +37,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  * @author Yash
  */
 public class NavActivityInstrumentationTest {
+    /**
+     * Testing constants
+     */
     public static final String DUMMY_TASK = "Dummy Task";
     @Rule
     public ActivityTestRule<NavActivity> activityTestRule = new ActivityTestRule<>(NavActivity.class);
