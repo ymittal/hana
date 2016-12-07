@@ -54,6 +54,10 @@ public class CountDownView extends LinearLayout implements
      */
     private static CountDownView cdView;
     /**
+     * Pending intent general paramter
+     */
+    final int pendingParam = 0;
+    /**
      * Service constant, 0 is the rebind code.
      */
     private final int REBINDSERVICE = 0;
@@ -96,13 +100,11 @@ public class CountDownView extends LinearLayout implements
      * On first run, it should be true.
      */
     private boolean breakMode = true;
-
     /**
      * Date formating
      */
     private Date date = null;
     private DateFormat minFor;
-
     /**
      * Presenter and Model refrences.
      * NOTE, the settings variable exists for convience, it still commes from the presenter!
@@ -311,8 +313,9 @@ public class CountDownView extends LinearLayout implements
      * @author Charles
      */
     private void configBreakOrPomoSession(int newTimeValue) {
+        final int conversionMiliConstant = 60000;
         cd.setSessionTime(newTimeValue);
-        date = new Date((long) newTimeValue * 60000);
+        date = new Date((long) newTimeValue * conversionMiliConstant);
         mins.setText(minFor.format(date));
     }
 
@@ -325,26 +328,6 @@ public class CountDownView extends LinearLayout implements
         cd.setSessionTime(time);
     }
 
-
-    /**
-     * Sets the session time from data model, then inits the data.
-     * Updates view
-     * Cannot create a service without the known session time!
-     *
-     * @param sessionTime
-     */
-    public void setSessionTime(int sessionTime) {
-        this.sessionTime = sessionTime;
-        CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
-        if (isMyServiceRunning(CountDownService.class)) {
-            getContext().bindService(i, this, REBINDSERVICE);
-
-        } else {
-            getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
-
-        }
-
-    }
 
 
     /**
@@ -420,16 +403,18 @@ public class CountDownView extends LinearLayout implements
      */
     @Override
     public void onCountFinished() {
+        final int twoSeconds = 2000; //Parameter takes miliseconds.
         countCancelComplete();
         Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(2000);
+        v.vibrate(twoSeconds);
 
         //the intent that is started when the notification is clicked (works)
         Intent notificationIntent = new Intent(getContext(), jumpTo);
         notificationIntent.setAction(Intent.ACTION_MAIN);
         notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        PendingIntent pendingNotificationIntent = PendingIntent.getActivity(getContext(), 5,
-                notificationIntent, 0);
+        final int countFinishedid = 5; //Need not be global, self dismissing.
+        PendingIntent pendingNotificationIntent = PendingIntent.getActivity(getContext(), countFinishedid,
+                notificationIntent, pendingParam);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(getContext())
                         .setSmallIcon(R.drawable.ic_pom)
@@ -461,8 +446,6 @@ public class CountDownView extends LinearLayout implements
         countCancelComplete();
     }
 
-    //TODO: Charles, split this into smaller methods please
-    //TODO: remove magic numbers from this class (can use Linting to find where they are)
     /**
      * Creates notification that pairs the same action logic tied with the CountDownView
      *
@@ -483,8 +466,9 @@ public class CountDownView extends LinearLayout implements
         Intent notificationIntent = new Intent(getContext(), jumpTo);
         notificationIntent.setAction(Intent.ACTION_MAIN);
         notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        PendingIntent pendingNotificationIntent = PendingIntent.getActivity(getContext(), 4,
-                notificationIntent, 0);
+        final int pendingID = 4; //Need not be global, self managing.
+        PendingIntent pendingNotificationIntent = PendingIntent.getActivity(getContext(), pendingID,
+                notificationIntent, pendingParam);
 
         notification.contentView = notificationView;
         notification.contentIntent = pendingNotificationIntent;
@@ -495,23 +479,26 @@ public class CountDownView extends LinearLayout implements
         Intent start = new Intent(getContext(), NotificationButtonListener.class);
         /* Put extra to identify which action was called. */
         start.putExtra(NotificationUtil.START, NotificationUtil.START);
-        PendingIntent pendingStart = PendingIntent.getBroadcast(getContext(), 0,
-                start, 0);
+        final int startId = 0; //Need not be global, self managing.
+        PendingIntent pendingStart = PendingIntent.getBroadcast(getContext(), startId,
+                start, pendingParam);
 
         /* Create intent, set context and destionation */
         Intent pauseIntent = new Intent(getContext(), NotificationButtonListener.class);
         /* Put extra to identify which action was called. */
         pauseIntent.putExtra(NotificationUtil.PAUSE, NotificationUtil.PAUSE);
-        PendingIntent pendingPause = PendingIntent.getBroadcast(getContext(), 1,
-                pauseIntent, 0);
+        final int pauseID = 1; //Need not be global, self managing.
+        PendingIntent pendingPause = PendingIntent.getBroadcast(getContext(), pauseID,
+                pauseIntent, pendingParam);
 
 
         /* Create intent, set context and destionation */
         Intent cancelIntent = new Intent(getContext(), NotificationButtonListener.class);
         /* Put extra to identify which action was called. */
         cancelIntent.putExtra(NotificationUtil.CANCEL, NotificationUtil.CANCEL);
-        PendingIntent pendingCancel = PendingIntent.getBroadcast(getContext(), 2,
-                cancelIntent, 0);
+        final int cancelID = 2; //Need not be global, self managing.
+        PendingIntent pendingCancel = PendingIntent.getBroadcast(getContext(), cancelID,
+                cancelIntent, pendingParam);
 
         /* Functionally equal to setOnClickListener */
         notificationView.setOnClickPendingIntent(R.id.start, pendingStart);
@@ -533,23 +520,6 @@ public class CountDownView extends LinearLayout implements
         startNotification();
     }
 
-    /**
-     * Similar to setSessionTime, but ensures proper updating from settings.
-     *
-     * @param time
-     */
-    public void setSessionTimeOverride(int time) {
-        this.sessionTime = time;
-        CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
-        if (isMyServiceRunning(CountDownService.class)) {
-            cd.setSessionTime(time);
-
-        } else {
-            getContext().bindService(i, this, Context.BIND_AUTO_CREATE);
-
-        }
-    }
-
     public CountDownService getCd() {
         return cd;
     }
@@ -561,7 +531,6 @@ public class CountDownView extends LinearLayout implements
      * @author Charles
      */
     public static class NotificationButtonListener extends BroadcastReceiver {
-        private final int NOTIFICATION_ID = 1;
 
         /**
          * Determines which button was clicked, then calls the correct listener on
@@ -574,7 +543,6 @@ public class CountDownView extends LinearLayout implements
          */
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("onRec", "Yo");
             NotificationClickedSyncListener clickedSyncListener = cdView;
             String startPotential = intent.getStringExtra(NotificationUtil.START);
             String pausePotential = intent.getStringExtra(NotificationUtil.PAUSE);
