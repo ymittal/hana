@@ -48,35 +48,65 @@ public class CountDownView extends LinearLayout implements
         NotificationClickedSyncListener {
 
     //TODO: Charles, Javadocs for all these fields :-( (Ikr?)
+
+    /**
+     * Static refrence of this, used with BroadCastReceiver
+     */
     private static CountDownView cdView;
+    /**
+     * Service constant, 0 is the rebind code.
+     */
     private final int REBINDSERVICE = 0;
+    /**
+     * Notificaion ID
+     */
     private final int TIMERUP_ID = 9;
+    /**
+     * Internal click counter
+     */
     private int startPauseCounter = 0;
+    /**
+     * View elements
+     */
     private View root;
     private TextView mins;
     private TextView seconds;
     private ImageButton cancelPom;
     private LinearLayout timerContainer;
+    /**
+     * Service refrence
+     */
     private CountDownService cd;
-    //Notification
+    /**
+     * Notificaion view, system manangers, and class refrence for view returning
+     */
     private RemoteViews notificationView;
     private NotificationManager notificationManager;
     private Notification notification;
     private Class jumpTo;
-    //Pomodoro Specifics
+    /**
+     * Pomodoro constants
+     */
     private int sessionTime;
     private int breakTime;
     private int numCyclesTillBreak;
     private int longBreakTime;
-    /* Determines if system should countdown as a break, or work peroid.
-     * On first run, it should be true. */
+    /**
+     * Determines if system should countdown as a break, or work peroid.
+     * On first run, it should be true.
+     */
     private boolean breakMode = true;
 
-    //Formatting
+    /**
+     * Date formating
+     */
     private Date date = null;
     private DateFormat minFor;
 
-    //Model Ref
+    /**
+     * Presenter and Model refrences.
+     * NOTE, the settings variable exists for convience, it still commes from the presenter!
+     */
     private PomodoroPresenter presenter;
     private PomodoroSettings settings;
 
@@ -108,7 +138,9 @@ public class CountDownView extends LinearLayout implements
         minFor = new SimpleDateFormat("mm");
         pomodoroDataUpdate();
 
-        //Service
+        /**
+         * Service logic
+         */
         CountDownIntent i = new CountDownIntent(getContext(), sessionTime);
         if (isMyServiceRunning(CountDownService.class)) {
             getContext().bindService(i, this, REBINDSERVICE);
