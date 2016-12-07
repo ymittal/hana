@@ -26,12 +26,30 @@ import finalproject.csci205.com.countdown.Ults.ServiceState;
 
 public class CountDownService extends Service {
 
+    /**
+     * Seconds parameter constant, see android documentation
+     */
     private final int SECONDSPARAM = 1000;
+    /**
+     * Connection between this, and whatever connects
+     */
     private final IBinder returnBinder = new CountDownBinder();
+    /**
+     * Local time storage
+     */
     private long storedTime;
     private int sessionTime; // In mins
+    /**
+     * Abstract timer
+     */
     private CountDownTimer cdStart = null;
+    /**
+     * Internal state, set to other by default
+     */
     private ServiceState state = ServiceState.OTHER;
+    /**
+     * Listener that informs operation's status
+     */
     private CountDownListener countDownListener;
 
 
@@ -40,7 +58,14 @@ public class CountDownService extends Service {
 
     }
 
-    /* IntentService / LifeCycle Methods */
+    /**
+     * IntentService / LifeCycle Methods
+     *
+     * @param intent
+     * @param flags
+     * @param startId
+     * @return
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return Service.START_NOT_STICKY;
@@ -55,6 +80,7 @@ public class CountDownService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        //1 is passed by default
         this.sessionTime = intent.getIntExtra(Constants.STRINGEXTRA, 1);
         return returnBinder;
     }

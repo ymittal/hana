@@ -13,7 +13,12 @@ import finalproject.csci205.com.countdown.Ults.Constants;
  */
 public class CountDownIntent extends Intent {
 
-    /* Specifies the session param in MINS! */
+    /**
+     * Specifies the session param in MINS!
+     *
+     * @param c
+     * @param sessionTime
+     */
     public CountDownIntent(Context c, int sessionTime) {
         super(c, CountDownService.class);
         this.putExtra(Constants.STRINGEXTRA, sessionTime);
