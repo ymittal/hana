@@ -10,7 +10,6 @@
             android:id="@+id/menuitem_pomodoro"
             android:icon="@drawable/ic_pom"
             android:title="@string/menuitem_pomodoro" />
-        <!-- TODO: change icon -->
         <item
             android:id="@+id/menuitem_tenminute"
             android:icon="@drawable/ic_tenmin"
