@@ -1,10 +1,10 @@
-# Hana
+# Hana!
 
 Hana is an research-based productivity application built for Android. This app was developed for CSCI 205: Software Engineering & Design course during Fall 2016 at Bucknell University.
 
-This application came to life when we realized that there was a need for a Pomodoro timer which freely offered greater levels of customization. When browsing the market, we found several applications falling short due to a poor User Interface or lack of extensibility. When our team came together, we decided that it was possible to extend our application to serve a broader purpose.
+This application came to life when our team realized that there was a need for a Pomodoro timer which freely offered greater levels of customization. When browsing the market, we found several applications falling short due to a poor User Interface or lack of extensibility. When we came together, we decided to extend our application to serve a broader purpose.
 
-Productivity hackers often employ a series of applications to ensure maximum output with their time. We found it absurd that many groups suggested the use of 3 or more apps which offered similar functionality. To service the broader needs of the market, we wanted to create an application that is modular and can implement many popular techniques. Our end product **Hana!** fulfills these needs by implementing Get Things Done, Pomodoro Technique, and the 10-Minute Hack techniques. 
+Productivity hackers often employ a series of applications to ensure maximum value of their time. We found it absurd that many groups suggested the use of 3 or more apps which offered similar functionality. To service the broader needs of the market, we wanted to create an modular application that can implement many popular techniques. Our end product **Hana!** fulfills these needs by implementing Getting Things Done, Pomodoro, and the 10-Minute Hack techniques. 
 
 ## Files
 
@@ -41,6 +41,7 @@ scrum/
 ### Installation
 
 Following are the two ways you can use our application.
+
 1. Install using `.apk` file in `dist/` folder. You would need to enable _Install from Unknown Sources_ in the Security Settings on your Android.
 2. Import the entire project in [Android Studio](https://developer.android.com/studio/index.html) and download all SDK requirements.
     * Install project dependencies from __Tools > Android > Sync Gradle with Project Files__
@@ -53,7 +54,7 @@ Following are the two ways you can use our application.
 We utilized [`Espresso`](https://developer.android.com/training/testing/ui-testing/espresso-testing.html) library to test the UI functionality of our application. In Android, these tests are called Instrumentation Tests, and they can be found in `app/src/androidTest`. You can run the Instrumentation Tests as follows:
 * Using the left pane, change the Project view to __Project__ (default)
 * Open `app/src/androidTest/`
-* Right-click on `androidTest/java/` and click __Run \'All Tests\'__
+* Right-click on `androidTest/java/` and click __Run 'All Tests'__
 * Select your preferred device to run UI tests on
 
 In addition, the `JUnit` tests can be found in `app/src/test`. You do not need a device to run these tests.
