@@ -62,7 +62,7 @@ In addition, the `JUnit` tests can be found in `app/src/test`. You do not need a
 ## Authors
 
 This project is brought to you by the following people:
-* **Charles Hennessey** <charles.hennessey@gmail.com>
-* **Malachi Musick** <malachimusick@gmail.com>
-* **Aleksandar Antonov** <alekzandar@live.com>
+* [**Charles Hennessey**](https://github.com/fr0hike) <charles.hennessey@gmail.com>
+* [**Malachi Musick**](https://github.com/Malachimusick) <malachimusick@gmail.com>
+* [**Aleksandar Antonov**](https://github.com/Alekzandar) <alekzandar@live.com>
 * [**Yash Mittal**](https://github.com/ymittal) <yashmittal2009@bucknell.edu>
