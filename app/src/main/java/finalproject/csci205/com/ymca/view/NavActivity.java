@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,8 +30,6 @@ import finalproject.csci205.com.ymca.view.task.GTDFragment;
 /**
  * {@link android.app.Activity} to hold the hamburger menu allowing user to
  * switch between different productivity techniques
- *
- * @author Yash, Malachi, Aleks, and Charles
  */
 public class NavActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -46,34 +45,22 @@ public class NavActivity extends AppCompatActivity implements
     private NavigationView navigationView;
 
     /**
-     * Instance Fragments
-     */
-    private GTDFragment gtdFragment;
-    private PomodoroFragment pomoFragment;
-    private TenMinuteFragment tenMinFragment;
-
-    /**
      * Sets up activity user interface and controls
      *
      * @param savedInstanceState
-     * @author Charles and Yash
+     * @author
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
         initUI();
-        gtdFragment = GTDFragment.newInstance();
-        pomoFragment = PomodoroFragment.newInstance();
-        tenMinFragment = TenMinuteFragment.newInstance();
-        displayGTDFragment();
+        initFragment(new GTDFragment());
     }
 
     /**
      * Initializes user interface elements including {@link Toolbar},
      * {@link ActionBarDrawerToggle}, and {@link NavigationView}
-     *
-     * @author Yash
      */
     private void initUI() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -123,70 +110,13 @@ public class NavActivity extends AppCompatActivity implements
     }
 
     /**
-     * Displays the fragment depending on whether or not it exists.
+     * Initializes fragment by changing container view content
      *
-     * @author Charles
-     * @see <a href="https://guides.codepath.com/android/Creating-and-Using-Fragments#managing-fragment-backstack">
-     * Codepath Creating and Using Fragments Managing Fragment Backstack</a>
+     * @param newFragment new {@link Fragment} object
      */
-    private void displayGTDFragment() {
+    private void initFragment(Fragment newFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (gtdFragment.isAdded()) {
-            transaction.show(gtdFragment);
-            setTitle(R.string.title_gtd_fragment);
-        } else {
-            transaction.add(R.id.content_nav, gtdFragment, FragmentTags.GTD_FRAGMENT);
-        }
-        if (pomoFragment.isAdded()) {
-            transaction.hide(pomoFragment);
-        }
-        if (tenMinFragment.isAdded()) {
-            transaction.hide(tenMinFragment);
-        }
-        transaction.commit();
-    }
-
-    /**
-     * Displays the fragment depending on whether or not it exists.
-     *
-     * @author Charles
-     */
-    private void displayPomodoroFragment() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (pomoFragment.isAdded()) {
-            transaction.show(pomoFragment);
-            setTitle(R.string.title_pomodoro_fragment);
-        } else {
-            transaction.add(R.id.content_nav, pomoFragment, FragmentTags.POMO_FRAGMENT);
-        }
-        if (gtdFragment.isAdded()) {
-            transaction.hide(gtdFragment);
-        }
-        if (tenMinFragment.isAdded()) {
-            transaction.hide(tenMinFragment);
-        }
-        transaction.commit();
-    }
-
-    /**
-     * Displays the fragment depending on whether or not it exists.
-     *
-     * @author Charles
-     */
-    private void displayTenMinFragment() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (tenMinFragment.isAdded()) {
-            transaction.show(tenMinFragment);
-            setTitle(R.string.title_tenmin_fragment);
-        } else {
-            transaction.add(R.id.content_nav, tenMinFragment, FragmentTags.TEN_MIN_FRAGMENT);
-        }
-        if (pomoFragment.isAdded()) {
-            transaction.hide(pomoFragment);
-        }
-        if (gtdFragment.isAdded()) {
-            transaction.hide(gtdFragment);
-        }
+        transaction.replace(R.id.content_nav, newFragment);
         transaction.commit();
     }
 
@@ -195,27 +125,33 @@ public class NavActivity extends AppCompatActivity implements
      *
      * @param item {@link NavigationView} menu item selected
      * @return true if the event was handles, false otherwise
-     * @author Charles
      */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+        Class fragmentClass;
 
         // determines appropriate fragment using item Id
         switch (item.getItemId()) {
             case R.id.menuitem_tasks:
-                displayGTDFragment();
+                fragmentClass = GTDFragment.class;
                 break;
             case R.id.menuitem_pomodoro:
-
-                displayPomodoroFragment();
+                fragmentClass = PomodoroFragment.class;
                 break;
             case R.id.menuitem_tenminute:
-                displayTenMinFragment();
+                fragmentClass = TenMinuteFragment.class;
                 break;
             default:
-                displayGTDFragment();
+                fragmentClass = GTDFragment.class;
         }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        initFragment(fragment);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -237,7 +173,7 @@ public class NavActivity extends AppCompatActivity implements
 
         } else if (getSupportFragmentManager().findFragmentById(R.id.content_nav)
                 instanceof DetailTaskFragment) {
-            displayGTDFragment();
+            initFragment(new GTDFragment());
 
         } else if (getSupportFragmentManager().findFragmentById(R.id.content_nav)
                 instanceof PomodoroSettingsFragment) {
@@ -259,7 +195,6 @@ public class NavActivity extends AppCompatActivity implements
      *
      * @param event {@link MotionEvent} to be dispatched
      * @return true if touch event was handled
-     * @author Yash
      * @see <a href="http://stackoverflow.com/questions/4165414/how-to-hide-soft-keyboard-on-android-after-clicking-outside-edittext">
      * Stack Overflow - how to hide soft keyboard on android after clicking outside EditText?</a>
      */
@@ -284,8 +219,6 @@ public class NavActivity extends AppCompatActivity implements
 
     /**
      * Hides Android soft keyboard
-     *
-     * @author Yash
      */
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
