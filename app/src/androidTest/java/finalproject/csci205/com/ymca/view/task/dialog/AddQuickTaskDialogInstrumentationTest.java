@@ -14,6 +14,7 @@ import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.TestUtil;
 import finalproject.csci205.com.ymca.model.Task;
 import finalproject.csci205.com.ymca.view.NavActivity;
+import finalproject.csci205.com.ymca.view.task.AddQuickTaskDialog;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;

@@ -1,4 +1,4 @@
-package finalproject.csci205.com.ymca.view.task.dialog;
+package finalproject.csci205.com.ymca.view.task;
 
 
 import android.app.Activity;
@@ -56,8 +56,6 @@ public class AddQuickTaskDialog extends DialogFragment {
 
         addOnClickListenersToButtons(view, dialog);
 
-        // opens soft keyboard
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return dialog;
     }
 

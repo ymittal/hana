@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
@@ -78,11 +79,13 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         setViewHolderUI(holder, task);
 
         // updates task completion status in Database
-        holder.checkboxTask.setOnClickListener(new View.OnClickListener() {
+        holder.checkboxTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 boolean changeTo = !task.isComplete();
                 gtdPresenter.taskChecked(holder.getAdapterPosition(), changeTo);
+
+                setViewHolderUI(holder, task);
             }
         });
 
@@ -121,7 +124,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
                 holder.tvTimeLeft.setTextColor(Color.WHITE);
             } else {
                 holder.tvTimeLeft.setText(R.string.tv_time_left_unset);
-                holder.tvTimeLeft.setTextColor(ContextCompat.getColor(context, R.color.tv_time_left_unset));
+                holder.tvTimeLeft.setTextColor(
+                        ContextCompat.getColor(context, R.color.tv_time_left_unset));
             }
         }
     }

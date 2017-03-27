@@ -147,8 +147,6 @@ public class GTDPresenter {
     public void taskChecked(int index, boolean changeTo) {
         tasks.get(index).setIsComplete(changeTo);
         tasks.get(index).save();
-        Collections.sort(this.tasks);
-        tasksAdapter.notifyDataSetChanged();
     }
 
     /**

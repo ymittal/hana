@@ -43,7 +43,7 @@ public class GTDFragmentInstrumentationTest {
 
     /**
      * Automates adding a {@link finalproject.csci205.com.ymca.model.Task} quickly through
-     * {@link finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog}
+     * {@link AddQuickTaskDialog}
      *
      * @throws Exception
      * @author Yash
@@ -91,7 +91,7 @@ public class GTDFragmentInstrumentationTest {
     }
 
     /**
-     * Ensures that {@link finalproject.csci205.com.ymca.view.task.dialog.AddQuickTaskDialog}
+     * Ensures that {@link AddQuickTaskDialog}
      * shows up when {@link android.support.design.widget.FloatingActionButton} is tapped
      *
      * @author Yash
