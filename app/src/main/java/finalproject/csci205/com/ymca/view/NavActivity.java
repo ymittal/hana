@@ -12,7 +12,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -200,21 +202,33 @@ public class NavActivity extends AppCompatActivity implements
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if (getCurrentFocus() instanceof EditText) {
-            int coords[] = new int[2];
-            View w = getCurrentFocus();
-            w.getLocationOnScreen(coords);
-
-            float x = event.getRawX() + w.getLeft() - coords[0];
-            float y = event.getRawY() + w.getTop() - coords[1];
-
-            if (event.getAction() == MotionEvent.ACTION_UP
-                    && (x < w.getLeft() || x >= w.getRight() || y < w.getTop() || y > w.getBottom())) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            boolean isOutside = isTouchOutside(event);
+            if ((getCurrentFocus() instanceof EditText && isOutside)
+                    || getCurrentFocus() instanceof RecyclerView && !isOutside) {
                 hideKeyboard();
             }
         }
 
         return super.dispatchTouchEvent(event);
+    }
+
+    /**
+     * Determines whether the touch motion event was outside the view in focus
+     *
+     * @param event {@link MotionEvent} to be dispatched
+     * @return true if touch was outside the view in focus
+     * @author Yash
+     */
+    private boolean isTouchOutside(MotionEvent event) {
+        int coords[] = new int[2];
+        View w = getCurrentFocus();
+        w.getLocationOnScreen(coords);
+
+        float x = event.getRawX() + w.getLeft() - coords[0];
+        float y = event.getRawY() + w.getTop() - coords[1];
+
+        return (x < w.getLeft() || x >= w.getRight() || y < w.getTop() || y > w.getBottom());
     }
 
     /**

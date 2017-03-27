@@ -4,7 +4,8 @@
     android:id="@+id/fragmentDetailTask"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgPrimary">
+    android:background="@color/bgPrimary"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,36 +15,6 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp">
-
-            <TextView
-                android:id="@+id/tvDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_desc"
-                android:textAllCaps="true"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/etDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tvDesc"
-                android:hint="@string/et_desc"
-                android:inputType="textCapSentences|textMultiLine"
-                android:scrollHorizontally="false"
-                android:textColor="@android:color/white"
-                android:textColorHint="#BDBDBD"
-                android:textSize="14dp" />
-
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -104,8 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvSubtasks"
                 android:hint="@string/et_subtask"
-                android:inputType="textCapSentences|textNoSuggestions"
-                android:maxLines="1"
+                android:inputType="textVisiblePassword"
+                android:lines="1"
                 android:textColor="@android:color/white"
                 android:textColorHint="#BDBDBD"
                 android:textSize="14dp"

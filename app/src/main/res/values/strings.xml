@@ -32,10 +32,8 @@
     <string name="et_add_task">Task Name</string>
     <string name="et_session_time">Session length (minutes)</string>
     <string name="tv_ticker">00 : 00</string>
-    <string name="tv_desc">Description</string>
     <string name="tv_min_label">min</string>
     <string name="tv_seconds">00</string>
-    <string name="et_desc">Optional</string>
     <string name="et_break_time">Break length (minutes)</string>
     <string name="tv_sec_label">sec</string>
     <string name="et_num_breaks">Number of cycles till long break</string>

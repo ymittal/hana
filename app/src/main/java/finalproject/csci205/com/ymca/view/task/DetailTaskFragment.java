@@ -2,6 +2,7 @@ package finalproject.csci205.com.ymca.view.task;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,8 +37,7 @@ public class DetailTaskFragment extends Fragment
         implements View.OnClickListener,
         View.OnKeyListener,
         DatePickerDialog.OnDateSetListener,
-        TimePickerDialog.OnTimeSetListener,
-        TextWatcher {
+        TimePickerDialog.OnTimeSetListener {
 
     /**
      * Name of {@link Task} serializable passed from {@link GTDFragment}
@@ -66,7 +67,6 @@ public class DetailTaskFragment extends Fragment
     private EditText etSubtask;
     private TextView tvDueDate;
     private ImageView addSubtaskBtn;
-    private EditText etDesc;
 
     /**
      * Required empty constructor
@@ -115,7 +115,6 @@ public class DetailTaskFragment extends Fragment
      * @author Malachi
      */
     private void setupInterfaceComponents(View root) {
-        etDesc = (EditText) root.findViewById(R.id.etDesc);
         tvDueDate = (TextView) root.findViewById(R.id.tvDueDate);
         addSubtaskBtn = (ImageView) root.findViewById(R.id.addSubtaskBtn);
         etSubtask = (EditText) root.findViewById(R.id.etSubtask);
@@ -123,9 +122,7 @@ public class DetailTaskFragment extends Fragment
         tvDueDate.setOnClickListener(this);
         addSubtaskBtn.setOnClickListener(this);
         etSubtask.setOnKeyListener(this);
-        etDesc.addTextChangedListener(this);
 
-        etDesc.setText(task.getDesc());
         setReadableDueDate();
     }
 
@@ -265,36 +262,5 @@ public class DetailTaskFragment extends Fragment
         myCalendar.set(Calendar.MINUTE, minute);
         detailTaskPresenter.setTaskDate(task, myCalendar.getTime());
         setReadableDueDate();
-    }
-
-    /**
-     * Manitory method , not used. Nor is the next.
-     *
-     * @param charSequence
-     * @param i
-     * @param i1
-     * @param i2
-     */
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-    }
-
-    /**
-     * When the user is done editing the textview, we save the data
-     *
-     * @param editable
-     * @author Yash
-     */
-    @Override
-    public void afterTextChanged(Editable editable) {
-        if (etDesc.getText().hashCode() == editable.hashCode()) {
-            detailTaskPresenter.setDescription(task, etDesc.getText().toString());
-        }
     }
 }
