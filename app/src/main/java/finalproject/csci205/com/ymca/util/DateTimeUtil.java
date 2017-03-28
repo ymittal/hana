@@ -6,6 +6,7 @@ import java.util.Locale;
 
 /**
  * Utility class to get user-friendly date representations
+ *
  * @author Yash, Malachi, Aleks, and Charles
  */
 public class DateTimeUtil {
@@ -57,10 +58,13 @@ public class DateTimeUtil {
             int minutesLeft = (int) (secondsLeft / SECS_IN_MINUTE);
 
             StringBuilder sb = new StringBuilder()
-                    .append(formatTimeUnit(daysLeft, "dy")).append(" ")
-                    .append(formatTimeUnit(hoursLeft, "hr")).append(" ")
-                    .append(formatTimeUnit(minutesLeft, "min")).append(" ")
-                    .append("remaining");
+                    .append(formatTimeUnit(daysLeft, "day")).append(" ")
+                    .append(formatTimeUnit(hoursLeft, "hr")).append(" ");
+
+            if (daysLeft == 0) {
+                sb.append(formatTimeUnit(minutesLeft, "min")).append(" ");
+            }
+            sb.append("remaining");
 
             // removes leading and trailing spaces, and replaces consecutive spaces with a single space
             return sb.toString().trim().replaceAll("\\s+", " ");

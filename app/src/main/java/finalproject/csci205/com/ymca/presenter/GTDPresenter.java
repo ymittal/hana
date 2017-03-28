@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import java.util.Collections;
 import java.util.List;
@@ -135,6 +136,7 @@ public class GTDPresenter {
         dismissedTask.save();
         tasks.add(index, dismissedTask);
         tasksAdapter.notifyItemInserted(index);
+        tasksAdapter.notifyDataSetChanged();
     }
 
     /**

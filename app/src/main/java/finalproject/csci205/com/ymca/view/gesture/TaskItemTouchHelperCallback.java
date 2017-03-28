@@ -70,7 +70,7 @@ public class TaskItemTouchHelperCallback extends ItemTouchHelper.Callback {
      * Returns the different movement flags for drag and swipe gestures
      *
      * @param recyclerView recyclerview
-     * @param viewHolder   recyclerview viewholder {@link finalproject.csci205.com.ymca.view.task.item.TaskViewHolder}
+     * @param viewHolder   recyclerview viewholder {@link finalproject.csci205.com.ymca.view.task.item.TasksAdapter.TaskViewHolder}
      * @return
      */
     @Override
@@ -82,7 +82,7 @@ public class TaskItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     /**
      * @param recyclerView recyclerview
-     * @param viewHolder   recyclerview viewholder {@link finalproject.csci205.com.ymca.view.task.item.TaskViewHolder}
+     * @param viewHolder   recyclerview viewholder {@link finalproject.csci205.com.ymca.view.task.item.TasksAdapter.TaskViewHolder}
      * @param target       target position of item in recyclerview
      * @return false
      */
@@ -95,7 +95,7 @@ public class TaskItemTouchHelperCallback extends ItemTouchHelper.Callback {
     /**
      * Handles swipe gesture by class {@link finalproject.csci205.com.ymca.view.task.item.TasksAdapter#onItemDismiss(int, RecyclerView)}
      *
-     * @param viewHolder recyclerview viewholder {@link finalproject.csci205.com.ymca.view.task.item.TaskViewHolder}
+     * @param viewHolder recyclerview viewholder {@link finalproject.csci205.com.ymca.view.task.item.TasksAdapter.TaskViewHolder}
      * @param direction  direction of swipe
      */
     @Override

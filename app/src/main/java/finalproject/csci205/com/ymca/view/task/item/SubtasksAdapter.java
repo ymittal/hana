@@ -4,12 +4,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Subtask;
 import finalproject.csci205.com.ymca.presenter.DetailTaskPresenter;
 
-public class SubtasksAdapter extends RecyclerView.Adapter<SubtaskViewHolder> {
+public class SubtasksAdapter extends RecyclerView.Adapter<SubtasksAdapter.SubtaskViewHolder> {
 
     /**
      * {@link DetailTaskPresenter} presenter
@@ -49,14 +51,6 @@ public class SubtasksAdapter extends RecyclerView.Adapter<SubtaskViewHolder> {
     public void onBindViewHolder(final SubtaskViewHolder holder, final int position) {
         Subtask subtask = detailTaskPresenter.getSubtasks().get(position);
         holder.tvSubtask.setText(subtask.getTitle());
-        holder.btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                detailTaskPresenter.removeSubtask(position);
-            }
-        });
-
-        holder.itemView.setTag(subtask);
     }
 
     /**
@@ -66,5 +60,45 @@ public class SubtasksAdapter extends RecyclerView.Adapter<SubtaskViewHolder> {
     @Override
     public int getItemCount() {
         return detailTaskPresenter.getNumSubtasks();
+    }
+
+    /**
+     * A container class {@link RecyclerView.ViewHolder} to hold view elements for a subtask
+     *
+     * @author Yash
+     */
+    public class SubtaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        /**
+         * {@link TextView} for subtask title
+         */
+        public final TextView tvSubtask;
+        /**
+         * {@link ImageView} for a button to delete subtask
+         */
+        public final ImageView btnCancel;
+
+        /**
+         * @param itemView view containing subtask view elements
+         */
+        public SubtaskViewHolder(View itemView) {
+            super(itemView);
+            tvSubtask = (TextView) itemView.findViewById(R.id.tvSubtask);
+            btnCancel = (ImageView) itemView.findViewById(R.id.btnCancel);
+
+            btnCancel.setOnClickListener(this);
+        }
+
+        /**
+         * Removes subtask when cancel button is clicked
+         *
+         * @param v one of recyclerview items
+         */
+        @Override
+        public void onClick(View v) {
+            if (v == btnCancel) {
+                detailTaskPresenter.removeSubtask(getAdapterPosition());
+            }
+        }
     }
 }

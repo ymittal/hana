@@ -5,10 +5,13 @@ import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import finalproject.csci205.com.ymca.R;
 import finalproject.csci205.com.ymca.model.Task;
@@ -22,7 +25,7 @@ import finalproject.csci205.com.ymca.view.gesture.TaskTouchHelperAdapter;
  * @see <a href="https://github.com/codepath/android_guides/wiki/Using-the-RecyclerView">
  * GitHub - Using the RecyclerView</a>
  */
-public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implements TaskTouchHelperAdapter {
+public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHolder> implements TaskTouchHelperAdapter {
 
     /**
      * Alpha of {@link TaskViewHolder#tvTimeLeft} when {@link Task} is done
@@ -76,7 +79,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
     @Override
     public void onBindViewHolder(final TaskViewHolder holder, int position) {
         final Task task = gtdPresenter.getTasks().get(position);
-        setViewHolderUI(holder, task);
+        holder.setupViewHolderUI(task);
 
         // updates task completion status in Database
         holder.checkboxTask.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -84,50 +87,17 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 boolean changeTo = !task.isComplete();
                 gtdPresenter.taskChecked(holder.getAdapterPosition(), changeTo);
-
-                setViewHolderUI(holder, task);
+                holder.setupViewHolderUI(task);
             }
         });
 
-        // opens DetailTaskFragment when recyclervier item is clicked
+        // opens DetailTaskFragment when recyclerview item is clicked
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 gtdPresenter.openDetailedTaskFragment(task);
             }
         });
-
-        holder.itemView.setTag(task);
-    }
-
-    /**
-     * Initializes the UI elements for a {@link TaskViewHolder} and designs it according to
-     * whether the {@link Task} has been completed or its due date has been set
-     *
-     * @param holder {@link TaskViewHolder} object
-     * @param task   {@link Task} represented by view
-     */
-    private void setViewHolderUI(TaskViewHolder holder, Task task) {
-        holder.tvTask.setText(task.getTitle());
-        holder.checkboxTask.setChecked(task.isComplete());
-
-        if (task.isComplete()) {
-            holder.itemView.setAlpha(ALPHA_TASK_DONE);
-            holder.tvTimeLeft.setVisibility(View.GONE);
-        } else {
-            holder.itemView.setAlpha(ALPHA_TASK_UNDONE);
-            holder.tvTimeLeft.setVisibility(View.VISIBLE);
-
-            // sets time remaining if task due date has been defined by user
-            if (task.getDueDate() != null) {
-                holder.tvTimeLeft.setText(DateTimeUtil.convertDateToTimeRemaining(task.getDueDate()));
-                holder.tvTimeLeft.setTextColor(Color.WHITE);
-            } else {
-                holder.tvTimeLeft.setText(R.string.tv_time_left_unset);
-                holder.tvTimeLeft.setTextColor(
-                        ContextCompat.getColor(context, R.color.tv_time_left_unset));
-            }
-        }
     }
 
     /**
@@ -151,14 +121,74 @@ public class TasksAdapter extends RecyclerView.Adapter<TaskViewHolder> implement
         gtdPresenter.removeTask(position);
 
         // allows user to undo task delete
-        Snackbar snackbar = Snackbar
-                .make(recyclerView, R.string.snackbar_task_delete, Snackbar.LENGTH_LONG)
+        Snackbar.make(recyclerView, R.string.snackbar_task_delete, Snackbar.LENGTH_LONG)
                 .setAction(R.string.snackbar_task_undo, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         gtdPresenter.restoreTask(position);
                     }
-                });
-        snackbar.show();
+                }).show();
+    }
+
+    /**
+     * A container class {@link RecyclerView.ViewHolder} to hold view elements for a task
+     *
+     * @author Yash
+     * @see <a href="https://github.com/codepath/android_guides/wiki/Using-the-RecyclerView">
+     * GitHub - Using the RecyclerView</a>
+     */
+    public class TaskViewHolder extends RecyclerView.ViewHolder {
+
+        /**
+         * {@link TextView} for task title
+         */
+        public final TextView tvTask;
+        /**
+         * {@link CheckBox} for whether task has been completed or not
+         */
+        public final CheckBox checkboxTask;
+        /**
+         * {@link TextView} for time remaining
+         */
+        public final TextView tvTimeLeft;
+
+        /**
+         * @param itemView view containing task view elements
+         */
+        public TaskViewHolder(View itemView) {
+            super(itemView);
+            tvTask = (TextView) itemView.findViewById(R.id.tvTask);
+            checkboxTask = (CheckBox) itemView.findViewById(R.id.checkboxTask);
+            tvTimeLeft = (TextView) itemView.findViewById(R.id.tvTimeLeft);
+        }
+
+        /**
+         * Initializes the UI elements for a {@link TaskViewHolder} and designs it according to
+         * whether the {@link Task} has been completed or its due date has been set
+         *
+         * @param task {@link Task} represented by view
+         */
+        private void setupViewHolderUI(Task task) {
+            tvTask.setText(task.getTitle());
+            checkboxTask.setChecked(task.isComplete());
+
+            if (task.isComplete()) {
+                itemView.setAlpha(ALPHA_TASK_DONE);
+                tvTimeLeft.setVisibility(View.GONE);
+            } else {
+                itemView.setAlpha(ALPHA_TASK_UNDONE);
+                tvTimeLeft.setVisibility(View.VISIBLE);
+
+                // sets time remaining if task due date has been defined by user
+                if (task.getDueDate() != null) {
+                    tvTimeLeft.setText(DateTimeUtil.convertDateToTimeRemaining(task.getDueDate()));
+                    tvTimeLeft.setTextColor(Color.WHITE);
+                } else {
+                    tvTimeLeft.setText(R.string.tv_time_left_unset);
+                    tvTimeLeft.setTextColor(
+                            ContextCompat.getColor(context, R.color.tv_time_left_unset));
+                }
+            }
+        }
     }
 }
